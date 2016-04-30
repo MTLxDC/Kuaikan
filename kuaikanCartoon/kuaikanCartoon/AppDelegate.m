@@ -1,6 +1,6 @@
 
 #import "AppDelegate.h"
-#import "HomeViewController.h"
+#import "MainTabBarController.h"
 
 
 @interface AppDelegate ()
@@ -14,12 +14,15 @@
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    _window.rootViewController = [[HomeViewController alloc] init];
+    _window.rootViewController = [[MainTabBarController alloc] init];
     
     [_window makeKeyAndVisible];
     
     return YES;
 }
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

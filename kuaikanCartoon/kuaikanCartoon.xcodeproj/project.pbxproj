@@ -8,11 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */; };
-		8471A94B1CD499B400A5D901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8471A9491CD499B400A5D901 /* Assets.xcassets */; };
 		8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9531CD49CDA00A5D901 /* AppDelegate.m */; };
 		8471A9561CD49CEE00A5D901 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9551CD49CEE00A5D901 /* main.m */; };
 		8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9591CD49DA100A5D901 /* HomeViewController.m */; };
-		8471A95D1CD49F9E00A5D901 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A95C1CD49F9E00A5D901 /* BaseViewController.m */; };
+		8471A9671CD4A55C00A5D901 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9621CD4A55C00A5D901 /* BaseViewController.m */; };
+		8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9741CD4A5C500A5D901 /* MainTabBarController.m */; };
+		8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9771CD4AB6100A5D901 /* BaseNavigationController.m */; };
+		8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A97A1CD4AD6C00A5D901 /* UIImage+Extension.m */; };
+		8471A97D1CD4B4D700A5D901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8471A9491CD499B400A5D901 /* Assets.xcassets */; };
+		8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A97F1CD4B7DC00A5D901 /* FindingsViewController.m */; };
+		8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9821CD4B7F600A5D901 /* PersonalViewController.m */; };
+		8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9891CD4BECC00A5D901 /* MainTabbar.m */; };
+		8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A98C1CD4C67600A5D901 /* UIView+Extension.m */; };
+		8471A9901CD4E27C00A5D901 /* navBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A98F1CD4E27C00A5D901 /* navBarTitleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +34,26 @@
 		8471A9551CD49CEE00A5D901 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8471A9581CD49DA100A5D901 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		8471A9591CD49DA100A5D901 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		8471A95B1CD49F9E00A5D901 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = "kuaikanCartoon/Classes/Home(主页)/Controllers/BaseViewController.h"; sourceTree = SOURCE_ROOT; };
-		8471A95C1CD49F9E00A5D901 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = "kuaikanCartoon/Classes/Home(主页)/Controllers/BaseViewController.m"; sourceTree = SOURCE_ROOT; };
+		8471A9611CD4A55C00A5D901 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		8471A9621CD4A55C00A5D901 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		8471A9731CD4A5C500A5D901 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		8471A9741CD4A5C500A5D901 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		8471A9761CD4AB6100A5D901 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		8471A9771CD4AB6100A5D901 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		8471A9791CD4AD6C00A5D901 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		8471A97A1CD4AD6C00A5D901 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		8471A97C1CD4AE8200A5D901 /* pathMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pathMacro.h; sourceTree = "<group>"; };
+		8471A97E1CD4B7DC00A5D901 /* FindingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindingsViewController.h; sourceTree = "<group>"; };
+		8471A97F1CD4B7DC00A5D901 /* FindingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindingsViewController.m; sourceTree = "<group>"; };
+		8471A9811CD4B7F600A5D901 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
+		8471A9821CD4B7F600A5D901 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
+		8471A9871CD4B89300A5D901 /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
+		8471A9881CD4BECC00A5D901 /* MainTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabbar.h; sourceTree = "<group>"; };
+		8471A9891CD4BECC00A5D901 /* MainTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabbar.m; sourceTree = "<group>"; };
+		8471A98B1CD4C67600A5D901 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		8471A98C1CD4C67600A5D901 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		8471A98E1CD4E27C00A5D901 /* navBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = navBarTitleView.h; path = "../../Home(主页)/Views/navBarTitleView.h"; sourceTree = "<group>"; };
+		8471A98F1CD4E27C00A5D901 /* navBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = navBarTitleView.m; path = "../../Home(主页)/Views/navBarTitleView.m"; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -98,7 +124,8 @@
 		8471A9331CD499B400A5D901 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8471A9571CD49D5200A5D901 /* BaseClasses(基类) */,
+				8471A9691CD4A56200A5D901 /* Main(入口) */,
+				8471A95F1CD4A55C00A5D901 /* BaseClasses(基类) */,
 				8471A9341CD499B400A5D901 /* Findings(发现) */,
 				8471A9381CD499B400A5D901 /* Home(主页) */,
 				8471A93C1CD499B400A5D901 /* Personal Center(个人中心) */,
@@ -120,6 +147,8 @@
 		8471A9351CD499B400A5D901 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8471A97E1CD4B7DC00A5D901 /* FindingsViewController.h */,
+				8471A97F1CD4B7DC00A5D901 /* FindingsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -184,6 +213,8 @@
 		8471A93D1CD499B400A5D901 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8471A9811CD4B7F600A5D901 /* PersonalViewController.h */,
+				8471A9821CD4B7F600A5D901 /* PersonalViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -229,6 +260,8 @@
 		8471A9431CD499B400A5D901 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8471A98E1CD4E27C00A5D901 /* navBarTitleView.h */,
+				8471A98F1CD4E27C00A5D901 /* navBarTitleView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +269,10 @@
 		8471A9441CD499B400A5D901 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				8471A9791CD4AD6C00A5D901 /* UIImage+Extension.h */,
+				8471A97A1CD4AD6C00A5D901 /* UIImage+Extension.m */,
+				8471A98B1CD4C67600A5D901 /* UIView+Extension.h */,
+				8471A98C1CD4C67600A5D901 /* UIView+Extension.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -250,6 +287,8 @@
 		8471A9461CD499B400A5D901 /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				8471A97C1CD4AE8200A5D901 /* pathMacro.h */,
+				8471A9871CD4B89300A5D901 /* CommonMacro.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -277,14 +316,74 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		8471A9571CD49D5200A5D901 /* BaseClasses(基类) */ = {
+		8471A95F1CD4A55C00A5D901 /* BaseClasses(基类) */ = {
 			isa = PBXGroup;
 			children = (
-				8471A95B1CD49F9E00A5D901 /* BaseViewController.h */,
-				8471A95C1CD49F9E00A5D901 /* BaseViewController.m */,
+				8471A9601CD4A55C00A5D901 /* Controllers */,
+				8471A9651CD4A55C00A5D901 /* Models */,
+				8471A9661CD4A55C00A5D901 /* Views */,
 			);
-			name = "BaseClasses(基类)";
-			path = BaseClasses;
+			path = "BaseClasses(基类)";
+			sourceTree = "<group>";
+		};
+		8471A9601CD4A55C00A5D901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9611CD4A55C00A5D901 /* BaseViewController.h */,
+				8471A9621CD4A55C00A5D901 /* BaseViewController.m */,
+				8471A9761CD4AB6100A5D901 /* BaseNavigationController.h */,
+				8471A9771CD4AB6100A5D901 /* BaseNavigationController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8471A9651CD4A55C00A5D901 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8471A9661CD4A55C00A5D901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8471A9691CD4A56200A5D901 /* Main(入口) */ = {
+			isa = PBXGroup;
+			children = (
+				8471A96A1CD4A56200A5D901 /* Controllers */,
+				8471A96F1CD4A56200A5D901 /* Models */,
+				8471A9701CD4A56200A5D901 /* Views */,
+			);
+			path = "Main(入口)";
+			sourceTree = "<group>";
+		};
+		8471A96A1CD4A56200A5D901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9731CD4A5C500A5D901 /* MainTabBarController.h */,
+				8471A9741CD4A5C500A5D901 /* MainTabBarController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8471A96F1CD4A56200A5D901 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8471A9701CD4A56200A5D901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9881CD4BECC00A5D901 /* MainTabbar.h */,
+				8471A9891CD4BECC00A5D901 /* MainTabbar.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,8 +395,8 @@
 			buildPhases = (
 				BE734B55ED0060AE8F9246FD /* Check Pods Manifest.lock */,
 				8471A9141CD486ED00A5D901 /* Sources */,
-				8471A9151CD486ED00A5D901 /* Frameworks */,
 				8471A9161CD486ED00A5D901 /* Resources */,
+				8471A9151CD486ED00A5D901 /* Frameworks */,
 				CDCE5B38B9E3FC35CB748021 /* Embed Pods Frameworks */,
 				A734BD5DF3748C42A6F1C184 /* Copy Pods Resources */,
 			);
@@ -348,7 +447,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8471A94B1CD499B400A5D901 /* Assets.xcassets in Resources */,
+				8471A97D1CD4B4D700A5D901 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,9 +506,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
-				8471A95D1CD49F9E00A5D901 /* BaseViewController.m in Sources */,
+				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
+				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
+				8471A9901CD4E27C00A5D901 /* navBarTitleView.m in Sources */,
+				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,
+				8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */,
+				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
+				8471A9671CD4A55C00A5D901 /* BaseViewController.m in Sources */,
 				8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */,
+				8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */,
 				8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,8 +609,10 @@
 			baseConfigurationReference = 6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -515,8 +624,10 @@
 			baseConfigurationReference = 45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
