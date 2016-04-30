@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */; };
+		8471A94B1CD499B400A5D901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8471A9491CD499B400A5D901 /* Assets.xcassets */; };
+		8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9531CD49CDA00A5D901 /* AppDelegate.m */; };
+		8471A9561CD49CEE00A5D901 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9551CD49CEE00A5D901 /* main.m */; };
+		8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9591CD49DA100A5D901 /* HomeViewController.m */; };
+		8471A95D1CD49F9E00A5D901 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A95C1CD49F9E00A5D901 /* BaseViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.release.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.release.xcconfig"; sourceTree = "<group>"; };
+		6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.debug.xcconfig"; sourceTree = "<group>"; };
+		8471A9181CD486ED00A5D901 /* kuaikanCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kuaikanCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8471A9491CD499B400A5D901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8471A9501CD49C1700A5D901 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8471A9521CD49CDA00A5D901 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8471A9531CD49CDA00A5D901 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8471A9551CD49CEE00A5D901 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8471A9581CD49DA100A5D901 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		8471A9591CD49DA100A5D901 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		8471A95B1CD49F9E00A5D901 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = "kuaikanCartoon/Classes/Home(主页)/Controllers/BaseViewController.h"; sourceTree = SOURCE_ROOT; };
+		8471A95C1CD49F9E00A5D901 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = "kuaikanCartoon/Classes/Home(主页)/Controllers/BaseViewController.m"; sourceTree = SOURCE_ROOT; };
+		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8471A9151CD486ED00A5D901 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C9994ECBFC31DEDA6726E87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		327D51E1F383EA3634791980 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */,
+				45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8471A90F1CD486ED00A5D901 = {
+			isa = PBXGroup;
+			children = (
+				8471A9321CD499B400A5D901 /* kuaikanCartoon */,
+				8471A9551CD49CEE00A5D901 /* main.m */,
+				8471A9501CD49C1700A5D901 /* Info.plist */,
+				8471A9191CD486ED00A5D901 /* Products */,
+				327D51E1F383EA3634791980 /* Pods */,
+				1C9994ECBFC31DEDA6726E87 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8471A9191CD486ED00A5D901 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9181CD486ED00A5D901 /* kuaikanCartoon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8471A9321CD499B400A5D901 /* kuaikanCartoon */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9521CD49CDA00A5D901 /* AppDelegate.h */,
+				8471A9531CD49CDA00A5D901 /* AppDelegate.m */,
+				8471A9331CD499B400A5D901 /* Classes */,
+				8471A9441CD499B400A5D901 /* Extension */,
+				8471A9461CD499B400A5D901 /* Macro */,
+				8471A9471CD499B400A5D901 /* Resource */,
+				8471A94A1CD499B400A5D901 /* Tools */,
+				8471A9451CD499B400A5D901 /* FrameWork */,
+			);
+			path = kuaikanCartoon;
+			sourceTree = "<group>";
+		};
+		8471A9331CD499B400A5D901 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9571CD49D5200A5D901 /* BaseClasses(基类) */,
+				8471A9341CD499B400A5D901 /* Findings(发现) */,
+				8471A9381CD499B400A5D901 /* Home(主页) */,
+				8471A93C1CD499B400A5D901 /* Personal Center(个人中心) */,
+				8471A9401CD499B400A5D901 /* PublicViewPage(公共页面) */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8471A9341CD499B400A5D901 /* Findings(发现) */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9351CD499B400A5D901 /* Controllers */,
+				8471A9361CD499B400A5D901 /* Models */,
+				8471A9371CD499B400A5D901 /* Views */,
+			);
+			path = "Findings(发现)";
+			sourceTree = "<group>";
+		};
+		8471A9351CD499B400A5D901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8471A9361CD499B400A5D901 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8471A9371CD499B400A5D901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8471A9381CD499B400A5D901 /* Home(主页) */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9391CD499B400A5D901 /* Controllers */,
+				8471A93A1CD499B400A5D901 /* Models */,
+				8471A93B1CD499B400A5D901 /* Views */,
+			);
+			path = "Home(主页)";
+			sourceTree = "<group>";
+		};
+		8471A9391CD499B400A5D901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9581CD49DA100A5D901 /* HomeViewController.h */,
+				8471A9591CD49DA100A5D901 /* HomeViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8471A93A1CD499B400A5D901 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8471A93B1CD499B400A5D901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8471A93C1CD499B400A5D901 /* Personal Center(个人中心) */ = {
+			isa = PBXGroup;
+			children = (
+				8471A93D1CD499B400A5D901 /* Controllers */,
+				8471A93E1CD499B400A5D901 /* Models */,
+				8471A93F1CD499B400A5D901 /* Views */,
+			);
+			path = "Personal Center(个人中心)";
+			sourceTree = "<group>";
+		};
+		8471A93D1CD499B400A5D901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8471A93E1CD499B400A5D901 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8471A93F1CD499B400A5D901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8471A9401CD499B400A5D901 /* PublicViewPage(公共页面) */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9411CD499B400A5D901 /* Controllers */,
+				8471A9421CD499B400A5D901 /* Models */,
+				8471A9431CD499B400A5D901 /* Views */,
+			);
+			path = "PublicViewPage(公共页面)";
+			sourceTree = "<group>";
+		};
+		8471A9411CD499B400A5D901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8471A9421CD499B400A5D901 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8471A9431CD499B400A5D901 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8471A9441CD499B400A5D901 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		8471A9451CD499B400A5D901 /* FrameWork */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FrameWork;
+			sourceTree = "<group>";
+		};
+		8471A9461CD499B400A5D901 /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		8471A9471CD499B400A5D901 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9481CD499B400A5D901 /* Image */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		8471A9481CD499B400A5D901 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				8471A9491CD499B400A5D901 /* Assets.xcassets */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		8471A94A1CD499B400A5D901 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		8471A9571CD49D5200A5D901 /* BaseClasses(基类) */ = {
+			isa = PBXGroup;
+			children = (
+				8471A95B1CD49F9E00A5D901 /* BaseViewController.h */,
+				8471A95C1CD49F9E00A5D901 /* BaseViewController.m */,
+			);
+			name = "BaseClasses(基类)";
+			path = BaseClasses;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8471A9171CD486ED00A5D901 /* kuaikanCartoon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8471A92F1CD486ED00A5D901 /* Build configuration list for PBXNativeTarget "kuaikanCartoon" */;
+			buildPhases = (
+				BE734B55ED0060AE8F9246FD /* Check Pods Manifest.lock */,
+				8471A9141CD486ED00A5D901 /* Sources */,
+				8471A9151CD486ED00A5D901 /* Frameworks */,
+				8471A9161CD486ED00A5D901 /* Resources */,
+				CDCE5B38B9E3FC35CB748021 /* Embed Pods Frameworks */,
+				A734BD5DF3748C42A6F1C184 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kuaikanCartoon;
+			productName = kuaikanCartoon;
+			productReference = 8471A9181CD486ED00A5D901 /* kuaikanCartoon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8471A9101CD486ED00A5D901 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = name;
+				TargetAttributes = {
+					8471A9171CD486ED00A5D901 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = MABMSRRB25;
+					};
+				};
+			};
+			buildConfigurationList = 8471A9131CD486ED00A5D901 /* Build configuration list for PBXProject "kuaikanCartoon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8471A90F1CD486ED00A5D901;
+			productRefGroup = 8471A9191CD486ED00A5D901 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8471A9171CD486ED00A5D901 /* kuaikanCartoon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8471A9161CD486ED00A5D901 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8471A94B1CD499B400A5D901 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A734BD5DF3748C42A6F1C184 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE734B55ED0060AE8F9246FD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CDCE5B38B9E3FC35CB748021 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8471A9141CD486ED00A5D901 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
+				8471A95D1CD49F9E00A5D901 /* BaseViewController.m in Sources */,
+				8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */,
+				8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8471A92D1CD486ED00A5D901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8471A92E1CD486ED00A5D901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8471A9301CD486ED00A5D901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8471A9311CD486ED00A5D901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8471A9131CD486ED00A5D901 /* Build configuration list for PBXProject "kuaikanCartoon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8471A92D1CD486ED00A5D901 /* Debug */,
+				8471A92E1CD486ED00A5D901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8471A92F1CD486ED00A5D901 /* Build configuration list for PBXNativeTarget "kuaikanCartoon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8471A9301CD486ED00A5D901 /* Debug */,
+				8471A9311CD486ED00A5D901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8471A9101CD486ED00A5D901 /* Project object */;
+}
