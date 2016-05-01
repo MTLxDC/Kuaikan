@@ -9,12 +9,15 @@
 #import "HomeViewController.h"
 #import "CommonMacro.h"
 #import "navBarTitleView.h"
+#import "updateCartoonView.h"
 #import <UIControl+BlocksKit.h>
+#import "UIView+Extension.h"
 
 @interface HomeViewController ()
 
 @property (nonatomic,weak) UIButton *leftBtn;
 @property (nonatomic,weak) UIButton *rightBtn;
+
 
 @end
 
@@ -29,6 +32,8 @@
     [self setupTitleView];
    
     [self setupSearchItem];
+    
+    [self setupMainView];
 }
 
 - (void)setupSearchItem {
@@ -51,45 +56,27 @@
     
     navBarTitleView *titleView = [navBarTitleView defaultTitleView];
     
-    self.leftBtn = titleView.leftButton;
-    self.rightBtn = titleView.rightButton;
+    self.navigationItem.titleView = titleView;
     
-    [self.leftBtn setTitle:@"关注" forState:UIControlStateNormal];
-    [self.rightBtn setTitle:@"更新" forState:UIControlStateNormal];
+    titleView.leftBtnOnClick = ^(UIButton *btn){
+        NSLog(@"%@",btn);
+    };
     
-    [self.navigationItem setTitleView:titleView];
-    
-    weakself(self);
-    
-    [self.leftBtn bk_addEventHandler:^(id sender) {
-        
-        [weakSelf selectBtn:self.leftBtn];
-        
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.rightBtn bk_addEventHandler:^(id sender) {
-        
-        [weakSelf selectBtn:self.rightBtn];
-        
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-    [self selectBtn:self.rightBtn];
+    titleView.rightBtnOnClick = ^(UIButton *btn){
+        NSLog(@"%@",btn);
+    };
     
 }
 
-- (void)selectBtn:(UIButton *)btn {
-   
-    [btn setBackgroundColor:[UIColor whiteColor]];
-    [btn setTitleColor:subjectColor forState:UIControlStateNormal];
+- (void)setupMainView {
     
-    if (btn == self.leftBtn) {
-        [self.rightBtn setBackgroundColor:[UIColor clearColor]];
-        [self.rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    }else {
-        [self.leftBtn setBackgroundColor:[UIColor clearColor]];
-        [self.leftBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    }
+    updateCartoonView *v = [[updateCartoonView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height)];
+    [self.view addSubview:v];
+    
 }
+
+
+
 
 
 

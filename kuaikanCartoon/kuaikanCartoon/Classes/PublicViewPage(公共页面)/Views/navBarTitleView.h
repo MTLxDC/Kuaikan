@@ -10,11 +10,11 @@
 
 @interface navBarTitleView : UIView
 
-@property (nonatomic,weak,readonly) UIButton *leftButton;
-
-@property (nonatomic,weak,readonly) UIButton *rightButton;
 
 
+@property (nonatomic,copy) void (^leftBtnOnClick)(UIButton *btn);
+
+@property (nonatomic,copy) void (^rightBtnOnClick)(UIButton *btn);
 
 
 + (instancetype)defaultTitleView;

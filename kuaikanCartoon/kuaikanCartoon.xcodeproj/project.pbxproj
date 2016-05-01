@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */; };
+		84390CB41CD5D89800D0AB8D /* navBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB31CD5D89800D0AB8D /* navBarTitleView.m */; };
+		84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */; };
 		8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9531CD49CDA00A5D901 /* AppDelegate.m */; };
 		8471A9561CD49CEE00A5D901 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9551CD49CEE00A5D901 /* main.m */; };
 		8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9591CD49DA100A5D901 /* HomeViewController.m */; };
@@ -20,12 +22,16 @@
 		8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9821CD4B7F600A5D901 /* PersonalViewController.m */; };
 		8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9891CD4BECC00A5D901 /* MainTabbar.m */; };
 		8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A98C1CD4C67600A5D901 /* UIView+Extension.m */; };
-		8471A9901CD4E27C00A5D901 /* navBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A98F1CD4E27C00A5D901 /* navBarTitleView.m */; };
+		8471A9931CD4F34900A5D901 /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9921CD4F34900A5D901 /* ListView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.release.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.release.xcconfig"; sourceTree = "<group>"; };
 		6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.debug.xcconfig"; sourceTree = "<group>"; };
+		84390CB21CD5D89800D0AB8D /* navBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = navBarTitleView.h; sourceTree = "<group>"; };
+		84390CB31CD5D89800D0AB8D /* navBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = navBarTitleView.m; sourceTree = "<group>"; };
+		84390CB61CD5D8B800D0AB8D /* updateCartoonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateCartoonView.h; sourceTree = "<group>"; };
+		84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonView.m; sourceTree = "<group>"; };
 		8471A9181CD486ED00A5D901 /* kuaikanCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kuaikanCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8471A9491CD499B400A5D901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8471A9501CD49C1700A5D901 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,8 +58,8 @@
 		8471A9891CD4BECC00A5D901 /* MainTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabbar.m; sourceTree = "<group>"; };
 		8471A98B1CD4C67600A5D901 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		8471A98C1CD4C67600A5D901 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		8471A98E1CD4E27C00A5D901 /* navBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = navBarTitleView.h; path = "../../Home(主页)/Views/navBarTitleView.h"; sourceTree = "<group>"; };
-		8471A98F1CD4E27C00A5D901 /* navBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = navBarTitleView.m; path = "../../Home(主页)/Views/navBarTitleView.m"; sourceTree = "<group>"; };
+		8471A9911CD4F34900A5D901 /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
+		8471A9921CD4F34900A5D901 /* ListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListView.m; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -84,6 +90,15 @@
 				45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		84390CB51CD5D8B800D0AB8D /* UpdateCartoonView */ = {
+			isa = PBXGroup;
+			children = (
+				84390CB61CD5D8B800D0AB8D /* updateCartoonView.h */,
+				84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */,
+			);
+			path = UpdateCartoonView;
 			sourceTree = "<group>";
 		};
 		8471A90F1CD486ED00A5D901 = {
@@ -196,6 +211,7 @@
 		8471A93B1CD499B400A5D901 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84390CB51CD5D8B800D0AB8D /* UpdateCartoonView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,8 +276,10 @@
 		8471A9431CD499B400A5D901 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8471A98E1CD4E27C00A5D901 /* navBarTitleView.h */,
-				8471A98F1CD4E27C00A5D901 /* navBarTitleView.m */,
+				84390CB21CD5D89800D0AB8D /* navBarTitleView.h */,
+				84390CB31CD5D89800D0AB8D /* navBarTitleView.m */,
+				8471A9911CD4F34900A5D901 /* ListView.h */,
+				8471A9921CD4F34900A5D901 /* ListView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -506,11 +524,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84390CB41CD5D89800D0AB8D /* navBarTitleView.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
+				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
 				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
 				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
-				8471A9901CD4E27C00A5D901 /* navBarTitleView.m in Sources */,
+				8471A9931CD4F34900A5D901 /* ListView.m in Sources */,
 				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,
 				8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
