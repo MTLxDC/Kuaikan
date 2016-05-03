@@ -5,12 +5,13 @@
 
 target 'kuaikanCartoon' do
 
-pod ‘AFNetworking’
-pod ‘SDWebImage’
-pod ‘MBProgressHUD’
-pod ‘Masonry’
+#pod ‘iOS-WebP’, '0.4'
+pod ’SDWebImage/WebP’
 pod ‘MJRefresh’
 pod ‘BlocksKit’
+pod ‘AFNetworking’
+pod ‘MBProgressHUD’
+pod ‘Masonry’
 
 end
 

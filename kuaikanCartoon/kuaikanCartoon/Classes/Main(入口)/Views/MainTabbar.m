@@ -31,6 +31,7 @@
 
 @property (nonatomic,weak) UIView *line;
 
+@property (nonatomic,weak) UIImageView *bgView;
 
 @end
 
@@ -55,8 +56,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.line.frame = CGRectMake(0, 0, self.bounds.size.width, 0.5);
-    
+    self.bgView.frame = self.bounds;
     if (self.items.count < 1) {
         return;
     }
@@ -107,17 +107,21 @@
     
     [self.items addObject:item];
     [self addSubview:item];
+
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIView *line = [UIView new];
-        line.backgroundColor = [UIColor lightGrayColor];
-        [self addSubview:line];
         
-        self.line = line;
+        UIImageView *bg = [UIImageView new];
+        
+        self.bgView = bg;
+        
+        self.bgView.image = [UIImage imageNamed:@"Tabbar-Bg_2x45_"];
+        [self addSubview:self.bgView];
     }
     return self;
 }
@@ -139,5 +143,6 @@
         [self btnClick:self.items[selectItem]];
     }
 }
+
 
 @end

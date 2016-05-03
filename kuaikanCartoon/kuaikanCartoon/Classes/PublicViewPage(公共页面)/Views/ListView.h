@@ -25,6 +25,10 @@
 
 @property (nonatomic) CGSize  labelSize;
 
+@property (nonatomic,weak) UIScrollView *scrollView;
+
+@property (nonatomic) CGSize itemSize;
+
 
 + (instancetype)defaultConfiguration;
 
@@ -36,24 +40,26 @@
     __weak UIView *_lineView;
     
     NSMutableArray *_titleLabelArray;
-    NSMutableArray *_titleLabelFrameArray;
+    NSMutableArray *_titleLabelFrameCache;
 }
 
 @property (nonatomic,copy) NSArray *labelTextArray;
 
 @property (nonatomic,weak,readonly) UILabel *currentSelectLabel;
 
+@property (nonatomic,copy) void (^selectAtIndex)(NSInteger index);
+
+
 
 + (instancetype)listViewWithFrame:(CGRect)frame
                         TextArray:(NSArray *)textArray
                     Configuration:(ListViewConfiguration *)configuration;
 
-+ (instancetype)listViewWithFrame:(CGRect)frame TextArray:(NSArray *)textArray;
-
-
 - (instancetype)initWithFrame:(CGRect)frame
                     TextArray:(NSArray *)textArray
                 Configuration:(ListViewConfiguration *)configuration;
+
++ (instancetype)listViewWithFrame:(CGRect)frame TextArray:(NSArray *)textArray;
 
 - (instancetype)initWithFrame:(CGRect)frame TextArray:(NSArray *)textArray;
 

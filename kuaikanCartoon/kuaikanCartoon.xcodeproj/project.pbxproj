@@ -10,6 +10,8 @@
 		580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */; };
 		84390CB41CD5D89800D0AB8D /* navBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB31CD5D89800D0AB8D /* navBarTitleView.m */; };
 		84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */; };
+		84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */; };
+		84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */; };
 		8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9531CD49CDA00A5D901 /* AppDelegate.m */; };
 		8471A9561CD49CEE00A5D901 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9551CD49CEE00A5D901 /* main.m */; };
 		8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9591CD49DA100A5D901 /* HomeViewController.m */; };
@@ -23,6 +25,14 @@
 		8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9891CD4BECC00A5D901 /* MainTabbar.m */; };
 		8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A98C1CD4C67600A5D901 /* UIView+Extension.m */; };
 		8471A9931CD4F34900A5D901 /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9921CD4F34900A5D901 /* ListView.m */; };
+		8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAB81CD74A4A0072A17B /* SummaryModel.m */; };
+		8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAC11CD7620B0072A17B /* NetWorkManager.m */; };
+		8480CAC51CD76B6F0072A17B /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAC41CD76B6F0072A17B /* NSString+Extension.m */; };
+		8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAC71CD779FB0072A17B /* UIColor+Extension.m */; };
+		84D9797D1CD85005008EAE63 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9797C1CD85005008EAE63 /* BaseModel.m */; };
+		84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9797F1CD8529B008EAE63 /* SummaryListItem.m */; };
+		84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D979821CD85551008EAE63 /* updateCartoonListView.m */; };
+		84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D979851CD8A6D7008EAE63 /* DateManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +42,9 @@
 		84390CB31CD5D89800D0AB8D /* navBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = navBarTitleView.m; sourceTree = "<group>"; };
 		84390CB61CD5D8B800D0AB8D /* updateCartoonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateCartoonView.h; sourceTree = "<group>"; };
 		84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonView.m; sourceTree = "<group>"; };
+		84390CBB1CD71F4B00D0AB8D /* CartoonSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonSummaryCell.h; sourceTree = "<group>"; };
+		84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonSummaryCell.m; sourceTree = "<group>"; };
+		84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartoonSummaryCell.xib; sourceTree = "<group>"; };
 		8471A9181CD486ED00A5D901 /* kuaikanCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kuaikanCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8471A9491CD499B400A5D901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8471A9501CD49C1700A5D901 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +73,22 @@
 		8471A98C1CD4C67600A5D901 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		8471A9911CD4F34900A5D901 /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
 		8471A9921CD4F34900A5D901 /* ListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListView.m; sourceTree = "<group>"; };
+		8480CAB71CD74A4A0072A17B /* SummaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryModel.h; sourceTree = "<group>"; };
+		8480CAB81CD74A4A0072A17B /* SummaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryModel.m; sourceTree = "<group>"; };
+		8480CAC01CD7620B0072A17B /* NetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkManager.h; sourceTree = "<group>"; };
+		8480CAC11CD7620B0072A17B /* NetWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkManager.m; sourceTree = "<group>"; };
+		8480CAC31CD76B6F0072A17B /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		8480CAC41CD76B6F0072A17B /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		8480CAC61CD779FB0072A17B /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		8480CAC71CD779FB0072A17B /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		84D9797B1CD85005008EAE63 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		84D9797C1CD85005008EAE63 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		84D9797E1CD8529B008EAE63 /* SummaryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryListItem.h; sourceTree = "<group>"; };
+		84D9797F1CD8529B008EAE63 /* SummaryListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryListItem.m; sourceTree = "<group>"; };
+		84D979811CD85551008EAE63 /* updateCartoonListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateCartoonListView.h; sourceTree = "<group>"; };
+		84D979821CD85551008EAE63 /* updateCartoonListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonListView.m; sourceTree = "<group>"; };
+		84D979841CD8A6D7008EAE63 /* DateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateManager.h; sourceTree = "<group>"; };
+		84D979851CD8A6D7008EAE63 /* DateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateManager.m; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,10 +124,25 @@
 		84390CB51CD5D8B800D0AB8D /* UpdateCartoonView */ = {
 			isa = PBXGroup;
 			children = (
+				84390CBA1CD71E4A00D0AB8D /* Cell */,
 				84390CB61CD5D8B800D0AB8D /* updateCartoonView.h */,
 				84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */,
+				84D979811CD85551008EAE63 /* updateCartoonListView.h */,
+				84D979821CD85551008EAE63 /* updateCartoonListView.m */,
 			);
 			path = UpdateCartoonView;
+			sourceTree = "<group>";
+		};
+		84390CBA1CD71E4A00D0AB8D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				84390CBB1CD71F4B00D0AB8D /* CartoonSummaryCell.h */,
+				84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */,
+				84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */,
+				84D9797E1CD8529B008EAE63 /* SummaryListItem.h */,
+				84D9797F1CD8529B008EAE63 /* SummaryListItem.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8471A90F1CD486ED00A5D901 = {
@@ -130,7 +174,7 @@
 				8471A9441CD499B400A5D901 /* Extension */,
 				8471A9461CD499B400A5D901 /* Macro */,
 				8471A9471CD499B400A5D901 /* Resource */,
-				8471A94A1CD499B400A5D901 /* Tools */,
+				8471A94A1CD499B400A5D901 /* Managers */,
 				8471A9451CD499B400A5D901 /* FrameWork */,
 			);
 			path = kuaikanCartoon;
@@ -204,6 +248,8 @@
 		8471A93A1CD499B400A5D901 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8480CAB71CD74A4A0072A17B /* SummaryModel.h */,
+				8480CAB81CD74A4A0072A17B /* SummaryModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -291,6 +337,10 @@
 				8471A97A1CD4AD6C00A5D901 /* UIImage+Extension.m */,
 				8471A98B1CD4C67600A5D901 /* UIView+Extension.h */,
 				8471A98C1CD4C67600A5D901 /* UIView+Extension.m */,
+				8480CAC31CD76B6F0072A17B /* NSString+Extension.h */,
+				8480CAC41CD76B6F0072A17B /* NSString+Extension.m */,
+				8480CAC61CD779FB0072A17B /* UIColor+Extension.h */,
+				8480CAC71CD779FB0072A17B /* UIColor+Extension.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -327,10 +377,15 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
-		8471A94A1CD499B400A5D901 /* Tools */ = {
+		8471A94A1CD499B400A5D901 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				8480CAC01CD7620B0072A17B /* NetWorkManager.h */,
+				8480CAC11CD7620B0072A17B /* NetWorkManager.m */,
+				84D979841CD8A6D7008EAE63 /* DateManager.h */,
+				84D979851CD8A6D7008EAE63 /* DateManager.m */,
 			);
+			name = Managers;
 			path = Tools;
 			sourceTree = "<group>";
 		};
@@ -358,6 +413,8 @@
 		8471A9651CD4A55C00A5D901 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84D9797B1CD85005008EAE63 /* BaseModel.h */,
+				84D9797C1CD85005008EAE63 /* BaseModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -466,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8471A97D1CD4B4D700A5D901 /* Assets.xcassets in Resources */,
+				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,16 +582,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
 				84390CB41CD5D89800D0AB8D /* navBarTitleView.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
+				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
 				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
 				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
 				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
+				84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */,
 				8471A9931CD4F34900A5D901 /* ListView.m in Sources */,
+				8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */,
+				8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */,
 				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,
 				8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */,
+				84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
+				84D9797D1CD85005008EAE63 /* BaseModel.m in Sources */,
+				84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */,
+				8480CAC51CD76B6F0072A17B /* NSString+Extension.m in Sources */,
 				8471A9671CD4A55C00A5D901 /* BaseViewController.m in Sources */,
 				8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */,
 				8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */,
@@ -631,9 +698,40 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"SD_WEBP=1",
+				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"BlocksKit\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"SDWebImage\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -646,9 +744,40 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"SD_WEBP=1",
+				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"BlocksKit\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"SDWebImage\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

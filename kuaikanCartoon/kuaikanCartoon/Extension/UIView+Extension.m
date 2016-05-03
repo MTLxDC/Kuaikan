@@ -10,6 +10,26 @@
 
 @implementation UIView (Extension)
 
+
+
+- (id)findResponderWithClass:(Class)aclass
+{
+    UIResponder *nextResponder = self.nextResponder;
+    
+    while (nextResponder) {
+        
+        if ([nextResponder isKindOfClass:aclass]) {
+            return nextResponder;
+        }
+        
+        nextResponder = nextResponder.nextResponder;
+    }
+    
+    return nil;
+}
+
+
+
 - (CGFloat)x {
     return self.frame.origin.x;
 }

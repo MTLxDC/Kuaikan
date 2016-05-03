@@ -11,6 +11,8 @@
 @interface UIView (Extension)
 
 
+- (id)findResponderWithClass:(Class)aclass;
+
 - (CGFloat)x;
 - (CGFloat)y;
 - (CGFloat)width;

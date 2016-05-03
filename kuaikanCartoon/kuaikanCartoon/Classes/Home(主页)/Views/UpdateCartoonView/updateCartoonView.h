@@ -11,6 +11,5 @@
 
 @interface updateCartoonView : UIView
 
-@property (nonatomic,weak) ListView *listView;
 
 @end

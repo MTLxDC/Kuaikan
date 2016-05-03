@@ -9,9 +9,13 @@
 #import "updateCartoonView.h"
 #import "UIView+Extension.h"
 #import "CommonMacro.h"
+#import "updateCartoonListView.h"
 
-@interface updateCartoonView ()
+@interface updateCartoonView ()<UICollectionViewDelegate>
 
+@property (nonatomic,weak) updateCartoonListView *cartoonListView;
+
+@property (nonatomic,weak) ListView *navigationHeadView;
 
 @end
 
@@ -24,21 +28,26 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupListView];
+        self.backgroundColor = [UIColor whiteColor];
+        [self setupNavigationHeadView];
+        [self setupCartoonListView];
     }
     return self;
 }
 
-static const CGFloat listView_H = 25;
+static const CGFloat navigationHeadView_H = 25;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.listView.frame = CGRectMake(0, 0,self.width,listView_H);
-    
+    self.navigationHeadView.frame = CGRectMake(0, 0,self.width,navigationHeadView_H);
+    self.cartoonListView.frame = CGRectMake(0, navigationHeadView_H, self.width, self.height - navigationHeadView_H);
 }
 
-- (void)setupListView {
+
+
+
+- (void)setupNavigationHeadView {
     
     NSMutableArray *weekArray = [NSMutableArray arrayWithArray:
     @[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"]];
@@ -59,7 +68,7 @@ static const CGFloat listView_H = 25;
     [weekArray replaceObjectAtIndex:yesterday withObject:@"昨天"];
     
     
-    ListViewConfiguration *lc = [ListViewConfiguration defaultConfiguration];
+    ListViewConfiguration *lc = [ListViewConfiguration new];
     
     lc.hasSelectAnimate = YES;
     lc.labelSelectTextColor = subjectColor;
@@ -67,15 +76,30 @@ static const CGFloat listView_H = 25;
     lc.lineColor = subjectColor;
     lc.fontSize = 10.0f;
     lc.spaceing = 20.0f;
-    lc.labelSize = CGSizeMake(50, listView_H - 1);
+    lc.labelSize = CGSizeMake(50, navigationHeadView_H - 1);
     
-    ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,listView_H) TextArray:weekArray Configuration:lc];
+    ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:weekArray Configuration:lc];
     
     [self addSubview:lv];
         
-    self.listView = lv;
+    self.navigationHeadView = lv;
     
 }
+
+
+- (void)setupCartoonListView {
+    
+    updateCartoonListView *clv = [[updateCartoonListView alloc] initWithFrame:CGRectMake(0, navigationHeadView_H, self.width, self.height - navigationHeadView_H)];
+    
+    clv.delegate = self;
+    
+    [self addSubview:clv];
+    
+    self.cartoonListView = clv;
+    
+    
+}
+
 
 
 

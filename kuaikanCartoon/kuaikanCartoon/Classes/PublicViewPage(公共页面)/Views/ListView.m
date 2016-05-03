@@ -43,7 +43,10 @@ static const CGFloat lineHeight = 2.0f;
 
 @end
 
+
 @implementation ListView
+
+static NSString * const offsetKeyPath = @"contentOffset";
 
 + (instancetype)listViewWithFrame:(CGRect)frame
                     TextArray:(NSArray *)textArray
@@ -66,7 +69,11 @@ static const CGFloat lineHeight = 2.0f;
 #pragma mark 执行顺序不能错
         
         self.configuration = configuration;
-
+        
+        if (self.configuration.scrollView) {
+            [self.configuration.scrollView addObserver:self forKeyPath:offsetKeyPath options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(self)];
+        }
+        
         [self setupSubviews];
 
         self.labelTextArray = textArray;
@@ -75,6 +82,19 @@ static const CGFloat lineHeight = 2.0f;
 
     
     return self;
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    
+    if ([keyPath isEqualToString:offsetKeyPath]&&context == (__bridge void *)self) {
+        
+//        CGFloat offsetX = [change[NSKeyValueChangeNewKey] CGPointValue].x;
+        
+        
+        
+    }
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame TextArray:(NSArray *)textArray {
@@ -180,12 +200,14 @@ static const CGFloat lineHeight = 2.0f;
     
     [self.scrollView setContentOffset:CGPointMake(left, 0) animated:YES];
     
+    if (self.selectAtIndex) {
+        self.selectAtIndex(selectLabel.tag);
+    }
 }
 
 - (void)setCurrentSelectLabel:(UILabel *)newSelectLabel {
     
     CGRect newFrame = newSelectLabel.frame;
-    
     
     newFrame.origin.y = self.height - lineHeight;
     newFrame.size.height = lineHeight;
@@ -225,7 +247,7 @@ static const CGFloat lineHeight = 2.0f;
 
 - (void)calculateLabelFrame {
     
-    _titleLabelFrameArray = [[NSMutableArray alloc] initWithCapacity:_titleLabelArray.count];
+    _titleLabelFrameCache = [[NSMutableArray alloc] initWithCapacity:_titleLabelArray.count];
 
     
     for (NSInteger index = 0; index < _titleLabelArray.count; index++) {
@@ -254,7 +276,7 @@ static const CGFloat lineHeight = 2.0f;
         
         if (index > 0) {
             
-            NSValue *lastFrame = [_titleLabelFrameArray objectAtIndex:index - 1];
+            NSValue *lastFrame = [_titleLabelFrameCache objectAtIndex:index - 1];
             
             label_X = CGRectGetMaxX([lastFrame CGRectValue]) + self.configuration.spaceing;
             
@@ -270,24 +292,24 @@ static const CGFloat lineHeight = 2.0f;
         [currentLabel setFrame:labelFrame];
         
         //缓存Frame
-        [_titleLabelFrameArray addObject:[NSValue valueWithCGRect:labelFrame]];
+        [_titleLabelFrameCache addObject:[NSValue valueWithCGRect:labelFrame]];
         
     }
     
-    CGFloat MAX_X = CGRectGetMaxX([[_titleLabelFrameArray lastObject] CGRectValue]) + self.configuration.spaceing;
+    CGFloat MAX_X = CGRectGetMaxX([[_titleLabelFrameCache lastObject] CGRectValue]) + self.configuration.spaceing;
     
     self.scrollView.contentSize = CGSizeMake(MAX_X, 0);
 }
 
 - (void)updateLabelFrame {
     
-    if (_titleLabelFrameArray.count == _titleLabelArray.count) {
+    if (_titleLabelFrameCache.count == _titleLabelArray.count) {
         
         for (NSInteger index = 0; index < _titleLabelArray.count; index++) {
             
             UILabel *currentLabel = [_titleLabelArray objectAtIndex:index];
             
-            [currentLabel setFrame:[[_titleLabelFrameArray objectAtIndex:index] CGRectValue]];
+            [currentLabel setFrame:[[_titleLabelFrameCache objectAtIndex:index] CGRectValue]];
 
         }
     }else {
@@ -296,6 +318,8 @@ static const CGFloat lineHeight = 2.0f;
         
     }
 }
+
+
 
 - (void)layoutSubviews {
     [super layoutSubviews];
