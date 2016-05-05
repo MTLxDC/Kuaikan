@@ -11,11 +11,19 @@
 #define SCREEN_WIDTH    [[UIScreen mainScreen] bounds].size.width
 #define SCREEN_HEIGHT   [[UIScreen mainScreen] bounds].size.height
 
+#define SINGLE_LINE_WIDTH           (1 / [UIScreen mainScreen].scale)
+#define SINGLE_LINE_ADJUST_OFFSET   ((1 / [UIScreen mainScreen].scale) / 2)
+
 #define navHeight 64.0f
 
 #define weakself(self)  __weak __typeof(self) weakSelf = self
 
 
-#define RGB(r,g,b)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
-#define subjectColor RGB(254,208,9)
+
+// 日志输出
+#ifdef DEBUG
+#define DEBUG_Log(...) NSLog(__VA_ARGS__)
+#else
+#define DEBUG_Log(...)
+#endif

@@ -10,9 +10,8 @@
 #import "CommonMacro.h"
 #import "navBarTitleView.h"
 #import "updateCartoonView.h"
+#import "Color.h"
 
-
-#import <UIControl+BlocksKit.h>
 #import "UIView+Extension.h"
 
 @interface HomeViewController ()
@@ -27,9 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    [self.navigationController.navigationBar setBarTintColor:subjectColor];
     
     [self setupTitleView];
    
@@ -72,12 +68,17 @@
 
 - (void)setupMainView {
     
-    updateCartoonView *v = [[updateCartoonView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height)];
+    updateCartoonView *v = [[updateCartoonView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
     [self.view addSubview:v];
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBarTintColor:subjectColor];
 
+}
 
 
 

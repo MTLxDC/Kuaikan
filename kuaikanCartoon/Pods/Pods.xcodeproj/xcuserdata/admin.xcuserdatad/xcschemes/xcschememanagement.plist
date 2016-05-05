@@ -9,12 +9,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BlocksKit.xcscheme</key>
+		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MBProgressHUD.xcscheme</key>
+		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,22 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23A8679BE989B3EFB0F696410D88F3F6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2E1B5383E48E66EEC992DA1CD36D89CC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>43FE871D4590DE54D05DE127CD6BBA2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81582C483C14461D4728A79D056BCD35</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,7 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA1A7295DF2A99609DA0EEBF5E83233D</key>
+		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9F91FEBF22436C5DE2AF259F1C86A40</key>
 		<dict>
 			<key>primary</key>
 			<true/>

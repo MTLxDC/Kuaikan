@@ -1,6 +1,7 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "CartoonDetailViewController.h"
 
 
 @interface AppDelegate ()
@@ -18,10 +19,10 @@
     
     [_window makeKeyAndVisible];
     
+    
+    
     return YES;
 }
-
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

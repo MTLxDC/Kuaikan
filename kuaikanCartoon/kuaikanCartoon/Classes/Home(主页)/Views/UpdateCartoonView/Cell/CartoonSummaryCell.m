@@ -11,7 +11,8 @@
 #import <UIImageView+WebCache.h>
 #import <SDWebImageDownloader.h>
 #import "UIColor+Extension.h"
-
+#import "NetWorkManager.h"
+#import "Color.h"
 
 @interface CartoonSummaryCell ()
 
@@ -21,14 +22,25 @@
 @property (weak, nonatomic) IBOutlet UIImageView *frontCover;
 @property (weak, nonatomic) IBOutlet UILabel *chapterTitle;
 @property (weak, nonatomic) IBOutlet UILabel *topCount;
+@property (weak, nonatomic) IBOutlet UIImageView *up;
 @property (weak, nonatomic) IBOutlet UILabel *commentCount;
+@property (weak, nonatomic) IBOutlet UIImageView *comment;
 
 
 @property (nonatomic,strong) NSMutableAttributedString *iconString;
 
+
+@property (nonatomic,assign) BOOL islike;
+
+@property (nonatomic,assign) NSInteger likeCount;
+
+
 @end
 
 @implementation CartoonSummaryCell
+
+
+
 
 + (instancetype)cartoonSummaryCell
 {
@@ -39,9 +51,86 @@
     
     self.cateoryLabel.layer.cornerRadius  = self.cateoryLabel.bounds.size.height * 0.5;
     self.cateoryLabel.layer.masksToBounds = YES;
-   
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [self.up addGestureRecognizer:[self tapWithSel:@selector(upCount)]];
+    [self.topCount addGestureRecognizer:[self tapWithSel:@selector(upCount)]];
+
+
+    [self.comment addGestureRecognizer:[self tapWithSel:@selector(goComment)]];
+    [self.commentCount addGestureRecognizer:[self tapWithSel:@selector(goComment)]];
+    
+    
 }
 
+- (UITapGestureRecognizer *)tapWithSel:(SEL)sel
+{
+    return [[UITapGestureRecognizer alloc] initWithTarget:self action:sel];
+}
+
+- (void)goComment {
+    
+    printf("%s\n",__func__);
+    
+}
+
+- (void)updataIsLikeState {
+    
+    
+    
+}
+
+- (void)upCount {
+    
+    self.userInteractionEnabled = NO;
+    
+    self.islike = !self.islike;
+
+    
+    self.likeCount += (self.islike ? 1 : -1);
+    
+    
+    self.topCount.text = [self makeTextWithCount:self.likeCount];
+   
+    
+    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.8f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
+        
+        self.up.transform = CGAffineTransformMakeScale(2, 2);
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            self.up.transform = CGAffineTransformIdentity;
+            self.userInteractionEnabled = YES;
+        }];
+        
+    }];
+    
+    
+    NetWorkManager *manger = [NetWorkManager manager];
+    
+    
+     NSArray *parameter  = self.islike ? @[@"POST",@"/like"] : @[@"DELETE",@"/like?"];
+
+    
+    NSMutableString *newUrl = [self.model.url mutableCopy];
+    
+    [newUrl appendString:parameter.lastObject];
+
+    [manger requestWithMethod:parameter.firstObject url:newUrl parameters:nil complish:^(id res, NSError *error) {
+        NSLog(@"%@ error:%@",res,error);
+    }];
+    
+    
+ 
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    frame.size.height -= 8;
+    [super setFrame:frame];
+}
 //
 //"status": "published",
 //"label_text": "\u6821\u56ed",
@@ -80,7 +169,9 @@
 //},
 - (void)setModel:(SummaryModel *)model {
     
-    self.topCount.text = [self makeTextWithCount:model.likes_count.integerValue];
+    self.likeCount = model.likes_count.integerValue;
+    
+    self.topCount.text = [self makeTextWithCount:self.likeCount];
     
     self.commentCount.text = [self makeTextWithCount:model.comments_count.integerValue];
     
@@ -101,6 +192,8 @@
     self.authorName.attributedText = self.iconString;
     
     self.chapterTitle.text = model.title;
+    
+    self.islike = model.is_liked;
     
     _model = model;
         
@@ -137,6 +230,17 @@
 }
 
 
+- (void)setIslike:(BOOL)islike {
+    _islike = islike;
+    
+    NSString *imageName = self.islike ? @"ic_details_toolbar_praise_pressed_21x21_":
+    @"ic_common_praise_normal_15x15_";
+    
+    [self.up setImage:[UIImage imageNamed:imageName]];
+    
+    self.topCount.textColor = self.islike ? subjectColor : [UIColor lightGrayColor];
+    
 
+}
 
 @end

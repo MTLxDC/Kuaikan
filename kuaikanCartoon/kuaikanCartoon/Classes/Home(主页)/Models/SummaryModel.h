@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseModel.h"
-
+#import "topicModel.h"
 //
 //{
 //    "status": "published",
@@ -47,48 +47,8 @@
 //    "likes_count": 266523
 //},
 
-@interface userModel : BaseModel
-
-@property (nonatomic,copy)   NSString *avatar_url;
-
-@property (nonatomic,copy)   NSString *nickname;
-
-@property (nonatomic,strong) NSNumber *diff_id;
-
-@property (nonatomic,copy)   NSString *reg_type;
 
 
-@end
-
-
-@interface topicModel : BaseModel
-
-@property (nonatomic,copy)   NSString *vertical_image_url;
-
-@property (nonatomic,copy)   NSString *diff_description;
-
-@property (nonatomic,copy)   NSString *title;
-
-@property (nonatomic,strong) NSNumber *created_at;
-
-@property (nonatomic,strong) NSNumber *updated_at;
-
-@property (nonatomic,strong) NSNumber *order;
-
-@property (nonatomic,strong) NSNumber *label_id;
-
-@property (nonatomic,strong) userModel *user;
-
-@property (nonatomic,copy)   NSString *cover_image_url;
-
-@property (nonatomic,strong) NSNumber *statusId;
-
-@property (nonatomic,strong) NSNumber *comics_count;
-
-@property (nonatomic,copy)   NSString *discover_image_url;
-
-
-@end
 
 @interface SummaryModel : BaseModel
 
@@ -106,7 +66,7 @@
 
 @property (nonatomic,strong) NSNumber *updated_at;
 
-@property (nonatomic,strong) NSNumber *diff_id;
+@property (nonatomic,strong) NSNumber *ID;
 
 @property (nonatomic,strong) topicModel *topic;
 
@@ -125,7 +85,8 @@
 @property (nonatomic,strong) NSNumber *likes_count;
 
 + (void)requestSummaryModelDataWithUrlString:(NSString *)urlString
-                             complish:(void (^)(id res))complish;
+                                    complish:(void (^)(id res))complish
+                                    useCache:(BOOL)cache;
 
 @end
 

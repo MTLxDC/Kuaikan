@@ -7,7 +7,7 @@
 //
 
 #import "BaseNavigationController.h"
-
+#import "UIBarButtonItem+EXtension.h"
 @interface BaseNavigationController ()
 
 @end
@@ -16,7 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *back = [UIBarButtonItem barButtonItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_" target:self action:@selector(back)];
+    
+    
+}
+
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */; };
-		84390CB41CD5D89800D0AB8D /* navBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB31CD5D89800D0AB8D /* navBarTitleView.m */; };
 		84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */; };
 		84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */; };
 		84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */; };
@@ -24,12 +23,21 @@
 		8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9821CD4B7F600A5D901 /* PersonalViewController.m */; };
 		8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9891CD4BECC00A5D901 /* MainTabbar.m */; };
 		8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A98C1CD4C67600A5D901 /* UIView+Extension.m */; };
-		8471A9931CD4F34900A5D901 /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9921CD4F34900A5D901 /* ListView.m */; };
 		8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAB81CD74A4A0072A17B /* SummaryModel.m */; };
 		8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAC11CD7620B0072A17B /* NetWorkManager.m */; };
 		8480CAC51CD76B6F0072A17B /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAC41CD76B6F0072A17B /* NSString+Extension.m */; };
 		8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480CAC71CD779FB0072A17B /* UIColor+Extension.m */; };
-		84D9797D1CD85005008EAE63 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9797C1CD85005008EAE63 /* BaseModel.m */; };
+		849DE6931CDAF33600879190 /* navBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A7611CDA73ED00E2056A /* navBarTitleView.m */; };
+		849DE6991CDB2A6100879190 /* topicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6981CDB2A6100879190 /* topicModel.m */; };
+		849DE69C1CDB2A9300879190 /* userModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE69B1CDB2A9300879190 /* userModel.m */; };
+		849DE69F1CDB2B9300879190 /* comicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE69E1CDB2B9300879190 /* comicsModel.m */; };
+		849DE6A21CDB2C2700879190 /* bannerInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6A11CDB2C2700879190 /* bannerInfoModel.m */; };
+		849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6A51CDB2FDC00879190 /* BaseModel.m */; };
+		84D0A74D1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */; };
+		84D0A7621CDA73ED00E2056A /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A75F1CDA73ED00E2056A /* ListView.m */; };
+		84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */; };
+		84D0A7691CDA782100E2056A /* CommentBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A7681CDA782100E2056A /* CommentBottomView.m */; };
+		84D0A76B1CDA791E00E2056A /* CommentBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D0A76A1CDA791E00E2056A /* CommentBottomView.xib */; };
 		84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9797F1CD8529B008EAE63 /* SummaryListItem.m */; };
 		84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D979821CD85551008EAE63 /* updateCartoonListView.m */; };
 		84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D979851CD8A6D7008EAE63 /* DateManager.m */; };
@@ -38,8 +46,6 @@
 /* Begin PBXFileReference section */
 		45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.release.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.release.xcconfig"; sourceTree = "<group>"; };
 		6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.debug.xcconfig"; sourceTree = "<group>"; };
-		84390CB21CD5D89800D0AB8D /* navBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = navBarTitleView.h; sourceTree = "<group>"; };
-		84390CB31CD5D89800D0AB8D /* navBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = navBarTitleView.m; sourceTree = "<group>"; };
 		84390CB61CD5D8B800D0AB8D /* updateCartoonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateCartoonView.h; sourceTree = "<group>"; };
 		84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonView.m; sourceTree = "<group>"; };
 		84390CBB1CD71F4B00D0AB8D /* CartoonSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonSummaryCell.h; sourceTree = "<group>"; };
@@ -71,8 +77,6 @@
 		8471A9891CD4BECC00A5D901 /* MainTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabbar.m; sourceTree = "<group>"; };
 		8471A98B1CD4C67600A5D901 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		8471A98C1CD4C67600A5D901 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		8471A9911CD4F34900A5D901 /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
-		8471A9921CD4F34900A5D901 /* ListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListView.m; sourceTree = "<group>"; };
 		8480CAB71CD74A4A0072A17B /* SummaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryModel.h; sourceTree = "<group>"; };
 		8480CAB81CD74A4A0072A17B /* SummaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryModel.m; sourceTree = "<group>"; };
 		8480CAC01CD7620B0072A17B /* NetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkManager.h; sourceTree = "<group>"; };
@@ -81,14 +85,34 @@
 		8480CAC41CD76B6F0072A17B /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		8480CAC61CD779FB0072A17B /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		8480CAC71CD779FB0072A17B /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
-		84D9797B1CD85005008EAE63 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
-		84D9797C1CD85005008EAE63 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		849DE6971CDB2A6100879190 /* topicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topicModel.h; sourceTree = "<group>"; };
+		849DE6981CDB2A6100879190 /* topicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topicModel.m; sourceTree = "<group>"; };
+		849DE69A1CDB2A9300879190 /* userModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userModel.h; sourceTree = "<group>"; };
+		849DE69B1CDB2A9300879190 /* userModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userModel.m; sourceTree = "<group>"; };
+		849DE69D1CDB2B9300879190 /* comicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comicsModel.h; sourceTree = "<group>"; };
+		849DE69E1CDB2B9300879190 /* comicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = comicsModel.m; sourceTree = "<group>"; };
+		849DE6A01CDB2C2700879190 /* bannerInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bannerInfoModel.h; sourceTree = "<group>"; };
+		849DE6A11CDB2C2700879190 /* bannerInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bannerInfoModel.m; sourceTree = "<group>"; };
+		849DE6A41CDB2FDC00879190 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		849DE6A51CDB2FDC00879190 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		84D0A74B1CDA63BA00E2056A /* UIBarButtonItem+EXtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+EXtension.h"; sourceTree = "<group>"; };
+		84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+EXtension.m"; sourceTree = "<group>"; };
+		84D0A75E1CDA73ED00E2056A /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
+		84D0A75F1CDA73ED00E2056A /* ListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListView.m; sourceTree = "<group>"; };
+		84D0A7601CDA73ED00E2056A /* navBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = navBarTitleView.h; sourceTree = "<group>"; };
+		84D0A7611CDA73ED00E2056A /* navBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = navBarTitleView.m; sourceTree = "<group>"; };
+		84D0A7641CDA74A900E2056A /* CartoonDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonDetailViewController.h; sourceTree = "<group>"; };
+		84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonDetailViewController.m; sourceTree = "<group>"; };
+		84D0A7671CDA782100E2056A /* CommentBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentBottomView.h; sourceTree = "<group>"; };
+		84D0A7681CDA782100E2056A /* CommentBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentBottomView.m; sourceTree = "<group>"; };
+		84D0A76A1CDA791E00E2056A /* CommentBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentBottomView.xib; sourceTree = "<group>"; };
 		84D9797E1CD8529B008EAE63 /* SummaryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryListItem.h; sourceTree = "<group>"; };
 		84D9797F1CD8529B008EAE63 /* SummaryListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryListItem.m; sourceTree = "<group>"; };
 		84D979811CD85551008EAE63 /* updateCartoonListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateCartoonListView.h; sourceTree = "<group>"; };
 		84D979821CD85551008EAE63 /* updateCartoonListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonListView.m; sourceTree = "<group>"; };
 		84D979841CD8A6D7008EAE63 /* DateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateManager.h; sourceTree = "<group>"; };
 		84D979851CD8A6D7008EAE63 /* DateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateManager.m; sourceTree = "<group>"; };
+		84D979871CD8FE57008EAE63 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -183,6 +207,7 @@
 		8471A9331CD499B400A5D901 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				84D0A75C1CDA73ED00E2056A /* UI组件 */,
 				8471A9691CD4A56200A5D901 /* Main(入口) */,
 				8471A95F1CD4A55C00A5D901 /* BaseClasses(基类) */,
 				8471A9341CD499B400A5D901 /* Findings(发现) */,
@@ -250,6 +275,10 @@
 			children = (
 				8480CAB71CD74A4A0072A17B /* SummaryModel.h */,
 				8480CAB81CD74A4A0072A17B /* SummaryModel.m */,
+				849DE6971CDB2A6100879190 /* topicModel.h */,
+				849DE6981CDB2A6100879190 /* topicModel.m */,
+				849DE69A1CDB2A9300879190 /* userModel.h */,
+				849DE69B1CDB2A9300879190 /* userModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -257,6 +286,7 @@
 		8471A93B1CD499B400A5D901 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84D0A74E1CDA661900E2056A /* New Group */,
 				84390CB51CD5D8B800D0AB8D /* UpdateCartoonView */,
 			);
 			path = Views;
@@ -298,36 +328,9 @@
 		8471A9401CD499B400A5D901 /* PublicViewPage(公共页面) */ = {
 			isa = PBXGroup;
 			children = (
-				8471A9411CD499B400A5D901 /* Controllers */,
-				8471A9421CD499B400A5D901 /* Models */,
-				8471A9431CD499B400A5D901 /* Views */,
+				84D0A7501CDA732F00E2056A /* CartoonDetail(漫画详情) */,
 			);
 			path = "PublicViewPage(公共页面)";
-			sourceTree = "<group>";
-		};
-		8471A9411CD499B400A5D901 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		8471A9421CD499B400A5D901 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		8471A9431CD499B400A5D901 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				84390CB21CD5D89800D0AB8D /* navBarTitleView.h */,
-				84390CB31CD5D89800D0AB8D /* navBarTitleView.m */,
-				8471A9911CD4F34900A5D901 /* ListView.h */,
-				8471A9921CD4F34900A5D901 /* ListView.m */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		8471A9441CD499B400A5D901 /* Extension */ = {
@@ -341,6 +344,8 @@
 				8480CAC41CD76B6F0072A17B /* NSString+Extension.m */,
 				8480CAC61CD779FB0072A17B /* UIColor+Extension.h */,
 				8480CAC71CD779FB0072A17B /* UIColor+Extension.m */,
+				84D0A74B1CDA63BA00E2056A /* UIBarButtonItem+EXtension.h */,
+				84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 			children = (
 				8471A97C1CD4AE8200A5D901 /* pathMacro.h */,
 				8471A9871CD4B89300A5D901 /* CommonMacro.h */,
+				84D979871CD8FE57008EAE63 /* Color.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -392,8 +398,8 @@
 		8471A95F1CD4A55C00A5D901 /* BaseClasses(基类) */ = {
 			isa = PBXGroup;
 			children = (
+				849DE6A31CDB2FC100879190 /* Models */,
 				8471A9601CD4A55C00A5D901 /* Controllers */,
-				8471A9651CD4A55C00A5D901 /* Models */,
 				8471A9661CD4A55C00A5D901 /* Views */,
 			);
 			path = "BaseClasses(基类)";
@@ -408,15 +414,6 @@
 				8471A9771CD4AB6100A5D901 /* BaseNavigationController.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		8471A9651CD4A55C00A5D901 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				84D9797B1CD85005008EAE63 /* BaseModel.h */,
-				84D9797C1CD85005008EAE63 /* BaseModel.m */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		8471A9661CD4A55C00A5D901 /* Views */ = {
@@ -457,6 +454,82 @@
 			children = (
 				8471A9881CD4BECC00A5D901 /* MainTabbar.h */,
 				8471A9891CD4BECC00A5D901 /* MainTabbar.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		849DE6A31CDB2FC100879190 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				849DE6A41CDB2FDC00879190 /* BaseModel.h */,
+				849DE6A51CDB2FDC00879190 /* BaseModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		84D0A74E1CDA661900E2056A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		84D0A7501CDA732F00E2056A /* CartoonDetail(漫画详情) */ = {
+			isa = PBXGroup;
+			children = (
+				84D0A7511CDA732F00E2056A /* Controllers */,
+				84D0A7521CDA732F00E2056A /* Models */,
+				84D0A7531CDA732F00E2056A /* Views */,
+			);
+			name = "CartoonDetail(漫画详情)";
+			path = CartoonDetailView;
+			sourceTree = "<group>";
+		};
+		84D0A7511CDA732F00E2056A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84D0A7641CDA74A900E2056A /* CartoonDetailViewController.h */,
+				84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		84D0A7521CDA732F00E2056A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				849DE69D1CDB2B9300879190 /* comicsModel.h */,
+				849DE69E1CDB2B9300879190 /* comicsModel.m */,
+				849DE6A01CDB2C2700879190 /* bannerInfoModel.h */,
+				849DE6A11CDB2C2700879190 /* bannerInfoModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		84D0A7531CDA732F00E2056A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84D0A7671CDA782100E2056A /* CommentBottomView.h */,
+				84D0A7681CDA782100E2056A /* CommentBottomView.m */,
+				84D0A76A1CDA791E00E2056A /* CommentBottomView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		84D0A75C1CDA73ED00E2056A /* UI组件 */ = {
+			isa = PBXGroup;
+			children = (
+				84D0A75D1CDA73ED00E2056A /* Views */,
+			);
+			path = "UI组件";
+			sourceTree = "<group>";
+		};
+		84D0A75D1CDA73ED00E2056A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84D0A75E1CDA73ED00E2056A /* ListView.h */,
+				84D0A75F1CDA73ED00E2056A /* ListView.m */,
+				84D0A7601CDA73ED00E2056A /* navBarTitleView.h */,
+				84D0A7611CDA73ED00E2056A /* navBarTitleView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -524,6 +597,7 @@
 			files = (
 				8471A97D1CD4B4D700A5D901 /* Assets.xcassets in Resources */,
 				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
+				84D0A76B1CDA791E00E2056A /* CommentBottomView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,26 +656,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849DE6931CDAF33600879190 /* navBarTitleView.m in Sources */,
+				84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */,
 				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
-				84390CB41CD5D89800D0AB8D /* navBarTitleView.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
+				84D0A7691CDA782100E2056A /* CommentBottomView.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
 				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
+				84D0A7621CDA73ED00E2056A /* ListView.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
 				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
 				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
 				84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */,
-				8471A9931CD4F34900A5D901 /* ListView.m in Sources */,
 				8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */,
+				849DE69F1CDB2B9300879190 /* comicsModel.m in Sources */,
 				8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */,
+				849DE69C1CDB2A9300879190 /* userModel.m in Sources */,
+				849DE6991CDB2A6100879190 /* topicModel.m in Sources */,
 				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,
 				8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */,
 				84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
-				84D9797D1CD85005008EAE63 /* BaseModel.m in Sources */,
+				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
 				84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */,
+				849DE6A21CDB2C2700879190 /* bannerInfoModel.m in Sources */,
 				8480CAC51CD76B6F0072A17B /* NSString+Extension.m in Sources */,
 				8471A9671CD4A55C00A5D901 /* BaseViewController.m in Sources */,
+				84D0A74D1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m in Sources */,
 				8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */,
 				8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */,
 				8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */,

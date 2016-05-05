@@ -75,6 +75,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AFHTTPSessionManager : AFURLSessionManager <NSSecureCoding, NSCopying>
 
+#pragma MARK 改动
+- (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
+                                       URLString:(NSString *)URLString
+                                      parameters:(id)parameters
+                                  uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+                                downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+                                         success:(void (^)(NSURLSessionDataTask *, id))success
+                                         failure:(void (^)(NSURLSessionDataTask *, NSError *))failure;
+
+
 /**
  The URL used to construct requests from relative paths in methods like `requestWithMethod:URLString:parameters:`, and the `GET` / `POST` / et al. convenience methods.
  */

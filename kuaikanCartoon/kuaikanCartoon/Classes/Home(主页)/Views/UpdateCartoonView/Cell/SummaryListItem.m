@@ -9,13 +9,15 @@
 #import "SummaryListItem.h"
 #import "CartoonSummaryCell.h"
 #import "CommonMacro.h"
-#import "SummaryModel.h"
 #import <MJRefresh.h>
-
+#import "UIView+Extension.h"
+#import "CartoonDetailViewController.h"
+#import "SummaryModel.h"
 
 @interface SummaryListView ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) NSMutableArray *modelArray;
+
 
 @end
 
@@ -38,18 +40,41 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.dataSource = self;
     self.delegate = self;
-    self.sectionFooterHeight = 20;
-    self.rowHeight = 285;
+    self.rowHeight = 300;
+    self.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    weakself(self);
+    
+    MJRefreshNormalHeader *normalHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        
+    }];
+    
+    [normalHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
+    
+    
+    MJRefreshAutoFooter *footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+    }];
+    
+    
+    self.mj_header = normalHeader;
+    
+    self.mj_footer = footer;
+    
+    UIImage *image = [UIImage imageNamed:@"no_data_footer_375x98_"];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    
+    self.tableFooterView = imageView;
     
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.modelArray.count;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.modelArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,7 +85,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
         cell = [CartoonSummaryCell cartoonSummaryCell];
     }
     
-    cell.model = [self.modelArray objectAtIndex:indexPath.section];
+    cell.model = [self.modelArray objectAtIndex:indexPath.row];
     
     return cell;
     
@@ -68,20 +93,41 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    CartoonDetailViewController *detailVc = [[CartoonDetailViewController alloc] init];
+    
+    SummaryModel *md = self.modelArray[indexPath.row];
+    
+    detailVc.cartoonId = [NSString stringWithFormat:@"%zd",md.ID.integerValue];
+    
+    [[self findResponderWithClass:[UINavigationController class]]
+               pushViewController:detailVc animated:YES];
 }
 
 
-- (void)setUrlString:(NSString *)urlString {
-    _urlString = urlString;
+- (void)updata:(NSString *)url {
     
     weakself(self);
     
-    [SummaryModel requestSummaryModelDataWithUrlString:urlString complish:^(id res) {
+    [SummaryModel requestSummaryModelDataWithUrlString:self.urlString complish:^(id res) {
+        
+    
+        [weakSelf.mj_header endRefreshing];
+
+    } useCache:NO];
+    
+}
+
+- (void)setUrlString:(NSString *)urlString {
+    
+    _urlString = urlString;
+    weakself(self);
+
+    [SummaryModel requestSummaryModelDataWithUrlString:_urlString complish:^(id res) {
+        
         if ([res isKindOfClass:[NSError class]] || res == nil || weakSelf == nil) {
-            NSLog(@"%@",res);
+            DEBUG_Log(@"%@",res);
             return ;
         }
         
@@ -90,7 +136,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
             [weakSelf reloadData];
         });
         
-    }];
+    } useCache:YES];
     
 }
 
@@ -111,7 +157,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     self = [super initWithFrame:frame];
     if (self) {
 
-        SummaryListView *slv = [[SummaryListView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
+        SummaryListView *slv = [[SummaryListView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         [self.contentView addSubview:slv];
         
         self.slv = slv;

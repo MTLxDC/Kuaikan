@@ -12,39 +12,42 @@
 #import "FindingsViewController.h"
 #import "PersonalViewController.h"
 #import "BaseNavigationController.h"
-#import "MainTabbar.h"
 #import "CommonMacro.h"
+#import "CartoonDetailViewController.h"
+#import "UIView+Extension.h"
 
 @interface MainTabBarController ()
+
 
 @end
 
 @implementation MainTabBarController
 
+CGFloat tabbar_h = 44;
+
 - (void)loadView {
     [super loadView];
     
-    CGFloat h = 44;
-    CGFloat y = SCREEN_HEIGHT - h;
-    
-    
     weakself(self);
  
-    MainTabbar *tabbar = [[MainTabbar alloc] initWithFrame:CGRectMake(0, y, SCREEN_WIDTH, h)];
+    MainTabbar *tabbar = [[MainTabbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH,tabbar_h)];
     tabbar.backgroundColor = [UIColor whiteColor];
     [tabbar addItemWithImageNames:@[@"home",@"discover",@"me"]];
     [tabbar setSelectAtIndex:^(UIButton *btn, NSInteger index) {
         weakSelf.selectedIndex = index;
     }];
     [self.view addSubview:tabbar];
+    
+    _mainTabbar = tabbar;
 
     [self.tabBar removeFromSuperview];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-    
+
+
     
     HomeViewController * home = [[HomeViewController alloc] init];
     
@@ -54,6 +57,7 @@
 
     
     [self addChildViewControllers:@[home,find,person]];
+    
 }
 
 - (void)addChildViewControllers:(NSArray *)childControllers  {
@@ -63,6 +67,13 @@
         [super addChildViewController:navHome];
     }
 }
+
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        [self.mainTabbar setY:SCREEN_HEIGHT - tabbar_h];
+//    }];
+//}
 
 
 

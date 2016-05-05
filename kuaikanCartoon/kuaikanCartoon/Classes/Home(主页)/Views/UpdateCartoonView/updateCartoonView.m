@@ -8,8 +8,9 @@
 
 #import "updateCartoonView.h"
 #import "UIView+Extension.h"
-#import "CommonMacro.h"
+#import "Color.h"
 #import "updateCartoonListView.h"
+#import "DateManager.h"
 
 @interface updateCartoonView ()<UICollectionViewDelegate>
 
@@ -30,12 +31,12 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         [self setupNavigationHeadView];
-        [self setupCartoonListView];
+
     }
     return self;
 }
 
-static const CGFloat navigationHeadView_H = 25;
+static const CGFloat navigationHeadView_H = 30;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -52,20 +53,16 @@ static const CGFloat navigationHeadView_H = 25;
     NSMutableArray *weekArray = [NSMutableArray arrayWithArray:
     @[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"]];
     
-    NSCalendar *calender = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
-    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    DateManager *date = [DateManager share];
 
-    [calender setTimeZone:timeZone];
-    
-    NSDateComponents *dc = [calender components:NSCalendarUnitWeekday fromDate:[NSDate date]];
-    
-    NSInteger weekday = dc.weekday - 1;
+    NSInteger weekday = date.currentWeek - 1;
     
     [weekArray replaceObjectAtIndex:weekday withObject:@"今天"];
     
     NSInteger yesterday = weekday - 1 > 0 ? weekday - 1 : weekArray.count - 1;
     
     [weekArray replaceObjectAtIndex:yesterday withObject:@"昨天"];
+    
     
     
     ListViewConfiguration *lc = [ListViewConfiguration new];
@@ -76,29 +73,31 @@ static const CGFloat navigationHeadView_H = 25;
     lc.lineColor = subjectColor;
     lc.fontSize = 10.0f;
     lc.spaceing = 20.0f;
-    lc.labelSize = CGSizeMake(50, navigationHeadView_H - 1);
-    
+    lc.labelWidth = 50.0f;
+    lc.monitorScrollView = self.cartoonListView;
     ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:weekArray Configuration:lc];
     
     [self addSubview:lv];
-        
+    [self addSubview:self.cartoonListView];
+    
     self.navigationHeadView = lv;
     
 }
 
 
-- (void)setupCartoonListView {
-    
-    updateCartoonListView *clv = [[updateCartoonListView alloc] initWithFrame:CGRectMake(0, navigationHeadView_H, self.width, self.height - navigationHeadView_H)];
-    
-    clv.delegate = self;
-    
-    [self addSubview:clv];
-    
-    self.cartoonListView = clv;
-    
-    
+
+
+- (updateCartoonListView *)cartoonListView {
+    if (!_cartoonListView) {
+        updateCartoonListView *clv = [[updateCartoonListView alloc] initWithFrame:CGRectMake(0, navigationHeadView_H, self.width, self.height - navigationHeadView_H)];
+        
+        clv.delegate = self;
+        
+        _cartoonListView = clv;
+    }
+    return _cartoonListView;
 }
+
 
 
 

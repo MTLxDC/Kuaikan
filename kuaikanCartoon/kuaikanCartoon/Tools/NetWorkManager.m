@@ -9,56 +9,36 @@
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
 
+
+
 @implementation NetWorkManager
 
 
 
-
-- (void)GET_Request:(NSString *)url
-           complish:(void (^)(id res,NSError *error))complish;
-
-{
-    NSParameterAssert(complish);
-
-    NSString *requstUrl = [[url componentsSeparatedByString:@"?"] firstObject];
-    NSDictionary *parameters = [url getUrlStringParameters];
-    
-    [self GET:requstUrl parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        if (complish) {
-            complish(responseObject,nil);
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (complish) {
-            complish(nil,error);
-        }
-        
-    }];
-    
-}
-
-- (void)POST_Request:(NSString *)url
+- (void)requestWithMethod:(NSString *)method
+                      url:(NSString *)url
                parameters:(id)parameters
-            complish:(void (^)(id res,NSError *error))complish;
-
-{
+                 complish:(void (^)(id res,NSError *error))complish {
+    
     NSParameterAssert(complish);
     
-    [self POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    [[self dataTaskWithHTTPMethod:method URLString:url parameters:parameters uploadProgress:nil downloadProgress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         if (complish) {
             complish(responseObject,nil);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         if (complish) {
             complish(nil,error);
         }
         
-    }];
+    }] resume];
     
 }
+
 
 
 
@@ -79,9 +59,12 @@
     self = [super init];
     if (self) {
         self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_SERIAL);
+        _reachability = [AFNetworkReachabilityManager sharedManager];
+        [_reachability startMonitoring];
     }
     return self;
 }
+
 
 
 @end

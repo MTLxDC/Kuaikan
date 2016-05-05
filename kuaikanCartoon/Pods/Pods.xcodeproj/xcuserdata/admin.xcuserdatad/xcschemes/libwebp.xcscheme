@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C237E0210D40F0C0E1A34659'
+               BlueprintIdentifier = '26FE6F6085D7A0AA2A7017D3'
                BlueprintName = 'libwebp'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'liblibwebp.a'>

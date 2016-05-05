@@ -5,6 +5,20 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 28,
+          "top" : 27,
+          "right" : 28,
+          "left" : 27
+        }
+      },
       "idiom" : "universal",
       "filename" : "bg_searchbar_textfield_49x28_@2x.png",
       "scale" : "2x"

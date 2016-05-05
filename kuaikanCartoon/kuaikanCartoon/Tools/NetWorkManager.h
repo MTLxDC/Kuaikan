@@ -12,17 +12,14 @@
 
 @interface NetWorkManager : AFHTTPSessionManager
 
+@property (nonatomic,strong,readonly) AFNetworkReachabilityManager *reachability;
 
 + (instancetype)share;
 
-
-- (void)GET_Request:(NSString *)url 
-           complish:(void (^)(id res,NSError *error))complish;
-
-
-- (void)POST_Request:(NSString *)url
-          parameters:(id)parameters
-            complish:(void (^)(id res,NSError *error))complish;
+- (void)requestWithMethod:(NSString *)method
+                      url:(NSString *)url
+               parameters:(id)parameters
+                 complish:(void (^)(id res,NSError *error))complish;
 
 
 @end

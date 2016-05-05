@@ -37,6 +37,7 @@
     
     self.dataSource = self;
     self.pagingEnabled = YES;
+    self.bounces = NO;
     
     [self registerClass:[SummaryListItem class] forCellWithReuseIdentifier:@"SummaryListItem"];
     
@@ -90,7 +91,6 @@
         for (NSInteger index = 1; index < 8; index++) {
             
             NSString *timeStamp = [date timeStampWithDate:[date dateByAddingDays:index - 7]];
-            NSLog(@"%@",timeStamp);
             NSString *newUrl = [NSString stringWithFormat:formatUrl,timeStamp];
             
             [array addObject:newUrl];

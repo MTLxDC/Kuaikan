@@ -60,5 +60,6 @@
 + (UIColor *)colorWithHexString:(NSString *)color
 {
     return [self colorWithHexString:color alpha:1.0f];
+    
 }
 @end

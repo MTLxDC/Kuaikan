@@ -10,4 +10,7 @@
 
 @interface BaseViewController : UIViewController
 
+
+- (void)setBackItemWithImage:(NSString *)image pressImage:(NSString *)pressImage;
+
 @end
