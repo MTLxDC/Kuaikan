@@ -17,9 +17,7 @@
                                          complish:(void (^)(id res))complish
                                          useCache:(BOOL)cache {
     
-    
-    
-    NetWorkManager *tool = [NetWorkManager manager];
+    NetWorkManager *tool = [NetWorkManager share];
     
     NSString *savePath = urlString.cachePath;
     
@@ -40,7 +38,6 @@
             return;
         }
         
-        
         NSDictionary *dict = (NSDictionary *)res;
         
         NSDictionary *modelDict = dict[@"data"];
@@ -49,9 +46,7 @@
         
         complish(md);
         
-        if (cache) {
-            [NSKeyedArchiver archiveRootObject:md toFile:savePath];
-        }
+        [NSKeyedArchiver archiveRootObject:md toFile:savePath];
         
     }];
     

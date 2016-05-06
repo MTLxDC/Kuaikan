@@ -15,6 +15,7 @@
 #define SINGLE_LINE_ADJUST_OFFSET   ((1 / [UIScreen mainScreen].scale) / 2)
 
 #define navHeight 64.0f
+#define bottomBarHeight 44.0f
 
 #define weakself(self)  __weak __typeof(self) weakSelf = self
 

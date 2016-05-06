@@ -11,6 +11,7 @@
 
 @implementation NSString (Extension)
 
+
 - (NSDictionary *)getUrlStringParameters
 {
     

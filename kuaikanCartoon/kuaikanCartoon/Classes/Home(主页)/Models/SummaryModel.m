@@ -27,7 +27,7 @@
                                     useCache:(BOOL)cache
 {
     
-    NetWorkManager *tool = [NetWorkManager manager];
+    NetWorkManager *tool = [NetWorkManager share];
     
     NSString *savePath = urlString.cachePath;
     
@@ -48,26 +48,15 @@
             return;
         }
         
-        
         NSDictionary *dict = (NSDictionary *)res;
         
         NSArray *dictArr = dict[@"data"][@"comics"];
         
-        NSMutableArray *modelArr = [[NSMutableArray alloc] initWithCapacity:dictArr.count];
-        
-        
-        for (NSDictionary *modelDict in dictArr) {
-            
-            SummaryModel *md = [SummaryModel mj_objectWithKeyValues:modelDict];
-    
-            [modelArr addObject:md];
-        }
+        NSMutableArray *modelArr = [SummaryModel mj_objectArrayWithKeyValuesArray:dictArr];
         
         complish(modelArr);
         
-        if (cache) {
-            [NSKeyedArchiver archiveRootObject:modelArr toFile:savePath];
-        }
+        [NSKeyedArchiver archiveRootObject:modelArr toFile:savePath];
         
     }];
 }

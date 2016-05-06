@@ -10,6 +10,9 @@
 
 @interface CommentBottomView : UIView
 
+@property (nonatomic,assign) NSInteger recommend_count;
+
 
 + (instancetype)commentBottomView;
+
 @end

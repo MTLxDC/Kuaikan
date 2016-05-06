@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 
 @property (nonatomic,strong) NSAttributedString *placeText;
+@property (weak, nonatomic) IBOutlet UIButton *commntCount;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelWidth;
 
 @end
 
@@ -25,12 +27,25 @@
 - (void)awakeFromNib {
     
     self.commentTextField.attributedPlaceholder = self.placeText;
-   
+    self.commntCount.layer.cornerRadius = self.commntCount.bounds.size.height * 0.5;
+    self.commntCount.layer.masksToBounds = YES;
+    
 }
-- (CGRect)borderRectForBounds:(CGRect)bounds {
-    NSLog(@"%@",NSStringFromCGRect(bounds));
-    return CGRectZero;
+
+
+- (void)setRecommend_count:(NSInteger)recommend_count {
+    _recommend_count = recommend_count;
+    NSString *commntCountText = [NSString stringWithFormat:@"%zd",_recommend_count];
+    CGSize textSize = [commntCountText boundingRectWithSize:CGSizeMake(MAXFLOAT,20)
+                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                      attributes:@{NSFontAttributeName:self.commntCount.titleLabel.font} context:nil].size;
+    
+    self.labelWidth.constant = textSize.width * 1.2 + 10;
+    [self.commntCount setTitle:commntCountText forState:UIControlStateNormal];
+
+    [self.commntCount layoutIfNeeded];
 }
+
 - (IBAction)share:(id)sender {
 }
 

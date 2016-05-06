@@ -78,6 +78,8 @@
 
 @property (nonatomic) BOOL is_liked;
 
+@property (nonatomic,strong) NSNumber *likes_count;
+
 @property (nonatomic,strong) NSNumber *next_comic_id;
 
 @property (nonatomic,strong) NSNumber *previous_comic_id;

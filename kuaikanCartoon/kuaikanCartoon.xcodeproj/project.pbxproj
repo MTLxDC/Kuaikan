@@ -33,6 +33,10 @@
 		849DE69F1CDB2B9300879190 /* comicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE69E1CDB2B9300879190 /* comicsModel.m */; };
 		849DE6A21CDB2C2700879190 /* bannerInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6A11CDB2C2700879190 /* bannerInfoModel.m */; };
 		849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6A51CDB2FDC00879190 /* BaseModel.m */; };
+		849DE6B01CDB9CA300879190 /* authorInfoHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6AF1CDB9CA300879190 /* authorInfoHeadView.m */; };
+		849DE6B31CDBA39D00879190 /* CartoonContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6B21CDBA39D00879190 /* CartoonContentCell.m */; };
+		849DE6B71CDBA97100879190 /* CartoonFlooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6B51CDBA97100879190 /* CartoonFlooterView.m */; };
+		849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */; };
 		84D0A74D1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */; };
 		84D0A7621CDA73ED00E2056A /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A75F1CDA73ED00E2056A /* ListView.m */; };
 		84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */; };
@@ -95,6 +99,13 @@
 		849DE6A11CDB2C2700879190 /* bannerInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bannerInfoModel.m; sourceTree = "<group>"; };
 		849DE6A41CDB2FDC00879190 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		849DE6A51CDB2FDC00879190 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		849DE6AE1CDB9CA300879190 /* authorInfoHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = authorInfoHeadView.h; sourceTree = "<group>"; };
+		849DE6AF1CDB9CA300879190 /* authorInfoHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = authorInfoHeadView.m; sourceTree = "<group>"; };
+		849DE6B11CDBA39D00879190 /* CartoonContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonContentCell.h; sourceTree = "<group>"; };
+		849DE6B21CDBA39D00879190 /* CartoonContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonContentCell.m; sourceTree = "<group>"; };
+		849DE6B41CDBA97100879190 /* CartoonFlooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonFlooterView.h; sourceTree = "<group>"; };
+		849DE6B51CDBA97100879190 /* CartoonFlooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonFlooterView.m; sourceTree = "<group>"; };
+		849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartoonFlooterView.xib; sourceTree = "<group>"; };
 		84D0A74B1CDA63BA00E2056A /* UIBarButtonItem+EXtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+EXtension.h"; sourceTree = "<group>"; };
 		84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+EXtension.m"; sourceTree = "<group>"; };
 		84D0A75E1CDA73ED00E2056A /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
@@ -286,7 +297,6 @@
 		8471A93B1CD499B400A5D901 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84D0A74E1CDA661900E2056A /* New Group */,
 				84390CB51CD5D8B800D0AB8D /* UpdateCartoonView */,
 			);
 			path = Views;
@@ -467,11 +477,18 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		84D0A74E1CDA661900E2056A /* New Group */ = {
+		849DE6AD1CDB9A8F00879190 /* CartoonDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				849DE6AE1CDB9CA300879190 /* authorInfoHeadView.h */,
+				849DE6AF1CDB9CA300879190 /* authorInfoHeadView.m */,
+				849DE6B11CDBA39D00879190 /* CartoonContentCell.h */,
+				849DE6B21CDBA39D00879190 /* CartoonContentCell.m */,
+				849DE6B41CDBA97100879190 /* CartoonFlooterView.h */,
+				849DE6B51CDBA97100879190 /* CartoonFlooterView.m */,
+				849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */,
 			);
-			name = "New Group";
+			name = CartoonDetailView;
 			sourceTree = "<group>";
 		};
 		84D0A7501CDA732F00E2056A /* CartoonDetail(漫画详情) */ = {
@@ -508,6 +525,7 @@
 		84D0A7531CDA732F00E2056A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				849DE6AD1CDB9A8F00879190 /* CartoonDetailView */,
 				84D0A7671CDA782100E2056A /* CommentBottomView.h */,
 				84D0A7681CDA782100E2056A /* CommentBottomView.m */,
 				84D0A76A1CDA791E00E2056A /* CommentBottomView.xib */,
@@ -598,6 +616,7 @@
 				8471A97D1CD4B4D700A5D901 /* Assets.xcassets in Resources */,
 				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
 				84D0A76B1CDA791E00E2056A /* CommentBottomView.xib in Resources */,
+				849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,14 +683,17 @@
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
 				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
 				84D0A7621CDA73ED00E2056A /* ListView.m in Sources */,
+				849DE6B31CDBA39D00879190 /* CartoonContentCell.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
 				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
 				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
 				84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */,
+				849DE6B01CDB9CA300879190 /* authorInfoHeadView.m in Sources */,
 				8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */,
 				849DE69F1CDB2B9300879190 /* comicsModel.m in Sources */,
 				8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */,
 				849DE69C1CDB2A9300879190 /* userModel.m in Sources */,
+				849DE6B71CDBA97100879190 /* CartoonFlooterView.m in Sources */,
 				849DE6991CDB2A6100879190 /* topicModel.m in Sources */,
 				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,
 				8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */,

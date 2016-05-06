@@ -11,6 +11,7 @@
 
 @implementation UIImage (Extension)
 
+
 - (UIImage *)clipImageToSize:(CGSize)size {
     
     UIGraphicsBeginImageContextWithOptions(size, YES, [UIScreen mainScreen].scale);

@@ -11,7 +11,7 @@
 
 @interface bannerInfoModel : BaseModel
 
-@property (nonatomic,strong) NSNumber *diff_id;
+@property (nonatomic,strong) NSNumber *ID;
 
 @property (nonatomic,copy) NSString *pic;
 
