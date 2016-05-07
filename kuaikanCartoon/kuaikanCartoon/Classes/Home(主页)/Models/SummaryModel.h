@@ -84,10 +84,6 @@
 
 @property (nonatomic,strong) NSNumber *likes_count;
 
-+ (void)requestSummaryModelDataWithUrlString:(NSString *)urlString
-                                    complish:(void (^)(id res))complish
-                                    useCache:(BOOL)cache
-                                    saveData:(BOOL)save;
 
 @end
 

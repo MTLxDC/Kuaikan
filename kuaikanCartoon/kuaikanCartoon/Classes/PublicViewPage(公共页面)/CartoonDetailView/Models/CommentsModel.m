@@ -1,21 +1,21 @@
 //
-//  comicsModel.m
+//  CommentsModel.m
 //  kuaikanCartoon
 //
-//  Created by dengchen on 16/5/5.
+//  Created by dengchen on 16/5/7.
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import "comicsModel.h"
+#import "CommentsModel.h"
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
 
 
-@implementation comicsModel
+@implementation CommentsModel
+
 
 + (NSArray<NSString *> *)setupDataFieldsIsModelArray:(BOOL *)isModelArray {
-    return @[@"data"];
+    *isModelArray = YES;
+    return @[@"data",@"comments"];
 }
-
-
 @end

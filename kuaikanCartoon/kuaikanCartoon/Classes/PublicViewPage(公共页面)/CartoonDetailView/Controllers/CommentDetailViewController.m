@@ -7,8 +7,13 @@
 //
 
 #import "CommentDetailViewController.h"
+#import "UIBarButtonItem+EXtension.h"
+#import "CommentDetailView.h"
+#import <Masonry.h>
 
 @interface CommentDetailViewController ()
+
+@property (nonatomic,weak) CommentDetailView *cdv;
 
 @end
 
@@ -16,22 +21,68 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self setupNavBar];
+    
+    [self setupCommentDetailView];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+
+- (void)setupNavBar {
+    
+    
+    UISegmentedControl *sc = [[UISegmentedControl alloc] initWithItems:@[@"最新评论",@"最热评论"]];
+    
+    
+    [sc setTintColor:[UIColor lightGrayColor]];
+    
+    
+    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor darkGrayColor]};
+    
+    NSDictionary *selectTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+    [sc setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    
+    [sc setTitleTextAttributes:selectTextAttributes forState:UIControlStateSelected];
+    
+    [sc addTarget:self action:@selector(selectedSegmentIndex:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    self.navigationItem.titleView = sc;
+    
+    [sc setSelectedSegmentIndex:0];
+    
+    UIBarButtonItem *back = [UIBarButtonItem barButtonItemWithImage:@"ic_nav_delete_normal_17x17_" pressImage:@"ic_nav_delete_pressed_17x17_" target:self action:@selector(dismiss)];
+    
+    self.navigationItem.leftBarButtonItem = back;
+    
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)setupCommentDetailView {
+    
+    CommentDetailView *cdv = [[CommentDetailView alloc] init];
+    [self.view addSubview:cdv];
+    
+    [cdv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    self.cdv = cdv;
 }
-*/
 
+- (void)selectedSegmentIndex:(UISegmentedControl *)sc
+{
+    
+    
+}
+
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 @end

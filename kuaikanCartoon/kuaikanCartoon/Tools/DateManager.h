@@ -20,6 +20,7 @@
 - (NSDate *)dateByAddingDays: (NSInteger)dDays;
 
 - (NSString *)timeStampWithDate:(NSDate *)date;
+- (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp;
 
 - (NSString *)stringFromDate:(NSDate *)date;
 - (NSDate *)dateFromString:(NSString *)string;

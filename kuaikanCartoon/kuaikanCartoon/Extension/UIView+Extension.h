@@ -10,6 +10,7 @@
 
 @interface UIView (Extension)
 
+- (void)cornerRadius:(CGFloat)size;
 
 - (id)findResponderWithClass:(Class)aclass;
 

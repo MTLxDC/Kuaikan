@@ -7,18 +7,40 @@
 //
 
 #import "CommentBottomView.h"
+#import "CommentDetailViewController.h"
+#import "UIView+Extension.h"
+
+static NSString * const contentSizeKeyPath = @"contentSize";
+
 
 @interface CommentBottomView () <UITextViewDelegate>
 
-
-@property (nonatomic,strong) NSAttributedString *placeText;
 @property (weak, nonatomic) IBOutlet UIButton *commntCount;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelWidth;
 @property (weak, nonatomic) IBOutlet UIButton *placeBtn;
 
+@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+
+
 @end
 
 @implementation CommentBottomView
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    
+    if (context == (__bridge void * _Nullable)(self)) {
+        
+        CGSize size = [change[NSKeyValueChangeNewKey] CGSizeValue];
+        
+        if ([self.delegate respondsToSelector:@selector(textViewContenSizeDidChange:)]) {
+            [self.delegate textViewContenSizeDidChange:size];
+        }
+        
+    }
+    
+}
+
 
 + (instancetype)commentBottomView {
     return [[[NSBundle mainBundle] loadNibNamed:@"CommentBottomView" owner:nil options:nil] firstObject];
@@ -27,24 +49,17 @@
 
 - (void)awakeFromNib {
     
-//    self.commentTextView.attributedText = self.placeText;
     self.commentTextView.delegate = self;
     
-    self.commentTextView.layer.cornerRadius = self.commentTextView.bounds.size.height * 0.5;
-    self.commentTextView.layer.masksToBounds = YES;
+    [self.commentTextView cornerRadius:0];
     
-    self.commntCount.layer.cornerRadius = self.commntCount.bounds.size.height * 0.5;
-    self.commntCount.layer.masksToBounds = YES;
+    [self.commntCount cornerRadius:0];
     
+    [self.commentTextView addObserver:self forKeyPath:contentSizeKeyPath options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(self)];
     
 }
-//
-//- (void)textViewDidBeginEditing:(UITextView *)textView {
-//}
-//
-//- (void)textViewDidEndEditing:(UITextView *)textView {
-//    self.commentTextView.attributedText = self.placeText;
-//}
+
+
 
 - (void)textViewDidChange:(UITextView *)textView {
     self.placeBtn.hidden = textView.text.length > 0;
@@ -64,33 +79,17 @@
     [self.commntCount layoutIfNeeded];
 }
 
+
 - (IBAction)share:(id)sender {
 }
 
 - (IBAction)gotoCommentPage:(id)sender {
-}
-
-- (NSAttributedString *)placeText {
-    if (!_placeText) {
-        //附件
-        NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-        
-        //给附件添加图片
-        attachment.image = [UIImage imageNamed:@"ic_details_toolbar_write_comment_16x16_"];
-        
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"  "];
-        
-        NSAttributedString *iconStr = [NSAttributedString attributedStringWithAttachment:attachment] ;
-        
-        NSAttributedString *str1 = [[NSAttributedString alloc] initWithString:@"    发表评论"];
-    
-        [str appendAttributedString:iconStr];
-        [str appendAttributedString:str1];
-
-        _placeText = [str copy];
+    if ([self.delegate respondsToSelector:@selector(showCommentPage)]) {
+        [self.delegate showCommentPage];
     }
-    
-    return _placeText;
 }
 
+- (void)dealloc {
+    [self.commentTextView removeObserver:self forKeyPath:contentSizeKeyPath context:(__bridge void * _Nullable)(self)];
+}
 @end

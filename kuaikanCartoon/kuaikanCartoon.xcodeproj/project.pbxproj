@@ -11,6 +11,7 @@
 		84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */; };
 		84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */; };
 		84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */; };
+		846A46DF1CDE55CC00F99B36 /* CommentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A46DE1CDE55CC00F99B36 /* CommentDetailView.m */; };
 		8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9531CD49CDA00A5D901 /* AppDelegate.m */; };
 		8471A9561CD49CEE00A5D901 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9551CD49CEE00A5D901 /* main.m */; };
 		8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471A9591CD49DA100A5D901 /* HomeViewController.m */; };
@@ -39,6 +40,10 @@
 		849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */; };
 		84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */; };
 		84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */; };
+		84BA93BF1CDDD706009CFDC6 /* CommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BE1CDDD706009CFDC6 /* CommentsModel.m */; };
+		84BA93C41CDDDB03009CFDC6 /* CommentInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93C21CDDDB03009CFDC6 /* CommentInfoCell.m */; };
+		84BA93C51CDDDB03009CFDC6 /* CommentInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BA93C31CDDDB03009CFDC6 /* CommentInfoCell.xib */; };
+		84BA93C81CDDE58F009CFDC6 /* likeCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93C71CDDE58F009CFDC6 /* likeCountView.m */; };
 		84D0A74D1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */; };
 		84D0A7621CDA73ED00E2056A /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A75F1CDA73ED00E2056A /* ListView.m */; };
 		84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */; };
@@ -57,6 +62,8 @@
 		84390CBB1CD71F4B00D0AB8D /* CartoonSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonSummaryCell.h; sourceTree = "<group>"; };
 		84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonSummaryCell.m; sourceTree = "<group>"; };
 		84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartoonSummaryCell.xib; sourceTree = "<group>"; };
+		846A46DD1CDE55CC00F99B36 /* CommentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailView.h; sourceTree = "<group>"; };
+		846A46DE1CDE55CC00F99B36 /* CommentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailView.m; sourceTree = "<group>"; };
 		8471A9181CD486ED00A5D901 /* kuaikanCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kuaikanCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8471A9491CD499B400A5D901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8471A9501CD49C1700A5D901 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +119,13 @@
 		84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsDetailViewController.m; sourceTree = "<group>"; };
 		84BA93BA1CDDBE95009CFDC6 /* CommentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailViewController.h; sourceTree = "<group>"; };
 		84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailViewController.m; sourceTree = "<group>"; };
+		84BA93BD1CDDD706009CFDC6 /* CommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsModel.h; sourceTree = "<group>"; };
+		84BA93BE1CDDD706009CFDC6 /* CommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsModel.m; sourceTree = "<group>"; };
+		84BA93C11CDDDB03009CFDC6 /* CommentInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentInfoCell.h; sourceTree = "<group>"; };
+		84BA93C21CDDDB03009CFDC6 /* CommentInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentInfoCell.m; sourceTree = "<group>"; };
+		84BA93C31CDDDB03009CFDC6 /* CommentInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentInfoCell.xib; sourceTree = "<group>"; };
+		84BA93C61CDDE58F009CFDC6 /* likeCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = likeCountView.h; sourceTree = "<group>"; };
+		84BA93C71CDDE58F009CFDC6 /* likeCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = likeCountView.m; sourceTree = "<group>"; };
 		84D0A74B1CDA63BA00E2056A /* UIBarButtonItem+EXtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+EXtension.h"; sourceTree = "<group>"; };
 		84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+EXtension.m"; sourceTree = "<group>"; };
 		84D0A75E1CDA73ED00E2056A /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
@@ -531,6 +545,21 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		84BA93C01CDDD872009CFDC6 /* CoommentDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				84BA93C11CDDDB03009CFDC6 /* CommentInfoCell.h */,
+				84BA93C21CDDDB03009CFDC6 /* CommentInfoCell.m */,
+				84BA93C31CDDDB03009CFDC6 /* CommentInfoCell.xib */,
+				84D0A7671CDA782100E2056A /* CommentBottomView.h */,
+				84D0A7681CDA782100E2056A /* CommentBottomView.m */,
+				84D0A76A1CDA791E00E2056A /* CommentBottomView.xib */,
+				846A46DD1CDE55CC00F99B36 /* CommentDetailView.h */,
+				846A46DE1CDE55CC00F99B36 /* CommentDetailView.m */,
+			);
+			name = CoommentDetailView;
+			sourceTree = "<group>";
+		};
 		84D0A7501CDA732F00E2056A /* CartoonDetail(漫画详情) */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +589,8 @@
 				849DE69E1CDB2B9300879190 /* comicsModel.m */,
 				849DE6A01CDB2C2700879190 /* bannerInfoModel.h */,
 				849DE6A11CDB2C2700879190 /* bannerInfoModel.m */,
+				84BA93BD1CDDD706009CFDC6 /* CommentsModel.h */,
+				84BA93BE1CDDD706009CFDC6 /* CommentsModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -567,10 +598,8 @@
 		84D0A7531CDA732F00E2056A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84BA93C01CDDD872009CFDC6 /* CoommentDetailView */,
 				849DE6AD1CDB9A8F00879190 /* CartoonDetailView */,
-				84D0A7671CDA782100E2056A /* CommentBottomView.h */,
-				84D0A7681CDA782100E2056A /* CommentBottomView.m */,
-				84D0A76A1CDA791E00E2056A /* CommentBottomView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -590,6 +619,8 @@
 				84D0A75F1CDA73ED00E2056A /* ListView.m */,
 				84D0A7601CDA73ED00E2056A /* navBarTitleView.h */,
 				84D0A7611CDA73ED00E2056A /* navBarTitleView.m */,
+				84BA93C61CDDE58F009CFDC6 /* likeCountView.h */,
+				84BA93C71CDDE58F009CFDC6 /* likeCountView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -655,6 +686,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84BA93C51CDDDB03009CFDC6 /* CommentInfoCell.xib in Resources */,
 				8471A97D1CD4B4D700A5D901 /* Assets.xcassets in Resources */,
 				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
 				84D0A76B1CDA791E00E2056A /* CommentBottomView.xib in Resources */,
@@ -717,10 +749,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846A46DF1CDE55CC00F99B36 /* CommentDetailView.m in Sources */,
 				849DE6931CDAF33600879190 /* navBarTitleView.m in Sources */,
+				84BA93C41CDDDB03009CFDC6 /* CommentInfoCell.m in Sources */,
 				84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */,
 				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
+				84BA93C81CDDE58F009CFDC6 /* likeCountView.m in Sources */,
 				84D0A7691CDA782100E2056A /* CommentBottomView.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
 				84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */,
@@ -742,6 +777,7 @@
 				8471A9781CD4AB6100A5D901 /* BaseNavigationController.m in Sources */,
 				84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
+				84BA93BF1CDDD706009CFDC6 /* CommentsModel.m in Sources */,
 				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
 				84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */,
 				84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */,

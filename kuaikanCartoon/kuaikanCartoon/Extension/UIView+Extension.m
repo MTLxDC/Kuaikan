@@ -11,6 +11,14 @@
 @implementation UIView (Extension)
 
 
+- (void)cornerRadius:(CGFloat)size
+{
+    if (size == 0) size = self.height * 0.5;
+    
+    self.layer.cornerRadius = size;
+    self.layer.masksToBounds = YES;
+    
+}
 
 - (id)findResponderWithClass:(Class)aclass
 {

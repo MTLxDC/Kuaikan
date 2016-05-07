@@ -8,11 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CommentBottomViewDelegate <NSObject>
+
+@optional
+
+- (void)textViewContenSizeDidChange:(CGSize)size;
+
+- (void)showShareView;
+
+- (void)showCommentPage;
+
+
+@end
+
 @interface CommentBottomView : UIView
 
 @property (nonatomic,assign) NSInteger recommend_count;
 
-@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (nonatomic,weak) id<CommentBottomViewDelegate> delegate;
 
 + (instancetype)commentBottomView;
 

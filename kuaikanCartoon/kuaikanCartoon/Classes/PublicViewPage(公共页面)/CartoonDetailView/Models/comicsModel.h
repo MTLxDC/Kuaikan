@@ -96,9 +96,5 @@
 
 @property (nonatomic,copy) NSString *url;
 
-+ (void)requestComicsDetailModelDataWithUrlString:(NSString *)urlString
-                                         complish:(void (^)(id res))complish
-                                         useCache:(BOOL)cache
-                                         saveData:(BOOL)save;
 
 @end

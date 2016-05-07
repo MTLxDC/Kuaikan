@@ -9,7 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <MJExtension.h>
 
-@interface BaseModel : NSObject <MJCoding,MJKeyValue>
 
+@interface BaseModel : NSObject  <MJCoding,MJKeyValue>
+
++ (NSArray <NSString *>*)setupDataFieldsIsModelArray:(BOOL *)isModelArray;
+
++ (void)requestModelDataWithUrlString:(NSString *)urlString
+                             complish:(void (^)(id res))complish
+                             useCache:(BOOL)cache;
+
++ (void)requestModelDataWithUrlString:(NSString *)urlString
+                             complish:(void (^)(id res))complish;
 
 @end

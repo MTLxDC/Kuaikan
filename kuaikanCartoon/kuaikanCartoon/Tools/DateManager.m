@@ -38,6 +38,9 @@
    return [NSString stringWithFormat:@"%.0f",[date timeIntervalSince1970]];
 }
 
+- (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp {
+  return [self stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
+}
 
 - (NSString *)stringFromDate:(NSDate *)date {
     return [self.format stringFromDate:date];

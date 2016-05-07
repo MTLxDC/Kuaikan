@@ -18,6 +18,8 @@
 
 @property (nonatomic,strong) NSMutableArray *modelArray;
 
+@property (nonatomic,assign) BOOL isLastUpdata;
+
 
 @end
 
@@ -43,6 +45,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     self.rowHeight = 300;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.isLastUpdata = NO;
     
     weakself(self);
     
@@ -110,7 +113,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     weakself(self);
     
     
-    [SummaryModel requestSummaryModelDataWithUrlString:self.urlString complish:^(id res) {
+    [SummaryModel requestModelDataWithUrlString:self.urlString complish:^(id res) {
         
         if ([res isKindOfClass:[NSError class]] || res == nil || weakSelf == nil) {
             DEBUG_Log(@"%@",res);
@@ -125,19 +128,19 @@ static NSString * const cellIdentifier = @"SummaryCell";
             [sself.mj_header endRefreshing];
         });
         
-    } useCache:useCache saveData:YES];
+    } useCache:useCache];
+    
     
 }
 
-static bool isfirstUpdata = YES;
 
 - (void)setUrlString:(NSString *)urlString {
     
     _urlString = urlString;
     
-    [self updataWithCache:!isfirstUpdata];
+    [self updataWithCache:self.isLastUpdata];
     
-    isfirstUpdata = false;
+    self.isLastUpdata = YES;
 }
 
 @end
