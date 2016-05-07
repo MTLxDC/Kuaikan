@@ -8,13 +8,13 @@
 
 #import "CommentBottomView.h"
 
-@interface CommentBottomView ()
+@interface CommentBottomView () <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 
 @property (nonatomic,strong) NSAttributedString *placeText;
 @property (weak, nonatomic) IBOutlet UIButton *commntCount;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelWidth;
+@property (weak, nonatomic) IBOutlet UIButton *placeBtn;
 
 @end
 
@@ -24,12 +24,30 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"CommentBottomView" owner:nil options:nil] firstObject];
 }
 
+
 - (void)awakeFromNib {
     
-    self.commentTextField.attributedPlaceholder = self.placeText;
+//    self.commentTextView.attributedText = self.placeText;
+    self.commentTextView.delegate = self;
+    
+    self.commentTextView.layer.cornerRadius = self.commentTextView.bounds.size.height * 0.5;
+    self.commentTextView.layer.masksToBounds = YES;
+    
     self.commntCount.layer.cornerRadius = self.commntCount.bounds.size.height * 0.5;
     self.commntCount.layer.masksToBounds = YES;
     
+    
+}
+//
+//- (void)textViewDidBeginEditing:(UITextView *)textView {
+//}
+//
+//- (void)textViewDidEndEditing:(UITextView *)textView {
+//    self.commentTextView.attributedText = self.placeText;
+//}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    self.placeBtn.hidden = textView.text.length > 0;
 }
 
 

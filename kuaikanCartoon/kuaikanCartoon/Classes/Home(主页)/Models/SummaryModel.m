@@ -25,9 +25,15 @@
 + (void)requestSummaryModelDataWithUrlString:(NSString *)urlString
                                     complish:(void (^)(id res))complish
                                     useCache:(BOOL)cache
+                                    saveData:(BOOL)save
 {
     
     NetWorkManager *tool = [NetWorkManager share];
+    
+    if (!tool.isReachable) {
+        cache = YES;
+        save = NO;
+    }
     
     NSString *savePath = urlString.cachePath;
     
@@ -56,7 +62,9 @@
         
         complish(modelArr);
         
-        [NSKeyedArchiver archiveRootObject:modelArr toFile:savePath];
+        if (save) {
+            [NSKeyedArchiver archiveRootObject:modelArr toFile:savePath];
+        }
         
     }];
 }

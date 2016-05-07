@@ -12,7 +12,8 @@
 
 @interface NetWorkManager : AFHTTPSessionManager
 
-@property (nonatomic,strong,readonly) AFNetworkReachabilityManager *reachability;
+@property (nonatomic,readonly) bool isReachable;
+
 
 + (instancetype)share;
 

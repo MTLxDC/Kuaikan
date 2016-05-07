@@ -12,6 +12,7 @@
 
 @property (nonatomic,assign) NSInteger recommend_count;
 
+@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 
 + (instancetype)commentBottomView;
 

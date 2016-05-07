@@ -15,7 +15,9 @@
 
 + (void)requestComicsDetailModelDataWithUrlString:(NSString *)urlString
                                          complish:(void (^)(id res))complish
-                                         useCache:(BOOL)cache {
+                                         useCache:(BOOL)cache
+                                         saveData:(BOOL)save;
+{
     
     NetWorkManager *tool = [NetWorkManager share];
     
@@ -46,7 +48,9 @@
         
         complish(md);
         
-        [NSKeyedArchiver archiveRootObject:md toFile:savePath];
+        if (save) {
+            [NSKeyedArchiver archiveRootObject:md toFile:savePath];
+        }
         
     }];
     

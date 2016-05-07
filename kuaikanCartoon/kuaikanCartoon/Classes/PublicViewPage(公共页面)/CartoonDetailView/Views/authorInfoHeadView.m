@@ -11,7 +11,7 @@
 #import "userModel.h"
 #import <UIImageView+WebCache.h>
 #import "CommonMacro.h"
-
+#import "Color.h"
 @interface authorInfoHeadView ()
 
 @property (nonatomic,weak) UIImageView *authorIcon;
@@ -127,7 +127,7 @@ static CGFloat followSize = 21;
         
         name.font = [UIFont systemFontOfSize:13];
         name.textAlignment = NSTextAlignmentLeft;
-        name.textColor = [[UIColor alloc] initWithWhite:8 alpha:1];
+        name.textColor = [UIColor lightGrayColor];
         _authorName = name;
     }
     return _authorName;
@@ -155,7 +155,7 @@ static CGFloat followSize = 21;
         UIView *line = [UIView new];
         [self.contentView addSubview:line];
         
-        line.backgroundColor = [[UIColor alloc] initWithWhite:6 alpha:1];
+        line.backgroundColor = White(0.9);
         
         _line = line;
     }

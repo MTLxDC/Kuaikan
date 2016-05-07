@@ -47,8 +47,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     weakself(self);
     
     MJRefreshNormalHeader *normalHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
-        
+            [weakSelf updataWithCache:NO];
     }];
     
     [normalHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
@@ -106,38 +105,39 @@ static NSString * const cellIdentifier = @"SummaryCell";
 }
 
 
-- (void)updata:(NSString *)url {
+- (void)updataWithCache:(BOOL)useCache{
     
     weakself(self);
+    
     
     [SummaryModel requestSummaryModelDataWithUrlString:self.urlString complish:^(id res) {
-        
-    
-        [weakSelf.mj_header endRefreshing];
-
-    } useCache:NO];
-    
-}
-
-- (void)setUrlString:(NSString *)urlString {
-    
-    _urlString = urlString;
-    weakself(self);
-
-    [SummaryModel requestSummaryModelDataWithUrlString:_urlString complish:^(id res) {
         
         if ([res isKindOfClass:[NSError class]] || res == nil || weakSelf == nil) {
             DEBUG_Log(@"%@",res);
             return ;
         }
         
-        weakSelf.modelArray = res;
+        SummaryListView *sself = weakSelf;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf reloadData];
+            sself.modelArray = res;
+            [sself reloadData];
+            [sself.mj_header endRefreshing];
         });
         
-    } useCache:YES];
+    } useCache:useCache saveData:YES];
     
+}
+
+static bool isfirstUpdata = YES;
+
+- (void)setUrlString:(NSString *)urlString {
+    
+    _urlString = urlString;
+    
+    [self updataWithCache:!isfirstUpdata];
+    
+    isfirstUpdata = false;
 }
 
 @end

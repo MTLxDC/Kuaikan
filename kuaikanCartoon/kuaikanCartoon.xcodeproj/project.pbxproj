@@ -37,6 +37,8 @@
 		849DE6B31CDBA39D00879190 /* CartoonContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6B21CDBA39D00879190 /* CartoonContentCell.m */; };
 		849DE6B71CDBA97100879190 /* CartoonFlooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6B51CDBA97100879190 /* CartoonFlooterView.m */; };
 		849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */; };
+		84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */; };
+		84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */; };
 		84D0A74D1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */; };
 		84D0A7621CDA73ED00E2056A /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A75F1CDA73ED00E2056A /* ListView.m */; };
 		84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */; };
@@ -106,6 +108,10 @@
 		849DE6B41CDBA97100879190 /* CartoonFlooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonFlooterView.h; sourceTree = "<group>"; };
 		849DE6B51CDBA97100879190 /* CartoonFlooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonFlooterView.m; sourceTree = "<group>"; };
 		849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartoonFlooterView.xib; sourceTree = "<group>"; };
+		84BA93B71CDDA862009CFDC6 /* WordsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsDetailViewController.h; sourceTree = "<group>"; };
+		84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsDetailViewController.m; sourceTree = "<group>"; };
+		84BA93BA1CDDBE95009CFDC6 /* CommentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailViewController.h; sourceTree = "<group>"; };
+		84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailViewController.m; sourceTree = "<group>"; };
 		84D0A74B1CDA63BA00E2056A /* UIBarButtonItem+EXtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+EXtension.h"; sourceTree = "<group>"; };
 		84D0A74C1CDA63BA00E2056A /* UIBarButtonItem+EXtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+EXtension.m"; sourceTree = "<group>"; };
 		84D0A75E1CDA73ED00E2056A /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
@@ -338,6 +344,7 @@
 		8471A9401CD499B400A5D901 /* PublicViewPage(公共页面) */ = {
 			isa = PBXGroup;
 			children = (
+				84BA93B31CDDA74C009CFDC6 /* WorksDetail(作品详情) */,
 				84D0A7501CDA732F00E2056A /* CartoonDetail(漫画详情) */,
 			);
 			path = "PublicViewPage(公共页面)";
@@ -491,6 +498,39 @@
 			name = CartoonDetailView;
 			sourceTree = "<group>";
 		};
+		84BA93B31CDDA74C009CFDC6 /* WorksDetail(作品详情) */ = {
+			isa = PBXGroup;
+			children = (
+				84BA93B41CDDA7DE009CFDC6 /* Controllers */,
+				84BA93B51CDDA7DE009CFDC6 /* Models */,
+				84BA93B61CDDA7DE009CFDC6 /* Views */,
+			);
+			path = "WorksDetail(作品详情)";
+			sourceTree = "<group>";
+		};
+		84BA93B41CDDA7DE009CFDC6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84BA93B71CDDA862009CFDC6 /* WordsDetailViewController.h */,
+				84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		84BA93B51CDDA7DE009CFDC6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		84BA93B61CDDA7DE009CFDC6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		84D0A7501CDA732F00E2056A /* CartoonDetail(漫画详情) */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +547,8 @@
 			children = (
 				84D0A7641CDA74A900E2056A /* CartoonDetailViewController.h */,
 				84D0A7651CDA74A900E2056A /* CartoonDetailViewController.m */,
+				84BA93BA1CDDBE95009CFDC6 /* CommentDetailViewController.h */,
+				84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -681,6 +723,7 @@
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
 				84D0A7691CDA782100E2056A /* CommentBottomView.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
+				84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */,
 				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
 				84D0A7621CDA73ED00E2056A /* ListView.m in Sources */,
 				849DE6B31CDBA39D00879190 /* CartoonContentCell.m in Sources */,
@@ -700,6 +743,7 @@
 				84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
 				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
+				84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */,
 				84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */,
 				849DE6A21CDB2C2700879190 /* bannerInfoModel.m in Sources */,
 				8480CAC51CD76B6F0072A17B /* NSString+Extension.m in Sources */,

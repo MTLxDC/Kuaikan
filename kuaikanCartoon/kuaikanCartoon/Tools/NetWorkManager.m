@@ -9,7 +9,11 @@
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
 
+@interface NetWorkManager ()
 
+@property (nonatomic,strong) AFNetworkReachabilityManager *reachability;
+
+@end
 
 @implementation NetWorkManager
 
@@ -58,9 +62,11 @@
 {
     self = [super init];
     if (self) {
+        
         self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_SERIAL);
-        _reachability = [AFNetworkReachabilityManager sharedManager];
-        [_reachability startMonitoring];
+        
+        self.reachability = [AFNetworkReachabilityManager sharedManager];
+        [self.reachability startMonitoring];
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         self.requestSerializer.timeoutInterval = 15.0f;
         
@@ -69,6 +75,8 @@
     return self;
 }
 
-
+- (bool)isReachable {
+    return self.reachability.isReachable;
+}
 
 @end

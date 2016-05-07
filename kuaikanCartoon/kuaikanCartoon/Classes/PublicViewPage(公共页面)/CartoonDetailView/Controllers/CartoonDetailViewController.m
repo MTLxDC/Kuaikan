@@ -17,6 +17,7 @@
 #import "CartoonFlooterView.h"
 #import "CartoonContentCell.h"
 #import "authorInfoHeadView.h"
+#import "UIView+Extension.h"
 
 @interface CartoonDetailViewController () <UITableViewDataSource,UITableViewDelegate,CartoonFlooterViewDelegate>
 
@@ -27,8 +28,6 @@
 @property (nonatomic,weak) UITableView *cartoonContentView;
 
 @property (nonatomic,weak) CommentBottomView *bottomView;
-
-@property (nonatomic,strong) MASConstraint *bottomConstraint;
 
 @end
 
@@ -65,23 +64,53 @@ static const CGFloat imageCellHeight = 250.0f;
             DEBUG_Log(@"%@",res);
             return ;
         }
+        
+        CartoonDetailViewController *sself = weakSelf;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.comicsMd = res;
-            [weakSelf updataUI];
+            sself.comicsMd = res;
+            [sself updataUI];
         });
         
-    } useCache:YES];
+    } useCache:YES saveData:YES];
     
 }
 
 - (void)updataUI {
     
     self.titleLabel.text = self.comicsMd.title;
-    self.bottomView.recommend_count = self.comicsMd.recommend_count.integerValue;
+    self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     [self.cartoonContentView reloadData];
 }
 
+static bool hideOrShow = false;
 
+- (void)hideOrShowHeadBottomView
+{
+    hideOrShow = !hideOrShow;
+    
+    [self.navigationController setNavigationBarHidden:hideOrShow animated:YES];
+    
+    CGFloat offset = hideOrShow ? bottomBarHeight : 0;
+    
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(offset);
+    }];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.bottomView layoutIfNeeded];
+    }];
+    
+
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self hideOrShowHeadBottomView];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self hideOrShowHeadBottomView];
+}
 
 - (instancetype)init
 {
@@ -103,12 +132,13 @@ static const CGFloat imageCellHeight = 250.0f;
 - (void)keyboardFrameChange:(NSNotification *)not {
     
     CGFloat kb_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
-    CGFloat offset = kb_Y - SCREEN_HEIGHT;
+    CGFloat offset = SCREEN_HEIGHT - kb_Y;
+
     [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-        self.bottomConstraint.offset(-offset);
+        make.bottom.equalTo(self.view).offset(-offset);
     }];
     
-    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.8f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.66f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
         [self.bottomView layoutIfNeeded];
     } completion:^(BOOL finished) {
         
@@ -154,28 +184,70 @@ static const CGFloat imageCellHeight = 250.0f;
 }
 
 
+static NSString * const contentSizeKeyPath = @"contentSize";
+
+static const CGFloat contentSizeMaxHeight = 100.0f;
 
 
 - (void)setupCommentBottomView {
     
     CommentBottomView *cb = [CommentBottomView commentBottomView];
     
+    [cb.commentTextView addObserver:self forKeyPath:contentSizeKeyPath options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(self)];
+    
     [self.view addSubview:cb];
     
     [cb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        self.bottomConstraint = make.bottom.equalTo(self.view).offset(0);
-        make.height.equalTo(@44);
+        make.bottom.equalTo(self.view);
+        make.height.equalTo(@(bottomBarHeight));
     }];
     
     self.bottomView = cb;
     
+
+    
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    
+    if (context == (__bridge void * _Nullable)(self)) {
+        
+        CGFloat offset_H = [change[NSKeyValueChangeNewKey] CGSizeValue].height;
+        
+        if (offset_H > contentSizeMaxHeight) {
+            return;
+        }
+        
+        if (offset_H < 44) offset_H = 44;
+        
+        
+        [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(offset_H));
+        }];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.bottomView layoutIfNeeded];
+        }];
+    }
+    
+}
+
 
 static NSString * const authorInfoHeadViewIdentifier = @"authorInfoHeadView";
 static NSString * const CartoonFlooterViewIdentifier = @"CartoonFlooterView";
 static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
+
+- (UIView *)creatplaceViewWithHeight:(CGFloat)height {
+    
+    UIView *placeHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width,height)];
+    
+    placeHead.backgroundColor = [UIColor clearColor];
+    
+    
+    return placeHead;
+}
 
 - (void)setupCartoonContentView {
     
@@ -187,6 +259,9 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
+    contentView.tableHeaderView = [self creatplaceViewWithHeight:navHeight];
+    contentView.tableFooterView = [self creatplaceViewWithHeight:bottomBarHeight];
+    
     [contentView registerClass:[authorInfoHeadView class] forCellReuseIdentifier:authorInfoHeadViewIdentifier];
     
     [contentView registerNib:[UINib nibWithNibName:@"CartoonFlooterView" bundle:nil] forCellReuseIdentifier:CartoonFlooterViewIdentifier];
@@ -194,9 +269,10 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     [contentView registerClass:[CartoonContentCell class] forCellReuseIdentifier:CartoonContentCellIdentifier];
     
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(navHeight);
-        make.bottom.equalTo(self.view).offset(-bottomBarHeight);
+//        make.left.right.equalTo(self.view);
+//        make.top.equalTo(self.view).offset(navHeight);
+//        make.bottom.equalTo(self.view).offset(-bottomBarHeight);
+            make.edges.equalTo(self.view);
     }];
     
     self.cartoonContentView = contentView;
@@ -272,8 +348,11 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 
 
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    
+    [self.bottomView.commentTextView removeObserver:self forKeyPath:contentSizeKeyPath context:(__bridge void * _Nullable)(self)];
 }
 
 @end
