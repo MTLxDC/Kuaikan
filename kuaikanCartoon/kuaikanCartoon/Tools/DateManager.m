@@ -20,9 +20,11 @@
 
 @implementation DateManager
 
+
 - (NSInteger)currentWeek {
     return [[self.calender_CN components:NSCalendarUnitWeekday fromDate:self.currentDate] weekday];
 }
+
 
 - (NSDate *)dateByAddingDays: (NSInteger)dDays
 {
@@ -33,11 +35,13 @@
     return newDate;
 }
 
+//时间转字符串的时间戳
 - (NSString *)timeStampWithDate:(NSDate *)date
 {
    return [NSString stringWithFormat:@"%.0f",[date timeIntervalSince1970]];
 }
 
+//时间戳转字符串的时间
 - (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp {
   return [self stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
 }

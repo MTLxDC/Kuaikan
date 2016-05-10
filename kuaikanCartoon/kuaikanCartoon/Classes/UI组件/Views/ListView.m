@@ -167,7 +167,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
     CGFloat line_h = SINGLE_LINE_WIDTH;
     
     CALayer *line = [CALayer layer];
-    line.backgroundColor = [[UIColor alloc] initWithWhite:0.8 alpha:1].CGColor;
+    line.backgroundColor = [[UIColor alloc] initWithWhite:0.9 alpha:1].CGColor;
     line.frame = CGRectMake(0,self.height - line_h,self.width,line_h);
     
     [self.layer addSublayer:line];

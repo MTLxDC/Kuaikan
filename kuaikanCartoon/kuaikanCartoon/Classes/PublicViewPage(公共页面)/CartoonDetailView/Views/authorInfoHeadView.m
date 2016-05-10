@@ -86,6 +86,7 @@ static CGFloat followSize = 21;
     
 }
 
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     

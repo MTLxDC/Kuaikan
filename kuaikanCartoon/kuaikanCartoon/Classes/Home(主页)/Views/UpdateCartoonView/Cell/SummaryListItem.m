@@ -42,7 +42,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.dataSource = self;
     self.delegate = self;
-    self.rowHeight = 300;
+    self.rowHeight = 292;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.isLastUpdata = NO;

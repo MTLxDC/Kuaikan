@@ -9,7 +9,9 @@
 #import "CommentDetailViewController.h"
 #import "UIBarButtonItem+EXtension.h"
 #import "CommentDetailView.h"
+#import "CommentsModel.h"
 #import <Masonry.h>
+#import "CommonMacro.h"
 
 @interface CommentDetailViewController ()
 
@@ -26,10 +28,18 @@
     
     [self setupCommentDetailView];
     
+    [self requestData];
 }
 
-
-
+- (void)requestData {
+    if (self.requestID.length < 1) {
+        return;
+    }
+    
+    NSString *requestUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/0?",self.requestID];
+    
+    self.cdv.requestUrl = requestUrl;
+}
 
 - (void)setupNavBar {
     
@@ -67,8 +77,10 @@
     CommentDetailView *cdv = [[CommentDetailView alloc] init];
     [self.view addSubview:cdv];
     
+    
     [cdv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(self.view).offset(navHeight);
     }];
     
     self.cdv = cdv;

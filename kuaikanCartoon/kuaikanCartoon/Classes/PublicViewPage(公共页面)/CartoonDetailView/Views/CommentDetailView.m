@@ -8,6 +8,9 @@
 
 #import "CommentDetailView.h"
 #import "CommentInfoCell.h"
+#import "CommentsModel.h"
+#import "CommonMacro.h"
+#import "UIView+Extension.h"
 
 @interface CommentDetailView ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -15,10 +18,20 @@
 
 @end
 
-static NSString * const commentInfoCellName = @"CommentInfoCell";
+static NSString * const commentInfoCellName = @"CommentInfoCellIdentifier";
 
 @implementation CommentDetailView
 
+
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    
+    if (self = [super initWithFrame:frame style:style]) {
+        
+        [self setup];
+    }
+    
+    return self;
+}
 
 - (instancetype)init
 {
@@ -29,7 +42,14 @@ static NSString * const commentInfoCellName = @"CommentInfoCell";
     return self;
 }
 
-
+- (UIView *)creatplaceViewWithHeight:(CGFloat)height {
+    
+    UIView *placeHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH,height)];
+    
+    placeHead.backgroundColor = [UIColor clearColor];
+    
+    return placeHead;
+}
 
 
 - (void)setup {
@@ -37,9 +57,12 @@ static NSString * const commentInfoCellName = @"CommentInfoCell";
     self.dataSource = self;
     self.delegate = self;
     
-    [self registerNib:[UINib nibWithNibName:commentInfoCellName bundle:nil] forCellReuseIdentifier:commentInfoCellName];
+    self.tableHeaderView = [self creatplaceViewWithHeight:navHeight];
     
+    self.rowHeight = UITableViewAutomaticDimension;
+    self.estimatedRowHeight = 100.f;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.modelArray.count;
@@ -49,15 +72,44 @@ static NSString * const commentInfoCellName = @"CommentInfoCell";
     
     CommentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:commentInfoCellName];
     
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"CommentInfoCell" owner:nil options:nil] firstObject];
+    }
+    
     cell.commentsModel = self.modelArray[indexPath.row];
     
     return cell;
 }
 
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
+
+
+- (void)setRequestUrl:(NSString *)requestUrl {
+    _requestUrl = requestUrl;
+    
+    weakself(self);
+    
+    [CommentsModel requestModelDataWithUrlString:requestUrl complish:^(id res) {
+        if (weakSelf == nil) {
+            return ;
+        }
+        
+        CommentDetailView *sself = weakSelf;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            sself.modelArray = res;
+            [sself reloadData];
+        });
+        
+    } useCache:YES];
+}
+
+
+
 
 
 @end

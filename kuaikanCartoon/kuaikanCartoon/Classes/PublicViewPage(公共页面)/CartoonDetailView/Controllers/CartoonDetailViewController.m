@@ -8,6 +8,7 @@
 
 #import "CartoonDetailViewController.h"
 #import "CommentDetailViewController.h"
+#import "WordsDetailViewController.h"
 #import "BaseNavigationController.h"
 
 #import "Color.h"
@@ -111,10 +112,6 @@ static bool hideOrShow = false;
 
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self hideOrShowHeadBottomView];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self hideOrShowHeadBottomView];
 }
@@ -155,7 +152,12 @@ static bool hideOrShow = false;
 
 
 - (void)gotoCollectedWorksPage {
-    printf("%s\n",__func__);
+   
+    WordsDetailViewController *wdc = [[WordsDetailViewController alloc] init];
+    
+    wdc.wordsID = self.comicsMd.topic.ID.stringValue;
+    
+    [self.navigationController pushViewController:wdc animated:YES];
 }
 
 - (void)setupNavigationBar {
@@ -239,6 +241,8 @@ CGFloat contentSizeMaxHeight = 100.0f;
     
     CommentDetailViewController  *cdVc = [[CommentDetailViewController alloc] init];
     
+    cdVc.requestID = self.comicsMd.ID.stringValue;
+    
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:cdVc];
     
     [self presentViewController:nav animated:YES completion:^{
@@ -252,16 +256,6 @@ static NSString * const CartoonFlooterViewIdentifier = @"CartoonFlooterView";
 static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 
-- (UIView *)creatplaceViewWithHeight:(CGFloat)height {
-    
-    UIView *placeHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width,height)];
-    
-    placeHead.backgroundColor = [UIColor clearColor];
-    
-    
-    return placeHead;
-}
-
 - (void)setupCartoonContentView {
     
     UITableView *contentView = [UITableView new];
@@ -270,10 +264,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     contentView.dataSource = self;
     contentView.delegate = self;
     contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    
-    contentView.tableHeaderView = [self creatplaceViewWithHeight:navHeight];
-    contentView.tableFooterView = [self creatplaceViewWithHeight:bottomBarHeight];
     
     [contentView registerClass:[authorInfoHeadView class] forCellReuseIdentifier:authorInfoHeadViewIdentifier];
     

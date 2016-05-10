@@ -10,10 +10,10 @@
 #import "SummaryModel.h"
 #import <UIImageView+WebCache.h>
 #import <SDWebImageDownloader.h>
-#import "UIColor+Extension.h"
-#import "NetWorkManager.h"
 #import "Color.h"
 #import "likeCountView.h"
+#import "CommentDetailViewController.h"
+#import "UIView+Extension.h"
 
 
 @interface CartoonSummaryCell ()
@@ -50,14 +50,15 @@
     
 }
 
-- (UITapGestureRecognizer *)tapWithSel:(SEL)sel
-{
-    return [[UITapGestureRecognizer alloc] initWithTarget:self action:sel];
-}
+
 
 - (void)goComment {
     
-    printf("%s\n",__func__);
+    CommentDetailViewController *cdv = [[CommentDetailViewController alloc] init];
+    
+    cdv.requestID = self.model.topic.ID.stringValue;
+    
+[[self findResponderWithClass:[UINavigationController class]] pushViewController:cdv animated:YES];
     
 }
 

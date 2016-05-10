@@ -7,8 +7,12 @@
 //
 
 #import "WordsDetailViewController.h"
+#import "wordsDetailModel.h"
+#import "CommonMacro.h"
 
 @interface WordsDetailViewController ()
+
+@property (nonatomic,strong) wordsDetailModel *wordsModel;
 
 @end
 
@@ -16,22 +20,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupNavBar {
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)requestData {
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/topics/%@?sort=0",self.wordsID];
+    
+    weakself(self);
+    
+    [wordsDetailModel requestModelDataWithUrlString:url complish:^(id res) {
+        
+        
+            weakSelf.wordsModel = res;
+            
+        
+    } useCache:YES];
+    
 }
-*/
 
 @end

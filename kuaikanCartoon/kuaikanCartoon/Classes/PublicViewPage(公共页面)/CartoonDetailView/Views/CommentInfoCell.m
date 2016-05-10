@@ -46,14 +46,18 @@
     
     self.CommentContent.text = commentsModel.content;
     
-    NSString *likeCount = [NSString stringWithFormat:@"%zd",commentsModel.likes_count.integerValue];
+    NSString *likeCount = commentsModel.likes_count.stringValue;
     
     [self.likeCount setTitle:likeCount forState:UIControlStateNormal];
+    
     
 }
 
 - (void)awakeFromNib {
-    // Initialization code
+
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+
 }
 
 

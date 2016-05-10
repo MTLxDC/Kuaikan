@@ -9,6 +9,7 @@
 #import "BaseModel.h"
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
+#import <MBProgressHUD.h>
 
 @implementation BaseModel
 
@@ -24,7 +25,8 @@ MJCodingImplementation
                                      useCache:(BOOL)useCache{
     
     
-        NSString *savePath = urlString.cachePath;
+    
+     NSString *savePath = urlString.cachePath;
         
         if (useCache) {
             
@@ -36,6 +38,12 @@ MJCodingImplementation
             }
         }
     
+    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
+
+      MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:topWindow animated:YES];
+    
+        hud.labelText = @"Loading...";
+    
         NetWorkManager *manager = [NetWorkManager share];
 
         [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
@@ -45,14 +53,13 @@ MJCodingImplementation
                 return;
             }
             
+            
             BOOL isModelArray = false;
             
             NSArray *fields = [self setupDataFieldsIsModelArray:&isModelArray];
             
-            for (NSInteger index = 0; index < fields.count; index++) {
-                res = res[fields[index]];
-            }
-
+            for (NSInteger index = 0; index < fields.count; index++) res = res[fields[index]];
+            
             
             id result = nil;
             
@@ -62,7 +69,12 @@ MJCodingImplementation
                 result = [[self class] mj_objectWithKeyValues:res];
             }
             
-            complish(result);
+            [NSThread sleepForTimeInterval:arc4random() % 2];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complish(result);
+                [hud hide:YES];
+            });
             
             [NSKeyedArchiver archiveRootObject:result toFile:savePath];
             

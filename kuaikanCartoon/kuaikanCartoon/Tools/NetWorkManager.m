@@ -65,7 +65,8 @@
         
         self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_SERIAL);
         
-        self.reachability = [AFNetworkReachabilityManager manager];
+        self.reachability = [AFNetworkReachabilityManager sharedManager];
+        [self.reachability startMonitoring];
 //        self.requestSerializer = [AFJSONRequestSerializer serializer];
 //        self.requestSerializer.timeoutInterval = 15.0f;
         

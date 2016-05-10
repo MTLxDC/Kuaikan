@@ -11,4 +11,7 @@
 
 @interface CommentDetailViewController : BaseViewController
 
+@property (nonatomic,copy) NSString *requestID;
+
+
 @end

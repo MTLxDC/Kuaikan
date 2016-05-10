@@ -1,5 +1,5 @@
 //
-//  CommentDetailView.h
+//  BaseTableView.h
 //  kuaikanCartoon
 //
 //  Created by dengchen on 16/5/8.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommentDetailView : UITableView
-
-@property (nonatomic,copy) NSString *requestUrl;
-
+@interface BaseTableView : UITableView
 
 @end
