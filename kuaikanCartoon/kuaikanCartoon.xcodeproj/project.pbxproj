@@ -44,6 +44,9 @@
 		849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */; };
 		84B296EB1CE1D9D200D927CE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B296EA1CE1D9D200D927CE /* UIImage+ImageEffects.m */; };
 		84B51F1E1CE450AE00EB4CB0 /* wordsDetailHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B51F1D1CE450AE00EB4CB0 /* wordsDetailHeadView.xib */; };
+		84B51F211CE4B25900EB4CB0 /* wordsOptionsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51F201CE4B25900EB4CB0 /* wordsOptionsHeadView.m */; };
+		84B51F261CE4D91F00EB4CB0 /* wordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51F241CE4D91F00EB4CB0 /* wordTableViewCell.m */; };
+		84B51F271CE4D91F00EB4CB0 /* wordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B51F251CE4D91F00EB4CB0 /* wordTableViewCell.xib */; };
 		84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */; };
 		84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */; };
 		84BA93BF1CDDD706009CFDC6 /* CommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BE1CDDD706009CFDC6 /* CommentsModel.m */; };
@@ -132,6 +135,11 @@
 		84B296E91CE1D9D200D927CE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		84B296EA1CE1D9D200D927CE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		84B51F1D1CE450AE00EB4CB0 /* wordsDetailHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = wordsDetailHeadView.xib; sourceTree = "<group>"; };
+		84B51F1F1CE4B25900EB4CB0 /* wordsOptionsHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordsOptionsHeadView.h; sourceTree = "<group>"; };
+		84B51F201CE4B25900EB4CB0 /* wordsOptionsHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordsOptionsHeadView.m; sourceTree = "<group>"; };
+		84B51F231CE4D91F00EB4CB0 /* wordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordTableViewCell.h; sourceTree = "<group>"; };
+		84B51F241CE4D91F00EB4CB0 /* wordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordTableViewCell.m; sourceTree = "<group>"; };
+		84B51F251CE4D91F00EB4CB0 /* wordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = wordTableViewCell.xib; sourceTree = "<group>"; };
 		84BA93B71CDDA862009CFDC6 /* WordsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsDetailViewController.h; sourceTree = "<group>"; };
 		84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsDetailViewController.m; sourceTree = "<group>"; };
 		84BA93BA1CDDBE95009CFDC6 /* CommentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailViewController.h; sourceTree = "<group>"; };
@@ -569,6 +577,11 @@
 				846579581CE33B6F0094072E /* wordsDetailHeadView.h */,
 				846579591CE33B6F0094072E /* wordsDetailHeadView.m */,
 				84B51F1D1CE450AE00EB4CB0 /* wordsDetailHeadView.xib */,
+				84B51F1F1CE4B25900EB4CB0 /* wordsOptionsHeadView.h */,
+				84B51F201CE4B25900EB4CB0 /* wordsOptionsHeadView.m */,
+				84B51F231CE4D91F00EB4CB0 /* wordTableViewCell.h */,
+				84B51F241CE4D91F00EB4CB0 /* wordTableViewCell.m */,
+				84B51F251CE4D91F00EB4CB0 /* wordTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -719,6 +732,7 @@
 				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
 				84D0A76B1CDA791E00E2056A /* CommentBottomView.xib in Resources */,
 				849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */,
+				84B51F271CE4D91F00EB4CB0 /* wordTableViewCell.xib in Resources */,
 				84B51F1E1CE450AE00EB4CB0 /* wordsDetailHeadView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -782,6 +796,7 @@
 				849DE6931CDAF33600879190 /* navBarTitleView.m in Sources */,
 				84BA93C41CDDDB03009CFDC6 /* CommentInfoCell.m in Sources */,
 				84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */,
+				84B51F211CE4B25900EB4CB0 /* wordsOptionsHeadView.m in Sources */,
 				84B296EB1CE1D9D200D927CE /* UIImage+ImageEffects.m in Sources */,
 				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
@@ -812,6 +827,7 @@
 				84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
 				84BA93BF1CDDD706009CFDC6 /* CommentsModel.m in Sources */,
+				84B51F261CE4D91F00EB4CB0 /* wordTableViewCell.m in Sources */,
 				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
 				84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */,
 				84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */,

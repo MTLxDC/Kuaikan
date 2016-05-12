@@ -82,6 +82,7 @@ static NSMutableDictionary *_modelCache = nil;
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
         
         if (res == nil || error != nil) {
+            
             complish(error);
             return;
         }
@@ -109,6 +110,7 @@ static NSMutableDictionary *_modelCache = nil;
         
         if (saveMemoryCache) {
             [_modelCache setObject:result forKey:urlString];
+            NSLog(@"%@",_modelCache);
         }
 
     }];

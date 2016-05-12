@@ -8,8 +8,22 @@
 
 #import "NSString+Extension.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "DateManager.h"
 
 @implementation NSString (Extension)
+
++ (NSString *)makeTextWithCount:(NSInteger)count {
+    
+    NSString *topCountText = nil;
+    
+    if (count >= 100000) {
+        topCountText = [NSString stringWithFormat:@"%zd万",count/10000];
+    }else {
+        topCountText = [NSString stringWithFormat:@"%zd",count];
+    }
+    
+    return topCountText;
+}
 
 
 - (NSDictionary *)getUrlStringParameters
@@ -103,6 +117,14 @@
             result[12], result[13], result[14], result[15]
             
             ];
+}
+
+
++ (NSString *)timeStampWithDate:(NSDate *)date {
+   return [[DateManager share] timeStampWithDate:date];
+}
++ (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp {
+    return [[DateManager share] timeWithTimeStamp:timeStamp];
 }
 
 @end

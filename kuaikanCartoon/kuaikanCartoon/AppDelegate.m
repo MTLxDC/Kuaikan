@@ -3,7 +3,7 @@
 #import "MainTabBarController.h"
 #import "CartoonDetailViewController.h"
 #import "BaseModel.h"
-
+#import "NSString+Extension.h"
 @interface AppDelegate ()
 
 @end
@@ -13,7 +13,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [BaseModel getModelCache];
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -22,6 +21,7 @@
     [_window makeKeyAndVisible];
     
     
+    [BaseModel getModelCache];
     
     return YES;
 }

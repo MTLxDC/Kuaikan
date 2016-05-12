@@ -44,9 +44,14 @@
     if (self.navigationController.viewControllers.count == 1) {
         MainTabBarController *main = (MainTabBarController *)self.tabBarController;
         
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:0.25 delay:1 usingSpringWithDamping:0.8f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
+            
             [main.mainTabbar setY:SCREEN_HEIGHT - 44];
+
+        } completion:^(BOOL finished) {
+            
         }];
+
     }
     
    

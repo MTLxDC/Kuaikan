@@ -12,7 +12,8 @@
 #import "wordsDetailHeadView.h"
 #import <Masonry.h>
 #import "UIView+Extension.h"
-
+#import "wordsOptionsHeadView.h"
+#import "wordTableViewCell.h"
 
 @interface WordsDetailViewController ()<UITableViewDataSource,UITableViewDelegate,wordsDetailHeadViewDelegate>
 
@@ -52,7 +53,7 @@
 - (void)setupWordsDetailContentView {
     
    
-    UITableView *contenView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UITableView *contenView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     
     wordsDetailHeadView *head = [wordsDetailHeadView wordsDetailHeadViewWithFrame:CGRectMake(0, 0, self.view.width, headViewHeight) scorllView:contenView];
     
@@ -61,7 +62,7 @@
     contenView.contentInset = UIEdgeInsetsMake(headViewHeight, 0, 0, 0);
     contenView.dataSource = self;
     contenView.delegate = self;
-
+    contenView.rowHeight = 100.0f;
 
     [self.view addSubview:contenView];
     [self.view addSubview:head];
@@ -97,7 +98,7 @@
     _wordsModel = wordsModel;
     
     self.head.model = wordsModel;
-    
+    [self.contentView reloadData];
 }
 
 
@@ -106,24 +107,39 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellID = @"mycell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    wordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"wordCell"];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"wordTableViewCell" owner:nil options:nil] firstObject];
     }
     
-    cell.textLabel.text = @"1111111";
+    wordsModel *md = [self.wordsModel.comics objectAtIndex:indexPath.row];
+    
+    cell.model = md;
     
     return cell;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 100;
+    return self.wordsModel.comics.count;
 }
 
 #pragma mark UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 32;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    wordsOptionsHeadView *headView = [[wordsOptionsHeadView alloc] init];
+    
+    return headView;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

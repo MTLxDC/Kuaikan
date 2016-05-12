@@ -10,6 +10,8 @@
 
 @interface NSString (Extension)
 
++ (NSString *)makeTextWithCount:(NSInteger)count;
+
 - (NSDictionary *)getUrlStringParameters;
 
 - (NSString *)cachePath;
@@ -17,5 +19,9 @@
 - (NSString *)md5_32;
 
 - (NSString *)md5_16;
+
+
++ (NSString *)timeStampWithDate:(NSDate *)date;
++ (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp;
 
 @end

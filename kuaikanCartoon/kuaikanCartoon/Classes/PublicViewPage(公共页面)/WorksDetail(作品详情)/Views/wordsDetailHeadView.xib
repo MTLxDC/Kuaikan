@@ -43,16 +43,16 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5G-H4-PYl">
-                    <rect key="frame" x="8" y="239" width="37.5" height="20"/>
+                    <rect key="frame" x="8" y="239" width="44" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="yBB-YF-GQ5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-98-9yI">
-                    <rect key="frame" x="333" y="244" width="60" height="15"/>
+                    <rect key="frame" x="341" y="244" width="60" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="MfX-jD-0jA"/>
                         <constraint firstAttribute="height" constant="15" id="mdy-bG-BoX"/>
@@ -64,7 +64,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-wp-4cd">
-                    <rect key="frame" x="265" y="244" width="60" height="15"/>
+                    <rect key="frame" x="281" y="244" width="60" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="XNu-G0-SSe"/>
                         <constraint firstAttribute="width" constant="60" id="uRe-1B-Q4W"/>
@@ -104,7 +104,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Wpe-wp-4cd" firstAttribute="top" secondItem="cW6-g7-DAg" secondAttribute="bottom" id="3tF-uG-aBH"/>
-                <constraint firstItem="xc4-98-9yI" firstAttribute="leading" secondItem="Wpe-wp-4cd" secondAttribute="trailing" constant="8" id="C2R-fC-uZb"/>
+                <constraint firstItem="xc4-98-9yI" firstAttribute="leading" secondItem="Wpe-wp-4cd" secondAttribute="trailing" id="C2R-fC-uZb"/>
                 <constraint firstAttribute="bottom" secondItem="xc4-98-9yI" secondAttribute="bottom" constant="8" id="F71-UR-jAH"/>
                 <constraint firstAttribute="bottom" secondItem="cW6-g7-DAg" secondAttribute="bottom" id="Ict-AM-DyT"/>
                 <constraint firstItem="cW6-g7-DAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Nkh-ww-a9H"/>
@@ -117,7 +117,7 @@
                 <constraint firstAttribute="bottom" secondItem="L5G-H4-PYl" secondAttribute="bottom" constant="8" id="dxN-gb-QhA"/>
                 <constraint firstItem="L5G-H4-PYl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="hfq-JN-yGe"/>
                 <constraint firstAttribute="trailing" secondItem="cW6-g7-DAg" secondAttribute="trailing" id="lqM-33-hdp"/>
-                <constraint firstAttribute="trailing" secondItem="xc4-98-9yI" secondAttribute="trailing" constant="8" id="w0U-eQ-Jyc"/>
+                <constraint firstAttribute="trailing" secondItem="xc4-98-9yI" secondAttribute="trailing" id="w0U-eQ-Jyc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
@@ -135,7 +135,7 @@
                 <outlet property="replyCount" destination="xc4-98-9yI" id="oTQ-SG-4PV"/>
                 <outlet property="titleLabel" destination="L5G-H4-PYl" id="OlX-hu-ViF"/>
             </connections>
-            <point key="canvasLocation" x="-270.5" y="-37.5"/>
+            <point key="canvasLocation" x="-448.5" y="-36.5"/>
         </view>
     </objects>
     <resources>
