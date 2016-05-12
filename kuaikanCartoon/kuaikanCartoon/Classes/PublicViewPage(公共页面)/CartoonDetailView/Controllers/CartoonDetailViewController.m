@@ -34,6 +34,8 @@
 
 @property (nonatomic,weak) CommentBottomView *bottomView;
 
+@property (nonatomic,copy) NSString *urlString;
+
 @end
 
 
@@ -58,27 +60,28 @@ static const CGFloat imageCellHeight = 250.0f;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 - (void)requestData {
     
-    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@?",self.cartoonId];
+   self.urlString = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@?",self.cartoonId];
     
     weakself(self);
     
-   [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
+   [comicsModel requestModelDataWithUrlString:self.urlString complish:^(id res) {
        
-       if ([res isKindOfClass:[NSError class]] || res == nil || weakSelf == nil) {
-           DEBUG_Log(@"%@",res);
-           return ;
-       }
+       if (weakSelf == nil) return ;
        
        CartoonDetailViewController *sself = weakSelf;
        
-       dispatch_async(dispatch_get_main_queue(), ^{
            sself.comicsMd = res;
            [sself updataUI];
-       });
        
-   } useCache:YES];
+   } cachingPolicy:ModelDataCachingPolicyDefault];
     
    
     
@@ -350,6 +353,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 
 - (void)dealloc {
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
 }
 

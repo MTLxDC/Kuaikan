@@ -18,8 +18,6 @@
 
 @property (nonatomic,strong) NSMutableArray *modelArray;
 
-@property (nonatomic,assign) BOOL isLastUpdata;
-
 
 @end
 
@@ -45,12 +43,11 @@ static NSString * const cellIdentifier = @"SummaryCell";
     self.rowHeight = 292;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.isLastUpdata = NO;
     
     weakself(self);
     
     MJRefreshNormalHeader *normalHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf updataWithCache:NO];
+        [weakSelf updateWithUrl:self.urlString CachingPolicy:ModelDataCachingPolicyReload];
     }];
     
     [normalHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
@@ -108,39 +105,32 @@ static NSString * const cellIdentifier = @"SummaryCell";
 }
 
 
-- (void)updataWithCache:(BOOL)useCache{
+- (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
     weakself(self);
     
     
-    [SummaryModel requestModelDataWithUrlString:self.urlString complish:^(id res) {
+    [SummaryModel requestModelDataWithUrlString:url complish:^(id res) {
         
-        if ([res isKindOfClass:[NSError class]] || res == nil || weakSelf == nil) {
-            DEBUG_Log(@"%@",res);
-            return ;
-        }
+        if (weakSelf == nil) return ;
         
         SummaryListView *sself = weakSelf;
         
-        dispatch_async(dispatch_get_main_queue(), ^{
             sself.modelArray = res;
             [sself reloadData];
             [sself.mj_header endRefreshing];
-        });
         
-    } useCache:useCache];
+    } cachingPolicy:policy];
     
     
 }
 
-
 - (void)setUrlString:(NSString *)urlString {
     
+    [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault];
+    
     _urlString = urlString;
-    
-    [self updataWithCache:self.isLastUpdata];
-    
-    self.isLastUpdata = YES;
+
 }
 
 @end

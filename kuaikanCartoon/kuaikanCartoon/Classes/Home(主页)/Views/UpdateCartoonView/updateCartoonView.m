@@ -64,7 +64,6 @@ static const CGFloat navigationHeadView_H = 30;
     [weekArray replaceObjectAtIndex:yesterday withObject:@"昨天"];
     
     
-    
     ListViewConfiguration *lc = [ListViewConfiguration new];
     
     lc.hasSelectAnimate = YES;

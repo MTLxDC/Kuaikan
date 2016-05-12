@@ -11,6 +11,7 @@
 #import "NSString+Extension.h"
 #import <MBProgressHUD.h>
 
+
 @implementation BaseModel
 
 MJCodingImplementation
@@ -20,72 +21,61 @@ MJCodingImplementation
     return nil;
 }
 
-+ (void)requestModelDataWithUrlString:(NSString *)urlString
-                                     complish:(void (^)(id res))complish
-                                     useCache:(BOOL)useCache{
-    
-    
-    
-     NSString *savePath = urlString.cachePath;
-        
-        if (useCache) {
-            
-            id data = [NSKeyedUnarchiver unarchiveObjectWithFile:savePath];
-            
-            if (data) {
-                complish(data);
-                return;
-            }
-        }
-    
-    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
 
-      MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:topWindow animated:YES];
-    
-        hud.labelText = @"Loading...";
-    
-        NetWorkManager *manager = [NetWorkManager share];
+static NSMutableDictionary *_modelCache = nil;
 
-        [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
-            
-            if (res == nil || error != nil) {
-                complish(error);
-                return;
-            }
-            
-            
-            BOOL isModelArray = false;
-            
-            NSArray *fields = [self setupDataFieldsIsModelArray:&isModelArray];
-            
-            for (NSInteger index = 0; index < fields.count; index++) res = res[fields[index]];
-            
-            
-            id result = nil;
-            
-            if (isModelArray) {
-                result = [[self class] mj_objectArrayWithKeyValuesArray:res];
-            }else {
-                result = [[self class] mj_objectWithKeyValues:res];
-            }
-            
-            [NSThread sleepForTimeInterval:arc4random() % 2];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                complish(result);
-                [hud hide:YES];
-            });
-            
-            [NSKeyedArchiver archiveRootObject:result toFile:savePath];
-            
-            
-        }];
-        
-    
+
++ (BOOL)saveModelCache {
+  return [NSKeyedArchiver archiveRootObject:_modelCache toFile:NSStringFromClass(self).cachePath];
     
 }
 
-+ (void)requestModelDataWithUrlString:(NSString *)urlString complish:(void (^)(id))complish {
++ (void)getModelCache {
+   _modelCache = [NSKeyedUnarchiver unarchiveObjectWithFile:NSStringFromClass(self).cachePath];
+}
+
++ (void)requestModelDataWithUrlString:(NSString *)urlString complish:(void (^)(id))complish cachingPolicy:(ModelDataCachingPolicy)cachingPolicy {
+    
+    
+    BOOL useCache = YES;
+    BOOL saveMemoryCache = YES;
+
+    if (cachingPolicy == ModelDataCachingPolicyReload){
+        useCache = NO;
+    }else if (cachingPolicy == ModelDataCachingPolicyNoCache) {
+        useCache = NO;
+        saveMemoryCache = NO;
+    }
+    
+    [self requestModelDataWithUrlString:urlString
+                               complish:complish
+                               useCache:useCache
+                        saveMemoryCache:saveMemoryCache];
+
+}
+
++ (void)requestModelDataWithUrlString:(NSString *)urlString
+                             complish:(void (^)(id))complish
+                             useCache:(BOOL)useMemoryCache
+                             saveMemoryCache:(BOOL)saveMemoryCache   {
+    
+    if (useMemoryCache) {
+        
+        id memoryCache = [_modelCache objectForKey:urlString];
+        
+        if (memoryCache) {                      //内存缓存
+            complish(memoryCache);
+            return;
+        }
+        
+    }
+    
+    
+    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:topWindow animated:YES];
+    
+    hud.labelText = @"Loading...";
     
     NetWorkManager *manager = [NetWorkManager share];
     
@@ -112,12 +102,19 @@ MJCodingImplementation
             result = [[self class] mj_objectWithKeyValues:res];
         }
         
-        complish(result);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            complish(result);
+            [hud hide:YES];
+        });
         
-        
+        if (saveMemoryCache) {
+            [_modelCache setObject:result forKey:urlString];
+        }
+
     }];
 
 }
+
 
 + (void)initialize
 {
@@ -128,6 +125,9 @@ MJCodingImplementation
                      @"desc":@"description"
                      };
         }];
+        
+        _modelCache = [[NSMutableDictionary alloc] init];
+        
     }
 }
 

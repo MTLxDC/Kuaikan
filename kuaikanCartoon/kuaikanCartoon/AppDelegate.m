@@ -2,7 +2,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "CartoonDetailViewController.h"
-
+#import "BaseModel.h"
 
 @interface AppDelegate ()
 
@@ -12,6 +12,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [BaseModel getModelCache];
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -44,7 +46,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [BaseModel saveModelCache];
 }
 
 @end

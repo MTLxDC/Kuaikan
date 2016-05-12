@@ -1,13 +1,31 @@
 //
-//  wordsDetailHeadView.h
-//  kuaikanCartoon
+//  ParallaxHeaderView.h
+//  ParallaxTableViewHeader
 //
-//  Created by dengchen on 16/5/8.
-//  Copyright © 2016年 name. All rights reserved.
+//  Created by Vinodh  on 26/10/14.
+//  Copyright (c) 2014 Daston~Rhadnojnainva. All rights reserved.
+
 //
 
 #import <UIKit/UIKit.h>
+#import "wordsDetailModel.h"
+
+#define headViewHeight 200.0f
+
+@protocol wordsDetailHeadViewDelegate <NSObject>
+
+- (void)back;
+
+- (void)follow;
+
+@end
 
 @interface wordsDetailHeadView : UIView
+
+@property (nonatomic,strong) wordsDetailModel *model;
+
+@property (nonatomic,weak) id<wordsDetailHeadViewDelegate> delegate;
+
++ (instancetype)wordsDetailHeadViewWithFrame:(CGRect)frame scorllView:(UIScrollView *)sc;
 
 @end

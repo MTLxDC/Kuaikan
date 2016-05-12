@@ -57,6 +57,7 @@ static const CGFloat lineHeight = 3.0f;
 
 @property (nonatomic,assign) CGFloat itemWidth;
 
+@property (nonatomic,assign) NSInteger lastIndex;
 
 @end
 
@@ -89,8 +90,9 @@ static NSString * const offsetKeyPath = @"contentOffset";
         
         if (self.configuration.monitorScrollView) {
             [self.configuration.monitorScrollView addObserver:self forKeyPath:offsetKeyPath options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(self)];
-            self.itemScale = (self.configuration.labelWidth + self.configuration.spaceing)/self.configuration.MonitorScrollViewItemWidth;
+            
             self.itemWidth = self.configuration.labelWidth + self.configuration.spaceing;
+            self.itemScale = self.itemWidth/self.configuration.MonitorScrollViewItemWidth;
         }
         
         
@@ -117,8 +119,6 @@ static NSString * const offsetKeyPath = @"contentOffset";
         CGFloat offsetX = [change[NSKeyValueChangeNewKey] CGPointValue].x * self.itemScale +self.configuration.spaceing;
         
         [self scrollWithOffsetX:offsetX];
-        
-        
     }
     
 }
@@ -214,7 +214,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     UILabel *selectLabel = (UILabel *)[tap view];
     
-    self.currentSelectLabel = selectLabel;
+    if (self.currentSelectLabel == selectLabel) return;
     
     [self selectItem:selectLabel];
     
@@ -222,26 +222,18 @@ static NSString * const offsetKeyPath = @"contentOffset";
 }
 
 - (void)selectItem:(UILabel *)selectLabel {
-//    
-//    CGRect newFrame = selectLabel.frame;
-//    
-//    newFrame.origin.x = newFrame.origin.x + self.configuration.spaceing;
-//    newFrame.origin.y = self.height - lineHeight;
-//    newFrame.size.height = lineHeight;
-//    
-//    [UIView animateWithDuration:0.25 animations:^{
-//        _lineView.frame = newFrame;
-//    }];
-    
 
-    NSLog(@"%@",NSStringFromCGRect(_lineView.frame));
-
-    
-    [self scrollWithOffsetX:selectLabel.center.x];
-    
     if (self.configuration.monitorScrollView) {
+        
         CGFloat offsetX = self.configuration.MonitorScrollViewItemWidth * selectLabel.tag;
-        [self.configuration.monitorScrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+        
+        BOOL animate = YES;
+        
+        if (abs(_currentSelectLabel.tag - selectLabel.tag) > 2) animate = NO;
+        
+        [self.configuration.monitorScrollView setContentOffset:CGPointMake(offsetX, 0) animated:animate];
+    }else {
+        [self scrollWithOffsetX:selectLabel.center.x];
     }
     
     if (self.selectAtIndex) {
@@ -253,12 +245,14 @@ static NSString * const offsetKeyPath = @"contentOffset";
 - (void)scrollWithOffsetX:(CGFloat)x {
     
     [_lineView setX:x];
-
+    
     _currentIndex = round(x/(self.itemWidth));
     
-    if (_currentIndex >= _titleLabelArray.count) {
-        _currentIndex--;
-    }
+     //如果和lastindex一样,或者出现越界的现象,直接return
+    
+    if (self.lastIndex == _currentIndex || _currentIndex >= _titleLabelArray.count || _currentIndex < 0) return;
+    
+    self.lastIndex = _currentIndex;
     
     [self setCurrentSelectLabel:_titleLabelArray[_currentIndex]];
     
@@ -275,10 +269,6 @@ static NSString * const offsetKeyPath = @"contentOffset";
 }
 
 - (void)setCurrentSelectLabel:(UILabel *)newSelectLabel {
-
-    if (_currentSelectLabel == newSelectLabel) {
-        return;
-    }
     
     [UIView animateWithDuration:animateDuration animations:^{
         

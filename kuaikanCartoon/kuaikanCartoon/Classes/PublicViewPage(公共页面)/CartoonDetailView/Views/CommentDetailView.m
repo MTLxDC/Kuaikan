@@ -42,22 +42,11 @@ static NSString * const commentInfoCellName = @"CommentInfoCellIdentifier";
     return self;
 }
 
-- (UIView *)creatplaceViewWithHeight:(CGFloat)height {
-    
-    UIView *placeHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH,height)];
-    
-    placeHead.backgroundColor = [UIColor clearColor];
-    
-    return placeHead;
-}
-
 
 - (void)setup {
     
     self.dataSource = self;
     self.delegate = self;
-    
-    self.tableHeaderView = [self creatplaceViewWithHeight:navHeight];
     
     self.rowHeight = UITableViewAutomaticDimension;
     self.estimatedRowHeight = 100.f;
@@ -90,10 +79,14 @@ static NSString * const commentInfoCellName = @"CommentInfoCellIdentifier";
 
 - (void)setRequestUrl:(NSString *)requestUrl {
     _requestUrl = requestUrl;
+    [self update];
+}
+
+- (void)update {
     
     weakself(self);
     
-    [CommentsModel requestModelDataWithUrlString:requestUrl complish:^(id res) {
+    [CommentsModel requestModelDataWithUrlString:self.requestUrl complish:^(id res) {
         if (weakSelf == nil) {
             return ;
         }
@@ -105,7 +98,8 @@ static NSString * const commentInfoCellName = @"CommentInfoCellIdentifier";
             [sself reloadData];
         });
         
-    } useCache:YES];
+    } cachingPolicy:ModelDataCachingPolicyDefault] ;
+    
 }
 
 

@@ -13,5 +13,4 @@
 
 @property (nonatomic,copy) NSString *wordsID;
 
-
 @end

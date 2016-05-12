@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
     [self setupTitleView];
    
     [self setupSearchItem];

@@ -9,16 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <MJExtension.h>
 
+typedef NS_ENUM(NSUInteger, ModelDataCachingPolicy) {
+    ModelDataCachingPolicyDefault,
+    ModelDataCachingPolicyReload,
+    ModelDataCachingPolicyNoCache,
+};
+
 
 @interface BaseModel : NSObject  <MJCoding,MJKeyValue>
 
 + (NSArray <NSString *>*)setupDataFieldsIsModelArray:(BOOL *)isModelArray;
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString
-                             complish:(void (^)(id res))complish
-                             useCache:(BOOL)cache;
+                             complish:(void (^)(id))complish
+                             cachingPolicy:(ModelDataCachingPolicy)cachingPolicy;
 
-+ (void)requestModelDataWithUrlString:(NSString *)urlString
-                             complish:(void (^)(id res))complish;
++ (BOOL)saveModelCache;
++ (void)getModelCache;
 
 @end
