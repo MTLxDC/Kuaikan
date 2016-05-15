@@ -45,6 +45,13 @@
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-yI-9Ar" userLabel="line">
+                        <rect key="frame" x="0.0" y="94" width="396" height="1"/>
+                        <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="PNG-nG-HiE"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tby-F3-xL4" firstAttribute="leading" secondItem="qfV-ci-g69" secondAttribute="trailing" constant="10" id="6md-jL-LK0"/>
@@ -55,8 +62,11 @@
                     <constraint firstItem="6N5-I0-8tD" firstAttribute="leading" secondItem="qfV-ci-g69" secondAttribute="trailing" constant="10" id="Qff-Yq-YwF"/>
                     <constraint firstItem="6N5-I0-8tD" firstAttribute="top" secondItem="qfV-ci-g69" secondAttribute="top" id="a2M-tC-qXh"/>
                     <constraint firstItem="qfV-ci-g69" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="a4t-Tp-RIc"/>
+                    <constraint firstAttribute="trailing" secondItem="7oS-yI-9Ar" secondAttribute="trailing" id="d4y-vZ-XxZ"/>
+                    <constraint firstAttribute="bottom" secondItem="7oS-yI-9Ar" secondAttribute="bottom" id="dR8-cX-zEf"/>
                     <constraint firstAttribute="bottom" secondItem="qfV-ci-g69" secondAttribute="bottom" constant="10" id="laq-lw-Kov"/>
                     <constraint firstAttribute="trailing" secondItem="6Yn-CW-PlA" secondAttribute="trailing" constant="10" id="mIf-cf-zld"/>
+                    <constraint firstItem="7oS-yI-9Ar" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qA6-YE-lo3"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -65,7 +75,7 @@
                 <outlet property="wordImageView" destination="qfV-ci-g69" id="hVz-Xw-TFJ"/>
                 <outlet property="wordTitleLable" destination="6N5-I0-8tD" id="ShL-WR-Gmf"/>
             </connections>
-            <point key="canvasLocation" x="253" y="173"/>
+            <point key="canvasLocation" x="185" y="172"/>
         </tableViewCell>
     </objects>
     <resources>

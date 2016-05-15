@@ -51,7 +51,6 @@
 
 @property (nonatomic,readonly) NSInteger currentIndex;
 
-- (void)scrollWithOffsetX:(CGFloat)x;
 
 + (instancetype)listViewWithFrame:(CGRect)frame
                         TextArray:(NSArray *)textArray

@@ -24,7 +24,5 @@ typedef NS_ENUM(NSUInteger, ModelDataCachingPolicy) {
                              complish:(void (^)(id))complish
                              cachingPolicy:(ModelDataCachingPolicy)cachingPolicy;
 
-+ (BOOL)saveModelCache;
-+ (void)getModelCache;
 
 @end

@@ -40,7 +40,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.dataSource = self;
     self.delegate = self;
-    self.rowHeight = 292;
+    self.rowHeight = 300;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -68,8 +68,15 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.tableFooterView = imageView;
     
+    self.tableFooterView.hidden = YES;
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat offsetY = scrollView.contentOffset.y;
+    if (offsetY >= scrollView.contentSize.height) {
+        self.tableHeaderView.hidden = NO;
+    }
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

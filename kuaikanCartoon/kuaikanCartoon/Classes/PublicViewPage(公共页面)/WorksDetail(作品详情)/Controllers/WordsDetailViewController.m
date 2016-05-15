@@ -63,7 +63,8 @@
     contenView.dataSource = self;
     contenView.delegate = self;
     contenView.rowHeight = 100.0f;
-
+    contenView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.view addSubview:contenView];
     [self.view addSubview:head];
 
@@ -137,6 +138,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     wordsOptionsHeadView *headView = [[wordsOptionsHeadView alloc] init];
+    
+    [headView setLefeBtnClick:^(UIButton *btn) {
+        
+    }];
+    
+    [headView setRightBtnClick:^(UIButton *btn) {
+        
+    }];
+    
     
     return headView;
 }

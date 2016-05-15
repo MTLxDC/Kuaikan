@@ -24,7 +24,9 @@
 @implementation wordTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 }
 
 - (void)setModel:(wordsModel *)model {

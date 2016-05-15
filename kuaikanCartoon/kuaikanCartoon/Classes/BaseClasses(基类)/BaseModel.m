@@ -10,7 +10,7 @@
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
 #import <MBProgressHUD.h>
-
+#import "ModelCacheManager.h"
 
 @implementation BaseModel
 
@@ -22,24 +22,13 @@ MJCodingImplementation
 }
 
 
-static NSMutableDictionary *_modelCache = nil;
-
-
-+ (BOOL)saveModelCache {
-  return [NSKeyedArchiver archiveRootObject:_modelCache toFile:NSStringFromClass(self).cachePath];
-    
-}
-
-+ (void)getModelCache {
-   _modelCache = [NSKeyedUnarchiver unarchiveObjectWithFile:NSStringFromClass(self).cachePath];
-}
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString complish:(void (^)(id))complish cachingPolicy:(ModelDataCachingPolicy)cachingPolicy {
     
     
     BOOL useCache = YES;
     BOOL saveMemoryCache = YES;
-
+    
     if (cachingPolicy == ModelDataCachingPolicyReload){
         useCache = NO;
     }else if (cachingPolicy == ModelDataCachingPolicyNoCache) {
@@ -59,9 +48,11 @@ static NSMutableDictionary *_modelCache = nil;
                              useCache:(BOOL)useMemoryCache
                              saveMemoryCache:(BOOL)saveMemoryCache   {
     
+    ModelCacheManager *cache = [ModelCacheManager manager];
+    
     if (useMemoryCache) {
         
-        id memoryCache = [_modelCache objectForKey:urlString];
+        id memoryCache = [cache cacheForKey:urlString];
         
         if (memoryCache) {                      //内存缓存
             complish(memoryCache);
@@ -109,8 +100,7 @@ static NSMutableDictionary *_modelCache = nil;
         });
         
         if (saveMemoryCache) {
-            [_modelCache setObject:result forKey:urlString];
-            NSLog(@"%@",_modelCache);
+            [cache setCache:result forKey:urlString];
         }
 
     }];
@@ -127,8 +117,6 @@ static NSMutableDictionary *_modelCache = nil;
                      @"desc":@"description"
                      };
         }];
-        
-        _modelCache = [[NSMutableDictionary alloc] init];
         
     }
 }

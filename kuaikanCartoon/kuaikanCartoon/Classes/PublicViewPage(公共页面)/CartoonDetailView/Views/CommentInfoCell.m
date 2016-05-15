@@ -50,7 +50,6 @@
     
     [self.likeCount setTitle:likeCount forState:UIControlStateNormal];
     
-    
 }
 
 - (void)awakeFromNib {

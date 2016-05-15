@@ -21,8 +21,7 @@
     [_window makeKeyAndVisible];
     
     
-    [BaseModel getModelCache];
-    
+    NSLog(@"%@",@"".cachePath);
     return YES;
 }
 
@@ -46,7 +45,6 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [BaseModel saveModelCache];
 }
 
 @end

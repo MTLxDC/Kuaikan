@@ -109,8 +109,6 @@ CGFloat const btnHeight  = 15.0f;
             
         }
         
-        printf("constant:%f\n",self.leading.constant);
-                
         [UIView animateWithDuration:0.25 animations:^{
             [self layoutIfNeeded];
             self.backBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:btnAlpha ? 0.1:0];
@@ -149,7 +147,6 @@ CGFloat const btnHeight  = 15.0f;
     
     [self.imageView sd_setImageWithURL:url placeholderImage:placeImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
-       
         self.bluredImageView.image = [image applyLightEffect];
         
     }];

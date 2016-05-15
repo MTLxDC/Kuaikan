@@ -13,9 +13,7 @@
 
 @interface navBarTitleView ()
 
-@property (nonatomic,weak,readwrite) UIButton *leftBtn;
 
-@property (nonatomic,weak,readwrite) UIButton *rightBtn;
 
 @end
 
@@ -48,8 +46,8 @@ static CGFloat const MyHeight = 30;
     [self addSubview:btn2];
 
     
-    self.leftBtn = btn1;
-    self.rightBtn = btn2;
+    _leftBtn  = btn1;
+    _rightBtn = btn2;
     
     
     [self.leftBtn setTitle:@"关注" forState:UIControlStateNormal];
@@ -59,6 +57,7 @@ static CGFloat const MyHeight = 30;
     [self.leftBtn addTarget:self action:@selector(selectBtn:) forControlEvents:UIControlEventTouchUpInside];
     
      [self.rightBtn addTarget:self action:@selector(selectBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
 
     [self selectBtn:self.rightBtn];
 

@@ -20,7 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *cateoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *worksName;
-@property (weak, nonatomic) IBOutlet UILabel *authorName;
+@property (weak, nonatomic) IBOutlet UIButton *authorName;
 @property (weak, nonatomic) IBOutlet UIImageView *frontCover;
 @property (weak, nonatomic) IBOutlet UILabel *chapterTitle;
 
@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet likeCountView *likeCount;
 @property (weak, nonatomic) IBOutlet UIButton *CommentCount;
 
-@property (nonatomic,strong) NSMutableAttributedString *iconString;
 
 
 @end
@@ -62,11 +61,6 @@
     
 }
 
-- (void)updataIsLikeState {
-    
-    
-    
-}
 - (void)setFrame:(CGRect)frame
 {
     frame.size.height -= 8;
@@ -132,11 +126,7 @@
     
     self.worksName.text = model.topic.title;
     
-    NSAttributedString *authorName = [[NSAttributedString alloc] initWithString:model.topic.user.nickname];
-    
-    [self.iconString appendAttributedString:authorName];
-   
-    self.authorName.attributedText = self.iconString;
+    [self.authorName setTitle:model.topic.user.nickname forState:UIControlStateNormal];
     
     self.chapterTitle.text = model.title;
     
@@ -160,20 +150,7 @@
     return topCountText;
 }
 
-- (NSMutableAttributedString *)iconString {
-    if (!_iconString) {
-        //附件
-        NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-        
-        //给附件添加图片
-        attachment.image = [UIImage imageNamed:@"home_recommend_cell_author_15x15_"];
-        
-        _iconString = [[NSMutableAttributedString attributedStringWithAttachment:attachment] mutableCopy];
-        
-    }
-    
-    return _iconString;
-}
+
 
 
 @end

@@ -42,11 +42,13 @@
 		849DE6B31CDBA39D00879190 /* CartoonContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6B21CDBA39D00879190 /* CartoonContentCell.m */; };
 		849DE6B71CDBA97100879190 /* CartoonFlooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6B51CDBA97100879190 /* CartoonFlooterView.m */; };
 		849DE6B81CDBA97100879190 /* CartoonFlooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */; };
+		84B0343A1CE6E033003680F8 /* topicInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B034391CE6E033003680F8 /* topicInfoModel.m */; };
 		84B296EB1CE1D9D200D927CE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B296EA1CE1D9D200D927CE /* UIImage+ImageEffects.m */; };
 		84B51F1E1CE450AE00EB4CB0 /* wordsDetailHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B51F1D1CE450AE00EB4CB0 /* wordsDetailHeadView.xib */; };
 		84B51F211CE4B25900EB4CB0 /* wordsOptionsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51F201CE4B25900EB4CB0 /* wordsOptionsHeadView.m */; };
 		84B51F261CE4D91F00EB4CB0 /* wordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51F241CE4D91F00EB4CB0 /* wordTableViewCell.m */; };
 		84B51F271CE4D91F00EB4CB0 /* wordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B51F251CE4D91F00EB4CB0 /* wordTableViewCell.xib */; };
+		84B51F2A1CE5A3AF00EB4CB0 /* ModelCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51F291CE5A3AF00EB4CB0 /* ModelCacheManager.m */; };
 		84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */; };
 		84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BB1CDDBE95009CFDC6 /* CommentDetailViewController.m */; };
 		84BA93BF1CDDD706009CFDC6 /* CommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BA93BE1CDDD706009CFDC6 /* CommentsModel.m */; };
@@ -61,6 +63,12 @@
 		84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9797F1CD8529B008EAE63 /* SummaryListItem.m */; };
 		84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D979821CD85551008EAE63 /* updateCartoonListView.m */; };
 		84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D979851CD8A6D7008EAE63 /* DateManager.m */; };
+		84DD84331CE86BB100FD7300 /* DCPicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD842A1CE86BB100FD7300 /* DCPicItem.m */; };
+		84DD84341CE86BB100FD7300 /* DCPicItemConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD842C1CE86BB100FD7300 /* DCPicItemConfiguration.m */; };
+		84DD84351CE86BB100FD7300 /* DCPicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD842E1CE86BB100FD7300 /* DCPicScrollView.m */; };
+		84DD84361CE86BB100FD7300 /* DCPicScrollViewConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84301CE86BB100FD7300 /* DCPicScrollViewConfiguration.m */; };
+		84DD84371CE86BB100FD7300 /* NSTimer+Control.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84321CE86BB100FD7300 /* NSTimer+Control.m */; };
+		84DD843A1CE8733D00FD7300 /* bannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84391CE8733D00FD7300 /* bannerModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +140,8 @@
 		849DE6B41CDBA97100879190 /* CartoonFlooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartoonFlooterView.h; sourceTree = "<group>"; };
 		849DE6B51CDBA97100879190 /* CartoonFlooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartoonFlooterView.m; sourceTree = "<group>"; };
 		849DE6B61CDBA97100879190 /* CartoonFlooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartoonFlooterView.xib; sourceTree = "<group>"; };
+		84B034381CE6E033003680F8 /* topicInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topicInfoModel.h; sourceTree = "<group>"; };
+		84B034391CE6E033003680F8 /* topicInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topicInfoModel.m; sourceTree = "<group>"; };
 		84B296E91CE1D9D200D927CE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		84B296EA1CE1D9D200D927CE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		84B51F1D1CE450AE00EB4CB0 /* wordsDetailHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = wordsDetailHeadView.xib; sourceTree = "<group>"; };
@@ -140,6 +150,8 @@
 		84B51F231CE4D91F00EB4CB0 /* wordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordTableViewCell.h; sourceTree = "<group>"; };
 		84B51F241CE4D91F00EB4CB0 /* wordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordTableViewCell.m; sourceTree = "<group>"; };
 		84B51F251CE4D91F00EB4CB0 /* wordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = wordTableViewCell.xib; sourceTree = "<group>"; };
+		84B51F281CE5A3AF00EB4CB0 /* ModelCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCacheManager.h; sourceTree = "<group>"; };
+		84B51F291CE5A3AF00EB4CB0 /* ModelCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCacheManager.m; sourceTree = "<group>"; };
 		84BA93B71CDDA862009CFDC6 /* WordsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsDetailViewController.h; sourceTree = "<group>"; };
 		84BA93B81CDDA862009CFDC6 /* WordsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsDetailViewController.m; sourceTree = "<group>"; };
 		84BA93BA1CDDBE95009CFDC6 /* CommentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailViewController.h; sourceTree = "<group>"; };
@@ -169,6 +181,18 @@
 		84D979841CD8A6D7008EAE63 /* DateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateManager.h; sourceTree = "<group>"; };
 		84D979851CD8A6D7008EAE63 /* DateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateManager.m; sourceTree = "<group>"; };
 		84D979871CD8FE57008EAE63 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		84DD84291CE86BB100FD7300 /* DCPicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicItem.h; sourceTree = "<group>"; };
+		84DD842A1CE86BB100FD7300 /* DCPicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPicItem.m; sourceTree = "<group>"; };
+		84DD842B1CE86BB100FD7300 /* DCPicItemConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicItemConfiguration.h; sourceTree = "<group>"; };
+		84DD842C1CE86BB100FD7300 /* DCPicItemConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPicItemConfiguration.m; sourceTree = "<group>"; };
+		84DD842D1CE86BB100FD7300 /* DCPicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicScrollView.h; sourceTree = "<group>"; };
+		84DD842E1CE86BB100FD7300 /* DCPicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPicScrollView.m; sourceTree = "<group>"; };
+		84DD842F1CE86BB100FD7300 /* DCPicScrollViewConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicScrollViewConfiguration.h; sourceTree = "<group>"; };
+		84DD84301CE86BB100FD7300 /* DCPicScrollViewConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPicScrollViewConfiguration.m; sourceTree = "<group>"; };
+		84DD84311CE86BB100FD7300 /* NSTimer+Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Control.h"; sourceTree = "<group>"; };
+		84DD84321CE86BB100FD7300 /* NSTimer+Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Control.m"; sourceTree = "<group>"; };
+		84DD84381CE8733D00FD7300 /* bannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bannerModel.h; sourceTree = "<group>"; };
+		84DD84391CE8733D00FD7300 /* bannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bannerModel.m; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -296,6 +320,10 @@
 		8471A9361CD499B400A5D901 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84B034381CE6E033003680F8 /* topicInfoModel.h */,
+				84B034391CE6E033003680F8 /* topicInfoModel.m */,
+				84DD84381CE8733D00FD7300 /* bannerModel.h */,
+				84DD84391CE8733D00FD7300 /* bannerModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -448,6 +476,8 @@
 				8480CAC11CD7620B0072A17B /* NetWorkManager.m */,
 				84D979841CD8A6D7008EAE63 /* DateManager.h */,
 				84D979851CD8A6D7008EAE63 /* DateManager.m */,
+				84B51F281CE5A3AF00EB4CB0 /* ModelCacheManager.h */,
+				84B51F291CE5A3AF00EB4CB0 /* ModelCacheManager.m */,
 			);
 			name = Managers;
 			path = Tools;
@@ -656,6 +686,7 @@
 		84D0A75D1CDA73ED00E2056A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84DD84281CE86BB100FD7300 /* DCPicscrollView */,
 				84D0A75E1CDA73ED00E2056A /* ListView.h */,
 				84D0A75F1CDA73ED00E2056A /* ListView.m */,
 				84D0A7601CDA73ED00E2056A /* navBarTitleView.h */,
@@ -664,6 +695,23 @@
 				84BA93C71CDDE58F009CFDC6 /* likeCountView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		84DD84281CE86BB100FD7300 /* DCPicscrollView */ = {
+			isa = PBXGroup;
+			children = (
+				84DD84291CE86BB100FD7300 /* DCPicItem.h */,
+				84DD842A1CE86BB100FD7300 /* DCPicItem.m */,
+				84DD842B1CE86BB100FD7300 /* DCPicItemConfiguration.h */,
+				84DD842C1CE86BB100FD7300 /* DCPicItemConfiguration.m */,
+				84DD842D1CE86BB100FD7300 /* DCPicScrollView.h */,
+				84DD842E1CE86BB100FD7300 /* DCPicScrollView.m */,
+				84DD842F1CE86BB100FD7300 /* DCPicScrollViewConfiguration.h */,
+				84DD84301CE86BB100FD7300 /* DCPicScrollViewConfiguration.m */,
+				84DD84311CE86BB100FD7300 /* NSTimer+Control.h */,
+				84DD84321CE86BB100FD7300 /* NSTimer+Control.m */,
+			);
+			path = DCPicscrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -793,17 +841,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				846A46DF1CDE55CC00F99B36 /* CommentDetailView.m in Sources */,
+				84DD84351CE86BB100FD7300 /* DCPicScrollView.m in Sources */,
 				849DE6931CDAF33600879190 /* navBarTitleView.m in Sources */,
 				84BA93C41CDDDB03009CFDC6 /* CommentInfoCell.m in Sources */,
 				84D0A7661CDA74A900E2056A /* CartoonDetailViewController.m in Sources */,
 				84B51F211CE4B25900EB4CB0 /* wordsOptionsHeadView.m in Sources */,
 				84B296EB1CE1D9D200D927CE /* UIImage+ImageEffects.m in Sources */,
+				84DD84361CE86BB100FD7300 /* DCPicScrollViewConfiguration.m in Sources */,
 				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
+				84DD84331CE86BB100FD7300 /* DCPicItem.m in Sources */,
 				84BA93C81CDDE58F009CFDC6 /* likeCountView.m in Sources */,
 				84D0A7691CDA782100E2056A /* CommentBottomView.m in Sources */,
 				846A46E51CDF249800F99B36 /* wordsDetailModel.m in Sources */,
 				846A46E21CDF1FD500F99B36 /* BaseTableView.m in Sources */,
+				84B0343A1CE6E033003680F8 /* topicInfoModel.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
 				8465795A1CE33B6F0094072E /* wordsDetailHeadView.m in Sources */,
 				84BA93BC1CDDBE95009CFDC6 /* CommentDetailViewController.m in Sources */,
@@ -816,10 +868,13 @@
 				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
 				84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */,
 				849DE6B01CDB9CA300879190 /* authorInfoHeadView.m in Sources */,
+				84DD84341CE86BB100FD7300 /* DCPicItemConfiguration.m in Sources */,
 				8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */,
 				849DE69F1CDB2B9300879190 /* comicsModel.m in Sources */,
+				84DD84371CE86BB100FD7300 /* NSTimer+Control.m in Sources */,
 				8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */,
 				849DE69C1CDB2A9300879190 /* userModel.m in Sources */,
+				84DD843A1CE8733D00FD7300 /* bannerModel.m in Sources */,
 				849DE6B71CDBA97100879190 /* CartoonFlooterView.m in Sources */,
 				849DE6991CDB2A6100879190 /* topicModel.m in Sources */,
 				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,
@@ -827,6 +882,7 @@
 				84D979861CD8A6D7008EAE63 /* DateManager.m in Sources */,
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
 				84BA93BF1CDDD706009CFDC6 /* CommentsModel.m in Sources */,
+				84B51F2A1CE5A3AF00EB4CB0 /* ModelCacheManager.m in Sources */,
 				84B51F261CE4D91F00EB4CB0 /* wordTableViewCell.m in Sources */,
 				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
 				84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */,

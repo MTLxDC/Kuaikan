@@ -49,15 +49,14 @@ static const CGFloat imageCellHeight = 250.0f;
  
     [self setupCartoonContentView];
     
-    [self requestData];
-    
     [self setupNavigationBar];
     
     [self setupTitleView];
     
     [self setupCommentBottomView];
     
-    
+    [self requestData];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
