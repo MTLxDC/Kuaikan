@@ -92,6 +92,7 @@ static const NSUInteger totalItem = 1000;
             
         } repeats:YES];
         
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     }
 }
 

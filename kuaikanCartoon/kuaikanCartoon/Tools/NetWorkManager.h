@@ -12,8 +12,6 @@
 
 @interface NetWorkManager : AFHTTPSessionManager
 
-@property (nonatomic,readonly) bool isReachable;
-
 
 + (instancetype)share;
 

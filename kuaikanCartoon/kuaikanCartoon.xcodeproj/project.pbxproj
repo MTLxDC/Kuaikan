@@ -69,6 +69,14 @@
 		84DD84361CE86BB100FD7300 /* DCPicScrollViewConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84301CE86BB100FD7300 /* DCPicScrollViewConfiguration.m */; };
 		84DD84371CE86BB100FD7300 /* NSTimer+Control.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84321CE86BB100FD7300 /* NSTimer+Control.m */; };
 		84DD843A1CE8733D00FD7300 /* bannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84391CE8733D00FD7300 /* bannerModel.m */; };
+		84DD843D1CE8B7BA00FD7300 /* FindHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD843C1CE8B7BA00FD7300 /* FindHeaderSectionView.m */; };
+		84DD84401CE8E1A900FD7300 /* RenQiBiaoShengCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD843F1CE8E1A900FD7300 /* RenQiBiaoShengCell.m */; };
+		84DD84431CE8E1C900FD7300 /* MeiZhouPaiHangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84421CE8E1C900FD7300 /* MeiZhouPaiHangCell.m */; };
+		84DD84461CE8E1DD00FD7300 /* XinZuoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84451CE8E1DD00FD7300 /* XinZuoCell.m */; };
+		84DD84491CE8E22B00FD7300 /* ZhuBianLiTuiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84481CE8E22B00FD7300 /* ZhuBianLiTuiCell.m */; };
+		84DD844C1CE8E24700FD7300 /* GuanFangHuoDongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD844B1CE8E24700FD7300 /* GuanFangHuoDongCell.m */; };
+		84DD844F1CE8E33E00FD7300 /* topicInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD844E1CE8E33E00FD7300 /* topicInfoView.m */; };
+		84DD84551CEA11A200FD7300 /* bannersModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD84541CEA11A200FD7300 /* bannersModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +201,22 @@
 		84DD84321CE86BB100FD7300 /* NSTimer+Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Control.m"; sourceTree = "<group>"; };
 		84DD84381CE8733D00FD7300 /* bannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bannerModel.h; sourceTree = "<group>"; };
 		84DD84391CE8733D00FD7300 /* bannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bannerModel.m; sourceTree = "<group>"; };
+		84DD843B1CE8B7BA00FD7300 /* FindHeaderSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindHeaderSectionView.h; sourceTree = "<group>"; };
+		84DD843C1CE8B7BA00FD7300 /* FindHeaderSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindHeaderSectionView.m; sourceTree = "<group>"; };
+		84DD843E1CE8E1A900FD7300 /* RenQiBiaoShengCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenQiBiaoShengCell.h; sourceTree = "<group>"; };
+		84DD843F1CE8E1A900FD7300 /* RenQiBiaoShengCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenQiBiaoShengCell.m; sourceTree = "<group>"; };
+		84DD84411CE8E1C900FD7300 /* MeiZhouPaiHangCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeiZhouPaiHangCell.h; sourceTree = "<group>"; };
+		84DD84421CE8E1C900FD7300 /* MeiZhouPaiHangCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeiZhouPaiHangCell.m; sourceTree = "<group>"; };
+		84DD84441CE8E1DD00FD7300 /* XinZuoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XinZuoCell.h; sourceTree = "<group>"; };
+		84DD84451CE8E1DD00FD7300 /* XinZuoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XinZuoCell.m; sourceTree = "<group>"; };
+		84DD84471CE8E22B00FD7300 /* ZhuBianLiTuiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhuBianLiTuiCell.h; sourceTree = "<group>"; };
+		84DD84481CE8E22B00FD7300 /* ZhuBianLiTuiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhuBianLiTuiCell.m; sourceTree = "<group>"; };
+		84DD844A1CE8E24700FD7300 /* GuanFangHuoDongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanFangHuoDongCell.h; sourceTree = "<group>"; };
+		84DD844B1CE8E24700FD7300 /* GuanFangHuoDongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanFangHuoDongCell.m; sourceTree = "<group>"; };
+		84DD844D1CE8E33E00FD7300 /* topicInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topicInfoView.h; sourceTree = "<group>"; };
+		84DD844E1CE8E33E00FD7300 /* topicInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topicInfoView.m; sourceTree = "<group>"; };
+		84DD84531CEA11A200FD7300 /* bannersModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bannersModel.h; sourceTree = "<group>"; };
+		84DD84541CEA11A200FD7300 /* bannersModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bannersModel.m; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -324,6 +348,8 @@
 				84B034391CE6E033003680F8 /* topicInfoModel.m */,
 				84DD84381CE8733D00FD7300 /* bannerModel.h */,
 				84DD84391CE8733D00FD7300 /* bannerModel.m */,
+				84DD84531CEA11A200FD7300 /* bannersModel.h */,
+				84DD84541CEA11A200FD7300 /* bannersModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +357,20 @@
 		8471A9371CD499B400A5D901 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84DD843B1CE8B7BA00FD7300 /* FindHeaderSectionView.h */,
+				84DD843C1CE8B7BA00FD7300 /* FindHeaderSectionView.m */,
+				84DD843E1CE8E1A900FD7300 /* RenQiBiaoShengCell.h */,
+				84DD843F1CE8E1A900FD7300 /* RenQiBiaoShengCell.m */,
+				84DD84411CE8E1C900FD7300 /* MeiZhouPaiHangCell.h */,
+				84DD84421CE8E1C900FD7300 /* MeiZhouPaiHangCell.m */,
+				84DD84441CE8E1DD00FD7300 /* XinZuoCell.h */,
+				84DD84451CE8E1DD00FD7300 /* XinZuoCell.m */,
+				84DD84471CE8E22B00FD7300 /* ZhuBianLiTuiCell.h */,
+				84DD84481CE8E22B00FD7300 /* ZhuBianLiTuiCell.m */,
+				84DD844A1CE8E24700FD7300 /* GuanFangHuoDongCell.h */,
+				84DD844B1CE8E24700FD7300 /* GuanFangHuoDongCell.m */,
+				84DD844D1CE8E33E00FD7300 /* topicInfoView.h */,
+				84DD844E1CE8E33E00FD7300 /* topicInfoView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -853,7 +893,12 @@
 				84DD84331CE86BB100FD7300 /* DCPicItem.m in Sources */,
 				84BA93C81CDDE58F009CFDC6 /* likeCountView.m in Sources */,
 				84D0A7691CDA782100E2056A /* CommentBottomView.m in Sources */,
+				84DD843D1CE8B7BA00FD7300 /* FindHeaderSectionView.m in Sources */,
+				84DD84401CE8E1A900FD7300 /* RenQiBiaoShengCell.m in Sources */,
+				84DD844C1CE8E24700FD7300 /* GuanFangHuoDongCell.m in Sources */,
 				846A46E51CDF249800F99B36 /* wordsDetailModel.m in Sources */,
+				84DD844F1CE8E33E00FD7300 /* topicInfoView.m in Sources */,
+				84DD84461CE8E1DD00FD7300 /* XinZuoCell.m in Sources */,
 				846A46E21CDF1FD500F99B36 /* BaseTableView.m in Sources */,
 				84B0343A1CE6E033003680F8 /* topicInfoModel.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
@@ -862,6 +907,7 @@
 				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
 				846A46E81CDF273200F99B36 /* wordsModel.m in Sources */,
 				84D0A7621CDA73ED00E2056A /* ListView.m in Sources */,
+				84DD84431CE8E1C900FD7300 /* MeiZhouPaiHangCell.m in Sources */,
 				849DE6B31CDBA39D00879190 /* CartoonContentCell.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
 				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
@@ -887,6 +933,7 @@
 				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
 				84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */,
 				84D979801CD8529B008EAE63 /* SummaryListItem.m in Sources */,
+				84DD84551CEA11A200FD7300 /* bannersModel.m in Sources */,
 				849DE6A21CDB2C2700879190 /* bannerInfoModel.m in Sources */,
 				8480CAC51CD76B6F0072A17B /* NSString+Extension.m in Sources */,
 				8471A9671CD4A55C00A5D901 /* BaseViewController.m in Sources */,
@@ -894,6 +941,7 @@
 				8471A9541CD49CDA00A5D901 /* AppDelegate.m in Sources */,
 				8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */,
 				8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */,
+				84DD84491CE8E22B00FD7300 /* ZhuBianLiTuiCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

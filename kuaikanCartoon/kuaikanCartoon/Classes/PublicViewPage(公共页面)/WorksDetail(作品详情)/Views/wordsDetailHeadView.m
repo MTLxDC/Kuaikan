@@ -77,6 +77,8 @@ CGFloat const btnHeight  = 15.0f;
     CGFloat offsetY = [change[NSKeyValueChangeNewKey] CGPointValue].y;
     CGRect newFrame = self.frame;
     
+    printf("offsetY:%f\n",-offsetY);
+
     if (offsetY <= 0 && -offsetY >= navHeight) {
         
         newFrame.size.height = -offsetY;
@@ -85,41 +87,39 @@ CGFloat const btnHeight  = 15.0f;
 
         if (-offsetY < headViewHeight) {
             
-            alpha = headViewHeight/(-offsetY * 2) - 0.3f;
+            alpha = (headViewHeight * 0.5)/-offsetY - 0.3;
 
         }
         
-        printf("alpha:%f\n",alpha);
         self.bluredImageView.alpha = alpha;
         self.maskImageView.alpha = 1 - alpha;
         
-        CGFloat btnAlpha = 1;
-
-        if (-offsetY <= (navHeight + btnHeight + spaceing)) {
-            
-            btnAlpha  = 0;
-            
-            if (self.leading.constant == spaceing) {
-                self.leading.constant = (self.width - self.titleLabel.width) * 0.5 - spaceing;
-            }
-            
-        }else {
-            
-            self.leading.constant = spaceing;
-            
-        }
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            [self layoutIfNeeded];
-            self.backBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:btnAlpha ? 0.1:0];
-            self.replyCount.alpha = btnAlpha;
-            self.likeCount.alpha = btnAlpha;
-        }];
-        
     }else {
         newFrame.size.height = navHeight;
+        self.bluredImageView.alpha = 1;
+        self.maskImageView.alpha = 0;
     }
     
+    CGFloat btnAlpha = 1;
+    
+    if (-offsetY <= (navHeight + btnHeight + spaceing)) {
+        
+        btnAlpha  = 0;
+        
+        if (self.leading.constant == spaceing) {
+            self.leading.constant = (self.width - self.titleLabel.width) * 0.5 - spaceing;
+        }
+        
+    }else {
+        self.leading.constant = spaceing;
+    }
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+        self.backBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:btnAlpha ? 0.1:0];
+        self.replyCount.alpha = btnAlpha;
+        self.likeCount.alpha = btnAlpha;
+    }];
     
     
     self.frame = newFrame;

@@ -10,6 +10,7 @@
 //
 
 #import "topicInfoModel.h"
+#import "bannersModel.h"
 
 @implementation topicInfoModel
 
@@ -18,10 +19,9 @@
     return @[@"data",@"infos"];
 }
 
-+ (void)mj_setupObjectClassInArray:(MJObjectClassInArray)objectClassInArray {
-    objectClassInArray = ^NSDictionary *{
-        return @{@"topics" : [topicModel class]};
-    };
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"topics" : [topicModel class],
+             @"banners": [bannersModel class]};
 }
 
 @end

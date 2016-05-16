@@ -27,8 +27,8 @@
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="恋是樱草色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-gB-fN3">
-                        <rect key="frame" x="46" y="10" width="208" height="30"/>
+                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恋是樱草色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-gB-fN3">
+                        <rect key="frame" x="46" y="10" width="205" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -80,6 +80,7 @@
                 <constraints>
                     <constraint firstItem="U1T-gB-fN3" firstAttribute="height" secondItem="ve8-jQ-6OA" secondAttribute="height" id="1Vx-WL-138"/>
                     <constraint firstItem="1lX-Ak-dQy" firstAttribute="leading" secondItem="z1a-pZ-wnb" secondAttribute="trailing" id="69O-rF-Fsv"/>
+                    <constraint firstItem="JEN-h4-a4p" firstAttribute="leading" secondItem="U1T-gB-fN3" secondAttribute="trailing" constant="8" id="71b-p5-MsL"/>
                     <constraint firstItem="1lX-Ak-dQy" firstAttribute="centerY" secondItem="UHg-x4-jE9" secondAttribute="centerY" id="8jm-ux-0xK"/>
                     <constraint firstItem="z1a-pZ-wnb" firstAttribute="leading" secondItem="UHg-x4-jE9" secondAttribute="trailing" constant="5" id="CKU-uF-U7A"/>
                     <constraint firstAttribute="trailingMargin" secondItem="JEN-h4-a4p" secondAttribute="trailing" constant="8" id="FCM-ji-7E2"/>

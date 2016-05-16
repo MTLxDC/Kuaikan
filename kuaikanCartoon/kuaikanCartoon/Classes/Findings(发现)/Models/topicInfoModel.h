@@ -45,6 +45,8 @@
 
 @property (nonatomic,copy) NSArray *topics;
 
+@property (nonatomic,copy) NSArray *banners;
+
 @property (nonatomic,strong) NSNumber *type;
 
 @end

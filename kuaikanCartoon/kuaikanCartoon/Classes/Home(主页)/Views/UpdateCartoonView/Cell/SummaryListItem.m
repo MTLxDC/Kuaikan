@@ -18,7 +18,6 @@
 
 @property (nonatomic,strong) NSMutableArray *modelArray;
 
-
 @end
 
 

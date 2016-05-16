@@ -102,12 +102,19 @@
 //"created_at": 1461720619,
 //"likes_count": 269321
 //},
+
+- (void)like {
+    self.model.is_liked = !self.model.is_liked;
+}
+
 - (void)setModel:(SummaryModel *)model {
     
     
     self.likeCount.likeCount = model.likes_count.integerValue;
     
     self.likeCount.islike = model.is_liked;
+    
+    [self.likeCount addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
     
     self.likeCount.requestID = model.ID.stringValue;
     
