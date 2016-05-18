@@ -39,17 +39,27 @@
     
 }
 - (IBAction)comment:(id)sender {
-    
+    if ([self.delegate respondsToSelector:@selector(commentButtonAction)]) {
+        [self.delegate commentButtonAction];
+    }
 }
 - (IBAction)share:(id)sender {
-    
+    if ([self.delegate respondsToSelector:@selector(showShareView)]) {
+        [self.delegate showShareView];
+    }
 }
 
 
 
 - (IBAction)previous:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(previousPage)]) {
+        [self.delegate previousPage];
+    }
 }
 - (IBAction)nextPage:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(nextPage)]) {
+        [self.delegate nextPage];
+    }
 }
 
 - (void)awakeFromNib {

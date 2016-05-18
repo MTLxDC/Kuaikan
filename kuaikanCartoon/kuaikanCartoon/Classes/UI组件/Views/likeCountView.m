@@ -9,7 +9,7 @@
 #import "likeCountView.h"
 #import "NetWorkManager.h"
 #import "Color.h"
-
+#import "CommonMacro.h"
 
 static NSString * const likeUrl = @"http://api.kuaikanmanhua.com/v1/comics";
 
@@ -37,13 +37,10 @@ static NSString * const pressedImageName = @"ic_details_toolbar_praise_pressed_2
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        [self setup];
-    }
-    return self;
+- (void)awakeFromNib {
+    
+    [self setup];
+    
 }
 
 - (void)setup {
@@ -114,7 +111,9 @@ static NSString * const pressedImageName = @"ic_details_toolbar_praise_pressed_2
     [newUrl appendFormat:@"/%@%@",self.requestID,parameter.lastObject];
     
     [manger requestWithMethod:parameter.firstObject url:newUrl parameters:nil complish:^(id res, NSError *error) {
-//        NSLog(@"%@ error:%@",res,error);
+        if (error == nil) {
+            DEBUG_Log(@"%@",res);
+        }
     }];
     
 }

@@ -73,6 +73,7 @@
     updateCartoonView *v = [[updateCartoonView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
     [self.view addSubview:v];
     
+    DEBUG_Log(@"%@",v);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

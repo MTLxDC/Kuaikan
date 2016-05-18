@@ -68,6 +68,8 @@ static NSString * const cellIdentifier = @"SummaryCell";
     self.tableFooterView = imageView;
     
     self.tableFooterView.hidden = YES;
+    
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -104,7 +106,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     SummaryModel *md = self.modelArray[indexPath.row];
     
-    detailVc.cartoonId = [NSString stringWithFormat:@"%zd",md.ID.integerValue];
+    detailVc.cartoonId = md.ID.stringValue;
     
     [[self findResponderWithClass:[UINavigationController class]]
                pushViewController:detailVc animated:YES];
@@ -121,7 +123,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
         if (weakSelf == nil) return ;
         
         SummaryListView *sself = weakSelf;
-        
+    
             sself.modelArray = res;
             [sself reloadData];
             [sself.mj_header endRefreshing];

@@ -74,14 +74,15 @@
     if (self) {
         
         self.format = [NSDateFormatter new];
+        
         [self.format setDateFormat:@"yyyy-MM-dd"];
         
         
-        self.calender_CN = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+        self.calender_CN = [NSCalendar currentCalendar];
         
         NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
         [NSTimeZone setDefaultTimeZone:timeZone];
-
+        
         [self.calender_CN setTimeZone:timeZone];
 
     }
@@ -93,7 +94,7 @@
         
         NSCalendarUnit unit = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
         _todayDate = [self.calender_CN dateFromComponents:
-                      [self.calender_CN components:unit fromDate:self.currentDate]];
+                     [self.calender_CN components:unit fromDate:self.currentDate]];
     }
     return _todayDate;
 }

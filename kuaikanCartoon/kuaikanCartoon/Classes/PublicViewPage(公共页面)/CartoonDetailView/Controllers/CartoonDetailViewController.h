@@ -10,6 +10,6 @@
 
 @interface CartoonDetailViewController : BaseViewController
 
-@property (nonatomic,strong) NSString *cartoonId;
+@property (nonatomic,copy) NSString *cartoonId;
 
 @end

@@ -85,7 +85,6 @@
       DateManager *date = [DateManager share];
         
         NSString *formatUrl = @"http://api.kuaikanmanhua.com/v1/daily/comic_lists/%@?since=0";
-        
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:7];
 
         for (NSInteger index = 1; index < 8; index++) {

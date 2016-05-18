@@ -54,15 +54,23 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)removeAllCache {
+    [self.modelCache removeAllObjects];
+}
+
 - (id)cacheForKey:(NSString *)key {
+    
+    BOOL meiWifiLe = NO;
     
     id cache = [self.modelCache objectForKey:key];
     
-    if (cache) return cache;
+    if (cache || !meiWifiLe) return cache;
     
     cache = [NSKeyedUnarchiver unarchiveObjectWithFile:[self cachePathForKey:key]];
-    
-    NSLog(@"获取磁盘缓存对象%@",cache);
     
     return cache;
 }
@@ -72,15 +80,12 @@
     
     [self.modelCache setObject:aCache forKey:aKey];
     
-    NSLog(@"内存缓存对象:%@,key:%@",aCache,aKey);
-
 }
 
 - (void)removeCacheForKey:(NSString *)key {
     [self.modelCache removeObjectForKey:key];
     
 }
-
 
 - (void)saveCache {
     

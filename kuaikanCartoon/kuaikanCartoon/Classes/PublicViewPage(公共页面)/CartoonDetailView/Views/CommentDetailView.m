@@ -92,11 +92,8 @@ static NSString * const commentInfoCellName = @"CommentInfoCellIdentifier";
         }
         
         CommentDetailView *sself = weakSelf;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
             sself.modelArray = res;
             [sself reloadData];
-        });
         
     } cachingPolicy:ModelDataCachingPolicyDefault] ;
     

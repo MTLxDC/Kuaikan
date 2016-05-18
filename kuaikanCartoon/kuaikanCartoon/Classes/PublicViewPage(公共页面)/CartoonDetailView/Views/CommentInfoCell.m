@@ -10,6 +10,7 @@
 #import "CommentsModel.h"
 #import <UIImageView+WebCache.h>
 #import "DateManager.h"
+#import "likeCountView.h"
 
 @interface CommentInfoCell ()
 
@@ -19,15 +20,15 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
 @property (weak, nonatomic) IBOutlet UILabel *CommentContent;
-@property (weak, nonatomic) IBOutlet UIButton *likeCount;
+@property (weak, nonatomic) IBOutlet likeCountView *likeCount;
 
 @end
 
 @implementation CommentInfoCell
 
 
-- (IBAction)like:(id)sender {
-    
+- (IBAction)likeEevent:(id)sender {
+    self.commentsModel.is_liked = !self.commentsModel.is_liked;
 }
 - (IBAction)reply:(id)sender {
 }
@@ -46,16 +47,13 @@
     
     self.CommentContent.text = commentsModel.content;
     
-    NSString *likeCount = commentsModel.likes_count.stringValue;
-    
-    [self.likeCount setTitle:likeCount forState:UIControlStateNormal];
+    self.likeCount.likeCount = commentsModel.likes_count.integerValue;
+    self.likeCount.requestID = commentsModel.comic_id.stringValue;
     
 }
 
 - (void)awakeFromNib {
 
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
 
 }
 

@@ -21,7 +21,6 @@
     [_window makeKeyAndVisible];
     
     
-    NSLog(@"%@",@"".cachePath);
     return YES;
 }
 

@@ -9,6 +9,8 @@
 #import "CommentBottomView.h"
 #import "CommentDetailViewController.h"
 #import "UIView+Extension.h"
+#import "Color.h"
+#import <Masonry.h>
 
 static NSString * const contentSizeKeyPath = @"contentSize";
 
@@ -20,6 +22,13 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 @property (weak, nonatomic) IBOutlet UIButton *placeBtn;
 
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+
+@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
+@property (weak, nonatomic) IBOutlet UIButton *comentBtn;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *leading;
+
+@property (nonatomic,weak)  UIButton *sendBtn;
 
 
 @end
@@ -46,6 +55,42 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     return [[[NSBundle mainBundle] loadNibNamed:@"CommentBottomView" owner:nil options:nil] firstObject];
 }
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self setupSendBtn];
+    }
+    return self;
+}
+
+- (void)setupSendBtn {
+    
+    UIButton *sendBtn = [[UIButton alloc] init];
+    
+    sendBtn.hidden = YES;
+    
+    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [sendBtn setTitleColor:subjectColor forState:UIControlStateNormal];
+    
+    sendBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    
+    [sendBtn addTarget:self action:@selector(sendComment:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:sendBtn];
+    
+    [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.right.equalTo(self).offset(-8);
+        make.width.equalTo(@(42));
+    }];
+    
+    self.sendBtn = sendBtn;
+}
+
+- (void)sendComment:(UIButton *)btn {
+    
+}
 
 - (void)awakeFromNib {
     
@@ -57,9 +102,30 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     
     [self.commentTextView addObserver:self forKeyPath:contentSizeKeyPath options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(self)];
     
+    CALayer *layer = self.commentTextView.layer;
+    
+    layer.borderColor = [[UIColor alloc] initWithWhite:0.9 alpha:1].CGColor;
+    layer.borderWidth = 0.5;
+    
 }
 
-
+- (void)setBeginComment:(BOOL)beginComment {
+    _beginComment = beginComment;
+    
+    self.comentBtn.hidden   = beginComment;
+    self.shareBtn.hidden    = beginComment;
+    self.commntCount.hidden = beginComment;
+    self.sendBtn.hidden     = !beginComment;
+    
+    CGFloat constant = beginComment ? -50 : 8;
+    
+    self.leading.constant = constant;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+    }];
+    
+}
 
 - (void)textViewDidChange:(UITextView *)textView {
     self.placeBtn.hidden = textView.text.length > 0;

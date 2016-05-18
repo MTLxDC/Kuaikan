@@ -18,15 +18,17 @@
 
 - (void)showCommentPage;
 
-
 @end
 
 @interface CommentBottomView : UIView
+
+@property (nonatomic,assign) BOOL beginComment;
 
 @property (nonatomic,assign) NSInteger recommend_count;
 
 @property (nonatomic,weak) id<CommentBottomViewDelegate> delegate;
 
 + (instancetype)commentBottomView;
+
 
 @end

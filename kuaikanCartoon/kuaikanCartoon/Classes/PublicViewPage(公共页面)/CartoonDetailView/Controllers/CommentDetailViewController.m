@@ -19,6 +19,12 @@
 
 @end
 
+static NSString * const hotCommentRequestUrlFormat =
+@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/0?order=score";
+
+static NSString * const newCommentRequestUrlFormat =
+@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/0?";
+
 @implementation CommentDetailViewController
 
 - (void)viewDidLoad {
@@ -28,21 +34,19 @@
     
     [self setupCommentDetailView];
     
-    [self requestData];
+    [self requestCommentDataNewOrHot:YES];
 }
 
-- (void)requestData {
-    if (self.requestID.length < 1) {
-        return;
-    }
+- (void)requestCommentDataNewOrHot:(BOOL)isNew {
     
-    NSString *requestUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/0?",self.requestID];
+    NSString *requestFormat = isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
+
+    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.requestID];
     
     self.cdv.requestUrl = requestUrl;
 }
 
 - (void)setupNavBar {
-    
     
     UISegmentedControl *sc = [[UISegmentedControl alloc] initWithItems:@[@"最新评论",@"最热评论"]];
     
@@ -58,7 +62,7 @@
     
     [sc setTitleTextAttributes:selectTextAttributes forState:UIControlStateSelected];
     
-    [sc addTarget:self action:@selector(selectedSegmentIndex:) forControlEvents:UIControlEventTouchUpInside];
+    [sc addTarget:self action:@selector(selectedSegmentIndex:) forControlEvents:UIControlEventValueChanged];
 
     
     self.navigationItem.titleView = sc;
@@ -79,8 +83,7 @@
     
     
     [cdv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(self.view).offset(navHeight);
+        make.edges.equalTo(self.view);
     }];
     
     self.cdv = cdv;
@@ -88,8 +91,7 @@
 
 - (void)selectedSegmentIndex:(UISegmentedControl *)sc
 {
-    
-    
+    [self requestCommentDataNewOrHot:!sc.selectedSegmentIndex];
 }
 
 - (void)dismiss {

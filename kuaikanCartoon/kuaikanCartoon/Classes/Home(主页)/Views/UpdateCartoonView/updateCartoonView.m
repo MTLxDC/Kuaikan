@@ -14,9 +14,9 @@
 
 @interface updateCartoonView ()<UICollectionViewDelegate>
 
-@property (nonatomic,weak) updateCartoonListView *cartoonListView;
+@property (nonatomic,strong) updateCartoonListView *cartoonListView;
 
-@property (nonatomic,weak) ListView *navigationHeadView;
+@property (nonatomic,strong) ListView *navigationHeadView;
 
 @end
 

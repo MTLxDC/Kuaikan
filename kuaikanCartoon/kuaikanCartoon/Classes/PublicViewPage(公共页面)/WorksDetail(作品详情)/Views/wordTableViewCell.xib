@@ -20,12 +20,6 @@
                             <constraint firstAttribute="width" constant="120" id="bks-v4-v2i"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N5-I0-8tD">
-                        <rect key="frame" x="140" y="10" width="246" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tby-F3-xL4">
                         <rect key="frame" x="140" y="71" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -52,6 +46,12 @@
                             <constraint firstAttribute="height" constant="1" id="PNG-nG-HiE"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N5-I0-8tD">
+                        <rect key="frame" x="140" y="10" width="246" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tby-F3-xL4" firstAttribute="leading" secondItem="qfV-ci-g69" secondAttribute="trailing" constant="10" id="6md-jL-LK0"/>
@@ -75,7 +75,7 @@
                 <outlet property="wordImageView" destination="qfV-ci-g69" id="hVz-Xw-TFJ"/>
                 <outlet property="wordTitleLable" destination="6N5-I0-8tD" id="ShL-WR-Gmf"/>
             </connections>
-            <point key="canvasLocation" x="185" y="172"/>
+            <point key="canvasLocation" x="121" y="226"/>
         </tableViewCell>
     </objects>
     <resources>

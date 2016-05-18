@@ -68,12 +68,7 @@ CGFloat tabbar_h = 44;
     }
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    [UIView animateWithDuration:0.5 animations:^{
-//        [self.mainTabbar setY:SCREEN_HEIGHT - tabbar_h];
-//    }];
-//}
+
 
 
 

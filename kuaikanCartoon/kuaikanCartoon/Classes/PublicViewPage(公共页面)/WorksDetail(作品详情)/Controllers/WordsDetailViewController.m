@@ -14,6 +14,7 @@
 #import "UIView+Extension.h"
 #import "wordsOptionsHeadView.h"
 #import "wordTableViewCell.h"
+#import "CartoonDetailViewController.h"
 
 @interface WordsDetailViewController ()<UITableViewDataSource,UITableViewDelegate,wordsDetailHeadViewDelegate>
 
@@ -132,6 +133,16 @@
 
 #pragma mark UITableViewDelegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CartoonDetailViewController *cdv = [[CartoonDetailViewController alloc] init];
+    
+    wordsModel *md = self.wordsModel.comics[indexPath.row];
+    
+    cdv.cartoonId = md.ID.stringValue;
+    
+    [self.navigationController pushViewController:cdv animated:YES];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 32;
 }
@@ -151,9 +162,7 @@
     return headView;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
+\
 
 
 

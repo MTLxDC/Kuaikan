@@ -9,7 +9,7 @@
 #import "BaseModel.h"
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
-#import <MBProgressHUD.h>
+#import <SVProgressHUD.h>
 #import "ModelCacheManager.h"
 
 @implementation BaseModel
@@ -61,20 +61,15 @@ MJCodingImplementation
         
     }
     
-    
-    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:topWindow animated:YES];
-    
-    hud.labelText = @"Loading...";
+    [SVProgressHUD showWithStatus:@"loading"];
     
     NetWorkManager *manager = [NetWorkManager share];
     
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
         
         if (res == nil || error != nil) {
-            
-            complish(error);
+            [SVProgressHUD showErrorWithStatus:
+            [NSString stringWithFormat:@"网络提了个问题\n错误代码:%d",error.code]];
             return;
         }
         
@@ -96,7 +91,7 @@ MJCodingImplementation
         
         dispatch_async(dispatch_get_main_queue(), ^{
             complish(result);
-            [hud hide:YES];
+            [SVProgressHUD dismiss];
         });
         
         if (saveMemoryCache) {

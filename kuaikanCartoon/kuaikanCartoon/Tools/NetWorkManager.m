@@ -63,7 +63,7 @@
     if (self) {
         
         self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_SERIAL);
-        
+        self.requestSerializer.timeoutInterval = 5;
         
     }
     return self;

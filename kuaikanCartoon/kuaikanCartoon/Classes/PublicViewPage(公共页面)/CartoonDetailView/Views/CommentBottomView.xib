@@ -8,13 +8,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CommentBottomView">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="41"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rG-qD-eee">
-                    <rect key="frame" x="294" y="11" width="21" height="21"/>
+                    <rect key="frame" x="302" y="10" width="20" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="21" id="W4i-yg-SHO"/>
+                        <constraint firstAttribute="width" constant="20" id="W4i-yg-SHO"/>
                         <constraint firstAttribute="height" constant="21" id="vjy-S4-Ltn"/>
                     </constraints>
                     <state key="normal" title="Button" image="ic_details_toolbar_comment_normal_21x21_"/>
@@ -23,10 +23,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gy7-yz-rzt">
-                    <rect key="frame" x="367" y="11" width="21" height="21"/>
+                    <rect key="frame" x="372" y="10" width="20" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="6wo-k8-C4f"/>
-                        <constraint firstAttribute="width" constant="21" id="yBd-uv-1b6"/>
+                        <constraint firstAttribute="width" constant="20" id="yBd-uv-1b6"/>
                     </constraints>
                     <state key="normal" title="Button" image="ic_details_toolbar_share_normal_21x21_"/>
                     <connections>
@@ -34,7 +34,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VzF-Qr-uHi">
-                    <rect key="frame" x="307" y="3" width="30" height="16"/>
+                    <rect key="frame" x="314" y="2" width="30" height="16"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="n9h-Yf-x9g"/>
@@ -50,7 +50,7 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yem-YR-hZE">
-                    <rect key="frame" x="8" y="8" width="278" height="28"/>
+                    <rect key="frame" x="8" y="8" width="286" height="25"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -62,36 +62,39 @@
                         <constraint firstAttribute="height" constant="30" id="6Pi-M0-MAa"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="发表评论" image="ic_details_toolbar_write_comment_16x16_">
                         <color key="titleColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="yem-YR-hZE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="3tk-q9-LLl"/>
                 <constraint firstItem="yem-YR-hZE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="7Li-mA-DgR"/>
                 <constraint firstItem="3rG-qD-eee" firstAttribute="top" secondItem="VzF-Qr-uHi" secondAttribute="bottom" constant="-8" id="Bdz-7h-lT3"/>
                 <constraint firstItem="3rG-qD-eee" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="JG1-zU-iTT"/>
                 <constraint firstItem="wUC-sy-f8R" firstAttribute="top" secondItem="yem-YR-hZE" secondAttribute="top" id="JQA-wv-OA1"/>
-                <constraint firstAttribute="trailing" secondItem="Gy7-yz-rzt" secondAttribute="trailing" constant="12" id="ThW-AY-v3w"/>
+                <constraint firstAttribute="trailing" secondItem="Gy7-yz-rzt" secondAttribute="trailing" constant="8" id="ThW-AY-v3w"/>
                 <constraint firstItem="3rG-qD-eee" firstAttribute="leading" secondItem="yem-YR-hZE" secondAttribute="trailing" constant="8" id="U0M-nQ-HoS"/>
                 <constraint firstItem="Gy7-yz-rzt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ayA-b7-j12"/>
                 <constraint firstItem="wUC-sy-f8R" firstAttribute="leading" secondItem="yem-YR-hZE" secondAttribute="leading" id="bOC-ay-fTw"/>
                 <constraint firstAttribute="bottom" secondItem="yem-YR-hZE" secondAttribute="bottom" constant="8" id="lWS-DX-Cb7"/>
                 <constraint firstItem="VzF-Qr-uHi" firstAttribute="leading" secondItem="3rG-qD-eee" secondAttribute="trailing" constant="-8" id="lpH-pt-QT7"/>
-                <constraint firstItem="Gy7-yz-rzt" firstAttribute="leading" secondItem="3rG-qD-eee" secondAttribute="trailing" constant="52" id="vPm-Jz-ZLE"/>
+                <constraint firstItem="Gy7-yz-rzt" firstAttribute="leading" secondItem="3rG-qD-eee" secondAttribute="trailing" constant="50" id="vPm-Jz-ZLE"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="comentBtn" destination="3rG-qD-eee" id="fqt-Vw-mK2"/>
                 <outlet property="commentTextView" destination="yem-YR-hZE" id="a1x-gg-aVf"/>
                 <outlet property="commntCount" destination="VzF-Qr-uHi" id="qhS-e0-M3L"/>
                 <outlet property="labelWidth" destination="qi1-cN-S6W" id="bVB-9P-AHP"/>
+                <outlet property="leading" destination="U0M-nQ-HoS" id="9Rj-mI-np5"/>
                 <outlet property="placeBtn" destination="wUC-sy-f8R" id="sA5-Vu-D5N"/>
+                <outlet property="shareBtn" destination="Gy7-yz-rzt" id="8Xo-aL-Gg9"/>
             </connections>
-            <point key="canvasLocation" x="173" y="8"/>
+            <point key="canvasLocation" x="-243" y="316.5"/>
         </view>
     </objects>
     <resources>

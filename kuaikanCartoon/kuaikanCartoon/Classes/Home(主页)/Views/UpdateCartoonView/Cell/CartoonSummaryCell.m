@@ -105,11 +105,11 @@
 
 - (void)like {
     self.model.is_liked = !self.model.is_liked;
+    printf("%s\n",self.model.is_liked ? "喜欢" : "不喜欢");
 }
 
 - (void)setModel:(SummaryModel *)model {
-    
-    
+   
     self.likeCount.likeCount = model.likes_count.integerValue;
     
     self.likeCount.islike = model.is_liked;
