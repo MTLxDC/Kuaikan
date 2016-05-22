@@ -113,7 +113,7 @@
                 <outlet property="userIcon" destination="im6-Lj-Id7" id="dfO-lD-ijb"/>
                 <outlet property="userName" destination="xXh-j5-J2y" id="BYW-42-MjE"/>
             </connections>
-            <point key="canvasLocation" x="145.5" y="320"/>
+            <point key="canvasLocation" x="246.5" y="162"/>
         </tableViewCell>
         <tapGestureRecognizer id="7AZ-7L-poc">
             <connections>

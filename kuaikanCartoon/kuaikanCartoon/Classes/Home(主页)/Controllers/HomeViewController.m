@@ -11,6 +11,7 @@
 #import "navBarTitleView.h"
 #import "updateCartoonView.h"
 #import "Color.h"
+#import "SearchViewController.h"
 
 #import "UIView+Extension.h"
 
@@ -44,11 +45,18 @@
     
     self.navigationItem.rightBarButtonItem = search;
     
-    
 }
 
 - (void)search {
-    printf("%s\n",__func__);
+   
+    SearchViewController *searchVC = [[SearchViewController alloc] init];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    
+    [self presentViewController:nav animated:NO completion:^{
+        
+    }];
+    
 }
 
 
@@ -73,7 +81,6 @@
     updateCartoonView *v = [[updateCartoonView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
     [self.view addSubview:v];
     
-    DEBUG_Log(@"%@",v);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

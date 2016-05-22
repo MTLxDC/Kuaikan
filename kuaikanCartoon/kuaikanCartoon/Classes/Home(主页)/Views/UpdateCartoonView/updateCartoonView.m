@@ -74,6 +74,7 @@ static const CGFloat navigationHeadView_H = 30;
     lc.spaceing = 20.0f;
     lc.labelWidth = 50.0f;
     lc.monitorScrollView = self.cartoonListView;
+    
     ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:weekArray Configuration:lc];
     
     [self addSubview:lv];

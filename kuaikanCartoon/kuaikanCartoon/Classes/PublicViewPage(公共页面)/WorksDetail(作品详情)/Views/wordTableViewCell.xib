@@ -46,7 +46,7 @@
                             <constraint firstAttribute="height" constant="1" id="PNG-nG-HiE"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N5-I0-8tD">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N5-I0-8tD">
                         <rect key="frame" x="140" y="10" width="246" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -75,7 +75,7 @@
                 <outlet property="wordImageView" destination="qfV-ci-g69" id="hVz-Xw-TFJ"/>
                 <outlet property="wordTitleLable" destination="6N5-I0-8tD" id="ShL-WR-Gmf"/>
             </connections>
-            <point key="canvasLocation" x="121" y="226"/>
+            <point key="canvasLocation" x="172" y="223"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -100,8 +100,9 @@
     
     
     UIBarButtonItem *search = [UIBarButtonItem barButtonItemWithImage:@"ic_discover_nav_search_normal_19x19_"
-                                                           pressImage:@"ic_discover_nav_search_pressed_19x19_"
-                                                               target:self action:@selector(search)];
+                    pressImage:@"ic_discover_nav_search_pressed_19x19_"
+                    target:self action:@selector(search)];
+    
     self.navigationItem.rightBarButtonItem = search;
 
 }

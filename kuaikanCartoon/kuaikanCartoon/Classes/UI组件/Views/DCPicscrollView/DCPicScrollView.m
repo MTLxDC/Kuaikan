@@ -15,7 +15,7 @@
 
 @property (nonatomic,weak) UICollectionView *cycleScrollView;
 
-@property (nonatomic,weak) UICollectionViewFlowLayout *flowLayout;
+@property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 
 @property (nonatomic,weak) UIView<pageControlProtocol> *page;
 
@@ -28,6 +28,8 @@
 @property (nonatomic) NSUInteger itemCount;
 
 @property (nonatomic) NSUInteger currentItem;
+
+@property (nonatomic) CGFloat maxOffsetX;
 
 @end
 
@@ -77,9 +79,9 @@ static const NSUInteger totalItem = 1000;
 
 #pragma mark Timer 定时器
 
-- (void)setupTimer {
+- (void)setupTimerIfNeed {
     
-    if(self.itemCount > 1 && self.configuration.needAutoScroll) {
+    if(self.itemCount > 1 && self.configuration.needAutoScroll && self.timer == nil) {
     
         __weak DCPicScrollView * weakSelf = self;
         
@@ -115,8 +117,9 @@ static const NSUInteger totalItem = 1000;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self scrollToCenterIfNeed];
     self.page.currentPage = self.currentIndex;
-
+    
 }
 
 
@@ -146,7 +149,13 @@ static const NSUInteger totalItem = 1000;
 
 #pragma mark Encapsulation methods 封装方法
 
-- (void)scrollToCenter {
+/* 检测越界,如果越界滚到中间 */
+
+- (void)scrollToCenterIfNeed {
+    
+    CGFloat offsetX    = self.cycleScrollView.contentOffset.x;
+    
+    if (offsetX > 1 || offsetX < self.maxOffsetX) return;
     
     NSInteger centerIndex = (self.itemCount * totalItem) * 0.5;
     
@@ -183,19 +192,17 @@ static const NSUInteger totalItem = 1000;
     NSAssert([self.dataSource respondsToSelector:@selector(numberOfItemsInPicScrollView:)],
              @"The datasoure must be implemented numberOfItemsInPicScrollView: method");
     
-    NSAssert([self.dataSource respondsToSelector:@selector(picScrollView:needUpdateItem:atIndex:)],
-             @"The datasoure must be implemented picScrollView:needUpdateItem:atIndex: method");
+    NSAssert([self.dataSource respondsToSelector:@selector(picScrollView:needUpdateItem:atIndex:)],@"The datasoure must be implemented picScrollView:needUpdateItem:atIndex: method");
     
-    self.itemCount = [self.dataSource numberOfItemsInPicScrollView:self];
-    
-    if (self.itemCount < 1) return;
+    self.itemCount = [self.dataSource numberOfItemsInPicScrollView:self];   //获取item的个数
 
     [self updatePage];
     
     [self.cycleScrollView reloadData];
     
-    [self setupTimer];
+    [self setupTimerIfNeed];
     
+    self.maxOffsetX = self.cycleScrollView.contentSize.width - self.bounds.size.width * 2;
 }
 
 - (void)updatePage {
@@ -204,7 +211,7 @@ static const NSUInteger totalItem = 1000;
     
     self.page.currentPage   = 0;
     
-    if (self.itemCount > 1) [self calculatePageFrame]; //计算PageControlFrame
+    [self calculatePageFrame]; //计算PageControlFrame
     
 }
 
@@ -216,14 +223,7 @@ static const NSUInteger totalItem = 1000;
     self.cycleScrollView.frame = self.bounds;
     self.flowLayout.itemSize = self.bounds.size;
 
-    if (self.itemCount < 1) return;
-
     self.page.frame = self.pageFrame;
-
-    CGFloat offsetX    = self.cycleScrollView.contentOffset.x;
-    CGFloat maxOffsetX = self.cycleScrollView.contentSize.width - self.bounds.size.width * 2;
-    
-    if (offsetX < 1 || offsetX > maxOffsetX) [self scrollToCenter];
     
 }
 
@@ -253,15 +253,7 @@ static const NSUInteger totalItem = 1000;
 - (UICollectionView *)cycleScrollView {
     if (!_cycleScrollView) {
         
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        
-        layout.minimumInteritemSpacing = 0.0f;
-        layout.minimumLineSpacing = 0.0f;
-        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        
-        self.flowLayout = layout;
-        
-        UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
         
         [cv registerClass:[DCPicItem class] forCellWithReuseIdentifier:reuseIdentifier];
         
@@ -282,6 +274,19 @@ static const NSUInteger totalItem = 1000;
     return _cycleScrollView;
 }
 
+- (UICollectionViewFlowLayout *)flowLayout {
+    if (!_flowLayout) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        
+        layout.minimumInteritemSpacing = 0.0f;
+        layout.minimumLineSpacing = 0.0f;
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _flowLayout = layout;
+    }
+    
+    return _flowLayout;
+}
 
 - (UIView<pageControlProtocol> *)page {
     if (!_page) {

@@ -65,11 +65,12 @@ MJCodingImplementation
     
     NetWorkManager *manager = [NetWorkManager share];
     
+    
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
         
         if (res == nil || error != nil) {
             [SVProgressHUD showErrorWithStatus:
-            [NSString stringWithFormat:@"网络提了个问题\n错误代码:%d",error.code]];
+            [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]];
             return;
         }
         

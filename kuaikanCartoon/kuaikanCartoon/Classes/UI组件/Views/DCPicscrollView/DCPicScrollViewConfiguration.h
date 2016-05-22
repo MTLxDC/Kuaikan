@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DCPicItemConfiguration.h"
 
+
+
 @protocol pageControlProtocol <NSObject>
 
 @required
@@ -26,6 +28,8 @@
 @property(nonatomic,strong) UIColor *currentPageIndicatorTintColor;
 
 @end
+
+
 
 typedef NS_ENUM(NSUInteger,PageContolAlignment) {
     PageContolAlignmentCenter,

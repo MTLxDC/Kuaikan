@@ -31,6 +31,7 @@
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
     [btn sizeToFit];
+    
     return [self initWithCustomView:btn];
 }
 @end
