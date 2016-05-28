@@ -29,7 +29,7 @@
 @implementation authorInfoHeadView
 
 static CGFloat spacing = 10;
-static CGFloat imageSize = 60;
+static CGFloat imageSize = 40;
 static CGFloat followSize = 21;
 
 
@@ -46,16 +46,22 @@ static CGFloat followSize = 21;
     
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
 
 
 - (void)setupUI {
     
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     [self.authorIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.contentView).offset(spacing);
-        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self).offset(spacing);
+        make.centerY.equalTo(self);
         make.width.height.equalTo(@(imageSize));
         
     }];
@@ -63,7 +69,7 @@ static CGFloat followSize = 21;
     [self.authorName mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.authorIcon.mas_right).offset(spacing);
-        make.centerY.equalTo(self.contentView);
+        make.centerY.equalTo(self);
         make.right.equalTo(self.follow.mas_left).offset(-spacing);
         
     }];
@@ -71,15 +77,15 @@ static CGFloat followSize = 21;
     
     [self.follow mas_makeConstraints:^(MASConstraintMaker *make) {
        
-        make.centerY.equalTo(self.contentView);
-        make.right.equalTo(self.contentView).offset(-spacing);
+        make.centerY.equalTo(self);
+        make.right.equalTo(self).offset(-spacing);
         make.width.height.equalTo(@(followSize));
         
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-SINGLE_LINE_WIDTH);
+        make.left.right.equalTo(self);
+        make.bottom.equalTo(self).offset(-SINGLE_LINE_WIDTH);
         make.height.equalTo(@(SINGLE_LINE_WIDTH));
     }];
     
@@ -93,12 +99,7 @@ static CGFloat followSize = 21;
     NSLog(@"%@",NSStringFromCGRect(self.line.frame));
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self setupUI];
-    }
-    return self;
-}
+
 
 - (void)follow:(UIButton *)sender {
     
@@ -110,10 +111,12 @@ static CGFloat followSize = 21;
 - (UIImageView *)authorIcon {
     if (!_authorIcon) {
         UIImageView *icon = [UIImageView new];
-        [self.contentView addSubview:icon];
+        [self addSubview:icon];
         
         icon.layer.cornerRadius = imageSize * 0.5;
         icon.layer.masksToBounds = YES;
+        icon.layer.borderWidth = 1.0;
+        icon.layer.borderColor = [UIColor darkGrayColor].CGColor;
         
         _authorIcon = icon;
     }
@@ -124,11 +127,11 @@ static CGFloat followSize = 21;
     if (!_authorName) {
         
         UILabel *name = [UILabel new];
-        [self.contentView addSubview:name];
+        [self addSubview:name];
         
         name.font = [UIFont systemFontOfSize:13];
         name.textAlignment = NSTextAlignmentLeft;
-        name.textColor = [UIColor lightGrayColor];
+        name.textColor = White(0.4);
         _authorName = name;
     }
     return _authorName;
@@ -137,7 +140,7 @@ static CGFloat followSize = 21;
 - (UIButton *)follow {
     if (!_follow) {
         UIButton *btn = [UIButton new];
-        [self.contentView addSubview:btn];
+        [self addSubview:btn];
         
         [btn setImage:[UIImage imageNamed:@"ic_details_top_collection_normal_21x21_"] forState:UIControlStateNormal];
         
@@ -154,7 +157,7 @@ static CGFloat followSize = 21;
 - (UIView *)line {
     if (!_line) {
         UIView *line = [UIView new];
-        [self.contentView addSubview:line];
+        [self addSubview:line];
         
         line.backgroundColor = White(0.9);
         

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static CGFloat wordsOptionsHeadViewHeight = 40;
+
 @interface wordsOptionsHeadView : UIView
 
 @property (nonatomic,copy) void (^lefeBtnClick)(UIButton *btn);

@@ -20,6 +20,7 @@
 
 - (NSString *)md5_16;
 
+- (BOOL)isMobile;
 
 + (NSString *)timeStampWithDate:(NSDate *)date;
 + (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp;

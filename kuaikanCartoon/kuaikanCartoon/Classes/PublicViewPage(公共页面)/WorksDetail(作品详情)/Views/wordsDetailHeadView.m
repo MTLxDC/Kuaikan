@@ -16,6 +16,7 @@
 @interface wordsDetailHeadView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *bluredImageView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *maskImageView;
@@ -85,9 +86,9 @@ CGFloat const btnHeight  = 15.0f;
         
         CGFloat alpha = 0.0f;
 
-        if (-offsetY < headViewHeight) {
+        if (-offsetY < wordsDetailHeadViewHeight) {
             
-            alpha = (headViewHeight * 0.5)/-offsetY - 0.3;
+            alpha = (wordsDetailHeadViewHeight * 0.5)/-offsetY - 0.3;
 
         }
         

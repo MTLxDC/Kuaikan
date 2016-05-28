@@ -7,6 +7,7 @@
 //
 
 #import "DateManager.h"
+#import <objc/runtime.h>
 
 @interface DateManager ()
 
@@ -15,6 +16,8 @@
 @property (nonatomic,strong) NSCalendar *calender_CN;
 
 @property (nonatomic,strong) NSDate *todayDate;
+
+@property (nonatomic,assign) NSInteger counter;
 
 @end
 
@@ -55,6 +58,7 @@
 
 
 
+
 + (instancetype)share
 {
     static id instance = nil;
@@ -84,6 +88,7 @@
         [NSTimeZone setDefaultTimeZone:timeZone];
         
         [self.calender_CN setTimeZone:timeZone];
+        
 
     }
     return self;
@@ -102,5 +107,6 @@
 - (NSDate *)currentDate {
     return [NSDate date];
 }
+
 
 @end

@@ -16,11 +16,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ve8-jQ-6OA">
-                        <rect key="frame" x="8" y="10" width="30" height="30"/>
+                        <rect key="frame" x="8" y="10" width="40" height="20"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="KS8-Cs-v8g"/>
-                            <constraint firstAttribute="width" constant="30" id="OK9-Wh-tUV" userLabel="width = 50"/>
+                            <constraint firstAttribute="height" constant="20" id="KS8-Cs-v8g"/>
+                            <constraint firstAttribute="width" constant="40" id="OK9-Wh-tUV" userLabel="width = 50"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="剧情">
@@ -28,21 +28,21 @@
                         </state>
                     </button>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恋是樱草色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-gB-fN3">
-                        <rect key="frame" x="46" y="10" width="205" height="30"/>
+                        <rect key="frame" x="56" y="10" width="195" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1a-pZ-wnb" customClass="likeCountView">
-                        <rect key="frame" x="247" y="262" width="60" height="30"/>
+                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1a-pZ-wnb" customClass="likeCountView">
+                        <rect key="frame" x="247" y="252" width="60" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="K1z-8R-dUz"/>
                         </constraints>
                         <state key="normal" title="1111"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-Ak-dQy">
-                        <rect key="frame" x="307" y="269" width="60" height="15"/>
+                    <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-Ak-dQy">
+                        <rect key="frame" x="307" y="259" width="60" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="5zp-cz-bZO"/>
                         </constraints>
@@ -53,7 +53,7 @@
                         </state>
                     </button>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第61话 弹珠决胜! (上)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHg-x4-jE9">
-                        <rect key="frame" x="8" y="269" width="234" height="15.5"/>
+                        <rect key="frame" x="8" y="259" width="234" height="15.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="oak-W7-zl9"/>
@@ -62,8 +62,8 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEN-h4-a4p">
-                        <rect key="frame" x="259" y="17.5" width="100" height="15"/>
+                    <button contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEN-h4-a4p">
+                        <rect key="frame" x="259" y="12.5" width="100" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="ufD-S8-EIk"/>
                         </constraints>
@@ -73,7 +73,7 @@
                         </state>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nwK-WN-Eyf">
-                        <rect key="frame" x="0.0" y="50" width="375" height="211"/>
+                        <rect key="frame" x="0.0" y="40" width="375" height="211"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="211" id="gBj-BP-WMT"/>
                         </constraints>
@@ -109,7 +109,7 @@
                 <outlet property="likeCount" destination="z1a-pZ-wnb" id="ag2-gF-Ie6"/>
                 <outlet property="worksName" destination="U1T-gB-fN3" id="urT-4B-6vs"/>
             </connections>
-            <point key="canvasLocation" x="288.5" y="242.5"/>
+            <point key="canvasLocation" x="345.5" y="253.5"/>
         </tableViewCell>
     </objects>
     <resources>

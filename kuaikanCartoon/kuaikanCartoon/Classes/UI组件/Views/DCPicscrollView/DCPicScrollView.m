@@ -165,6 +165,8 @@ static const NSUInteger totalItem = 1000;
     
 }
 
+/* 计算根据PageContolAlignment枚举来计算frame */
+
 - (void)calculatePageFrame {
     
     CGFloat xSpaceing = MyWidth * 0.02;

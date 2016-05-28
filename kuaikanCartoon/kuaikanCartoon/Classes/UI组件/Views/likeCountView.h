@@ -12,11 +12,11 @@
 
 @interface likeCountView : UIButton
 
-@property (nonatomic) BOOL islike;
+@property (nonatomic) BOOL islike;                  //当前状态
 
-@property (nonatomic,copy) NSString *requestID;
+@property (nonatomic,copy) NSString *requestID;     //点赞请求ID
 
-@property (nonatomic) NSUInteger likeCount;
+@property (nonatomic) NSUInteger likeCount;         //设置赞数
 
 + (instancetype)likeCountViewWithCount:(NSInteger)count requestID:(NSString *)ID;
 

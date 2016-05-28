@@ -7,23 +7,62 @@
 //
 
 #import "CartoonFlooterView.h"
+#import "comicsModel.h"
+
 
 @interface CartoonFlooterView ()
 
 
 @property (weak, nonatomic) IBOutlet UILabel *upNumber;
 
+@property (nonatomic,assign) NSInteger upCount;
 
+@property (weak, nonatomic) IBOutlet UIButton *previousBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextPageBtn;
 
 @end
 
 @implementation CartoonFlooterView
 
++ (instancetype)makeCartoonFlooterView {
+    return [[[NSBundle mainBundle] loadNibNamed:@"CartoonFlooterView" owner:nil options:nil] firstObject];
+}
+
 - (void)setUpCount:(NSInteger)upCount {
     _upCount = upCount;
     
     self.upNumber.text = [NSString stringWithFormat:@"赞 %zd",upCount];
+    self.model.likes_count = [NSNumber numberWithInteger:upCount];
+    
 }
+
+- (void)setModel:(comicsModel *)model {
+    _model = model;
+    
+    self.upCount = model.likes_count.integerValue;
+    
+    BOOL hasPrevious = model.previous_comic_id == nil;
+    BOOL hasNext = model.next_comic_id == nil;
+    
+    if (hasPrevious == NO && hasNext == NO) {
+        
+        self.previousBtn.hidden = YES;
+        self.nextPageBtn.hidden = YES;
+        
+    }else {
+        
+        self.previousBtn.hidden = NO;
+        self.nextPageBtn.hidden = NO;
+        
+        self.previousBtn.enabled = hasPrevious;
+        self.previousBtn.enabled = hasNext;
+    }
+
+    
+}
+
+
+
 
 - (IBAction)ThumbsUp:(id)sender {
     UIButton *btn = (UIButton *)sender;
@@ -62,8 +101,6 @@
     }
 }
 
-- (void)awakeFromNib {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-}
+
 
 @end

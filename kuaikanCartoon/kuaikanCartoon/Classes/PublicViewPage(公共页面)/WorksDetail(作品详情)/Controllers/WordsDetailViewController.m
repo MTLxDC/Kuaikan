@@ -56,11 +56,11 @@
    
     UITableView *contenView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     
-    wordsDetailHeadView *head = [wordsDetailHeadView wordsDetailHeadViewWithFrame:CGRectMake(0, 0, self.view.width, headViewHeight) scorllView:contenView];
+    wordsDetailHeadView *head = [wordsDetailHeadView wordsDetailHeadViewWithFrame:CGRectMake(0, 0, self.view.width, wordsDetailHeadViewHeight) scorllView:contenView];
     
     head.delegate = self;
     
-    contenView.contentInset = UIEdgeInsetsMake(headViewHeight, 0, 0, 0);
+    contenView.contentInset = UIEdgeInsetsMake(wordsDetailHeadViewHeight, 0, 0, 0);
     contenView.dataSource = self;
     contenView.delegate = self;
     contenView.rowHeight = 100.0f;
@@ -144,7 +144,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 32;
+    return wordsOptionsHeadViewHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

@@ -9,8 +9,9 @@
 #import "BaseModel.h"
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
-#import <SVProgressHUD.h>
+#import "ProgressHUD.h"
 #import "ModelCacheManager.h"
+#import "CommonMacro.h"
 
 @implementation BaseModel
 
@@ -61,26 +62,31 @@ MJCodingImplementation
         
     }
     
-    [SVProgressHUD showWithStatus:@"loading"];
+    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
+    
+   dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:topWindow];
     
     NetWorkManager *manager = [NetWorkManager share];
     
-    
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
+       
+        dissmiss();
         
         if (res == nil || error != nil) {
-            [SVProgressHUD showErrorWithStatus:
-            [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]];
+            
+            DEBUG_Log(@"result:%@,error:%@",res,error);
+            [ProgressHUD showErrorWithStatus:
+             [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]
+                                      inView:topWindow];
             return;
         }
+        
         
         BOOL isModelArray = false;
         
         NSArray *fields = [self setupDataFieldsIsModelArray:&isModelArray];
         
-        for (NSInteger index = 0; index < fields.count; index++) {
-            res = res[fields[index]];
-        }
+        for (NSInteger index = 0; index < fields.count; index++) res = res[fields[index]];
         
         id result = nil;
         
@@ -92,7 +98,6 @@ MJCodingImplementation
         
         dispatch_async(dispatch_get_main_queue(), ^{
             complish(result);
-            [SVProgressHUD dismiss];
         });
         
         if (saveMemoryCache) {

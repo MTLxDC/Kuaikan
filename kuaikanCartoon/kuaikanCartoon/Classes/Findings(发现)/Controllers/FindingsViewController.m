@@ -27,7 +27,7 @@
 
 #import "FindingsViewController.h"
 #import "CartoonDetailViewController.h"
-
+#import "SearchViewController.h"
 
 #import "UIBarButtonItem+EXtension.h"
 #import "UIView+Extension.h"
@@ -82,6 +82,9 @@
 
 - (void)setNavBar {
     
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    
+    
     navBarTitleView *titleView = [navBarTitleView defaultTitleView];
     
     [titleView.leftBtn setTitle:@"热门" forState:UIControlStateNormal];
@@ -109,6 +112,9 @@
 
 - (void)search {
     
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[SearchViewController new]];
+    
+    [self presentViewController:nav animated:NO completion:nil];
 }
 
 #pragma mark 设置tableview为主要视图

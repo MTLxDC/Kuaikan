@@ -19,20 +19,10 @@
 
 @property (nonatomic,weak) UIView *line;
 
-@property (nonatomic,strong) MASConstraint *lineConstraint;
-
 @end
 
-@implementation wordsOptionsHeadView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
+@implementation wordsOptionsHeadView
 
 - (instancetype)init
 {
@@ -65,10 +55,11 @@
         make.right.top.bottom.equalTo(self);
     }];
     
+    
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-       self.lineConstraint = make.right.equalTo(self);
+        make.right.equalTo(self).offset(0);
         make.bottom.equalTo(self);
-        make.height.equalTo(@3);
+        make.height.equalTo(@2);
         make.width.equalTo(self.leftBtn);
     }];
     
@@ -76,17 +67,22 @@
     UIView *bottomLine = [self creatSpaceLine];
     UIView *centerLine = [self creatSpaceLine];
     
+    CGFloat line_h = wordsOptionsHeadViewHeight * 0.6;
+    
     [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
         make.height.equalTo(@(SINGLE_LINE_WIDTH));
     }];
     
     [centerLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.top.bottom.equalTo(self);
+        make.center.equalTo(self);
+        make.height.equalTo(@(line_h));
         make.width.equalTo(@(SINGLE_LINE_WIDTH));
     }];
     
 }
+
+
 
 - (void)btnClick:(UIButton *)btn {
     
@@ -95,7 +91,9 @@
     if (btn == self.leftBtn) {
         self.rightBtn.selected = NO;
         
-        self.lineConstraint.offset(-self.leftBtn.bounds.size.width);
+        [self.line mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(-self.rightBtn.bounds.size.width);
+        }];
         
         if (self.lefeBtnClick) {
             self.lefeBtnClick(self.leftBtn);
@@ -104,7 +102,9 @@
         
         self.leftBtn.selected = NO;
         
-        [self.lineConstraint setOffset:0];
+        [self.line mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(0);
+        }];
         
         if (self.rightBtnClick) {
             self.rightBtnClick(self.rightBtn);
@@ -136,7 +136,7 @@
 - (UIView *)creatSpaceLine {
     
     UIView *spaceLine = [[UIView alloc] init];
-    spaceLine.backgroundColor = [[UIColor alloc] initWithWhite:9 alpha:1];
+    spaceLine.backgroundColor = [[UIColor alloc] initWithWhite:0.8 alpha:1];
     [self addSubview:spaceLine];
     
     return spaceLine;

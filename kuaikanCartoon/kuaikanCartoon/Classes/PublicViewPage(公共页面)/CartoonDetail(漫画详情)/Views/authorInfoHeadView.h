@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 @class userModel;
 
-@interface authorInfoHeadView : UITableViewCell
+static CGFloat authorInfoHeadViewHeight = 60;
+
+@interface authorInfoHeadView : UIView
 
 @property (nonatomic,strong) userModel *user;
 

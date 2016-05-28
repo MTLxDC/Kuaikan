@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
+
 @protocol CartoonFlooterViewDelegate <NSObject>
 
 @optional
@@ -23,12 +24,18 @@
 
 @end
 
-@interface CartoonFlooterView : UITableViewCell
+@class comicsModel;
+
+static const CGFloat CartoonFlooterViewHeight = 200.f;
+
+@interface CartoonFlooterView : UIView
 
 @property (nonatomic,weak) id<CartoonFlooterViewDelegate> delegate;
 
-@property (nonatomic,assign) NSInteger upCount;
+@property (nonatomic,strong) comicsModel *model;
 
+
++ (instancetype)makeCartoonFlooterView;
 
 @end
 

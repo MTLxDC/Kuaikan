@@ -42,6 +42,8 @@
 
 - (void)awakeFromNib {
     
+    [self.likeCount addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
+    
     self.cateoryLabel.layer.cornerRadius  = self.cateoryLabel.bounds.size.height * 0.5;
     self.cateoryLabel.layer.masksToBounds = YES;
     
@@ -105,16 +107,14 @@
 
 - (void)like {
     self.model.is_liked = !self.model.is_liked;
-    printf("%s\n",self.model.is_liked ? "喜欢" : "不喜欢");
 }
 
 - (void)setModel:(SummaryModel *)model {
-   
+    _model = model;
+
     self.likeCount.likeCount = model.likes_count.integerValue;
     
     self.likeCount.islike = model.is_liked;
-    
-    [self.likeCount addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
     
     self.likeCount.requestID = model.ID.stringValue;
     
@@ -122,10 +122,8 @@
     
     [self.CommentCount setTitle:text forState:UIControlStateNormal];
     
-    
     [self.frontCover sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url]
-                       placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
-    
+                       placeholderImage:[UIImage imageNamed:@"bg_home_nav_logo_95x32_"]];
     
     [self.cateoryLabel setTitle:model.label_text forState:UIControlStateNormal];
     
@@ -138,8 +136,6 @@
     self.chapterTitle.text = model.title;
     
     
-    _model = model;
-        
 }
 
 

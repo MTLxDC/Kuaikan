@@ -18,7 +18,11 @@
 
 @property (nonatomic,strong) NSMutableArray *modelArray;
 
+@property (nonatomic,weak) UINavigationController *myNav;
+
+
 @end
+
 
 
 @implementation SummaryListView
@@ -39,7 +43,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.dataSource = self;
     self.delegate = self;
-    self.rowHeight = 300;
+    self.rowHeight = 290;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -67,16 +71,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.tableFooterView = imageView;
     
-    self.tableFooterView.hidden = YES;
     
-    
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat offsetY = scrollView.contentOffset.y;
-    if (offsetY >= scrollView.contentSize.height) {
-        self.tableHeaderView.hidden = NO;
-    }
 }
 
 
@@ -113,6 +108,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
 }
 
 
+
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
     weakself(self);
@@ -126,6 +122,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
             sself.modelArray = res;
             [sself reloadData];
+            sself.hidden = NO;
             [sself.mj_header endRefreshing];
         
     } cachingPolicy:policy];
@@ -135,11 +132,21 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)setUrlString:(NSString *)urlString {
     
+    self.hidden = YES;
     [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault];
     
     _urlString = urlString;
 
 }
+
+- (UINavigationController *)myNav {
+    if (!_myNav) {
+        _myNav = [self findResponderWithClass:[UINavigationController class]];
+    }
+    return _myNav;
+}
+
+
 
 @end
 
@@ -162,6 +169,8 @@ static NSString * const cellIdentifier = @"SummaryCell";
         [self.contentView addSubview:slv];
         
         self.slv = slv;
+        
+        self.backgroundColor = slv.backgroundColor;
         
     }
     return self;

@@ -2,8 +2,8 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "CartoonDetailViewController.h"
-#import "BaseModel.h"
-#import "NSString+Extension.h"
+#import "LoginViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -16,7 +16,12 @@
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    _window.rootViewController = [[MainTabBarController alloc] init];
+    
+//    UIViewController *root = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//    
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
+    
+    _window.rootViewController = [MainTabBarController new];
     
     [_window makeKeyAndVisible];
     

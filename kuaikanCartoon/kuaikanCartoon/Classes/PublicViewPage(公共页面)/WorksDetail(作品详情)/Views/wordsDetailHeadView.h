@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "wordsDetailModel.h"
 
-#define headViewHeight 200.0f
+
+static CGFloat wordsDetailHeadViewHeight = 200.0f;
 
 @protocol wordsDetailHeadViewDelegate <NSObject>
 

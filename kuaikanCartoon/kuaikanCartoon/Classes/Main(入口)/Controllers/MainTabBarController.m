@@ -11,7 +11,6 @@
 #import "HomeViewController.h"
 #import "FindingsViewController.h"
 #import "PersonalViewController.h"
-#import "BaseNavigationController.h"
 #import "CommonMacro.h"
 #import "CartoonDetailViewController.h"
 #import "UIView+Extension.h"
@@ -53,17 +52,18 @@ CGFloat tabbar_h = 44;
     
     FindingsViewController * find = [[FindingsViewController alloc] init];
 
-    PersonalViewController * person = [[PersonalViewController alloc] init];
+    UIViewController *person = [UIStoryboard storyboardWithName:@"PersonalCenter" bundle:nil].instantiateInitialViewController;
 
     
-    [self addChildViewControllers:@[home,find,person]];
+    [self addChildViewControllers:@[home,find]];
     
+    [super addChildViewController:person];
 }
 
 - (void)addChildViewControllers:(NSArray *)childControllers  {
     
     for (NSInteger index = 0; index < childControllers.count; index++) {
-        BaseNavigationController *navHome = [[BaseNavigationController alloc] initWithRootViewController:childControllers[index]];
+        UINavigationController *navHome = [[UINavigationController alloc] initWithRootViewController:childControllers[index]];
         [super addChildViewController:navHome];
     }
 }

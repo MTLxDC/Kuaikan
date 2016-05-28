@@ -14,7 +14,7 @@
 static NSString * const likeUrl = @"http://api.kuaikanmanhua.com/v1/comics";
 
 static NSString * const normalImageName = @"ic_common_praise_normal_15x15_";
-static NSString * const pressedImageName = @"ic_details_toolbar_praise_pressed_21x21_";
+static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 
 
 @implementation likeCountView
@@ -71,10 +71,9 @@ static NSString * const pressedImageName = @"ic_details_toolbar_praise_pressed_2
 
 - (void)setLikeCount:(NSUInteger)likeCount {
     _likeCount = likeCount;
-    if (likeCount < 1) {
-        [self setTitle:nil forState:UIControlStateNormal];
-        return;
-    }
+    
+    self.titleLabel.hidden = likeCount < 1;
+    
     [self setTitle:[self makeTextWithCount:likeCount] forState:UIControlStateNormal];
 }
 
@@ -88,7 +87,7 @@ static NSString * const pressedImageName = @"ic_details_toolbar_praise_pressed_2
     
     [self setTitle:[self makeTextWithCount:self.likeCount] forState:UIControlStateNormal];
     
-    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.6f initialSpringVelocity:10.0f options:0 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         
         self.imageView.transform = CGAffineTransformMakeScale(1.5, 1.5);
         

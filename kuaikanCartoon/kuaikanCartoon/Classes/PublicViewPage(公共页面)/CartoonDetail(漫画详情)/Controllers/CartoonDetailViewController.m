@@ -9,19 +9,23 @@
 #import "CartoonDetailViewController.h"
 #import "CommentDetailViewController.h"
 #import "WordsDetailViewController.h"
-#import "BaseNavigationController.h"
 
 #import "Color.h"
-#import "CommentBottomView.h"
+
 #import <Masonry.h>
+#import <UIImageView+WebCache.h>
+
 #import "comicsModel.h"
+#import "CommentsModel.h"
 #import "CommonMacro.h"
 
+#import "CommentSectionHeadView.h"
 #import "FindHeaderSectionView.h"
-#import <UIImageView+WebCache.h>
 #import "CartoonFlooterView.h"
 #import "CartoonContentCell.h"
 #import "authorInfoHeadView.h"
+#import "CommentBottomView.h"
+#import "CommentInfoCell.h"
 #import "UIView+Extension.h"
 
 
@@ -39,6 +43,11 @@
 
 @property (nonatomic,weak) UISlider *progress;
 
+@property (nonatomic,strong) NSMutableArray *commentCellHeightCache;
+
+@property (nonatomic,strong) CommentInfoCell *commentCell;  //计算CellHeight用
+
+@property (nonatomic,strong) NSArray *commentModels;
 
 @end
 
@@ -77,16 +86,32 @@ static const CGFloat imageCellHeight = 250.0f;
     
     weakself(self);
     
+    self.cartoonContentView.hidden = YES;
+    
    [comicsModel requestModelDataWithUrlString:self.urlString complish:^(id res) {
        
        if (weakSelf == nil) return ;
        
        CartoonDetailViewController *sself = weakSelf;
        
-           sself.comicsMd = res;
-           [sself updataUI];
+            sself.comicsMd = res;
+            [sself updataUI];
+            [sself.cartoonContentView setHidden:NO];
        
    } cachingPolicy:ModelDataCachingPolicyDefault];
+    
+    
+    NSString *commentUrl = [NSString stringWithFormat:hotCommentRequestUrlFormat,self.cartoonId];
+    
+    [CommentsModel requestModelDataWithUrlString:commentUrl complish:^(id result) {
+        
+        if (weakSelf == nil) return ;
+        
+        CartoonDetailViewController *sself = weakSelf;
+        sself.commentModels = result;
+        [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    } cachingPolicy:ModelDataCachingPolicyDefault];
     
 }
 
@@ -96,54 +121,63 @@ static const CGFloat imageCellHeight = 250.0f;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     [self.cartoonContentView reloadData];
     
-    [self.cartoonContentView setContentOffset:CGPointZero];
 }
 
-static bool isHide = false;
-static CGFloat progressWidth = 100;
+static CGFloat progressWidth = 150;
 
-- (void)hideOrShowHeadBottomView
+- (void)hideOrShowHeadBottomView:(BOOL)needhide
 {
-    isHide = !isHide;
+    if (self.progress.hidden == needhide) return;
     
-    if (!isHide) self.progress.hidden = NO;
+    [self.view endEditing:needhide];
     
-    [self.view endEditing:isHide];
+    [self.navigationController setNavigationBarHidden:needhide animated:YES];
     
-    [self.navigationController setNavigationBarHidden:isHide animated:YES];
+    CGFloat offset = needhide ? bottomBarHeight : 0;
     
-    CGFloat offset = isHide ? bottomBarHeight : 0;
-    
-    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {    //隐藏底部视图
         make.bottom.equalTo(self.view).offset(offset);
     }];
+
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.bottomView layoutIfNeeded];
+    }];
     
-    CGFloat p_w = isHide ? 0 : progressWidth;
+}
+
+
+- (void)hideOrShowProgressView:(BOOL)needhide {
     
-    [self.progress mas_updateConstraints:^(MASConstraintMaker *make) {
+    if (self.progress.hidden == needhide) return;
+    
+    CGFloat p_w = needhide ? 0 : progressWidth;
+    
+    [self.progress mas_updateConstraints:^(MASConstraintMaker *make) {      //隐藏进度条
         make.width.equalTo(@(p_w));
     }];
     
     [UIView animateWithDuration:0.25 animations:^{
         
-        [self.bottomView layoutIfNeeded];
         [self.progress layoutIfNeeded];
         
     } completion:^(BOOL finished) {
         
-        if (isHide) self.progress.hidden = isHide;
+        self.progress.hidden = needhide;
         
     }] ;
     
-    
 }
 
+static bool needHide = false;
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self hideOrShowHeadBottomView];
+    needHide = !needHide;
+    [self hideOrShowHeadBottomView:needHide];
+    [self hideOrShowProgressView:needHide];
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return isHide;
+    return needHide;
 }
 
 - (instancetype)init
@@ -162,6 +196,11 @@ static CGFloat progressWidth = 100;
     
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+}
+
 
 - (void)keyboardFrameChange:(NSNotification *)not {
     
@@ -174,24 +213,20 @@ static CGFloat progressWidth = 100;
         make.bottom.equalTo(self.view).offset(-offset);
     }];
     
+    BOOL beginComment = offset > 1;
+    
+    [self hideOrShowProgressView:beginComment];
+    
     [UIView animateWithDuration:0.25 animations:^{
         [self.bottomView layoutIfNeeded];
+        
     } completion:^(BOOL finished) {
-        self.bottomView.beginComment = offset > 1;
+        self.bottomView.beginComment = beginComment;
     }];
 
     
 }
 
-
-- (void)gotoCollectedWorksPage {
-   
-    WordsDetailViewController *wdc = [[WordsDetailViewController alloc] init];
-    
-    wdc.wordsID = self.comicsMd.topic.ID.stringValue;
-    
-    [self.navigationController pushViewController:wdc animated:YES];
-}
 
 - (void)setupNavigationBar {
     
@@ -224,6 +259,8 @@ static CGFloat progressWidth = 100;
     self.navigationItem.titleView = textView;
     
 }
+
+
 
 
 
@@ -275,12 +312,23 @@ CGFloat contentSizeMaxHeight = 100.0f;
     
     cdVc.requestID = self.comicsMd.ID.stringValue;
     
-    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:cdVc];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdVc];
     
     [self presentViewController:nav animated:YES completion:^{
         
     }];
 }
+
+
+- (void)gotoCollectedWorksPage {
+    
+    WordsDetailViewController *wdc = [[WordsDetailViewController alloc] init];
+    
+    wdc.wordsID = self.comicsMd.topic.ID.stringValue;
+    
+    [self.navigationController pushViewController:wdc animated:YES];
+}
+
 
 #pragma mark 设置滑动条
 
@@ -330,22 +378,19 @@ CGFloat contentSizeMaxHeight = 100.0f;
 
 #pragma mark 设置tableview
 
-static NSString * const authorInfoHeadViewIdentifier = @"authorInfoHeadView";
 static NSString * const CartoonFlooterViewIdentifier = @"CartoonFlooterView";
 static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
-
 - (void)setupCartoonContentView {
     
-    UITableView *contentView = [UITableView new];
+    UITableView *contentView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     
     [self.view addSubview:contentView];
     
+    contentView.backgroundColor = [UIColor whiteColor];
     contentView.dataSource = self;
     contentView.delegate = self;
     contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [contentView registerClass:[authorInfoHeadView class] forCellReuseIdentifier:authorInfoHeadViewIdentifier];
     
     [contentView registerNib:[UINib nibWithNibName:@"CartoonFlooterView" bundle:nil] forCellReuseIdentifier:CartoonFlooterViewIdentifier];
     
@@ -362,19 +407,60 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 #pragma mark UITableViewDataSource
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) return authorInfoHeadViewHeight;
+    if (section == 1) return CommentSectionHeadViewHeight;
+
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        authorInfoHeadView *head = [[authorInfoHeadView alloc] initWithFrame:self.view.bounds];
+        
+        head.user = self.comicsMd.topic.user;
+        
+        return head;
+    }
+    
+    if (section == 1) {
+        return [[CommentSectionHeadView alloc] initWithFrame:self.view.bounds];
+    }
+    
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 0) return CartoonFlooterViewHeight;
+
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 0) {
+        CartoonFlooterView *flooter = [CartoonFlooterView makeCartoonFlooterView];
+        
+        flooter.delegate = self;
+        flooter.model = self.comicsMd;
+        
+        return flooter;
+    }
+    
+    return nil;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (!self.comicsMd) return 0;
     
     if (section == 0) {
-        return self.comicsMd.images.count + 2;
+        return self.comicsMd.images.count;
     }else if (section == 1) {
-        
-    }else {
-        
+        return self.commentModels.count;
     }
     
     return 0;
@@ -383,52 +469,88 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         
-        authorInfoHeadView *head = [tableView dequeueReusableCellWithIdentifier:authorInfoHeadViewIdentifier];
+        CartoonContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CartoonContentCellIdentifier];
         
-        head.user = self.comicsMd.topic.user;
+        NSURL *imageUrl = [NSURL URLWithString:self.comicsMd.images[indexPath.row]];
         
-        return head;
+        [cell.content sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
         
-    }else if (indexPath.row == self.comicsMd.images.count + 1) {
-    
-        CartoonFlooterView *flooter = [tableView dequeueReusableCellWithIdentifier:CartoonFlooterViewIdentifier];
         
-        flooter.delegate = self;
-        flooter.upCount = self.comicsMd.likes_count.integerValue;
-        
-        return flooter;
+        return cell;
+
     }
     
-    CartoonContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CartoonContentCellIdentifier];
+    if (indexPath.section == 1)
+    {
+        CommentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:commentInfoCellName];
+        if (!cell) {
+            cell = [CommentInfoCell makeCommentInfoCell];
+        }
+        
+        cell.commentsModel = self.commentModels[indexPath.row];
+        
+        return cell;
+    }
     
-    NSURL *imageUrl = [NSURL URLWithString:self.comicsMd.images[indexPath.row - 1]];
-    
-    [cell.content sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
-    
-    
-    return cell;
-    
+    return nil;
 }
 
 
 
 #pragma mark UITableViewDelegate
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.row == 0) return 80;
+    if (indexPath.section == 0) {
+        
+        return imageCellHeight;
+        
+    }else if (indexPath.section == 1) {
+        
+        
+        if (self.commentCellHeightCache.count > indexPath.row) {
+            
+            NSNumber *cacheHeight = self.commentCellHeightCache[indexPath.row];
+            
+            if (cacheHeight) return cacheHeight.doubleValue;
+            
+        }
+        
+        CommentInfoCell *cell = self.commentCell;
+        
+        cell.commentsModel = self.commentModels[indexPath.row];
+        
+        [cell setNeedsLayout];
+        [cell layoutIfNeeded];
+        
+        cell.bounds = CGRectMake(0.0f, 0.0f,
+                                 CGRectGetWidth(tableView.bounds),
+                                 CGRectGetHeight(cell.bounds));
+        
+        // 得到cell的contentView需要的真实高度
+        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        
+        // 要为cell的分割线加上额外的1pt高度。因为分隔线是被加在cell底边和contentView底边之间的。
+        height += 1.0f;
+        
+        [self.commentCellHeightCache addObject:@(height)];
+        
+        return height;
 
-    if (indexPath.row == self.comicsMd.images.count + 2) return 200;
+    }
 
-    return imageCellHeight;
+    return 0;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sc {
-    if (isHide) return;
-
+    
     CGFloat offsetY = sc.contentOffset.y;
     CGFloat maxOffsetY = sc.contentSize.height - sc.height;
     
@@ -457,11 +579,23 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     
 }                       //显示分享视图
 
+#pragma mark Lazy load
 
-
-- (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+- (NSMutableArray *)commentCellHeightCache {
+    if (_commentCellHeightCache) {
+        _commentCellHeightCache = [[NSMutableArray alloc] init];
+    }
+    return _commentCellHeightCache;
 }
+
+- (CommentInfoCell *)commentCell {
+    if (!_commentCell) {
+        _commentCell = [CommentInfoCell makeCommentInfoCell];
+    }
+    return _commentCell;
+}
+
+
+
 
 @end

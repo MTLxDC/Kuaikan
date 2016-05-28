@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JGProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,11 +39,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SVProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>libwebp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,7 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2AEA0E4371AC9924B44290DAC5A74146</key>
+		<key>135D0610CC5FAE6B17B3F88E01128143</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3116F685117B044E8E119EA475203BA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>474A53C8C85CB9E0D4D09D2786A0FFE4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>48920DD9A8A0D5B71F19419B62C873FD</key>
+		<key>506CBDB3553FE49FE9A81AD85F278B94</key>
 		<dict>
 			<key>primary</key>
 			<true/>

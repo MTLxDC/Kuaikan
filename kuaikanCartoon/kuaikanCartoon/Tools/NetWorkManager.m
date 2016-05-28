@@ -62,8 +62,8 @@
     self = [super init];
     if (self) {
         
-        self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_SERIAL);
-        self.requestSerializer.timeoutInterval = 5;
+//        self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_CONCURRENT);
+        self.requestSerializer.timeoutInterval = 10;
         
     }
     return self;
