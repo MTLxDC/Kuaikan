@@ -37,11 +37,6 @@ static const CGFloat contentHeight = 20.0f;
 - (void)setup {
     CGFloat w = 5;
     
-    UIView *divLine = [[UIView alloc] init];
-    
-    divLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
-    
     UIView *yellowView = [[UIView alloc] init];
     
     yellowView.backgroundColor = subjectColor;

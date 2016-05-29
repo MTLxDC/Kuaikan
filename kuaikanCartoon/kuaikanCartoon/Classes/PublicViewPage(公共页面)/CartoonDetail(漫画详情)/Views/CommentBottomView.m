@@ -134,12 +134,15 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 
 - (void)setRecommend_count:(NSInteger)recommend_count {
     _recommend_count = recommend_count;
+    
     NSString *commntCountText = [NSString stringWithFormat:@"%zd",_recommend_count];
+    
     CGSize textSize = [commntCountText boundingRectWithSize:CGSizeMake(MAXFLOAT,20)
                                          options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                       attributes:@{NSFontAttributeName:self.commntCount.titleLabel.font} context:nil].size;
     
     self.labelWidth.constant = textSize.width * 1.2 + 10;
+    
     [self.commntCount setTitle:commntCountText forState:UIControlStateNormal];
 
     [self.commntCount layoutIfNeeded];

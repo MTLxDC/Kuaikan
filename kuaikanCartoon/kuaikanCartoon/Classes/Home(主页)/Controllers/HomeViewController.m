@@ -12,16 +12,25 @@
 #import "updateCartoonView.h"
 #import "Color.h"
 #import "SearchViewController.h"
-
+#import "WordsListView.h"
 #import "UIView+Extension.h"
+#import "UserNotLoginTipView.h"
+#import "UserInfoManager.h"
 
 @interface HomeViewController ()
 
 @property (nonatomic,weak) UIButton *leftBtn;
 @property (nonatomic,weak) UIButton *rightBtn;
 
+@property (nonatomic,weak) UIScrollView *mainView;
+
+@property (nonatomic,weak) WordsListView *wlv;
+
+@property (nonatomic,weak) UserNotLoginTipView *tipView;
 
 @end
+
+static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/v1/fav/timeline";
 
 @implementation HomeViewController
 
@@ -36,6 +45,7 @@
     
     [self setupMainView];
 }
+
 
 - (void)setupSearchItem {
     
@@ -66,21 +76,60 @@
     
     self.navigationItem.titleView = titleView;
     
+    weakself(self);
+    
     titleView.leftBtnOnClick = ^(UIButton *btn){
-        NSLog(@"%@",btn);
+         weakSelf.wlv.urlString = usersCorcernedWordsUrl;
+        
+       UserInfoManager *user = [UserInfoManager share];
+        
+        
+        if (!user.hasLogin) {
+            self.tipView.tip = tipOptionNotLogin;
+        }
+        
+        [weakSelf.mainView setContentOffset:CGPointZero animated:YES];
     };
     
     titleView.rightBtnOnClick = ^(UIButton *btn){
-        NSLog(@"%@",btn);
+        [weakSelf.mainView setContentOffset:CGPointMake(self.mainView.width, 0) animated:YES];
     };
     
 }
 
 - (void)setupMainView {
+        
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
     
-    updateCartoonView *v = [[updateCartoonView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
-    [self.view addSubview:v];
+    mainView.scrollEnabled = NO;
+    mainView.contentSize   = CGSizeMake(mainView.width * 2, 0);
+    mainView.pagingEnabled = YES;
+    mainView.showsHorizontalScrollIndicator = NO;
+    mainView.showsVerticalScrollIndicator = NO;
     
+    [mainView setContentOffset:CGPointMake(mainView.width, 0)];
+
+    
+    WordsListView *wlv = [[WordsListView alloc] initWithFrame:CGRectMake(0, 0, mainView.width, mainView.height) style:UITableViewStyleGrouped];
+    
+    wlv.hasTimeline = YES;
+    
+    updateCartoonView *cv = [[updateCartoonView alloc] initWithFrame:CGRectMake(mainView.width, 0, mainView.width, mainView.height)];
+    
+    UserNotLoginTipView *tipView = [UserNotLoginTipView makeUserNotLoginTipView];
+    
+    
+    tipView.frame  = wlv.frame;
+    tipView.hidden = YES;
+    
+    [mainView addSubview:wlv];
+    [mainView addSubview:tipView];
+    [mainView addSubview:cv];
+    
+    [self.view addSubview:mainView];
+    
+    self.mainView = mainView;
+    self.wlv = wlv;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

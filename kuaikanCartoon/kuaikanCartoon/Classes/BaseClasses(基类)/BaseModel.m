@@ -78,6 +78,8 @@ MJCodingImplementation
             [ProgressHUD showErrorWithStatus:
              [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]
                                       inView:topWindow];
+            complish(nil);
+            
             return;
         }
         

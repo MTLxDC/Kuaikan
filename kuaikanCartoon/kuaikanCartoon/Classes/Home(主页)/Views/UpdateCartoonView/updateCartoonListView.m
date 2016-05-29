@@ -84,16 +84,22 @@
         
       DateManager *date = [DateManager share];
         
-        NSString *formatUrl = @"http://api.kuaikanmanhua.com/v1/daily/comic_lists/%@?since=0";
+        NSString *formatUrl = @"http://api.kuaikanmanhua.com/v1/daily/comic_lists/%@";
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:7];
+        
+        
 
         for (NSInteger index = 1; index < 8; index++) {
             
-            NSString *timeStamp = [date timeStampWithDate:[date dateByAddingDays:index - 7]];
+            NSString *timeStamp = [date timeStampWithDate:[date dateByTodayAddingDays:index - 7]];
             NSString *newUrl = [NSString stringWithFormat:formatUrl,timeStamp];
             
             [array addObject:newUrl];
         }
+        
+        [array insertObject:array.lastObject atIndex:0];   //把今天的数据接口移动到前面
+        [array removeLastObject];
+        
         
         _requestUrlArray = [array copy];
         

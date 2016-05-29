@@ -248,9 +248,11 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     _currentIndex = round(x/(self.itemWidth));
     
-     //如果和lastindex一样,或者出现越界的现象,直接return
+     //如果和lastIndex一样,或者出现越界的现象,直接return
     
-    if (self.lastIndex == _currentIndex || _currentIndex >= _titleLabelArray.count || _currentIndex < 0) return;
+    if (self.lastIndex == _currentIndex ||
+        _currentIndex >= _titleLabelArray.count ||
+        _currentIndex < 0) return;
     
     self.lastIndex = _currentIndex;
     

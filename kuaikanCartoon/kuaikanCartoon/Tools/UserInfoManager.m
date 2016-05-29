@@ -22,6 +22,16 @@
     return instance;
 }
 
+- (void)saveUserInfoWithData:(NSDictionary *)data {
+    self.hasLogin = YES;
+    self.icon_url = data[@"avatar_url"];
+    self.ID = data[@"id"];
+    self.nickname = data[@"nickname"];
+    self.reg_type = data[@"reg_type"];
+    self.update_remind_flag = data[@"update_remind_flag"];
+    
+   
+}
 
 - (void)logoutUserInfo {
     

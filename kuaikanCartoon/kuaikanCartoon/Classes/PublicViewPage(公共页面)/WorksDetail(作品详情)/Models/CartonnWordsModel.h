@@ -21,7 +21,7 @@
  "url": "http://www.kuaikanmanhua.com/comics/9949"
  */
 
-@interface wordsModel : BaseModel
+@interface CartonnWordsModel : BaseModel
 
 @property (nonatomic,copy) NSString *cover_image_url;
 
@@ -40,7 +40,6 @@
 @property (nonatomic,strong) NSNumber *topic_id;
 
 @property (nonatomic,strong) NSNumber *updated_at;
-
 
 
 @end

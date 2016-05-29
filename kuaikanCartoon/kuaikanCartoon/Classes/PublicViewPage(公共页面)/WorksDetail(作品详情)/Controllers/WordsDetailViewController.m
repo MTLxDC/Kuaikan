@@ -116,7 +116,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"wordTableViewCell" owner:nil options:nil] firstObject];
     }
     
-    wordsModel *md = [self.wordsModel.comics objectAtIndex:indexPath.row];
+    CartonnWordsModel *md = [self.wordsModel.comics objectAtIndex:indexPath.row];
     
     cell.model = md;
     
@@ -136,7 +136,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CartoonDetailViewController *cdv = [[CartoonDetailViewController alloc] init];
     
-    wordsModel *md = self.wordsModel.comics[indexPath.row];
+    CartonnWordsModel *md = self.wordsModel.comics[indexPath.row];
     
     cdv.cartoonId = md.ID.stringValue;
     

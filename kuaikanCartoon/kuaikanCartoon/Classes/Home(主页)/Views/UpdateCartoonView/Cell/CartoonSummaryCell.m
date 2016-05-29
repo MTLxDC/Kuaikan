@@ -53,7 +53,7 @@
 
 
 
-- (void)goComment {
+- (IBAction)goComment {
     
     CommentDetailViewController *cdv = [[CommentDetailViewController alloc] init];
     
@@ -63,12 +63,12 @@
     
 }
 
-- (void)setFrame:(CGRect)frame
-{
-    frame.size.height -= 8;
-    [super setFrame:frame];
-}
-//
+//- (void)setFrame:(CGRect)frame
+//{
+//    frame.size.height -= 8;
+//    [super setFrame:frame];
+//}
+////
 //"status": "published",
 //"label_text": "\u6821\u56ed",
 //"title": "\u7b2c2\u8bdd \u6821\u56ed\u76f4\u64ad\u8f6c\u5b66\u751f",

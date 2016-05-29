@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+
+
+
 @interface DateManager : NSObject
+
+@property (nonatomic,strong,readonly) NSDateFormatter *format;
 
 //当前的时间
 @property (nonatomic,readonly) NSDate *currentDate;
@@ -17,13 +22,10 @@
 // 获取今天是星期几
 @property (nonatomic,readonly) NSInteger currentWeek;
 
-- (NSDate *)dateByAddingDays: (NSInteger)dDays;
+- (NSDate *)dateByTodayAddingDays: (NSInteger)dDays;
 
 - (NSString *)timeStampWithDate:(NSDate *)date;
-- (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp;
-
-- (NSString *)stringFromDate:(NSDate *)date;
-- (NSDate *)dateFromString:(NSString *)string;
+- (NSString *)timeWithTimeStamp:(NSInteger)timeStamp;
 
 + (instancetype)share;
 

@@ -11,8 +11,6 @@
 
 @interface DateManager ()
 
-@property (nonatomic,strong) NSDateFormatter *format;
-
 @property (nonatomic,strong) NSCalendar *calender_CN;
 
 @property (nonatomic,strong) NSDate *todayDate;
@@ -29,7 +27,7 @@
 }
 
 
-- (NSDate *)dateByAddingDays: (NSInteger)dDays
+- (NSDate *)dateByTodayAddingDays: (NSInteger)dDays
 {
     
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
@@ -45,17 +43,9 @@
 }
 
 //时间戳转字符串的时间
-- (NSString *)timeWithTimeStamp:(NSUInteger)timeStamp {
-  return [self stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
+- (NSString *)timeWithTimeStamp:(NSInteger)timeStamp  {
+    return [self.format stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
 }
-
-- (NSString *)stringFromDate:(NSDate *)date {
-    return [self.format stringFromDate:date];
-}
-- (NSDate *)dateFromString:(NSString *)string {
-    return [self.format dateFromString:string];
-}
-
 
 
 
@@ -77,9 +67,9 @@
     self = [super init];
     if (self) {
         
-        self.format = [NSDateFormatter new];
+        _format = [NSDateFormatter new];
         
-        [self.format setDateFormat:@"yyyy-MM-dd"];
+        [_format setDateFormat:@"yyyy-MM-dd"];
         
         
         self.calender_CN = [NSCalendar currentCalendar];

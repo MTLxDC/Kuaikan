@@ -2,15 +2,21 @@
 //  SummaryListItem.h
 //  kuaikanCartoon
 //
-//  Created by dengchen on 16/5/29.
+//  Created by dengchen on 16/5/3.
 //  Copyright © 2016年 name. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "WordsListView.h"
 
-@interface SummaryListItem : UICollectionViewCell
+
+
+@interface WordsListView : UITableView
 
 @property (nonatomic,copy) NSString *urlString;
 
+@property (nonatomic) BOOL hasTimeline;     //defaut is NO 
+
+
 @end
+
+

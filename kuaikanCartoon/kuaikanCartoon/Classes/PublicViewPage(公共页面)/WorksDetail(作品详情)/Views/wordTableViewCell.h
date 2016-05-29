@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "wordsModel.h"
+#import "CartonnWordsModel.h"
 
 @interface wordTableViewCell : UITableViewCell
 
-@property (nonatomic,strong) wordsModel *model;
+@property (nonatomic,strong) CartonnWordsModel *model;
 
 @end

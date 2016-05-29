@@ -29,7 +29,7 @@
     
 }
 
-- (void)setModel:(wordsModel *)model {
+- (void)setModel:(CartonnWordsModel *)model {
     _model = model;
     
     [self.wordImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url] placeholderImage:[UIImage imageNamed:@"ic_common_placeholder_l_120x38_"]];

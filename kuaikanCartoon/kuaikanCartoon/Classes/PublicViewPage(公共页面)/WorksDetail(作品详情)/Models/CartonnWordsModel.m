@@ -6,8 +6,8 @@
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import "wordsModel.h"
+#import "CartonnWordsModel.h"
 
-@implementation wordsModel
+@implementation CartonnWordsModel
 
 @end

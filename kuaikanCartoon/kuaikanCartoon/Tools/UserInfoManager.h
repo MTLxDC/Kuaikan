@@ -26,6 +26,8 @@
 @property (nonatomic,strong) NSNumber *update_remind_flag;
 
 
+- (void)saveUserInfoWithData:(NSDictionary *)data;
+
 - (void)logoutUserInfo; //注销
 
 @end

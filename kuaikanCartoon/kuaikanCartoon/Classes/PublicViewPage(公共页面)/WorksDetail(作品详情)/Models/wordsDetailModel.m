@@ -7,7 +7,7 @@
 //
 
 #import "wordsDetailModel.h"
-#import "wordsModel.h"
+#import "CartonnWordsModel.h"
 
 @implementation wordsDetailModel
 
@@ -16,7 +16,7 @@
 }
 
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"comics":[wordsModel class]};
+    return @{@"comics":[CartonnWordsModel class]};
 }
 
 @end

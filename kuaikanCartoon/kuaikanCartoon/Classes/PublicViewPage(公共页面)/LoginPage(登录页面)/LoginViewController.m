@@ -14,6 +14,7 @@
 #import "UserInfoManager.h"
 #import "NSString+Extension.h"
 #import "registerViewController.h"
+#import "CommonMacro.h"
 
 @interface LoginViewController ()
 
@@ -37,6 +38,7 @@
 
 @end
 
+static NSString * const userAuthorizeUrlString = @"http://api.kuaikanmanhua.com/v1/timeline/polling";
 
 static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/phone/signin";
 
@@ -122,25 +124,30 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
         
         NSString *message  = result[@"message"];
         NSDictionary *data = result[@"data"];
+        
+        DEBUG_Log(@"login result:%@",result);
 
         if ([message isEqualToString:@"OK"] && data) {
             
-         UserInfoManager *user = [UserInfoManager share];
+            UserInfoManager *user = [UserInfoManager share] ;
             
-            user.hasLogin = YES;
-            user.icon_url = data[@"avatar_url"];
-            user.ID = data[@"id"];
-            user.nickname = data[@"nickname"];
-            user.reg_type = data[@"reg_type"];
-            user.update_remind_flag = data[@"update_remind_flag"];
+            [user saveUserInfoWithData:data];
+            
+            [manager requestWithMethod:@"GET" url:userAuthorizeUrlString parameters:nil complish:^(id res, NSError *error) {
+                DEBUG_Log(@"用户授权结果:%@",result);
+            }];
             
             [ProgressHUD showSuccessWithStatus:@"登录成功" inView:self.view];
-            
+
             if (self.loginSucceeded) {
                 self.loginSucceeded(user);
             }
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                }];
+            });
+         
             
         }else {
             
@@ -152,6 +159,8 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     
     
 }
+
+
 
 - (BOOL)canLogin {
     
