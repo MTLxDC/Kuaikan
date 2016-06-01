@@ -47,7 +47,7 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 
     [self addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
     [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [self setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     
     [self setTitleEdgeInsets:UIEdgeInsetsMake(0,5, 0, 0)];
     
@@ -65,15 +65,12 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     UIColor *textColor = self.islike ? subjectColor : [UIColor lightGrayColor];
     
     [self setTitleColor:textColor forState:UIControlStateNormal];
-    
 
 }
 
 - (void)setLikeCount:(NSUInteger)likeCount {
     _likeCount = likeCount;
-    
-    self.titleLabel.hidden = likeCount < 1;
-    
+        
     [self setTitle:[self makeTextWithCount:likeCount] forState:UIControlStateNormal];
 }
 
@@ -120,11 +117,11 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 
 - (NSString *)makeTextWithCount:(NSInteger)count {
     
-    NSString *topCountText = nil;
+    NSString *topCountText = @"";
     
     if (count >= 100000) {
         topCountText = [NSString stringWithFormat:@"%zd万",count/10000];
-    }else {
+    }else if (count > 0) {
         topCountText = [NSString stringWithFormat:@"%zd",count];
     }
     

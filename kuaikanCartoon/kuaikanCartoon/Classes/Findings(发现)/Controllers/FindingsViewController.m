@@ -59,12 +59,19 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    
+}
+
 
 - (void)requestDataWithCachingPolicy:(ModelDataCachingPolicy)cachingPolicy {
     
-    NSString *bannerDataUrl = @"http://api.kuaikanmanhua.com/v1/banners?";
+    NSString *bannerDataUrl = @"http://api.kuaikanmanhua.com/v1/banners";
     
-    NSString *topicInfoDataUrl = @"http://api.kuaikanmanhua.com/v1/topic_lists/mixed/new?";
+    NSString *topicInfoDataUrl = @"http://api.kuaikanmanhua.com/v1/topic_lists/mixed/new";
     
     weakself(self);
     
@@ -81,8 +88,6 @@
 }
 
 - (void)setNavBar {
-    
-    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     
     
     navBarTitleView *titleView = [navBarTitleView defaultTitleView];
@@ -166,9 +171,9 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     switch (indexPath.section) {
         case 0:Identifier = RenQiBiaoShengCellIdentifier;break;      //人气飙升
         case 1:Identifier = MeiZhouPaiHangCellIdentifier;break;      //每周排行榜
-        case 2:Identifier = XinZuoCellIdentifier;break;      //新作出炉
-        case 3:Identifier = ZhuBianLiTuiCellIdentifier;break;      //主播力推
-        case 4:Identifier = GuanFangHuoDongCellIdentifier;break;      //官方活动
+        case 2:Identifier = XinZuoCellIdentifier;break;              //新作出炉
+        case 3:Identifier = ZhuBianLiTuiCellIdentifier;break;        //主播力推
+        case 4:Identifier = GuanFangHuoDongCellIdentifier;break;     //官方活动
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];

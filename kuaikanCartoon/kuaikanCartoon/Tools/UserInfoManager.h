@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class CommentsModel;
+
 @interface UserInfoManager : NSObject
 
 
@@ -29,5 +31,9 @@
 - (void)saveUserInfoWithData:(NSDictionary *)data;
 
 - (void)logoutUserInfo; //注销
+
+- (void)sendComment:(NSString *)meassage
+        withWordsID:(NSString *)wordsID
+withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback;
 
 @end

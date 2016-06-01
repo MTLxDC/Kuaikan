@@ -83,7 +83,6 @@ MJCodingImplementation
             return;
         }
         
-        
         BOOL isModelArray = false;
         
         NSArray *fields = [self setupDataFieldsIsModelArray:&isModelArray];

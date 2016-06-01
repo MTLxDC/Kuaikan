@@ -96,7 +96,6 @@ static CGFloat followSize = 21;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    NSLog(@"%@",NSStringFromCGRect(self.line.frame));
 }
 
 

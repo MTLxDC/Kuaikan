@@ -58,7 +58,7 @@
                 <outlet property="loginBtnWidth" destination="02j-3C-3vI" id="QxK-TJ-r0K"/>
                 <outlet property="tipLabel" destination="mqn-Pl-pjs" id="Ive-Vs-yt9"/>
             </connections>
-            <point key="canvasLocation" x="215" y="-27"/>
+            <point key="canvasLocation" x="200" y="-289"/>
         </view>
     </objects>
     <resources>

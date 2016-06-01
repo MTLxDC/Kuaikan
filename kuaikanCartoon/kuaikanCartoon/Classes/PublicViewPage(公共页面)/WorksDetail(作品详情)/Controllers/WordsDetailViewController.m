@@ -20,8 +20,7 @@
 
 @property (nonatomic,strong) wordsDetailModel *wordsModel;
 
-@property (nonatomic,weak) UITableView *contentView;
-
+@property (nonatomic,weak)   UITableView *contentView;
 
 @property (nonatomic,strong) wordsDetailHeadView *head;
 
@@ -161,10 +160,5 @@
     
     return headView;
 }
-
-\
-
-
-
 
 @end

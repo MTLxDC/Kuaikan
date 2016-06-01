@@ -44,9 +44,64 @@
 
 //时间戳转字符串的时间
 - (NSString *)timeWithTimeStamp:(NSInteger)timeStamp  {
+    [self.format setDateFormat:defautFormat];
     return [self.format stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
 }
 
+- (NSString *)conversionDate:(NSDate *)date {
+        
+  NSCalendarUnit unit = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute;
+
+   NSDateComponents *dc     = [self.calender_CN components:unit fromDate:date];
+
+   NSDateComponents *nowDc  = [self.calender_CN components:unit fromDate:self.currentDate];
+    
+    [self.format setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSArray *times = [[self.format stringFromDate:date] componentsSeparatedByString:@" "];
+    
+    if (dc.year < nowDc.year) return times[0];
+    
+    if (dc.month < nowDc.month || dc.day < nowDc.day - 2) {
+        return [times[0] substringWithRange:NSMakeRange(5, 5)];
+    }
+    
+    if (dc.day == nowDc.day - 2) {                  //前天
+        return [NSString stringWithFormat:@"前天 %@",times[1]];
+    }
+    
+    if (dc.day == nowDc.day - 1 || dc.hour < nowDc.hour - 2) {
+        return [NSString stringWithFormat:@"昨天 %@",times[1]];
+    }
+    
+    if (dc.hour == nowDc.hour - 2)    return @"2 小时前";
+    if (dc.hour == nowDc.hour - 1)    return @"1 小时前";
+
+    if (dc.minute <  nowDc.minute)    return [NSString stringWithFormat:@"%zd 分钟前",nowDc.minute - dc.minute];
+    if (dc.minute == nowDc.minute)    return @"刚刚";
+    
+    return nil;
+}
+
+- (NSString *)conversionDateVer2:(NSDate *)date {
+    
+    NSCalendarUnit unit      = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
+    
+    NSDateComponents *dc     = [self.calender_CN components:unit fromDate:date];
+    
+    NSDateComponents *nowDc  = [self.calender_CN components:unit fromDate:self.currentDate];
+    
+    if (dc.year < nowDc.year) return [NSString stringWithFormat:@"%zd年%zd月%zd日更新",dc.year,dc.month,dc.day];
+    
+    if (dc.month < nowDc.month || dc.day < nowDc.day - 1) {
+        return [NSString stringWithFormat:@"%zd月%zd日更新",dc.month,dc.day];
+    }
+    
+    if (dc.day == nowDc.day - 1) return @"昨天更新";
+    if (dc.day == nowDc.day) return @"今天更新";
+
+    return nil;
+}
 
 
 + (instancetype)share
@@ -69,8 +124,7 @@
         
         _format = [NSDateFormatter new];
         
-        [_format setDateFormat:@"yyyy-MM-dd"];
-        
+        [_format setDateFormat:defautFormat];
         
         self.calender_CN = [NSCalendar currentCalendar];
         

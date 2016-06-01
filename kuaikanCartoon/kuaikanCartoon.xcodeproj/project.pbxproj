@@ -89,7 +89,6 @@
 		84E3C03C1CF9B306000B61A7 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0271CF9B306000B61A7 /* CommentDetailViewController.m */; };
 		84E3C03D1CF9B306000B61A7 /* CommentDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C02A1CF9B306000B61A7 /* CommentDetailModel.m */; };
 		84E3C03E1CF9B306000B61A7 /* CommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C02C1CF9B306000B61A7 /* CommentsModel.m */; };
-		84E3C03F1CF9B306000B61A7 /* CommentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C02F1CF9B306000B61A7 /* CommentDetailView.m */; };
 		84E3C0401CF9B306000B61A7 /* CommentInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0311CF9B306000B61A7 /* CommentInfoCell.m */; };
 		84E3C0411CF9B306000B61A7 /* CommentInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3C0321CF9B306000B61A7 /* CommentInfoCell.xib */; };
 		84E3C0441CF9ED86000B61A7 /* CommentSectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0431CF9ED86000B61A7 /* CommentSectionHeadView.m */; };
@@ -97,6 +96,9 @@
 		84E3C04C1CFAA8C0000B61A7 /* UserNotLoginTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3C04B1CFAA8C0000B61A7 /* UserNotLoginTipView.xib */; };
 		84E3C0551CFACF67000B61A7 /* wordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0541CFACF67000B61A7 /* wordsModel.m */; };
 		84E3C0581CFADDF9000B61A7 /* SummaryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0571CFADDF9000B61A7 /* SummaryListItem.m */; };
+		84E3C0611CFC8DB6000B61A7 /* CommentSendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0601CFC8DB6000B61A7 /* CommentSendView.m */; };
+		84E3C0631CFC8DC9000B61A7 /* CommentSendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3C0621CFC8DC9000B61A7 /* CommentSendView.xib */; };
+		84E3C0661CFC92B3000B61A7 /* KeyBoardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3C0651CFC92B3000B61A7 /* KeyBoardManager.m */; };
 		84F5A6951CF6CD77001EF19F /* PersonalCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F5A6941CF6CD77001EF19F /* PersonalCenter.storyboard */; };
 		84F5A6981CF6F846001EF19F /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F5A6971CF6F846001EF19F /* SettingTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -259,8 +261,6 @@
 		84E3C02A1CF9B306000B61A7 /* CommentDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailModel.m; sourceTree = "<group>"; };
 		84E3C02B1CF9B306000B61A7 /* CommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsModel.h; sourceTree = "<group>"; };
 		84E3C02C1CF9B306000B61A7 /* CommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsModel.m; sourceTree = "<group>"; };
-		84E3C02E1CF9B306000B61A7 /* CommentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailView.h; sourceTree = "<group>"; };
-		84E3C02F1CF9B306000B61A7 /* CommentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailView.m; sourceTree = "<group>"; };
 		84E3C0301CF9B306000B61A7 /* CommentInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentInfoCell.h; sourceTree = "<group>"; };
 		84E3C0311CF9B306000B61A7 /* CommentInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentInfoCell.m; sourceTree = "<group>"; };
 		84E3C0321CF9B306000B61A7 /* CommentInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentInfoCell.xib; sourceTree = "<group>"; };
@@ -273,6 +273,11 @@
 		84E3C0541CFACF67000B61A7 /* wordsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordsModel.m; sourceTree = "<group>"; };
 		84E3C0561CFADDF9000B61A7 /* SummaryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummaryListItem.h; path = Cell/SummaryListItem.h; sourceTree = "<group>"; };
 		84E3C0571CFADDF9000B61A7 /* SummaryListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SummaryListItem.m; path = Cell/SummaryListItem.m; sourceTree = "<group>"; };
+		84E3C05F1CFC8DB6000B61A7 /* CommentSendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentSendView.h; sourceTree = "<group>"; };
+		84E3C0601CFC8DB6000B61A7 /* CommentSendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentSendView.m; sourceTree = "<group>"; };
+		84E3C0621CFC8DC9000B61A7 /* CommentSendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentSendView.xib; sourceTree = "<group>"; };
+		84E3C0641CFC92B3000B61A7 /* KeyBoardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyBoardManager.h; sourceTree = "<group>"; };
+		84E3C0651CFC92B3000B61A7 /* KeyBoardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyBoardManager.m; sourceTree = "<group>"; };
 		84F5A6941CF6CD77001EF19F /* PersonalCenter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PersonalCenter.storyboard; sourceTree = "<group>"; };
 		84F5A6961CF6F846001EF19F /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		84F5A6971CF6F846001EF19F /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
@@ -581,6 +586,8 @@
 				84B51F291CE5A3AF00EB4CB0 /* ModelCacheManager.m */,
 				847FE2ED1CF4A494006EF90C /* UserInfoManager.h */,
 				847FE2EE1CF4A494006EF90C /* UserInfoManager.m */,
+				84E3C0641CFC92B3000B61A7 /* KeyBoardManager.h */,
+				84E3C0651CFC92B3000B61A7 /* KeyBoardManager.m */,
 			);
 			name = Managers;
 			path = Tools;
@@ -886,11 +893,12 @@
 		84E3C02D1CF9B306000B61A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84E3C02E1CF9B306000B61A7 /* CommentDetailView.h */,
-				84E3C02F1CF9B306000B61A7 /* CommentDetailView.m */,
 				84E3C0301CF9B306000B61A7 /* CommentInfoCell.h */,
 				84E3C0311CF9B306000B61A7 /* CommentInfoCell.m */,
 				84E3C0321CF9B306000B61A7 /* CommentInfoCell.xib */,
+				84E3C05F1CFC8DB6000B61A7 /* CommentSendView.h */,
+				84E3C0601CFC8DB6000B61A7 /* CommentSendView.m */,
+				84E3C0621CFC8DC9000B61A7 /* CommentSendView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -972,6 +980,7 @@
 				8470B9BE1CE0CFF700CE12DA /* Assets.xcassets in Resources */,
 				84DD85121CF07BFB00FD7300 /* SearchResultsCell.xib in Resources */,
 				84E3C04C1CFAA8C0000B61A7 /* UserNotLoginTipView.xib in Resources */,
+				84E3C0631CFC8DC9000B61A7 /* CommentSendView.xib in Resources */,
 				847FE2FE1CF57A2A006EF90C /* registerViewController.xib in Resources */,
 				84DD850D1CF02A8000FD7300 /* CustomSearchBar.xib in Resources */,
 				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
@@ -1050,6 +1059,7 @@
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
 				84DD84331CE86BB100FD7300 /* DCPicItem.m in Sources */,
 				84BA93C81CDDE58F009CFDC6 /* likeCountView.m in Sources */,
+				84E3C0611CFC8DB6000B61A7 /* CommentSendView.m in Sources */,
 				84DD843D1CE8B7BA00FD7300 /* FindHeaderSectionView.m in Sources */,
 				84DD84401CE8E1A900FD7300 /* RenQiBiaoShengCell.m in Sources */,
 				84DD844C1CE8E24700FD7300 /* GuanFangHuoDongCell.m in Sources */,
@@ -1060,6 +1070,7 @@
 				84DD850B1CF02A1400FD7300 /* CustomSearchBar.m in Sources */,
 				84E3C0581CFADDF9000B61A7 /* SummaryListItem.m in Sources */,
 				84E3C04A1CFAA8B1000B61A7 /* UserNotLoginTipView.m in Sources */,
+				84E3C0661CFC92B3000B61A7 /* KeyBoardManager.m in Sources */,
 				84E3642A1CF0BDC4005EDDD6 /* SearchHistoryView.m in Sources */,
 				84DD844F1CE8E33E00FD7300 /* topicInfoView.m in Sources */,
 				84DD84461CE8E1DD00FD7300 /* XinZuoCell.m in Sources */,
@@ -1092,7 +1103,6 @@
 				849DE69C1CDB2A9300879190 /* userModel.m in Sources */,
 				84E3C0361CF9B306000B61A7 /* authorInfoHeadView.m in Sources */,
 				84DD843A1CE8733D00FD7300 /* bannerModel.m in Sources */,
-				84E3C03F1CF9B306000B61A7 /* CommentDetailView.m in Sources */,
 				84E3C0441CF9ED86000B61A7 /* CommentSectionHeadView.m in Sources */,
 				849DE6991CDB2A6100879190 /* topicModel.m in Sources */,
 				8471A9751CD4A5C500A5D901 /* MainTabBarController.m in Sources */,

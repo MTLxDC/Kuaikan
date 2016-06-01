@@ -45,6 +45,51 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
 
 @implementation LoginViewController
 
++ (void)show {
+    
+    UIViewController *rootVc = [self topViewControllerWithRootViewController:[[[[UIApplication sharedApplication] delegate] window] rootViewController]];
+    
+    LoginViewController *loginVc = [LoginViewController new];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+    
+    [rootVc presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
+
++ (void)showWithloginSucceeded:(loginSucceededCallback)loginSucceeded {
+    
+    UIViewController *rootVc = [self topViewControllerWithRootViewController:[[[[UIApplication sharedApplication] delegate] window] rootViewController]];
+
+    LoginViewController *loginVc = [LoginViewController new];
+    
+    [loginVc setLoginSucceeded:loginSucceeded];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+    
+    [rootVc presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
+
++ (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController
+{
+    
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController*)rootViewController;
+        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController* presentedViewController = rootViewController.presentedViewController;
+        return [self topViewControllerWithRootViewController:presentedViewController];
+    } else {
+        return rootViewController;
+    }
+}
+
 - (instancetype)init
 {
     if ([UserInfoManager share].hasLogin) return nil;

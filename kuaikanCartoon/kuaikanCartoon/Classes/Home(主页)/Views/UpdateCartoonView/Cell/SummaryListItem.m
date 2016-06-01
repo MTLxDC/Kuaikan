@@ -37,6 +37,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+
     self.slv.frame = self.bounds;
     
 }

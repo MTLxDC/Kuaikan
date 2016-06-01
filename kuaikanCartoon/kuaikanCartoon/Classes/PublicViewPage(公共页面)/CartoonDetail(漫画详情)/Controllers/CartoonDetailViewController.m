@@ -11,6 +11,10 @@
 #import "WordsDetailViewController.h"
 
 #import "Color.h"
+#import "KeyBoardManager.h"
+#import "NetWorkManager.h"
+#import "ProgressHUD.h"
+#import "UserInfoManager.h"
 
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
@@ -127,7 +131,6 @@ static CGFloat progressWidth = 150;
 
 - (void)hideOrShowHeadBottomView:(BOOL)needhide
 {
-    if (self.progress.hidden == needhide) return;
     
     [self.view endEditing:needhide];
     
@@ -150,6 +153,8 @@ static CGFloat progressWidth = 150;
     
     if (self.progress.hidden == needhide) return;
     
+    if (needhide == NO) self.progress.hidden = needhide;
+    
     CGFloat p_w = needhide ? 0 : progressWidth;
     
     [self.progress mas_updateConstraints:^(MASConstraintMaker *make) {      //隐藏进度条
@@ -162,7 +167,7 @@ static CGFloat progressWidth = 150;
         
     } completion:^(BOOL finished) {
         
-        self.progress.hidden = needhide;
+      if (needhide == YES) self.progress.hidden = needhide;
         
     }] ;
     
@@ -171,62 +176,20 @@ static CGFloat progressWidth = 150;
 static bool needHide = false;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    needHide = !needHide;
-    [self hideOrShowHeadBottomView:needHide];
-    [self hideOrShowProgressView:needHide];
+    
+    if (!self.bottomView.beginComment) {
+        needHide = !needHide;
+        [self hideOrShowHeadBottomView:needHide];
+        [self hideOrShowProgressView:needHide];
+    }else {
+        [self.bottomView resignFirstResponder];
+        [self hideOrShowProgressView:NO];
+    }
 }
 
 - (BOOL)prefersStatusBarHidden {
     return needHide;
 }
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self initialSetup];
-    }
-    return self;
-}
-
-- (void)initialSetup {
-    
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    
-}
-
-- (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
-}
-
-
-- (void)keyboardFrameChange:(NSNotification *)not {
-    
-    
-    CGFloat kb_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
-    CGFloat offset = SCREEN_HEIGHT - kb_Y;
-    
-
-    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-offset);
-    }];
-    
-    BOOL beginComment = offset > 1;
-    
-    [self hideOrShowProgressView:beginComment];
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        [self.bottomView layoutIfNeeded];
-        
-    } completion:^(BOOL finished) {
-        self.bottomView.beginComment = beginComment;
-    }];
-
-    
-}
-
 
 - (void)setupNavigationBar {
     
@@ -260,10 +223,6 @@ static bool needHide = false;
     
 }
 
-
-
-
-
 #pragma mark CommentBottomView
 
 CGFloat contentSizeMaxHeight = 100.0f;
@@ -283,7 +242,35 @@ CGFloat contentSizeMaxHeight = 100.0f;
     }];
     
     self.bottomView = cb;
+    
+    weakself(self);
+    
+    [KeyBoardManager frameWillChange:^(CGFloat start_Y, CGFloat end_Y) {
+        
+        CGFloat offset = SCREEN_HEIGHT - end_Y;
+        
+        weakSelf.bottomView.beginComment = offset > 0;
+        
+        [weakSelf.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(weakSelf.view).offset(-offset);
+        }];
+        
+        [weakSelf hideOrShowProgressView:YES];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [weakSelf.view layoutIfNeeded];
+        }];
+        
+    }];
 
+}
+
+- (void)sendMessage:(NSString *)message {
+    [[UserInfoManager share] sendComment:message
+                             withWordsID:self.cartoonId
+                   withSucceededCallback:^(CommentsModel *model) {
+                       NSLog(@"%@",model.content);
+                   }];
 }
 
 
@@ -391,8 +378,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     contentView.dataSource = self;
     contentView.delegate = self;
     contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [contentView registerNib:[UINib nibWithNibName:@"CartoonFlooterView" bundle:nil] forCellReuseIdentifier:CartoonFlooterViewIdentifier];
     
     [contentView registerClass:[CartoonContentCell class] forCellReuseIdentifier:CartoonContentCellIdentifier];
     
@@ -505,8 +490,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }
 
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         
@@ -523,11 +506,17 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
             
         }
         
+        //实例一个Cell专门用来算高,如果是多个Cell,用字典,重用标识符做key,cell做value;
+        
         CommentInfoCell *cell = self.commentCell;
         
+        //将数据传给cell
         cell.commentsModel = self.commentModels[indexPath.row];
         
-        [cell setNeedsLayout];
+        [cell setNeedsUpdateConstraints];
+        [cell updateConstraintsIfNeeded];
+        
+        [cell setNeedsLayout];          //强制更新cell的布局
         [cell layoutIfNeeded];
         
         cell.bounds = CGRectMake(0.0f, 0.0f,

@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *previousBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextPageBtn;
+@property (weak, nonatomic) IBOutlet UIView *navView;
 
 @end
 
@@ -41,24 +42,14 @@
     
     self.upCount = model.likes_count.integerValue;
     
-    BOOL hasPrevious = model.previous_comic_id == nil;
-    BOOL hasNext = model.next_comic_id == nil;
+    BOOL hasPrevious = model.previous_comic_id != nil;
+    BOOL hasNext = model.next_comic_id != nil;
     
-    if (hasPrevious == NO && hasNext == NO) {
+    self.navView.hidden = hasPrevious == NO && hasNext == NO;
         
-        self.previousBtn.hidden = YES;
-        self.nextPageBtn.hidden = YES;
-        
-    }else {
-        
-        self.previousBtn.hidden = NO;
-        self.nextPageBtn.hidden = NO;
-        
-        self.previousBtn.enabled = hasPrevious;
-        self.previousBtn.enabled = hasNext;
-    }
+    self.previousBtn.enabled = hasPrevious;
+    self.nextPageBtn.enabled = hasNext;
 
-    
 }
 
 

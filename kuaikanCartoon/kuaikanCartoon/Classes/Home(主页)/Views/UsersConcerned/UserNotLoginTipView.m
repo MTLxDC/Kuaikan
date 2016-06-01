@@ -26,7 +26,7 @@
         
         [self setLoginBtnImageWithName:@"ic_home_empty_login_normal_120x49_" pressName:@"ic_home_empty_login_pressed_120x49_"];
  
-        self.loginBtnWidth.constant = 0;
+        self.loginBtnWidth.constant = 120;
         
     }else if (tip == tipOptionNotConcerned) {
         
@@ -34,7 +34,7 @@
         
         [self setLoginBtnImageWithName:@"ic_home_empty_random_normal_150x49_" pressName:@"ic_home_empty_random_pressed_150x49_"];
         
-        self.loginBtnWidth.constant = 30;
+        self.loginBtnWidth.constant = 150;
     }
     
     [self layoutIfNeeded];
@@ -52,6 +52,7 @@
 }
 
 - (IBAction)login:(id)sender {
+
     if (self.loginOnClick) {
         self.loginOnClick(self);
     }

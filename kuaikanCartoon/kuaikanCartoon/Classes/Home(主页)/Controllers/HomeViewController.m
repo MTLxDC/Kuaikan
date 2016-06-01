@@ -16,6 +16,7 @@
 #import "UIView+Extension.h"
 #import "UserNotLoginTipView.h"
 #import "UserInfoManager.h"
+#import "LoginViewController.h"
 
 @interface HomeViewController ()
 
@@ -27,6 +28,9 @@
 @property (nonatomic,weak) WordsListView *wlv;
 
 @property (nonatomic,weak) UserNotLoginTipView *tipView;
+
+@property (nonatomic,weak) UIScrollView *tipViewContainer;
+
 
 @end
 
@@ -79,12 +83,17 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     weakself(self);
     
     titleView.leftBtnOnClick = ^(UIButton *btn){
-         weakSelf.wlv.urlString = usersCorcernedWordsUrl;
         
        UserInfoManager *user = [UserInfoManager share];
         
-        
-        if (!user.hasLogin) {
+        if (user.hasLogin) {
+            
+            weakSelf.wlv.hidden = NO;
+            weakSelf.wlv.urlString = usersCorcernedWordsUrl;
+    
+        }else {
+    
+            weakSelf.tipViewContainer.hidden = NO;
             self.tipView.tip = tipOptionNotLogin;
         }
         
@@ -112,30 +121,74 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     WordsListView *wlv = [[WordsListView alloc] initWithFrame:CGRectMake(0, 0, mainView.width, mainView.height) style:UITableViewStyleGrouped];
     
+    wlv.hidden = YES;
     wlv.hasTimeline = YES;
     
     updateCartoonView *cv = [[updateCartoonView alloc] initWithFrame:CGRectMake(mainView.width, 0, mainView.width, mainView.height)];
     
     UserNotLoginTipView *tipView = [UserNotLoginTipView makeUserNotLoginTipView];
     
-    
     tipView.frame  = wlv.frame;
-    tipView.hidden = YES;
+    
+    UIScrollView *sc = [[UIScrollView alloc] initWithFrame:tipView.frame];
+    
+    [sc setContentSize:CGSizeMake(0,tipView.bounds.size.height)];
+    
+    sc.showsVerticalScrollIndicator = NO;
+    
+    [sc addSubview:tipView];
+    
+    weakself(self);
+    
+    [tipView setLoginOnClick:^(UserNotLoginTipView *tv) {
+       
+        if (tv.tip == tipOptionNotLogin) {
+            
+            LoginViewController *lvc = [[LoginViewController alloc] init];
+            
+            [lvc setLoginSucceeded:^(UserInfoManager *user) {
+               
+            }];
+            
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
+            
+            [weakSelf presentViewController:nav animated:YES completion:^{
+                
+            }];
+            
+        }else if (tv.tip == tipOptionNotConcerned) {
+            
+            weakSelf.tabBarController.selectedIndex = 1;
+            
+        }
+        
+    }];
     
     [mainView addSubview:wlv];
-    [mainView addSubview:tipView];
+    [mainView addSubview:sc];
     [mainView addSubview:cv];
     
     [self.view addSubview:mainView];
     
     self.mainView = mainView;
     self.wlv = wlv;
+    self.tipView = tipView;
+    self.tipViewContainer = sc;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setBarTintColor:subjectColor];
+    
+    BOOL haslogin = [[UserInfoManager share] hasLogin];
+    
+    self.tipViewContainer.hidden = haslogin;
+
+    if (haslogin) {
+        self.wlv.hidden = !haslogin;
+        self.wlv.urlString = usersCorcernedWordsUrl;
+    }
 
 }
 

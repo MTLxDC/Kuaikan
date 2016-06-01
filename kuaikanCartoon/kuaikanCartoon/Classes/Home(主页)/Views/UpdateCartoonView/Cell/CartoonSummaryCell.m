@@ -123,7 +123,7 @@
     [self.CommentCount setTitle:text forState:UIControlStateNormal];
     
     [self.frontCover sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url]
-                       placeholderImage:[UIImage imageNamed:@"bg_home_nav_logo_95x32_"]];
+                       placeholderImage:[UIImage imageNamed:@"ic_common_placeholder_l_120x38_"]];
     
     [self.cateoryLabel setTitle:model.label_text forState:UIControlStateNormal];
     

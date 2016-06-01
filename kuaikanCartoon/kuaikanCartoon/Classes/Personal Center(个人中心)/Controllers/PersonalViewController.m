@@ -38,6 +38,15 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES];
+    
+    if (self.user.hasLogin) {
+        [self.userIcon sd_setImageWithURL:[NSURL URLWithString:self.user.icon_url]];
+        self.userName.text = self.user.nickname;
+    }else {
+        self.userName.text = @"登录";
+    }
+  
+    
 }
 
 - (IBAction)needLogin:(id)sender {
@@ -49,14 +58,7 @@
     LoginViewController *lvc = [LoginViewController new];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
-    
-    [lvc setLoginSucceeded:^(UserInfoManager *user) {
-        
-        [self.userIcon sd_setImageWithURL:[NSURL URLWithString:user.icon_url]];
-        self.userName.text = user.nickname;
-        
-    }];
-    
+
     [self presentViewController:nav animated:YES completion:nil];
 }
 

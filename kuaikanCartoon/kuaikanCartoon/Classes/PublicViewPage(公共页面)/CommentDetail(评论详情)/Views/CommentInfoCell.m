@@ -48,19 +48,23 @@
     
     self.userName.text = commentsModel.user.nickname;
     
-    self.releaseTime.text = [[DateManager share] timeWithTimeStamp:commentsModel.created_at.integerValue];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:commentsModel.created_at.doubleValue];
+    
+    self.releaseTime.text = [[DateManager share] conversionDate:date];
     
     self.CommentContent.text = commentsModel.content;
     
+    self.likeCount.islike    = commentsModel.is_liked;
     self.likeCount.likeCount = commentsModel.likes_count.integerValue;
     self.likeCount.requestID = commentsModel.comic_id.stringValue;
-    
-}
 
+
+}
 
 
 - (void)awakeFromNib {
 
+    
     UIView *line = [UIView new];
     
     line.backgroundColor = [[UIColor alloc] initWithWhite:0.9 alpha:1];
@@ -76,11 +80,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
-    
     self.CommentContent.font = [UIFont systemFontOfSize:15];
     self.CommentContent.preferredMaxLayoutWidth = CGRectGetWidth(self.CommentContent.frame);
-
+    
+    
 }
 @end

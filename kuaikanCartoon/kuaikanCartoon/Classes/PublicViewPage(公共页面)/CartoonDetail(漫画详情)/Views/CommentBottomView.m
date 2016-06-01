@@ -89,7 +89,11 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 }
 
 - (void)sendComment:(UIButton *)btn {
+    if (self.commentTextView.text.length < 1) return;
     
+    if ([self.delegate respondsToSelector:@selector(sendMessage:)]) {
+        [self.delegate sendMessage:self.commentTextView.text];
+    }
 }
 
 - (void)awakeFromNib {
@@ -125,6 +129,15 @@ static NSString * const contentSizeKeyPath = @"contentSize";
         [self layoutIfNeeded];
     }];
     
+}
+
+- (BOOL)becomeFirstResponder {
+    return [self.commentTextView becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder {
+    return  [self.commentTextView resignFirstResponder];
+
 }
 
 - (void)textViewDidChange:(UITextView *)textView {

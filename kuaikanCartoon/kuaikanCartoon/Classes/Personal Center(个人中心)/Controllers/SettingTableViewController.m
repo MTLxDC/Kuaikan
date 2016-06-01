@@ -9,7 +9,8 @@
 #import "SettingTableViewController.h"
 #import "UserInfoManager.h"
 
-@interface SettingTableViewController ()
+@interface SettingTableViewController () <UIAlertViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIButton *LogoutBtn;
 
 @end
@@ -32,7 +33,20 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)Logout:(id)sender {
-    [[UserInfoManager share] logoutUserInfo];
+    
+   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注销" message:@"确定要注销登录吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        [[UserInfoManager share] logoutUserInfo];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
 }
 
 @end

@@ -18,6 +18,8 @@
 
 - (void)showCommentPage;
 
+- (void)sendMessage:(NSString *)message;
+
 @end
 
 @interface CommentBottomView : UIView

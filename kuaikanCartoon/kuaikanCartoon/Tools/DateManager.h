@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 
+//@"yyyy-MM-dd HH:mm:ss.ff";
 
+static NSString * const defautFormat = @"yyyy-MM-dd";
 
 @interface DateManager : NSObject
 
@@ -26,6 +28,9 @@
 
 - (NSString *)timeStampWithDate:(NSDate *)date;
 - (NSString *)timeWithTimeStamp:(NSInteger)timeStamp;
+
+- (NSString *)conversionDate:(NSDate *)date;
+- (NSString *)conversionDateVer2:(NSDate *)date;
 
 + (instancetype)share;
 

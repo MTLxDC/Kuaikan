@@ -156,21 +156,12 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     [timeLineHeadView setImage:[UIImage imageNamed:@"ic_home_date_17x17_"] forState:UIControlStateNormal];
     
-    DateManager *date = [DateManager share];
-    
     SummaryModel *md = [self.words.comics objectAtIndex:section];
     
-    NSArray *updateDay = [[date timeWithTimeStamp:md.updated_at.integerValue] componentsSeparatedByString:@"-"];
-    
-    NSInteger year = [[updateDay objectAtIndex:1] integerValue];
-    NSInteger day  = [[updateDay objectAtIndex:2] integerValue];
-    
-    NSString *updateTime = [NSString stringWithFormat:@"%zd月%zd日更新",year,day];
+    NSString *updateTime = [[DateManager share] conversionDateVer2:[NSDate dateWithTimeIntervalSince1970:md.updated_at.doubleValue]];
     
     [timeLineHeadView setTitle:updateTime forState:UIControlStateNormal];
     
-    NSLog(@"%@",updateTime);
-
     return timeLineHeadView;
     
 }
@@ -180,9 +171,11 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     CartoonDetailViewController *detailVc = [[CartoonDetailViewController alloc] init];
     
-    SummaryModel *md = self.words.comics[indexPath.row];
+    SummaryModel *md = self.words.comics[indexPath.section];
     
     detailVc.cartoonId = md.ID.stringValue;
+    
+    NSLog(@"%zd",indexPath.row);
     
     [[self findResponderWithClass:[UINavigationController class]]
                pushViewController:detailVc animated:YES];
@@ -192,8 +185,8 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
-    weakself(self);
     
+    weakself(self);
     
     [wordsModel requestModelDataWithUrlString:url complish:^(id res) {
         
@@ -208,8 +201,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
             sself.words = res;
             [sself reloadData];
             sself.hidden = NO;
-        
-        DEBUG_Log(@"%@,%zd",url,sself.words.comics.count);
         
     } cachingPolicy:policy];
     
