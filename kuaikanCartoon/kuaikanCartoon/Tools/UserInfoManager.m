@@ -12,13 +12,27 @@
 #import "CommentsModel.h"
 #import "LoginViewController.h"
 
-@interface UserInfoManager () <UIAlertViewDelegate>
+@interface UserInfoManager () <UIAlertViewDelegate,MJCoding>
 
+@property (nonatomic,copy) NSString *savePath;
 
 
 @end
 
+static NSString * const loginInfoFileName = @"loginInfo";   //账号密码保存文件名
+
+
+static NSString * const userAuthorizeUrlString = @"http://api.kuaikanmanhua.com/v1/timeline/polling";
+
+static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/phone/signin";
+
+
+static NSString * const commentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comics/%@/comments";
+static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/%@/reply";
+
 @implementation UserInfoManager
+
+MJCodingImplementation
 
 + (instancetype)share
 {
@@ -32,15 +46,38 @@
     return instance;
 }
 
+
++ (void)autoLogin {
+    [[UserInfoManager share] autoLogin];
+}
+
+- (void)autoLogin {
+    
+    NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+    
+    NSDictionary *parameters = [NSKeyedUnarchiver unarchiveObjectWithFile:loginInfoPath];
+    
+    if (parameters.count < 1) return;
+    
+    [self loginWithPhone:parameters[@"phone"] WithPassword:parameters[@"password"] loginSucceed:^(UserInfoManager *user) {
+        if (self.hasLogin) {
+            NSLog(@"自动登录成功");
+        }
+    } loginFailed:nil];
+}
+
 - (void)saveUserInfoWithData:(NSDictionary *)data {
+    
     self.hasLogin = YES;
-    self.icon_url = data[@"avatar_url"];
+    self.avatar_url = data[@"avatar_url"];
     self.ID = data[@"id"];
     self.nickname = data[@"nickname"];
     self.reg_type = data[@"reg_type"];
     self.update_remind_flag = data[@"update_remind_flag"];
     
-   
+    NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    
+    [NSKeyedArchiver archiveRootObject:self toFile:documentPath];
 }
 
 - (void)logoutUserInfo {
@@ -55,23 +92,82 @@
     }
 }
 
-- (void)sendComment:(NSString *)meassage
-        withWordsID:(NSString *)wordsID
-        withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
++ (void)loginWithPhone:(NSString *)phone
+          WithPassword:(NSString *)password
+          loginSucceed:(void (^)(UserInfoManager *user))succeed
+           loginFailed:(void (^)(id faileResult,NSError *error))failed {
+    [[[self class] share] loginWithPhone:phone WithPassword:password loginSucceed:succeed loginFailed:failed];
+}
+
+- (void)loginWithPhone:(NSString *)phone
+          WithPassword:(NSString *)password
+           loginSucceed:(void (^)(UserInfoManager *user))succeed
+           loginFailed:(void (^)(id faileResult,NSError *error))failed {
     
-    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
+    NetWorkManager *manager = [NetWorkManager share];
+    
+    NSDictionary *parameters = @{@"password":password,
+                                 @"phone":phone};
+    
+    [manager requestWithMethod:@"POST" url:signinBaseUrlString parameters:parameters complish:^(id res, NSError *error) {
+        
+        if (error != nil) {
+            if (failed) failed(res,error);
+            return ;
+        }
+        
+        NSDictionary *result = (NSDictionary *)res;
+        
+        NSString *message  = result[@"message"];
+        NSDictionary *data = result[@"data"];
+        
+        if ([message isEqualToString:@"OK"] && data) {
+            
+            [self saveUserInfoWithData:data];
+            
+        NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+            
+            [NSKeyedArchiver archiveRootObject:parameters toFile:loginInfoPath];
+            
+            [manager requestWithMethod:@"GET" url:userAuthorizeUrlString parameters:nil complish:^(id res, NSError *error) {
+            }];
+            
+            if (succeed) succeed(self);
+            
+        }else {
+            
+            if (failed) failed(res,error);
+            
+        }
+        
+    }];
+
+}
 
 
++ (void)sendMessage:(NSString *)meassage isReply:(BOOL)isreply withID:(NSString *)ID withSucceededCallback:(void (^)(CommentsModel *))succeededCallback {
+    [[UserInfoManager share] sendMessage:meassage isReply:isreply withID:ID withSucceededCallback:succeededCallback];
+}
+
+- (void)sendMessage:(NSString *)meassage
+            isReply:(BOOL)isreply
+        withID:(NSString *)ID
+withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
+    
+    
     if (self.hasLogin == NO) {
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未登录" message:@"是否登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未登录" message:@"是否登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
         [alert show];
         return;
     }
     
-    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/comments",wordsID];
+    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
     
+    NSString *urlFormat = isreply ? replyUrlFormat : commentUrlFormat;
     
-  dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"发送中..." inView:topWindow];
+    NSString *url = [NSString stringWithFormat:urlFormat,ID];
+    
+    dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"发送中..." inView:topWindow];
     
     NetWorkManager *manager = [NetWorkManager share];
     
@@ -90,25 +186,36 @@
         
         NSDictionary *comment = data[@"data"][@"comment"];
         
-        if (comment) {
+        if (comment.count > 0) {
             
-         [ProgressHUD showSuccessWithStatus:@"发送成功" inView:topWindow];
-        
-         CommentsModel *model = [CommentsModel mj_objectWithKeyValues:comment];
+            [ProgressHUD showSuccessWithStatus:@"发送成功" inView:topWindow];
             
-         succeededCallback(model);
-
+            if (succeededCallback) {
+                
+                CommentsModel *model = [CommentsModel mj_objectWithKeyValues:comment];
+                
+                succeededCallback(model);
+                
+            }
+            
         }else {
             [ProgressHUD showErrorWithStatus:@"发送失败" inView:topWindow];
         }
         
     }];
-    
 }
 
 
-
-
-
+- (NSString *)savePath {
+    if (!_savePath) {
+        
+         _savePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:NSStringFromClass([self class])];
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:_savePath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    
+    return _savePath;
+    
+}
 
 @end

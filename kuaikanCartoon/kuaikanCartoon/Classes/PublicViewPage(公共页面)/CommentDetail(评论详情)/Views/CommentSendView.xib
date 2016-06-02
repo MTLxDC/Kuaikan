@@ -30,7 +30,10 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吐槽神马的尽管来" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hl-5L-9OK">
-                    <rect key="frame" x="8" y="13.5" width="104" height="16"/>
+                    <rect key="frame" x="16" y="15" width="104" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="PVj-p6-Sy5"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -38,12 +41,12 @@
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="5hl-5L-9OK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="5Cw-p2-lR2"/>
                 <constraint firstItem="rmt-JJ-o3d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7Js-Mc-m6l"/>
                 <constraint firstItem="rbG-Vc-j5K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="7Vk-VE-2R5"/>
-                <constraint firstItem="5hl-5L-9OK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="8aw-EG-u0N"/>
+                <constraint firstItem="5hl-5L-9OK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="8aw-EG-u0N"/>
                 <constraint firstItem="rbG-Vc-j5K" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="GzQ-kA-q0c"/>
                 <constraint firstAttribute="trailing" secondItem="rmt-JJ-o3d" secondAttribute="trailing" id="MN9-I5-7BV"/>
-                <constraint firstItem="5hl-5L-9OK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="O7i-Tc-EWu"/>
                 <constraint firstItem="rmt-JJ-o3d" firstAttribute="leading" secondItem="rbG-Vc-j5K" secondAttribute="trailing" constant="8" id="SRI-dm-uqb"/>
                 <constraint firstAttribute="bottom" secondItem="rbG-Vc-j5K" secondAttribute="bottom" constant="6" id="XW4-oQ-OFU"/>
                 <constraint firstAttribute="bottom" secondItem="rmt-JJ-o3d" secondAttribute="bottom" id="rad-nG-bcf"/>

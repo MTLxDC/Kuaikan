@@ -25,6 +25,8 @@
 
 @property (nonatomic,weak)   CommentSendView *sendView;
 
+@property (nonatomic,weak) UIView *sendViewContainer;
+
 @property (nonatomic,strong) CommentDetailModel *modelData;
 
 @property (nonatomic,strong) CommentInfoCell *commentCell;
@@ -34,6 +36,11 @@
 @property (nonatomic,strong) NSMutableArray *cellHeightCache;
 
 @property (nonatomic,copy)   NSString *requestUrl;
+
+@property (nonatomic,assign) BOOL isreply;
+
+@property (nonatomic,strong) CommentsModel *replyComment;
+
 
 
 @end
@@ -53,10 +60,9 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.sendView resignFirstResponder];
 }
 
 #pragma mark setupSubViews
@@ -65,9 +71,7 @@
     
     UISegmentedControl *sc = [[UISegmentedControl alloc] initWithItems:@[@"最新评论",@"最热评论"]];
     
-    
     [sc setTintColor:[UIColor lightGrayColor]];
-    
     
     NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor darkGrayColor]};
     
@@ -92,7 +96,26 @@
     self.sc = sc;
 }
 
+- (void)sendViewContinerDidTap {
+    [self.sendView resignFirstResponder];
+}
+
 - (void)setupCommentSendView {
+    
+    UIView *sendViewContiner = [[UIView alloc] init];
+    [self.view addSubview:sendViewContiner];
+    
+    sendViewContiner.hidden = YES;
+    sendViewContiner.backgroundColor = [UIColor blackColor];
+    sendViewContiner.alpha = 0;
+    
+    [sendViewContiner mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    [sendViewContiner addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendViewContinerDidTap)]];
+    
+    self.sendViewContainer = sendViewContiner;
     
     CommentSendView *csv = [CommentSendView makeCommentSendView];
     [self.view addSubview:csv];
@@ -106,23 +129,8 @@
     
     weakself(self);
 
-    
     [csv setSendMessage:^(NSString *message) {
-        
-        [[UserInfoManager share] sendComment:message withWordsID:self.requestID withSucceededCallback:^(CommentsModel *model) {
-            
-            [weakSelf.sendView clearText];
-            [weakSelf.sendView resignFirstResponder];
-            
-            
-            if (weakSelf.sc.selectedSegmentIndex == 0) {
-                [self update];
-            }
-
-  
-            
-        }];
-        
+        [weakSelf userCommentWithMessage:message];
     }];
     
     
@@ -135,11 +143,36 @@
         }];
         
         [UIView animateWithDuration:0.25 animations:^{
+            
+            weakSelf.sendViewContainer.alpha  = offset == 0 ? 0 : 0.6;
             [weakSelf.view layoutIfNeeded];
+            
+        } completion:^(BOOL finished) {
+            
+            weakSelf.sendViewContainer.hidden = offset == 0;
+
         }];
         
     }];
     
+}
+
+- (void)userCommentWithMessage:(NSString *)message {
+    
+    NSString *requestID = self.isreply ? self.replyComment.ID.stringValue : self.requestID;
+    
+    weakself(self);
+    
+    [UserInfoManager sendMessage:message isReply:self.isreply withID:requestID withSucceededCallback:^(CommentsModel *resultModel) {
+        
+        [[weakSelf sendView] clearText];
+        if (weakSelf.sc.selectedSegmentIndex == 0) {
+            [weakSelf update];
+        }
+
+    }];
+    
+    self.isreply = NO;
 }
 
 
@@ -253,6 +286,20 @@
 
 #pragma mark commentsDisplayListView Delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+        CommentsModel *md = self.modelData.comments[indexPath.row];
+    
+        self.isreply = YES;
+        self.replyComment = md;
+    
+    NSString *userName = md.user.nickname;
+    
+    NSString *placeText = [NSString stringWithFormat:@"回复@%@",userName];
+
+        [self.sendView becomeFirstResponder];
+        [self.sendView setPlaceText:placeText];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -310,4 +357,6 @@
         
     }];
 }
+
+
 @end

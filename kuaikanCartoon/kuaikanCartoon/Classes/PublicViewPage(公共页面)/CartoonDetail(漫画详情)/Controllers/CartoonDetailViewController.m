@@ -266,11 +266,7 @@ CGFloat contentSizeMaxHeight = 100.0f;
 }
 
 - (void)sendMessage:(NSString *)message {
-    [[UserInfoManager share] sendComment:message
-                             withWordsID:self.cartoonId
-                   withSucceededCallback:^(CommentsModel *model) {
-                       NSLog(@"%@",model.content);
-                   }];
+    [UserInfoManager sendMessage:message isReply:NO withID:self.cartoonId withSucceededCallback:nil];
 }
 
 

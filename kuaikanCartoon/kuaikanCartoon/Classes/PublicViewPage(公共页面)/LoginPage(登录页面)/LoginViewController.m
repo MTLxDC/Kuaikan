@@ -149,56 +149,37 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     dissmissCallBack dissMiss = [ProgressHUD showProgressWithStatus:@"登录中..."
                                                              inView:self.view];
     
-    NetWorkManager *manager = [NetWorkManager share];
+    weakself(self);
     
-    NSDictionary *parameters = @{@"password":self.passwordInputView.text,
-                                 @"phone":self.userInputView.text,};
-    
-    [manager requestWithMethod:@"POST" url:signinBaseUrlString parameters:parameters complish:^(id res, NSError *error) {
+    [UserInfoManager loginWithPhone:self.userInputView.text WithPassword:self.passwordInputView.text loginSucceed:^(UserInfoManager *user) {
+        
+        dissMiss();
+        
+        [ProgressHUD showSuccessWithStatus:@"登录成功" inView:weakSelf.view];
+        
+        if (weakSelf.loginSucceeded) {
+            weakSelf.loginSucceeded(user);
+        }
+     
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+    } loginFailed:^(id faileResult, NSError *error) {
         
         dissMiss();
         
         if (error != nil) {
-            
-            [ProgressHUD showErrorWithStatus:@"网络出了点小问题" inView:self.view];
-            
+            [ProgressHUD showErrorWithStatus:@"网络出了点小问题" inView:weakSelf.view];
             return ;
         }
-
-        NSDictionary *result = (NSDictionary *)res;
         
-        NSString *message  = result[@"message"];
-        NSDictionary *data = result[@"data"];
-        
-        DEBUG_Log(@"login result:%@",result);
-
-        if ([message isEqualToString:@"OK"] && data) {
-            
-            UserInfoManager *user = [UserInfoManager share] ;
-            
-            [user saveUserInfoWithData:data];
-            
-            [manager requestWithMethod:@"GET" url:userAuthorizeUrlString parameters:nil complish:^(id res, NSError *error) {
-                DEBUG_Log(@"用户授权结果:%@",result);
-            }];
-            
-            [ProgressHUD showSuccessWithStatus:@"登录成功" inView:self.view];
-
-            if (self.loginSucceeded) {
-                self.loginSucceeded(user);
-            }
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self dismissViewControllerAnimated:YES completion:^{
-                }];
-            });
-         
-            
-        }else {
-            
-            [ProgressHUD showErrorWithStatus:@"用户名或密码不正确" inView:self.view];
-            
-        }
+//        NSDictionary *result = (NSDictionary *)faileResult;
+//
+//        NSString *message  = result[@"message"];
+//        NSNumber *code = result[@"code"];
+//        
+        [ProgressHUD showErrorWithStatus:@"用户名或密码不正确" inView:weakSelf.view];
         
     }];
     

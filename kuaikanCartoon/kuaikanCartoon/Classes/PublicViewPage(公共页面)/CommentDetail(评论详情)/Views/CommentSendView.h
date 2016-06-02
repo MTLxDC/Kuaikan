@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class userModel;
+
 @interface CommentSendView : UIView
 
 @property (nonatomic,copy) void (^sendMessage)(NSString *message);
@@ -15,5 +17,9 @@
 + (instancetype)makeCommentSendView;
 
 - (void)clearText;
+
+- (void)setPlaceText:(NSString *)placeText;
+
+- (void)replyWithUserModel:(userModel *)user;
 
 @end

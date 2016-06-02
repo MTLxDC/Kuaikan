@@ -1,8 +1,7 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
-#import "CartoonDetailViewController.h"
-#import "LoginViewController.h"
+#import "UserInfoManager.h"
 
 @interface AppDelegate ()
 
@@ -16,15 +15,11 @@
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    
-//    UIViewController *root = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-//    
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
-    
     _window.rootViewController = [MainTabBarController new];
     
     [_window makeKeyAndVisible];
     
+    [UserInfoManager autoLogin];
     
     return YES;
 }

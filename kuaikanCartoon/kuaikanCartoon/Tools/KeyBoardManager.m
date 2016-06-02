@@ -10,14 +10,14 @@
 
 @interface KeyBoardManager ()
 
-@property (nonatomic,strong) NSMutableArray<keyboardFrameChangeCallBack> *blocks;
+@property (nonatomic,strong) NSMutableDictionary<NSString *,keyboardFrameChangeCallBack> *blocks;
 
 @end
 
 @implementation KeyBoardManager
 
-+ (void)frameWillChange:(keyboardFrameChangeCallBack)callback {
-    [[[[self class] share] blocks] addObject:callback];
++ (void)frameWillChange:(keyboardFrameChangeCallBack)callback WithKey:(NSString *)key {
+    [[[self share] blocks] setValue:callback forKey:key];
 }
 
 - (void)keyboardFrameChange:(NSNotification *)not {
@@ -25,10 +25,13 @@
     CGFloat start_Y = [not.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].origin.y;
     CGFloat end_Y   = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
     
-   
-    [self.blocks enumerateObjectsUsingBlock:^(keyboardFrameChangeCallBack  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.blocks enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, keyboardFrameChangeCallBack  _Nonnull obj, BOOL * _Nonnull stop) {
         if (obj) obj(start_Y,end_Y);
     }];
+}
+
++ (void)removeObserverWithKey:(NSString *)key {
+    [[[self share] blocks] removeObjectForKey:key];
 }
 
 
@@ -52,7 +55,7 @@
     if (self) {
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-        self.blocks = [NSMutableArray array];
+        self.blocks = [NSMutableDictionary dictionary];
     }
     return self;
 }

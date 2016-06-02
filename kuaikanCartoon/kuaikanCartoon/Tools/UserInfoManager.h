@@ -12,12 +12,11 @@
 
 @interface UserInfoManager : NSObject
 
-
 + (instancetype)share;
 
 @property BOOL hasLogin;
 
-@property (nonatomic,copy)   NSString *icon_url;      //头像
+@property (nonatomic,copy)   NSString *avatar_url;      //头像
 
 @property (nonatomic,strong) NSNumber *ID;              //ID
 
@@ -32,8 +31,16 @@
 
 - (void)logoutUserInfo; //注销
 
-- (void)sendComment:(NSString *)meassage
-        withWordsID:(NSString *)wordsID
-withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback;
++ (void)autoLogin;  //自动登录,前提是登录过并且网络正常
+
++ (void)sendMessage:(NSString *)meassage        //评论和回复
+            isReply:(BOOL)isreply               //是否是回复
+             withID:(NSString *)ID              //评论使用作品的ID,回复使用要回复的用户评论ID
+             withSucceededCallback:(void (^)(CommentsModel *))succeededCallback;
+
++ (void)loginWithPhone:(NSString *)phone        //登录
+          WithPassword:(NSString *)password
+          loginSucceed:(void (^)(UserInfoManager *user))succeed
+           loginFailed:(void (^)(id faileResult,NSError *error))failed;
 
 @end

@@ -40,7 +40,7 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     if (self.user.hasLogin) {
-        [self.userIcon sd_setImageWithURL:[NSURL URLWithString:self.user.icon_url]];
+        [self.userIcon sd_setImageWithURL:[NSURL URLWithString:self.user.avatar_url]];
         self.userName.text = self.user.nickname;
     }else {
         self.userName.text = @"登录";
