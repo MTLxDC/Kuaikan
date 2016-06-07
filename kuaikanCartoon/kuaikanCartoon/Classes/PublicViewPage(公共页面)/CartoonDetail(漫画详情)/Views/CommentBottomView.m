@@ -42,8 +42,8 @@ static NSString * const contentSizeKeyPath = @"contentSize";
         
         CGSize size = [change[NSKeyValueChangeNewKey] CGSizeValue];
         
-        if ([self.delegate respondsToSelector:@selector(textViewContenSizeDidChange:)]) {
-            [self.delegate textViewContenSizeDidChange:size];
+        if ([self.delegate respondsToSelector:@selector(textView:ContenSizeDidChange:)]) {
+            [self.delegate textView:self.commentTextView ContenSizeDidChange:size];
         }
         
     }
@@ -86,6 +86,19 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     }];
     
     self.sendBtn = sendBtn;
+}
+
+- (void)sendSucceeded {
+    self.commentTextView.text = nil;
+    [self.commentTextView resignFirstResponder];
+    
+    if ([self.delegate respondsToSelector:@selector(textView:ContenSizeDidChange:)]) {
+        [self.delegate textView:self.commentTextView ContenSizeDidChange:self.commentTextView.contentSize];
+    }
+    
+    self.beginComment = NO;
+    self.placeBtn.hidden = NO;
+    
 }
 
 - (void)sendComment:(UIButton *)btn {
@@ -136,7 +149,9 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 }
 
 - (BOOL)resignFirstResponder {
-    return  [self.commentTextView resignFirstResponder];
+    [self.commentTextView resignFirstResponder];
+    
+    return [super resignFirstResponder];
 
 }
 
@@ -151,14 +166,17 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     NSString *commntCountText = [NSString stringWithFormat:@"%zd",_recommend_count];
     
     CGSize textSize = [commntCountText boundingRectWithSize:CGSizeMake(MAXFLOAT,20)
-                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                      attributes:@{NSFontAttributeName:self.commntCount.titleLabel.font} context:nil].size;
+                                                    options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                                 attributes:@{NSFontAttributeName:self.commntCount.titleLabel.font} context:nil].size;
+    
+    [self.commntCount setTitle:commntCountText forState:UIControlStateNormal];
+    [self.commntCount setHidden:NO];
     
     self.labelWidth.constant = textSize.width * 1.2 + 10;
     
-    [self.commntCount setTitle:commntCountText forState:UIControlStateNormal];
-
-    [self.commntCount layoutIfNeeded];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.commntCount layoutIfNeeded];
+    }];
 }
 
 

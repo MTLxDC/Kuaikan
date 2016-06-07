@@ -7,7 +7,6 @@
 //
 
 
-
 #import <UIImageView+WebCache.h>
 #import <MJRefresh.h>
 
@@ -57,13 +56,19 @@
     
     [self requestDataWithCachingPolicy:ModelDataCachingPolicyDefault];
     
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.bannerView.timer begin];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     
+    [self.bannerView.timer pause];
 }
 
 
@@ -83,12 +88,12 @@
     [topicInfoModel requestModelDataWithUrlString:topicInfoDataUrl complish:^(id result) {
         weakSelf.modelArray = result;
         [weakSelf.mainView reloadData];
+        [weakSelf.mainView.mj_header endRefreshing];
     } cachingPolicy:cachingPolicy];
     
 }
 
 - (void)setNavBar {
-    
     
     navBarTitleView *titleView = [navBarTitleView defaultTitleView];
     
@@ -153,6 +158,7 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     
     [normalHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
     
+    mainView.mj_header = normalHeader;
     
     [self.view addSubview:mainView];
 
@@ -212,7 +218,7 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case 0:return 140;      //人气飙升
+        case 0:return 150;      //人气飙升
         case 1:return 300;      //每周排行榜
         case 2:return 270;      //新作出炉
         case 3:return 270;      //主播力推

@@ -32,7 +32,7 @@ static CGFloat const spaceing = 10;
     topicModel *top    = [topics firstObject];
     topicModel *bottom = [topics lastObject];
 
-    UIImage *placeImage = [UIImage imageNamed:@"ic_common_placeholder_l_120x38_"];
+    UIImage *placeImage = [UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"];
     
     [self.topImageView sd_setImageWithURL:[NSURL URLWithString:top.cover_image_url]
                       placeholderImage:placeImage];

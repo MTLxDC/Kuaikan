@@ -11,6 +11,6 @@
 
 @interface MainTabBarController : UITabBarController
 
-@property (nonatomic,weak,readonly) MainTabbar *mainTabbar;
+- (void)setHidesBottomBar:(BOOL)hidesBottomBar;
 
 @end

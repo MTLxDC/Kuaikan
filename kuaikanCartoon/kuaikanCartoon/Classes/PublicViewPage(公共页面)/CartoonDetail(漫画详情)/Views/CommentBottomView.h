@@ -12,7 +12,7 @@
 
 @optional
 
-- (void)textViewContenSizeDidChange:(CGSize)size;
+- (void)textView:(UITextView *)textView ContenSizeDidChange:(CGSize)size;
 
 - (void)showShareView;
 
@@ -32,5 +32,6 @@
 
 + (instancetype)commentBottomView;
 
+- (void)sendSucceeded;
 
 @end

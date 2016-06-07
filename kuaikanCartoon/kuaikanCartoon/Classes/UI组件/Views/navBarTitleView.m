@@ -23,7 +23,7 @@
 static CGFloat const MyHeight = 30;
 
 + (instancetype)defaultTitleView {
-    return  [[self alloc] initWithFrame:CGRectMake(0,navHeight - MyHeight,SCREEN_WIDTH * 0.33, MyHeight)];
+    return  [[self alloc] initWithFrame:CGRectMake(0,navHeight - MyHeight,SCREEN_WIDTH * 0.4, MyHeight)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -53,12 +53,10 @@ static CGFloat const MyHeight = 30;
     [self.leftBtn setTitle:@"关注" forState:UIControlStateNormal];
     [self.rightBtn setTitle:@"更新" forState:UIControlStateNormal];
     
-    
     [self.leftBtn addTarget:self action:@selector(selectBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-     [self.rightBtn addTarget:self action:@selector(selectBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightBtn addTarget:self action:@selector(selectBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-
     [self selectBtn:self.rightBtn];
 
 }
@@ -90,7 +88,7 @@ static CGFloat const MyHeight = 30;
     UIButton *btn = [UIButton new];
     
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    btn.titleLabel.font = [UIFont systemFontOfSize:18];
     
     btn.layer.cornerRadius = MyHeight * 0.5;
     btn.layer.masksToBounds = YES;

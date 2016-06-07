@@ -44,6 +44,7 @@ static CGFloat followSize = 21;
     
     [self.authorName setText:self.user.nickname];
     
+
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

@@ -8,6 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString * const passwordKey = @"password";
+static NSString * const phoneKey    = @"phone";
+
+
+//用户注销
+static NSString * const userLogoutNotification        = @"UserLogoutNotification";
+
+//登陆成功
+static NSString * const loginSuucceedNotification     = @"UserLoginSuucceedNotification";
+
+//登录失败 userInfo is a dict object,please use phoneKey and passwordKey get value
+
+static NSString * const loginFailedNotification       = @"UserLoginFailedNotification";
+
+//登录状态发生改变
+static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeNotification";
+
+
 @class CommentsModel;
 
 @interface UserInfoManager : NSObject
@@ -27,10 +45,6 @@
 @property (nonatomic,strong) NSNumber *update_remind_flag;
 
 
-- (void)saveUserInfoWithData:(NSDictionary *)data;
-
-- (void)logoutUserInfo; //注销
-
 + (void)autoLogin;  //自动登录,前提是登录过并且网络正常
 
 + (void)sendMessage:(NSString *)meassage        //评论和回复
@@ -42,5 +56,9 @@
           WithPassword:(NSString *)password
           loginSucceed:(void (^)(UserInfoManager *user))succeed
            loginFailed:(void (^)(id faileResult,NSError *error))failed;
+
+- (void)saveUserInfoWithData:(NSDictionary *)data;
+
+- (void)logoutUserInfo; //注销
 
 @end

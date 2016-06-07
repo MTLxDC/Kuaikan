@@ -21,11 +21,9 @@
 
 static NSString * const loginInfoFileName = @"loginInfo";   //账号密码保存文件名
 
-
 static NSString * const userAuthorizeUrlString = @"http://api.kuaikanmanhua.com/v1/timeline/polling";
 
 static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/phone/signin";
-
 
 static NSString * const commentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comics/%@/comments";
 static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/%@/reply";
@@ -59,11 +57,17 @@ MJCodingImplementation
     
     if (parameters.count < 1) return;
     
-    [self loginWithPhone:parameters[@"phone"] WithPassword:parameters[@"password"] loginSucceed:^(UserInfoManager *user) {
-        if (self.hasLogin) {
-            NSLog(@"自动登录成功");
-        }
-    } loginFailed:nil];
+    [self loginWithPhone:parameters[phoneKey] WithPassword:parameters[passwordKey] loginSucceed:^(UserInfoManager *user) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:loginSuucceedNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:loginStatusChangeNotification object:nil];
+        
+    } loginFailed:^(id faileResult, NSError *error) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:loginFailedNotification object:nil userInfo:parameters];
+        
+    }];
 }
 
 - (void)saveUserInfoWithData:(NSDictionary *)data {
@@ -75,15 +79,25 @@ MJCodingImplementation
     self.reg_type = data[@"reg_type"];
     self.update_remind_flag = data[@"update_remind_flag"];
     
-    NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    
-    [NSKeyedArchiver archiveRootObject:self toFile:documentPath];
 }
 
 - (void)logoutUserInfo {
     
     self.hasLogin = NO;
+    self.avatar_url = nil;
+    self.ID = nil;
+    self.nickname = nil;
+    self.reg_type = nil;
+    self.update_remind_flag = nil;
     
+    NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+
+    [[NSFileManager defaultManager] removeItemAtPath:loginInfoPath error:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:userLogoutNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:loginStatusChangeNotification object:nil];
+
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -106,8 +120,8 @@ MJCodingImplementation
     
     NetWorkManager *manager = [NetWorkManager share];
     
-    NSDictionary *parameters = @{@"password":password,
-                                 @"phone":phone};
+    NSDictionary *parameters = @{passwordKey:password,
+                                 phoneKey:phone};
     
     [manager requestWithMethod:@"POST" url:signinBaseUrlString parameters:parameters complish:^(id res, NSError *error) {
         
@@ -133,6 +147,8 @@ MJCodingImplementation
             }];
             
             if (succeed) succeed(self);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:loginSuucceedNotification object:nil];
             
         }else {
             

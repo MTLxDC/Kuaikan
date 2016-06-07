@@ -69,8 +69,7 @@
     
     clearHistoryFooter.titleLabel.font = [UIFont systemFontOfSize:15];
     clearHistoryFooter.layer.borderWidth = 1;
-    clearHistoryFooter.layer.borderColor = White(0.9).CGColor;
-    
+    clearHistoryFooter.layer.borderColor = subjectColor.CGColor;
     
     [clearHistoryFooter setTitleColor:subjectColor forState:UIControlStateNormal];
     [clearHistoryFooter setTitle:@"清空搜索历史" forState:UIControlStateNormal];

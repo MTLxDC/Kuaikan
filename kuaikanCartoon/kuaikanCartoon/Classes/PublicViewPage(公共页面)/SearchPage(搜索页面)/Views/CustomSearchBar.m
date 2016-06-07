@@ -103,4 +103,9 @@
     return [self.textField becomeFirstResponder];
 }
 
+- (BOOL)resignFirstResponder {
+    [self.textField resignFirstResponder];
+    return [super resignFirstResponder];
+}
+
 @end

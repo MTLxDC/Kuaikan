@@ -40,6 +40,7 @@
 - (void)setModel:(comicsModel *)model {
     _model = model;
     
+
     self.upCount = model.likes_count.integerValue;
     
     BOOL hasPrevious = model.previous_comic_id != nil;
@@ -59,7 +60,7 @@
     UIButton *btn = (UIButton *)sender;
     
     btn.selected = !btn.selected;
-    
+    self.model.is_liked = !self.model.is_liked;
     if (btn.selected) {
         self.upCount += 1;
     }else{

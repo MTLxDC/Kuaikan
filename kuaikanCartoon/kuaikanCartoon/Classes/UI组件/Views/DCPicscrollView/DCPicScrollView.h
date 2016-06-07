@@ -10,6 +10,8 @@
 
 #import "DCPicItem.h"
 #import "DCPicScrollViewConfiguration.h"
+#import "NSTimer+Control.h"
+
 
 @class DCPicScrollView;
 
@@ -46,6 +48,10 @@
 @property (nonatomic,weak) id<DCPicScrollViewDelegate> delegate;
 
 @property (nonatomic,readonly) NSUInteger currentIndex;
+
+@property (nonatomic,strong,readonly) NSTimer *timer;
+
+- (void)removeTimer;
 
 //if you not set Configuration,will use defaultConfiguration
 

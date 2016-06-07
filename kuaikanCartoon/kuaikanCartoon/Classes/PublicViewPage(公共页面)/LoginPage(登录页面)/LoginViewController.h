@@ -6,13 +6,13 @@
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class UserInfoManager;
 
 typedef void (^loginSucceededCallback)(UserInfoManager *userInfo);
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : BaseViewController
 
 @property (nonatomic,copy) loginSucceededCallback loginSucceeded;
 

@@ -19,7 +19,13 @@
 
 #define weakself(self)  __weak __typeof(self) weakSelf = self
 
+#define iOS8Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define iOS7Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define iOS6Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
 
+#define isPad   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad   ? YES : NO)
+#define isPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? YES : NO)
+#define isRetina ([[UIScreen mainScreen] scale] > 1 ? YES : NO)
 
 
 // 日志输出

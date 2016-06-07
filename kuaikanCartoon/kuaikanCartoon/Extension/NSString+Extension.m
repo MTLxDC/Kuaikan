@@ -110,8 +110,9 @@
     unsigned char result[32];
     
     
-    
-    CC_MD5( cStr, strlen(cStr), result );
+    CC_LONG lentgh = (CC_LONG)strlen(cStr);
+
+    CC_MD5( cStr,lentgh, result );
     
     return [NSString stringWithFormat:
             
@@ -145,7 +146,9 @@
     
     unsigned char result[16];
     
-    CC_MD5( cStr, strlen(cStr), result );
+    CC_LONG lentgh = (CC_LONG)strlen(cStr);
+    
+    CC_MD5(cStr,lentgh, result );
     
     return [NSString stringWithFormat:
             

@@ -70,7 +70,7 @@ static CGFloat spaceing = 10;
 - (void)setTopics:(NSArray *)topics {
     _topics = topics;
     
-    UIImage *palceImage = [UIImage imageNamed:@"ic_common_placeholder_m_92x29_"];
+    UIImage *palceImage = [UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"];
     
     bannersModel *left  = [topics firstObject];
     bannersModel *right = [topics lastObject];
@@ -88,9 +88,7 @@ static CGFloat spaceing = 10;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.contentView.frame = self.bounds;
-    
-    CGFloat itemHeight = 80;
+    CGFloat itemHeight = self.bounds.size.height - spaceing * 2;
     CGFloat itemWith = (self.width - 3 * spaceing) * 0.5;
     
     self.leftItem.frame = CGRectMake(spaceing, spaceing,itemWith, itemHeight);

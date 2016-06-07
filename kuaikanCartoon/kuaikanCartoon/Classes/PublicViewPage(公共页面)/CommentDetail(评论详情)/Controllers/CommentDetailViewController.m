@@ -12,7 +12,6 @@
 #import <Masonry.h>
 #import "CommonMacro.h"
 #import "CommentSendView.h"
-#import "KeyBoardManager.h"
 #import "UserInfoManager.h"
 
 #import "CommentInfoCell.h"
@@ -41,6 +40,7 @@
 
 @property (nonatomic,strong) CommentsModel *replyComment;
 
+@property (nonatomic,assign) NSInteger since;
 
 
 @end
@@ -60,9 +60,40 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
     [self.sendView resignFirstResponder];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+    
+- (void)keyboardFrameChange:(NSNotification *)not {
+    
+    CGFloat end_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+    
+    CGFloat offset = SCREEN_HEIGHT - end_Y;
+    
+    [self.sendView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-offset);
+    }];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.sendViewContainer.alpha  = offset == 0 ? 0 : 0.6;
+        [self.view layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        
+        self.sendViewContainer.hidden = offset == 0;
+    }];
 }
 
 #pragma mark setupSubViews
@@ -88,10 +119,7 @@
     
     [sc setSelectedSegmentIndex:0];
     
-    
-    UIBarButtonItem *back = [UIBarButtonItem barButtonItemWithImage:@"ic_nav_delete_normal_17x17_" pressImage:@"ic_nav_delete_pressed_17x17_" target:self action:@selector(dismiss)];
-    
-    self.navigationItem.leftBarButtonItem = back;
+    [super setBackItemWithImage:@"ic_nav_delete_normal_17x17_" pressImage:@"ic_nav_delete_pressed_17x17_"];
 
     self.sc = sc;
 }
@@ -133,27 +161,6 @@
         [weakSelf userCommentWithMessage:message];
     }];
     
-    
-    [KeyBoardManager frameWillChange:^(CGFloat start_Y, CGFloat end_Y) {
-        
-        CGFloat offset = SCREEN_HEIGHT - end_Y;
-        
-        [weakSelf.sendView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(weakSelf.view).offset(-offset);
-        }];
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            
-            weakSelf.sendViewContainer.alpha  = offset == 0 ? 0 : 0.6;
-            [weakSelf.view layoutIfNeeded];
-            
-        } completion:^(BOOL finished) {
-            
-            weakSelf.sendViewContainer.hidden = offset == 0;
-
-        }];
-        
-    }];
     
 }
 
@@ -199,14 +206,17 @@
     
     //上拉刷新
     
+    
     self.commentsDisplayListView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(update)
     ];
     
     //下拉加载更多
+    self.since = 0;
     
     self.commentsDisplayListView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        
-        NSString *moreCommentUrl = [self.requestUrl stringByReplacingOccurrencesOfString:@"0" withString:self.modelData.since.stringValue];
+        self.since += 20;
+
+        NSString *moreCommentUrl = [self.requestUrl stringByReplacingOccurrencesOfString:@"0" withString:[NSString stringWithFormat:@"%zd",self.since]];
         
         [CommentDetailModel requestModelDataWithUrlString:moreCommentUrl complish:^(id res) {
             
@@ -242,14 +252,9 @@
 
 - (void)update {
     
-    NSLog(@"%@",self.requestUrl);
-    
     weakself(self);
     
     [CommentDetailModel requestModelDataWithUrlString:self.requestUrl complish:^(id res) {
-        if (weakSelf == nil || res == nil) {
-            return ;
-        }
         
         CommentDetailViewController *sself = weakSelf;
         
@@ -258,7 +263,7 @@
         [sself.commentsDisplayListView reloadData];
         [sself.commentsDisplayListView setContentOffset:CGPointMake(0, -navHeight)];
         [sself.commentsDisplayListView.mj_header endRefreshing];
-        
+
     } cachingPolicy:ModelDataCachingPolicyNoCache] ;
     
 }
@@ -302,7 +307,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    if (iOS8Later) return UITableViewAutomaticDimension;
+
     if (self.cellHeightCache.count > indexPath.row) {
         
         NSNumber *cacheHeight = self.cellHeightCache[indexPath.row];
@@ -316,9 +322,6 @@
     CommentInfoCell *cell = self.commentCell;
     
     cell.commentsModel = self.modelData.comments[indexPath.row];
-    
-    [cell setNeedsUpdateConstraints];
-    [cell updateConstraintsIfNeeded];
     
     [cell setNeedsLayout];
     [cell layoutIfNeeded];

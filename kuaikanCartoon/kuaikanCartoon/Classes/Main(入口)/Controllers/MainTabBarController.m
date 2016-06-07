@@ -17,6 +17,8 @@
 
 @interface MainTabBarController ()
 
+@property (nonatomic,weak) MainTabbar *mainTabbar;
+
 
 @end
 
@@ -68,8 +70,27 @@ CGFloat tabbar_h = 44;
     }
 }
 
-
-
+- (void)setHidesBottomBar:(BOOL)hidesBottomBar {
+    
+    if (hidesBottomBar) {
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.mainTabbar setY:SCREEN_HEIGHT];
+        }];
+        
+    }else {
+        
+        
+        [UIView animateWithDuration:0.25 delay:0.5 usingSpringWithDamping:0.8f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
+            
+            [self.mainTabbar setY:SCREEN_HEIGHT - 44];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }
+}
 
 
 

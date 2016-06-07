@@ -23,16 +23,19 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leading;
-
 @property (weak, nonatomic) IBOutlet UIButton *likeCount;
-@property (weak, nonatomic) IBOutlet UIButton *replyCount;
 
+@property (weak, nonatomic) IBOutlet UIButton *replyCount;
 
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
-
 @property (strong, nonatomic)  UIScrollView *scrollView;
+
+@property (nonatomic,assign) BOOL  show;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rigthing;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leading;
 
 @end
 
@@ -75,57 +78,76 @@ CGFloat const btnHeight  = 15.0f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     
-    CGFloat offsetY = [change[NSKeyValueChangeNewKey] CGPointValue].y;
-    CGRect newFrame = self.frame;
+    CGFloat offsetY = -[change[NSKeyValueChangeNewKey] CGPointValue].y;
     
-    printf("offsetY:%f\n",-offsetY);
+    printf("offsetY:%f\n",offsetY);
 
-    if (offsetY <= 0 && -offsetY >= navHeight) {
+    [self setHeight:offsetY > navHeight ? offsetY : navHeight];
+    
+    if (offsetY > navHeight + 20) {
         
-        newFrame.size.height = -offsetY;
         
-        CGFloat alpha = 0.0f;
-
-        if (-offsetY < wordsDetailHeadViewHeight) {
+        if (offsetY < wordsDetailHeadViewHeight) {
             
-            alpha = (wordsDetailHeadViewHeight * 0.5)/-offsetY - 0.3;
+            CGFloat alpha = 0.0f;
 
+            alpha = (wordsDetailHeadViewHeight * 0.5)/offsetY - 0.3;
+            
+            self.bluredImageView.alpha = alpha;
+            self.maskImageView.alpha = 1 - alpha;
+            
         }
         
-        self.bluredImageView.alpha = alpha;
-        self.maskImageView.alpha = 1 - alpha;
+        self.show = YES;
         
     }else {
-        newFrame.size.height = navHeight;
+        
+        self.show = NO;
         self.bluredImageView.alpha = 1;
         self.maskImageView.alpha = 0;
+      
     }
     
-    CGFloat btnAlpha = 1;
-    
-    if (-offsetY <= (navHeight + btnHeight + spaceing)) {
-        
-        btnAlpha  = 0;
-        
-        if (self.leading.constant == spaceing) {
-            self.leading.constant = (self.width - self.titleLabel.width) * 0.5 - spaceing;
-        }
-        
-    }else {
-        self.leading.constant = spaceing;
-    }
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        [self layoutIfNeeded];
-        self.backBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:btnAlpha ? 0.1:0];
-        self.replyCount.alpha = btnAlpha;
-        self.likeCount.alpha = btnAlpha;
-    }];
-    
-    
-    self.frame = newFrame;
 }
 
+- (CGFloat)textWidth {
+    
+ return [self.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT,15)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                                      attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size.width;
+}
+
+- (void)setShow:(BOOL)show {
+    if (_show != show) {
+        
+      
+        
+        CGFloat leftConstant = spaceing;
+        CGFloat rightContstant = 128;
+        
+        if (!show) {
+            rightContstant =  70;
+            leftConstant   = (self.width - [self textWidth]) * 0.5;
+        }
+        
+        self.leading.constant  = leftConstant;
+        self.rigthing.constant = rightContstant;
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [self layoutIfNeeded];
+            self.replyCount.alpha = show;
+            self.likeCount.alpha = show;
+            
+        } completion:^(BOOL finished) {
+            self.replyCount.hidden = !show;
+            self.likeCount.hidden = !show;
+        }];
+        
+        self.backBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:show ? 0.1:0];
+        
+    }
+    _show = show;
+}
 
 
 - (void)dealloc {

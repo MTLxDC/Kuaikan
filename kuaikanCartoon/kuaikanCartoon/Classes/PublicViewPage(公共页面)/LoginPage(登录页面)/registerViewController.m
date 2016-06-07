@@ -92,7 +92,6 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
             
             [self startTiming];
             
-            
         }else if (code.integerValue == 600003) {
             
             [ProgressHUD showErrorWithStatus:@"手机号已经被注册了\n(╯°Д°)╯︵ ┻━┻ " inView:self.view];

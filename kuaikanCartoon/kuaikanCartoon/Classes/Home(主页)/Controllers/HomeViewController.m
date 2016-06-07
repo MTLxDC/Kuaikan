@@ -48,8 +48,13 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     [self setupSearchItem];
     
     [self setupMainView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStatusChange) name:loginStatusChangeNotification object:nil];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)setupSearchItem {
     
@@ -83,20 +88,6 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     weakself(self);
     
     titleView.leftBtnOnClick = ^(UIButton *btn){
-        
-       UserInfoManager *user = [UserInfoManager share];
-        
-        if (user.hasLogin) {
-            
-            weakSelf.wlv.hidden = NO;
-            weakSelf.wlv.urlString = usersCorcernedWordsUrl;
-    
-        }else {
-    
-            weakSelf.tipViewContainer.hidden = NO;
-            self.tipView.tip = tipOptionNotLogin;
-        }
-        
         [weakSelf.mainView setContentOffset:CGPointZero animated:YES];
     };
     
@@ -132,7 +123,7 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     UIScrollView *sc = [[UIScrollView alloc] initWithFrame:tipView.frame];
     
-    [sc setContentSize:CGSizeMake(0,tipView.bounds.size.height)];
+    [sc setContentSize:CGSizeMake(0,self.view.bounds.size.height)];
     
     sc.showsVerticalScrollIndicator = NO;
     
@@ -144,17 +135,7 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
        
         if (tv.tip == tipOptionNotLogin) {
             
-            LoginViewController *lvc = [[LoginViewController alloc] init];
-            
-            [lvc setLoginSucceeded:^(UserInfoManager *user) {
-               
-            }];
-            
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lvc];
-            
-            [weakSelf presentViewController:nav animated:YES completion:^{
-                
-            }];
+            [LoginViewController show];
             
         }else if (tv.tip == tipOptionNotConcerned) {
             
@@ -181,17 +162,22 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     [self.navigationController.navigationBar setBarTintColor:subjectColor];
     
+    [self loginStatusChange];
+}
+
+- (void)loginStatusChange {
+    
     BOOL haslogin = [[UserInfoManager share] hasLogin];
     
     self.tipViewContainer.hidden = haslogin;
+    
+    self.wlv.hidden = !haslogin;
 
     if (haslogin) {
-        self.wlv.hidden = !haslogin;
         self.wlv.urlString = usersCorcernedWordsUrl;
     }
 
 }
-
 
 
 

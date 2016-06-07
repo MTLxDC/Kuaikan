@@ -44,8 +44,9 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     NSInteger numberofline = 5;
     CGFloat maxH = self.meassageTextView.font.lineHeight * numberofline;
     
-    if (h >= maxH || h <= bottomBarHeight) return;
-    
+    if (h >= maxH) h = maxH;
+    if (h <= bottomBarHeight) h = bottomBarHeight;
+
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(h));
     }];
@@ -91,7 +92,7 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 - (void)clearText {
      self.meassageTextView.text = nil;
     [self textViewDidChange:self.meassageTextView];
-    [self updateHeightWithContentSizeHeight:self.meassageTextView.contentSize.height];
+    [self updateHeightWithContentSizeHeight:0];
     [self.meassageTextView resignFirstResponder];
 }
 
@@ -105,7 +106,9 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 
 - (BOOL)resignFirstResponder {
     self.placeLabel.text = @"吐槽神马的尽管来";
-    return [self.meassageTextView resignFirstResponder];
+    [self.meassageTextView resignFirstResponder];
+    
+    return [super resignFirstResponder];
 }
 
 @end

@@ -11,7 +11,6 @@
 #import "WordsDetailViewController.h"
 
 #import "Color.h"
-#import "KeyBoardManager.h"
 #import "NetWorkManager.h"
 #import "ProgressHUD.h"
 #import "UserInfoManager.h"
@@ -53,6 +52,8 @@
 
 @property (nonatomic,strong) NSArray *commentModels;
 
+@property (nonatomic,strong) CartoonFlooterView *flooter;
+
 @end
 
 
@@ -82,6 +83,36 @@ static const CGFloat imageCellHeight = 250.0f;
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.bottomView resignFirstResponder];
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+
+}
+
+- (void)keyboardFrameChange:(NSNotification *)not {
+    
+    CGFloat end_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+    
+    CGFloat offset = SCREEN_HEIGHT - end_Y;
+    
+    self.bottomView.beginComment = offset > 0;
+    
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-offset);
+    }];
+    
+    [self hideOrShowProgressView:YES];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)requestData {
@@ -90,12 +121,9 @@ static const CGFloat imageCellHeight = 250.0f;
     
     weakself(self);
     
-    self.cartoonContentView.hidden = YES;
     
    [comicsModel requestModelDataWithUrlString:self.urlString complish:^(id res) {
-       
-       if (weakSelf == nil) return ;
-       
+              
        CartoonDetailViewController *sself = weakSelf;
        
             sself.comicsMd = res;
@@ -109,12 +137,11 @@ static const CGFloat imageCellHeight = 250.0f;
     
     [CommentsModel requestModelDataWithUrlString:commentUrl complish:^(id result) {
         
-        if (weakSelf == nil) return ;
-        
         CartoonDetailViewController *sself = weakSelf;
         sself.commentModels = result;
-        [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         
+        [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
     } cachingPolicy:ModelDataCachingPolicyDefault];
     
 }
@@ -162,7 +189,6 @@ static CGFloat progressWidth = 150;
     }];
     
     [UIView animateWithDuration:0.25 animations:^{
-        
         [self.progress layoutIfNeeded];
         
     } completion:^(BOOL finished) {
@@ -192,7 +218,6 @@ static bool needHide = false;
 }
 
 - (void)setupNavigationBar {
-    
     
     UIBarButtonItem *collectedWorks = [[UIBarButtonItem alloc] initWithTitle:@"全集" style:UIBarButtonItemStylePlain target:self action:@selector(gotoCollectedWorksPage)];
     
@@ -242,43 +267,30 @@ CGFloat contentSizeMaxHeight = 100.0f;
     }];
     
     self.bottomView = cb;
-    
-    weakself(self);
-    
-    [KeyBoardManager frameWillChange:^(CGFloat start_Y, CGFloat end_Y) {
-        
-        CGFloat offset = SCREEN_HEIGHT - end_Y;
-        
-        weakSelf.bottomView.beginComment = offset > 0;
-        
-        [weakSelf.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(weakSelf.view).offset(-offset);
-        }];
-        
-        [weakSelf hideOrShowProgressView:YES];
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            [weakSelf.view layoutIfNeeded];
-        }];
-        
-    }];
+
 
 }
 
 - (void)sendMessage:(NSString *)message {
-    [UserInfoManager sendMessage:message isReply:NO withID:self.cartoonId withSucceededCallback:nil];
+    weakself(self);
+    
+    [UserInfoManager sendMessage:message isReply:NO withID:self.cartoonId withSucceededCallback:^(CommentsModel *md) {
+        [weakSelf.bottomView sendSucceeded];
+    }];
 }
 
 
-- (void)textViewContenSizeDidChange:(CGSize)size {
+- (void)textView:(UITextView *)textView ContenSizeDidChange:(CGSize)size {
     
     CGFloat offset_H = size.height;
     
-    if (offset_H > contentSizeMaxHeight) {
-        return;
-    }
+    textView.showsVerticalScrollIndicator = offset_H > contentSizeMaxHeight;
+
+    if (offset_H > contentSizeMaxHeight) return;
     
-    if (offset_H < 44) offset_H = 44;
+    if (offset_H < bottomBarHeight) {
+        offset_H = bottomBarHeight;
+    }
     
     [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(offset_H));
@@ -370,6 +382,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     
     [self.view addSubview:contentView];
     
+    contentView.hidden = YES;
     contentView.backgroundColor = [UIColor whiteColor];
     contentView.dataSource = self;
     contentView.delegate = self;
@@ -419,14 +432,12 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     return 0;
 }
 
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section == 0) {
-        CartoonFlooterView *flooter = [CartoonFlooterView makeCartoonFlooterView];
+        self.flooter.model = self.comicsMd;
         
-        flooter.delegate = self;
-        flooter.model = self.comicsMd;
-        
-        return flooter;
+        return self.flooter;
     }
     
     return nil;
@@ -479,7 +490,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }
 
 
-
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -513,7 +523,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         [cell updateConstraintsIfNeeded];
         
         [cell setNeedsLayout];          //强制更新cell的布局
-        [cell layoutIfNeeded];
+//        [cell layoutIfNeeded];
         
         cell.bounds = CGRectMake(0.0f, 0.0f,
                                  CGRectGetWidth(tableView.bounds),
@@ -567,7 +577,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 #pragma mark Lazy load
 
 - (NSMutableArray *)commentCellHeightCache {
-    if (_commentCellHeightCache) {
+    if (!_commentCellHeightCache) {
         _commentCellHeightCache = [[NSMutableArray alloc] init];
     }
     return _commentCellHeightCache;
@@ -580,7 +590,13 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     return _commentCell;
 }
 
-
+- (CartoonFlooterView *)flooter {
+    if (!_flooter) {
+        _flooter = [CartoonFlooterView makeCartoonFlooterView];
+        _flooter.delegate = self;
+    }
+    return _flooter;
+}
 
 
 @end

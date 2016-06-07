@@ -60,7 +60,7 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
+    [self.searchBar resignFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -224,5 +224,8 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
 }
 
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.searchBar resignFirstResponder];
+}
 
 @end

@@ -442,11 +442,11 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
 }
 
 - (void)dismissAnimated:(BOOL)animated {
-//    if (_transitioning) {
-//        _dismissAfterTransitionFinished = YES;
-//        _dismissAfterTransitionFinishedWithAnimation = animated;
-//        return;
-//    }
+    if (_transitioning) {
+        _dismissAfterTransitionFinished = YES;
+        _dismissAfterTransitionFinishedWithAnimation = animated;
+        return;
+    }
     
     if (self.targetView == nil) {
         return;

@@ -78,11 +78,12 @@
 }
 
 - (void)layoutSubviews {
+
     [super layoutSubviews];
     
-    self.CommentContent.font = [UIFont systemFontOfSize:15];
     self.CommentContent.preferredMaxLayoutWidth = CGRectGetWidth(self.CommentContent.frame);
     
-    
+    [super layoutSubviews];
+
 }
 @end

@@ -45,7 +45,7 @@
 
 static const CGFloat animateDuration = 0.3f;
 
-static const CGFloat lineHeight = 3.0f;
+static const CGFloat lineHeight = 5.0f;
 
 @interface ListView ()
 
@@ -229,7 +229,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
         
         BOOL animate = YES;
         
-        if (abs(_currentSelectLabel.tag - selectLabel.tag) > 2) animate = NO;
+        if (labs(_currentSelectLabel.tag - selectLabel.tag) > 2) animate = NO;
         
         [self.configuration.monitorScrollView setContentOffset:CGPointMake(offsetX, 0) animated:animate];
     }else {

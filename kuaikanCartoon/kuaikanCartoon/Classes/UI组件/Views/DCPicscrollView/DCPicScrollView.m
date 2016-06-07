@@ -8,7 +8,6 @@
 
 #import "DCPicScrollView.h"
 #import "DCPicItem.h"
-#import "NSTimer+Control.h"
 
 
 @interface DCPicScrollView () <UICollectionViewDataSource,UICollectionViewDelegate>
@@ -22,8 +21,6 @@
 @property (nonatomic,strong) DCPicScrollViewConfiguration *configuration;
 
 @property (nonatomic) CGRect pageFrame;
-
-@property (nonatomic,strong) NSTimer *timer;
 
 @property (nonatomic) NSUInteger itemCount;
 
@@ -77,6 +74,7 @@ static const NSUInteger totalItem = 1000;
     return self;
 }
 
+
 #pragma mark Timer 定时器
 
 - (void)setupTimerIfNeed {
@@ -85,7 +83,7 @@ static const NSUInteger totalItem = 1000;
     
         __weak DCPicScrollView * weakSelf = self;
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.configuration.timeInterval block:^{
+        _timer = [NSTimer scheduledTimerWithTimeInterval:self.configuration.timeInterval block:^{
             
             NSUInteger nextItem = weakSelf.currentItem + 1;
             
@@ -103,7 +101,7 @@ static const NSUInteger totalItem = 1000;
     if (!self.timer) return;
     
     [self.timer invalidate];
-    self.timer = nil;
+    _timer = nil;
 }
 
 #pragma mark UICollectionViewDelegate 代理

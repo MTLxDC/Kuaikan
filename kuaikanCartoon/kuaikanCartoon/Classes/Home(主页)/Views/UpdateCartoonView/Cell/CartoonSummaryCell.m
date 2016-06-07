@@ -59,7 +59,13 @@
     
     cdv.requestID = self.model.topic.ID.stringValue;
     
-[[self findResponderWithClass:[UINavigationController class]] pushViewController:cdv animated:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdv];
+    
+    UIViewController *myVc = [self findResponderWithClass:[UIViewController class]];
+    
+    [myVc presentViewController:nav animated:YES completion:^{
+        
+    }];
     
 }
 

@@ -43,15 +43,7 @@
     
     if (self.navigationController.viewControllers.count == 1) {
         MainTabBarController *main = (MainTabBarController *)self.tabBarController;
-        
-        [UIView animateWithDuration:0.25 delay:0.5 usingSpringWithDamping:0.8f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
-            
-            [main.mainTabbar setY:SCREEN_HEIGHT - 44];
-
-        } completion:^(BOOL finished) {
-            
-        }];
-
+        [main setHidesBottomBar:NO];
     }
     
    
@@ -63,9 +55,7 @@
     
     if (self.navigationController.viewControllers.count < 2) return;
     MainTabBarController *main = (MainTabBarController *)self.tabBarController;
-    [UIView animateWithDuration:0.25 animations:^{
-        [main.mainTabbar setY:SCREEN_HEIGHT];
-    }];
+    [main setHidesBottomBar:YES];
 }
 
 @end

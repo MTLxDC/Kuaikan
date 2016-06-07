@@ -8,7 +8,7 @@
 
 #import "ProgressHUD.h"
 
-static CGFloat dissmissDelay = 2.0;
+static CGFloat dissmissDelay = 0.5;
 static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 
 
@@ -17,20 +17,29 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 + (dissmissCallBack)showProgressWithStatus:(NSString *)status inView:(UIView *)view {
     
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
+    
+    HUD.userInteractionEnabled = NO;
     HUD.textLabel.textColor = [[UIColor alloc] initWithWhite:0.4 alpha:1];
     HUD.textLabel.text = status;
     [HUD showInView:view];
     
-    return ^{[HUD dismissAfterDelay:0.25];};
+    return ^{[HUD dismiss];};
 }
+
+
+
 
 + (void)showErrorWithStatus:(NSString *)status inView:(UIView *)view {
     
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
     HUD.textLabel.textColor = [[UIColor alloc] initWithWhite:0.4 alpha:1];
+    
      HUD.textLabel.text = status;
      HUD.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init]; //
+     HUD.interactionType = JGProgressHUDInteractionTypeBlockNoTouches;
+     HUD.userInteractionEnabled = NO;
+
     [HUD showInView:view];
     [HUD dismissAfterDelay:dissmissDelay];
     
@@ -39,8 +48,12 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 + (void)showSuccessWithStatus:(NSString *)status inView:(UIView *)view {
     
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
+    
     HUD.textLabel.text = status;
     HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init]; //
+    HUD.interactionType = JGProgressHUDInteractionTypeBlockNoTouches;
+    HUD.userInteractionEnabled = NO;
+
     [HUD showInView:view];
     [HUD dismissAfterDelay:dissmissDelay];
     
@@ -50,15 +63,15 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
     
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
+    HUD.userInteractionEnabled = NO;
+    HUD.interactionType = JGProgressHUDInteractionTypeBlockNoTouches;
     HUD.indicatorView = [[JGProgressHUDImageIndicatorView alloc] initWithImage:[UIImage imageNamed:imageName]];
     
     [HUD showInView:view];
+
     [HUD dismissAfterDelay:dissmissDelay];
     
 }
-
-
-
 
 
 @end

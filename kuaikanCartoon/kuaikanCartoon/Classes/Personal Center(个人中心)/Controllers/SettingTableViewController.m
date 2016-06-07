@@ -8,6 +8,7 @@
 
 #import "SettingTableViewController.h"
 #import "UserInfoManager.h"
+#import "MainTabBarController.h"
 
 @interface SettingTableViewController () <UIAlertViewDelegate>
 
@@ -26,8 +27,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    MainTabBarController *main = (MainTabBarController *)self.tabBarController;
+    
+    [main setHidesBottomBar:YES];
     [self.navigationController setNavigationBarHidden:NO];
     self.LogoutBtn.hidden = ![UserInfoManager share].hasLogin;
+    
 }
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

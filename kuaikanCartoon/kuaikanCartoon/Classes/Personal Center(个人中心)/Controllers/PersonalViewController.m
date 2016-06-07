@@ -11,6 +11,9 @@
 #import "LoginViewController.h"
 #import "UserInfoManager.h"
 #import "UIView+Extension.h"
+#import "MainTabBarController.h"
+#import "MyMessageViewController.h"
+#import "MyFellowViewController.h"
 
 @interface PersonalViewController ()
 
@@ -32,20 +35,34 @@
     
     [self.userIcon cornerRadius:0];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStatusChange) name:loginStatusChangeNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    MainTabBarController *main = (MainTabBarController *)self.tabBarController;
+    
+    [main setHidesBottomBar:NO];
+    
     [self.navigationController setNavigationBarHidden:YES];
+  
+    [self loginStatusChange];
+}
+
+- (void)loginStatusChange {
     
     if (self.user.hasLogin) {
         [self.userIcon sd_setImageWithURL:[NSURL URLWithString:self.user.avatar_url]];
         self.userName.text = self.user.nickname;
     }else {
+        [self.userIcon setImage:[UIImage imageNamed:@"ic_personal_avatar_83x83_"]];
         self.userName.text = @"登录";
     }
-  
     
 }
 
@@ -62,6 +79,19 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!self.user.hasLogin) return;
+    
+    if (indexPath.section == 0)
+    {
+        [self.navigationController pushViewController:[MyMessageViewController new] animated:YES];
+    }
+    if (indexPath.section == 1)
+    {
+        [self.navigationController pushViewController:[MyFellowViewController new] animated:YES];
+    }
+    
+}
 
 - (UserInfoManager *)user {
     if (!_user) {

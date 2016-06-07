@@ -22,7 +22,6 @@ typedef NS_ENUM(NSUInteger, ModelDataCachingPolicy) {
 + (NSArray <NSString *>*)setupDataFieldsIsModelArray:(BOOL *)isModelArray;
 
 
-
 + (void)requestModelDataWithUrlString:(NSString *)urlString
                              complish:(void (^)(id))complish
                              cachingPolicy:(ModelDataCachingPolicy)cachingPolicy;

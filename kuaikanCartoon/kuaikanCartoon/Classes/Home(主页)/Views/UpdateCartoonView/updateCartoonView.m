@@ -36,7 +36,7 @@
     return self;
 }
 
-static const CGFloat navigationHeadView_H = 30;
+static const CGFloat navigationHeadView_H = 35;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -70,7 +70,7 @@ static const CGFloat navigationHeadView_H = 30;
     lc.labelSelectTextColor = subjectColor;
     lc.labelTextColor = [UIColor darkGrayColor];
     lc.lineColor = subjectColor;
-    lc.fontSize = 10.0f;
+    lc.fontSize = 12.0f;
     lc.spaceing = 20.0f;
     lc.labelWidth = 50.0f;
     lc.monitorScrollView = self.cartoonListView;

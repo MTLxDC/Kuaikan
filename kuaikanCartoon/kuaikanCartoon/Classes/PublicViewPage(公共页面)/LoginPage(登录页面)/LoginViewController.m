@@ -92,8 +92,6 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
 
 - (instancetype)init
 {
-    if ([UserInfoManager share].hasLogin) return nil;
-    
     return [super initWithNibName:@"LoginViewController" bundle:nil];
 }
 

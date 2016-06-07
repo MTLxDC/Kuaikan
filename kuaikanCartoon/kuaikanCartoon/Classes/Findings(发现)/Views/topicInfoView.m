@@ -55,7 +55,7 @@
     _model = model;
     
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url]
-                      placeholderImage:[UIImage imageNamed:@"ic_common_placeholder_s_73x23_"]];
+                      placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
     
     self.titleLabel.text = model.title;
     
@@ -85,10 +85,7 @@
 - (void)setupUI {
     
     UIImageView *imageView = [UIImageView new];
-    
-//    imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    imageView.clipsToBounds = YES;
-    
+
     [self addSubview:imageView];
     
     self.imageView = imageView;

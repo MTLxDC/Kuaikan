@@ -64,7 +64,7 @@
 
 - (id)cacheForKey:(NSString *)key {
     
-    BOOL meiWifiLe = NO;
+    BOOL meiWifiLe = YES;
     
     id cache = [self.modelCache objectForKey:key];
     

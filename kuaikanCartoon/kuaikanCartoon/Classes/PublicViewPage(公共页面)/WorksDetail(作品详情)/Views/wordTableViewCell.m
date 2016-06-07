@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *wordTitleLable;
 
 @property (weak, nonatomic) IBOutlet UIButton *like_Count;
+
 @property (weak, nonatomic) IBOutlet UILabel *creat_Time;
 
 @end

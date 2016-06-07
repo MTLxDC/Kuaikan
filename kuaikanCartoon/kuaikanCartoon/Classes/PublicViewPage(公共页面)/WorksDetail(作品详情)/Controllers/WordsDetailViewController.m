@@ -69,7 +69,6 @@
     [self.view addSubview:head];
 
     self.head = head;
-    
     self.contentView = contenView;
 }
 

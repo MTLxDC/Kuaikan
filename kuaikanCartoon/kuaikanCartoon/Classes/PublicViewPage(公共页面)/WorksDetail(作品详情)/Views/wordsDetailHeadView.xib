@@ -20,7 +20,7 @@
                         <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pbi-2L-IKh" userLabel="bl">
                             <rect key="frame" x="0.0" y="0.0" width="401" height="267"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_album_mask_1x40_" translatesAutoresizingMaskIntoConstraints="NO" id="OXD-8Q-1oL">
+                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_album_mask_1x40_" translatesAutoresizingMaskIntoConstraints="NO" id="OXD-8Q-1oL">
                             <rect key="frame" x="0.0" y="227" width="401" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Yqp-y5-E4M"/>
@@ -43,15 +43,16 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5G-H4-PYl">
-                    <rect key="frame" x="8" y="239" width="44" height="20"/>
+                    <rect key="frame" x="8" y="239" width="265" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="yBB-YF-GQ5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-98-9yI">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-98-9yI">
                     <rect key="frame" x="341" y="244" width="60" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="MfX-jD-0jA"/>
@@ -63,7 +64,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-wp-4cd">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-wp-4cd">
                     <rect key="frame" x="281" y="244" width="60" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="XNu-G0-SSe"/>
@@ -118,6 +119,7 @@
                 <constraint firstItem="L5G-H4-PYl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="hfq-JN-yGe"/>
                 <constraint firstAttribute="trailing" secondItem="cW6-g7-DAg" secondAttribute="trailing" id="lqM-33-hdp"/>
                 <constraint firstAttribute="trailing" secondItem="xc4-98-9yI" secondAttribute="trailing" id="w0U-eQ-Jyc"/>
+                <constraint firstAttribute="trailing" secondItem="L5G-H4-PYl" secondAttribute="trailing" constant="128" id="wQf-jn-6Rv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
@@ -129,13 +131,14 @@
                 <outlet property="backBtn" destination="1Bz-rI-Txj" id="5Kv-kD-xVB"/>
                 <outlet property="bluredImageView" destination="pbi-2L-IKh" id="1cB-EP-2fP"/>
                 <outlet property="imageView" destination="lsZ-qv-UTP" id="hNR-SU-9de"/>
-                <outlet property="leading" destination="hfq-JN-yGe" id="4ZF-jd-WfC"/>
+                <outlet property="leading" destination="hfq-JN-yGe" id="NiA-9o-gJ6"/>
                 <outlet property="likeCount" destination="Wpe-wp-4cd" id="xmL-FZ-o9n"/>
                 <outlet property="maskImageView" destination="OXD-8Q-1oL" id="V6j-vR-z6V"/>
                 <outlet property="replyCount" destination="xc4-98-9yI" id="oTQ-SG-4PV"/>
+                <outlet property="rigthing" destination="wQf-jn-6Rv" id="Pxr-31-ube"/>
                 <outlet property="titleLabel" destination="L5G-H4-PYl" id="OlX-hu-ViF"/>
             </connections>
-            <point key="canvasLocation" x="-448.5" y="-36.5"/>
+            <point key="canvasLocation" x="-466.5" y="-36.5"/>
         </view>
     </objects>
     <resources>
