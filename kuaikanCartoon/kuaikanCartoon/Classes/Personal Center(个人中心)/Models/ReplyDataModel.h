@@ -89,3 +89,11 @@
 
 @end
 
+@interface ReplyDataModel : BaseModel
+
+@property (nonatomic,strong) NSMutableArray *comments;
+
+@property (nonatomic,strong) NSNumber *since;
+
+@end
+

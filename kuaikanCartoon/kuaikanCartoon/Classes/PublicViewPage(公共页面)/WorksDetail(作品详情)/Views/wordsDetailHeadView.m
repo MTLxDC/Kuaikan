@@ -12,8 +12,10 @@
 #import <UIImageView+WebCache.h>
 #import "CommonMacro.h"
 #import "UIView+Extension.h"
+#import "UserInfoManager.h"
+#import "UrlStringDefine.h"
 
-@interface wordsDetailHeadView ()
+@interface wordsDetailHeadView () <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
@@ -27,6 +29,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *replyCount;
 
+@property (weak, nonatomic) IBOutlet UIButton *followBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 
 @property (strong, nonatomic)  UIScrollView *scrollView;
@@ -37,11 +41,12 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leading;
 
+@property (nonatomic,assign) BOOL isFollow;
+
+
 @end
 
 #define kDefaultHeaderFrame CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
-
-
 
 static NSString * const offsetKeyPath = @"contentOffset";
 
@@ -53,15 +58,54 @@ CGFloat const btnHeight  = 15.0f;
 
 @implementation wordsDetailHeadView
 
-- (IBAction)follow:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(follow)]) {
-        [self.delegate follow];
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        self.isFollow = !self.followBtn.selected;
     }
 }
-- (IBAction)back:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(back)]) {
-        [self.delegate back];
+
+- (void)setIsFollow:(BOOL)isFollow {
+    
+    _isFollow = isFollow;
+    
+    BOOL isfollow = _isFollow;
+    
+    self.followBtn.userInteractionEnabled = NO;
+    
+    NSString *url = [NSString stringWithFormat:FollowTopicsUrlStringFormat,self.model.ID.stringValue];
+    
+    weakself(self);
+    
+    [UserInfoManager followWithUrl:url isFollow:isfollow WithfollowCallBack:^(BOOL succeed) {
+        
+        if (succeed) {
+            weakSelf.model.is_favourite = isfollow;
+            weakSelf.followBtn.selected = isfollow;
+        }
+        
+        weakSelf.followBtn.userInteractionEnabled = YES;
+    }];
+    
+}
+
+- (IBAction)follow:(id)sender {
+    
+    UIButton *btn = (UIButton *)sender;
+    
+    if (btn.selected) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"是否取消关注" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+    
+    }else {
+        
+        self.isFollow = !btn.selected;
+
     }
+    
+}
+- (IBAction)back:(id)sender {
+    [[self findResponderWithClass:[UINavigationController class]] popViewControllerAnimated:YES];
 }
 
 + (instancetype)wordsDetailHeadViewWithFrame:(CGRect)frame scorllView:(UIScrollView *)sc {
@@ -85,7 +129,6 @@ CGFloat const btnHeight  = 15.0f;
     [self setHeight:offsetY > navHeight ? offsetY : navHeight];
     
     if (offsetY > navHeight + 20) {
-        
         
         if (offsetY < wordsDetailHeadViewHeight) {
             
@@ -120,14 +163,17 @@ CGFloat const btnHeight  = 15.0f;
 - (void)setShow:(BOOL)show {
     if (_show != show) {
         
-      
-        
         CGFloat leftConstant = spaceing;
         CGFloat rightContstant = 128;
+        
+        UIApplication *app = [UIApplication sharedApplication];
         
         if (!show) {
             rightContstant =  70;
             leftConstant   = (self.width - [self textWidth]) * 0.5;
+            [app setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+        }else {
+            [app setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
         }
         
         self.leading.constant  = leftConstant;
@@ -138,9 +184,6 @@ CGFloat const btnHeight  = 15.0f;
             self.replyCount.alpha = show;
             self.likeCount.alpha = show;
             
-        } completion:^(BOOL finished) {
-            self.replyCount.hidden = !show;
-            self.likeCount.hidden = !show;
         }];
         
         self.backBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:show ? 0.1:0];
@@ -182,7 +225,7 @@ CGFloat const btnHeight  = 15.0f;
     [self.likeCount setTitle:[self makeTextWithCount:model.likes_count.integerValue]
                      forState:UIControlStateNormal];
     
-    
+    self.followBtn.selected = model.is_favourite;
 }
 
 - (NSString *)makeTextWithCount:(NSInteger)count {

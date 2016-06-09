@@ -106,9 +106,14 @@
 		84E3C0631CFC8DC9000B61A7 /* CommentSendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3C0621CFC8DC9000B61A7 /* CommentSendView.xib */; };
 		84F5A6951CF6CD77001EF19F /* PersonalCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F5A6941CF6CD77001EF19F /* PersonalCenter.storyboard */; };
 		84F5A6981CF6F846001EF19F /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F5A6971CF6F846001EF19F /* SettingTableViewController.m */; };
-		84F9B6801D06E8E900B5BADC /* ReplyCommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B67F1D06E8E900B5BADC /* ReplyCommentsModel.m */; };
+		84F9B6801D06E8E900B5BADC /* ReplyDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B67F1D06E8E900B5BADC /* ReplyDataModel.m */; };
 		84F9B6861D0720A700B5BADC /* FellowTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B6851D0720A700B5BADC /* FellowTopicsModel.m */; };
 		84F9B6891D0721DF00B5BADC /* MyFellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B6881D0721DF00B5BADC /* MyFellowViewController.m */; };
+		84F9B68D1D0831A800B5BADC /* MyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B68C1D0831A800B5BADC /* MyCollectionCell.m */; };
+		84F9B68F1D0831B200B5BADC /* MyCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9B68E1D0831B200B5BADC /* MyCollectionCell.xib */; };
+		84F9B6921D08333600B5BADC /* CollectionComicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B6911D08333600B5BADC /* CollectionComicModel.m */; };
+		84F9B6951D08356700B5BADC /* MyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B6941D08356700B5BADC /* MyCollectionViewController.m */; };
+		84F9B6981D096AB600B5BADC /* wordsSequenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9B6971D096AB600B5BADC /* wordsSequenceView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -297,13 +302,22 @@
 		84F5A6941CF6CD77001EF19F /* PersonalCenter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PersonalCenter.storyboard; sourceTree = "<group>"; };
 		84F5A6961CF6F846001EF19F /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		84F5A6971CF6F846001EF19F /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
-		84F9B67E1D06E8E900B5BADC /* ReplyCommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyCommentsModel.h; sourceTree = "<group>"; };
-		84F9B67F1D06E8E900B5BADC /* ReplyCommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyCommentsModel.m; sourceTree = "<group>"; };
+		84F9B67E1D06E8E900B5BADC /* ReplyDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyDataModel.h; sourceTree = "<group>"; };
+		84F9B67F1D06E8E900B5BADC /* ReplyDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyDataModel.m; sourceTree = "<group>"; };
 		84F9B6841D0720A700B5BADC /* FellowTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FellowTopicsModel.h; sourceTree = "<group>"; };
 		84F9B6851D0720A700B5BADC /* FellowTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FellowTopicsModel.m; sourceTree = "<group>"; };
 		84F9B6871D0721DF00B5BADC /* MyFellowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFellowViewController.h; sourceTree = "<group>"; };
 		84F9B6881D0721DF00B5BADC /* MyFellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFellowViewController.m; sourceTree = "<group>"; };
 		84F9B68A1D072B2200B5BADC /* UrlStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlStringDefine.h; sourceTree = "<group>"; };
+		84F9B68B1D0831A800B5BADC /* MyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionCell.h; sourceTree = "<group>"; };
+		84F9B68C1D0831A800B5BADC /* MyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionCell.m; sourceTree = "<group>"; };
+		84F9B68E1D0831B200B5BADC /* MyCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionCell.xib; sourceTree = "<group>"; };
+		84F9B6901D08333600B5BADC /* CollectionComicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionComicModel.h; sourceTree = "<group>"; };
+		84F9B6911D08333600B5BADC /* CollectionComicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionComicModel.m; sourceTree = "<group>"; };
+		84F9B6931D08356700B5BADC /* MyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewController.h; sourceTree = "<group>"; };
+		84F9B6941D08356700B5BADC /* MyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewController.m; sourceTree = "<group>"; };
+		84F9B6961D096AB600B5BADC /* wordsSequenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordsSequenceView.h; sourceTree = "<group>"; };
+		84F9B6971D096AB600B5BADC /* wordsSequenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordsSequenceView.m; sourceTree = "<group>"; };
 		FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kuaikanCartoon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -523,6 +537,8 @@
 				84C4AA1E1D05167800FB1248 /* BaseTableViewController.m */,
 				84F9B6871D0721DF00B5BADC /* MyFellowViewController.h */,
 				84F9B6881D0721DF00B5BADC /* MyFellowViewController.m */,
+				84F9B6931D08356700B5BADC /* MyCollectionViewController.h */,
+				84F9B6941D08356700B5BADC /* MyCollectionViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -530,10 +546,12 @@
 		8471A93E1CD499B400A5D901 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				84F9B67E1D06E8E900B5BADC /* ReplyCommentsModel.h */,
-				84F9B67F1D06E8E900B5BADC /* ReplyCommentsModel.m */,
+				84F9B67E1D06E8E900B5BADC /* ReplyDataModel.h */,
+				84F9B67F1D06E8E900B5BADC /* ReplyDataModel.m */,
 				84F9B6841D0720A700B5BADC /* FellowTopicsModel.h */,
 				84F9B6851D0720A700B5BADC /* FellowTopicsModel.m */,
+				84F9B6901D08333600B5BADC /* CollectionComicModel.h */,
+				84F9B6911D08333600B5BADC /* CollectionComicModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -547,6 +565,9 @@
 				84C4AA151D05106B00FB1248 /* MyFellowWordsCell.h */,
 				84C4AA161D05106B00FB1248 /* MyFellowWordsCell.m */,
 				84C4AA171D05106B00FB1248 /* MyFellowWordsCell.xib */,
+				84F9B68B1D0831A800B5BADC /* MyCollectionCell.h */,
+				84F9B68C1D0831A800B5BADC /* MyCollectionCell.m */,
+				84F9B68E1D0831B200B5BADC /* MyCollectionCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -744,6 +765,8 @@
 				84B51F231CE4D91F00EB4CB0 /* wordTableViewCell.h */,
 				84B51F241CE4D91F00EB4CB0 /* wordTableViewCell.m */,
 				84B51F251CE4D91F00EB4CB0 /* wordTableViewCell.xib */,
+				84F9B6961D096AB600B5BADC /* wordsSequenceView.h */,
+				84F9B6971D096AB600B5BADC /* wordsSequenceView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1024,6 +1047,7 @@
 				84DD850D1CF02A8000FD7300 /* CustomSearchBar.xib in Resources */,
 				84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */,
 				84B51F271CE4D91F00EB4CB0 /* wordTableViewCell.xib in Resources */,
+				84F9B68F1D0831B200B5BADC /* MyCollectionCell.xib in Resources */,
 				84F5A6951CF6CD77001EF19F /* PersonalCenter.storyboard in Resources */,
 				84B51F1E1CE450AE00EB4CB0 /* wordsDetailHeadView.xib in Resources */,
 				84C4AA141D0505A000FB1248 /* MyMessageCell.xib in Resources */,
@@ -1105,7 +1129,7 @@
 				84DD843D1CE8B7BA00FD7300 /* FindHeaderSectionView.m in Sources */,
 				84DD84401CE8E1A900FD7300 /* RenQiBiaoShengCell.m in Sources */,
 				84DD844C1CE8E24700FD7300 /* GuanFangHuoDongCell.m in Sources */,
-				84F9B6801D06E8E900B5BADC /* ReplyCommentsModel.m in Sources */,
+				84F9B6801D06E8E900B5BADC /* ReplyDataModel.m in Sources */,
 				84DD85111CF07BFB00FD7300 /* SearchResultsCell.m in Sources */,
 				84E364241CF09AE3005EDDD6 /* searchWordModel.m in Sources */,
 				846A46E51CDF249800F99B36 /* wordsDetailModel.m in Sources */,
@@ -1120,6 +1144,7 @@
 				84DD84461CE8E1DD00FD7300 /* XinZuoCell.m in Sources */,
 				846A46E21CDF1FD500F99B36 /* BaseTableView.m in Sources */,
 				84B0343A1CE6E033003680F8 /* topicInfoModel.m in Sources */,
+				84F9B6921D08333600B5BADC /* CollectionComicModel.m in Sources */,
 				84E3C03E1CF9B306000B61A7 /* CommentsModel.m in Sources */,
 				84E3642D1CF171B6005EDDD6 /* NoResultTipView.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
@@ -1127,11 +1152,13 @@
 				8465795A1CE33B6F0094072E /* wordsDetailHeadView.m in Sources */,
 				84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */,
 				846A46E81CDF273200F99B36 /* CartonnWordsModel.m in Sources */,
+				84F9B68D1D0831A800B5BADC /* MyCollectionCell.m in Sources */,
 				84E3C0341CF9B306000B61A7 /* bannerInfoModel.m in Sources */,
 				84D0A7621CDA73ED00E2056A /* ListView.m in Sources */,
 				84E3C0551CFACF67000B61A7 /* wordsModel.m in Sources */,
 				84DD84431CE8E1C900FD7300 /* MeiZhouPaiHangCell.m in Sources */,
 				8471A9561CD49CEE00A5D901 /* main.m in Sources */,
+				84F9B6951D08356700B5BADC /* MyCollectionViewController.m in Sources */,
 				84E3C0381CF9B306000B61A7 /* CartoonFlooterView.m in Sources */,
 				8471A98D1CD4C67600A5D901 /* UIView+Extension.m in Sources */,
 				8471A97B1CD4AD6C00A5D901 /* UIImage+Extension.m in Sources */,
@@ -1147,6 +1174,7 @@
 				84C4AA131D0505A000FB1248 /* MyMessageCell.m in Sources */,
 				84F9B6861D0720A700B5BADC /* FellowTopicsModel.m in Sources */,
 				849DE69C1CDB2A9300879190 /* userModel.m in Sources */,
+				84F9B6981D096AB600B5BADC /* wordsSequenceView.m in Sources */,
 				84E3C0361CF9B306000B61A7 /* authorInfoHeadView.m in Sources */,
 				84DD843A1CE8733D00FD7300 /* bannerModel.m in Sources */,
 				84E3C0441CF9ED86000B61A7 /* CommentSectionHeadView.m in Sources */,

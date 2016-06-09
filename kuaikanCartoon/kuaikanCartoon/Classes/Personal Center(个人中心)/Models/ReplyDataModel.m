@@ -6,7 +6,7 @@
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import "ReplyCommentsModel.h"
+#import "ReplyDataModel.h"
 
 @implementation TargetCommentModel
 
@@ -23,9 +23,17 @@
              @"target_comment":[TargetCommentModel class]};
 }
 
+@end
+
+@implementation ReplyDataModel
+
+
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"comments":[ReplyCommentsModel class]};
+}
+
 + (NSArray<NSString *> *)setupDataFieldsIsModelArray:(BOOL *)isModelArray {
-    *isModelArray = YES;
-    return @[@"data",@"comments"];
+    return @[@"data"];
 }
 
 @end

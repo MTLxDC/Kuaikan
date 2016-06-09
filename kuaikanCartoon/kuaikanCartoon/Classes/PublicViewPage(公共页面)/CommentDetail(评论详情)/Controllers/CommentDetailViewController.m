@@ -119,7 +119,7 @@
     
     [sc setSelectedSegmentIndex:0];
     
-    [super setBackItemWithImage:@"ic_nav_delete_normal_17x17_" pressImage:@"ic_nav_delete_pressed_17x17_"];
+   self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithImage:@"ic_nav_delete_normal_17x17_" pressImage:@"ic_nav_delete_pressed_17x17_" target:self action:@selector(dismiss)];
 
     self.sc = sc;
 }
@@ -176,7 +176,7 @@
         if (weakSelf.sc.selectedSegmentIndex == 0) {
             [weakSelf update];
         }
-
+        
     }];
     
     self.isreply = NO;
@@ -198,6 +198,7 @@
     self.commentsDisplayListView.dataSource = self;
     self.commentsDisplayListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.commentsDisplayListView.delegate = self;
+    self.commentsDisplayListView.estimatedRowHeight = 100;
     
     self.cellHeightCache = [NSMutableArray array];
     
@@ -205,7 +206,6 @@
     weakself(self);
     
     //上拉刷新
-    
     
     self.commentsDisplayListView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(update)
     ];
@@ -307,7 +307,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (iOS8Later) return UITableViewAutomaticDimension;
+//    if (iOS8Later) return UITableViewAutomaticDimension;
 
     if (self.cellHeightCache.count > indexPath.row) {
         

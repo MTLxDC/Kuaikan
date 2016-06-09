@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class userModel;
+@class comicsModel;
 
 static CGFloat authorInfoHeadViewHeight = 60;
 
 @interface authorInfoHeadView : UIView
 
-@property (nonatomic,strong) userModel *user;
+@property (nonatomic,strong) comicsModel *model;
 
 @end

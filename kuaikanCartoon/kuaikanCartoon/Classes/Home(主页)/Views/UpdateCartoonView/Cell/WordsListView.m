@@ -36,7 +36,6 @@
     
     [self setup];
     
-    
     return self;
 }
 
@@ -46,7 +45,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.dataSource = self;
     self.delegate = self;
-    self.rowHeight = 282;
+    self.rowHeight = 260;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.since = 0;
@@ -72,11 +71,11 @@ static NSString * const cellIdentifier = @"SummaryCell";
             wordsModel *md = (wordsModel *)result;
             
             if (md.comics.count < 1) {
-                [weakSelf.mj_footer endRefreshingWithNoMoreData];
+                [weakSelf.mj_footer endRefreshing];
+                [weakSelf.tableFooterView setHidden:NO];
                 return ;
             }
 
-            
             [weakSelf.words.comics addObjectsFromArray:md.comics];
              weakSelf.words.since = md.since;
             
@@ -98,7 +97,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     
     self.tableFooterView = imageView;
-    
+    self.tableFooterView.hidden = YES;
     
 }
 
@@ -125,7 +124,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    return 12;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -174,9 +173,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     SummaryModel *md = self.words.comics[indexPath.section];
     
     detailVc.cartoonId = md.ID.stringValue;
-    
-    NSLog(@"%zd",indexPath.row);
-    
+        
     [[self findResponderWithClass:[UINavigationController class]]
                pushViewController:detailVc animated:YES];
 }
@@ -190,15 +187,19 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     [wordsModel requestModelDataWithUrlString:url complish:^(id res) {
         
-        if (weakSelf == nil) return ;
-        
         WordsListView *sself = weakSelf;
         
         [sself.mj_header endRefreshing];
         
-        if (res == nil) return;
-    
             sself.words = res;
+
+        if (sself.words.comics.count < 1) {
+            if (self.NoDataCallBack) {
+                self.NoDataCallBack();
+            }
+            return ;
+        }
+        
             [sself reloadData];
             sself.hidden = NO;
         

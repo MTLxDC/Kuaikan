@@ -12,8 +12,10 @@
 #import "UserInfoManager.h"
 #import "UIView+Extension.h"
 #import "MainTabBarController.h"
+
 #import "MyMessageViewController.h"
 #import "MyFellowViewController.h"
+#import "MyCollectionViewController.h"
 
 @interface PersonalViewController ()
 
@@ -85,10 +87,25 @@
     if (indexPath.section == 0)
     {
         [self.navigationController pushViewController:[MyMessageViewController new] animated:YES];
+        return;
     }
     if (indexPath.section == 1)
     {
-        [self.navigationController pushViewController:[MyFellowViewController new] animated:YES];
+        if (indexPath.row == 0) {
+            [self.navigationController pushViewController:[MyFellowViewController new] animated:YES];
+            return;
+        }
+        
+        if (indexPath.row == 1) {
+            [self.navigationController pushViewController:[MyCollectionViewController new] animated:YES];
+            return;
+        }
+        
+    }
+    
+    if (indexPath.section == 2)
+    {
+        
     }
     
 }

@@ -9,20 +9,26 @@
 #import "WordsDetailViewController.h"
 #import "wordsDetailModel.h"
 #import "CommonMacro.h"
-#import "wordsDetailHeadView.h"
 #import <Masonry.h>
 #import "UIView+Extension.h"
-#import "wordsOptionsHeadView.h"
 #import "wordTableViewCell.h"
 #import "CartoonDetailViewController.h"
 
-@interface WordsDetailViewController ()<UITableViewDataSource,UITableViewDelegate,wordsDetailHeadViewDelegate>
+#import "wordsDetailHeadView.h"
+#import "wordsOptionsHeadView.h"
+#import "wordsSequenceView.h"
+
+@interface WordsDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) wordsDetailModel *wordsModel;
 
 @property (nonatomic,weak)   UITableView *contentView;
 
 @property (nonatomic,strong) wordsDetailHeadView *head;
+
+@property (nonatomic,assign) BOOL showIntroduction; //显示简介
+
+@property (nonatomic,strong) wordsSequenceView *sequenceView;
 
 @end
 
@@ -36,7 +42,7 @@
 
     [self setupWordsDetailContentView];
     
-    [self requestData];
+    [self updata];
 }
 
 - (void)setup {
@@ -55,15 +61,27 @@
    
     UITableView *contenView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     
-    wordsDetailHeadView *head = [wordsDetailHeadView wordsDetailHeadViewWithFrame:CGRectMake(0, 0, self.view.width, wordsDetailHeadViewHeight) scorllView:contenView];
-    
-    head.delegate = self;
-    
     contenView.contentInset = UIEdgeInsetsMake(wordsDetailHeadViewHeight, 0, 0, 0);
     contenView.dataSource = self;
     contenView.delegate = self;
     contenView.rowHeight = 100.0f;
     contenView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    wordsDetailHeadView *head = [wordsDetailHeadView wordsDetailHeadViewWithFrame:CGRectMake(0, 0, self.view.width, wordsDetailHeadViewHeight) scorllView:contenView];
+    
+    wordsOptionsHeadView *headView = [[wordsOptionsHeadView alloc] init];
+    
+    [headView setFrame:CGRectMake(0, 0,self.view.width, wordsOptionsHeadViewHeight)];
+    
+    [headView setLefeBtnClick:^(UIButton *btn) {
+        
+    }];
+    
+    [headView setRightBtnClick:^(UIButton *btn) {
+        
+    }];
+    
+    contenView.tableHeaderView = headView;
     
     [self.view addSubview:contenView];
     [self.view addSubview:head];
@@ -72,15 +90,16 @@
     self.contentView = contenView;
 }
 
+
 -(void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)follow {
-    printf("%s\n",__func__);
+- (void)changeSortReloadData:(UIButton *)sortBtn {
+    [self requestDataWithSortWay:!sortBtn.selected];
 }
 
-- (void)requestData {
+- (void)updata {
     
     NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/topics/%@?sort=0",self.wordsID];
     
@@ -88,17 +107,38 @@
     
     [wordsDetailModel requestModelDataWithUrlString:url complish:^(id res) {
         
-            weakSelf.wordsModel = res;
+        if (res == nil) return;
+        
+        weakSelf.wordsModel = res;
+        weakSelf.head.model = res;
+        [weakSelf.contentView reloadData];
         
     } cachingPolicy:ModelDataCachingPolicyDefault];
     
 }
 
-- (void)setWordsModel:(wordsDetailModel *)wordsModel {
-    _wordsModel = wordsModel;
+//yes正序,no倒序
+- (void)requestDataWithSortWay:(BOOL)sortWay {
     
-    self.head.model = wordsModel;
-    [self.contentView reloadData];
+    self.sequenceView.sortBtn.selected = sortWay;
+    self.sequenceView.sortBtn.enabled  = NO;
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/topics/%@?sort=%zd",self.wordsID,sortWay];
+    
+    weakself(self);
+    
+    [wordsDetailModel requestModelDataWithUrlString:url complish:^(id res) {
+        
+        if (res == nil) return;
+        
+        wordsDetailModel *model = (wordsDetailModel *)res;
+        
+            weakSelf.wordsModel.comics = model.comics;
+            weakSelf.sequenceView.sortBtn.enabled = YES;
+            [weakSelf.contentView reloadData];
+        
+    } cachingPolicy:ModelDataCachingPolicyNoCache];
+    
 }
 
 
@@ -142,22 +182,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return wordsOptionsHeadViewHeight;
+    return wordsSequenceViewHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    wordsOptionsHeadView *headView = [[wordsOptionsHeadView alloc] init];
-    
-    [headView setLefeBtnClick:^(UIButton *btn) {
-        
-    }];
-    
-    [headView setRightBtnClick:^(UIButton *btn) {
-        
-    }];
-    
-    
-    return headView;
+    return self.sequenceView;
+}
+
+- (wordsSequenceView *)sequenceView {
+    if (!_sequenceView) {
+        wordsSequenceView *wsv = [[wordsSequenceView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, wordsSequenceViewHeight)];
+        wsv.backgroundColor = [UIColor whiteColor];
+        [wsv.sortBtn addTarget:self action:@selector(changeSortReloadData:) forControlEvents:UIControlEventTouchUpInside];
+        _sequenceView = wsv;
+    }
+    return _sequenceView;
 }
 
 @end

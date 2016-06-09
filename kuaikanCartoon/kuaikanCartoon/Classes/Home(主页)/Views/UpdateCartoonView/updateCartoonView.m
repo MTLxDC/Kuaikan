@@ -53,20 +53,24 @@ static const CGFloat navigationHeadView_H = 35;
     NSMutableArray *weekArray = [NSMutableArray arrayWithArray:
     @[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"]];
     
-    DateManager *date = [DateManager share];
-
-    NSInteger weekday = date.currentWeek - 1;
+    NSInteger week = [[DateManager share] currentWeek] - 1;
     
-    [weekArray replaceObjectAtIndex:weekday withObject:@"今天"];
+    NSMutableArray *arr = [NSMutableArray array];
     
-    NSInteger yesterday = weekday - 1 > 0 ? weekday - 1 : weekArray.count - 1;
+    for (NSInteger index = 6; index > 1; index--) {
     
-    [weekArray replaceObjectAtIndex:yesterday withObject:@"昨天"];
+        NSInteger newWeek = week - index;
+        
+        if (newWeek < 0) newWeek = 7 + newWeek;
+        
+        [arr addObject:weekArray[newWeek]];
+    }
     
+    [arr addObjectsFromArray:@[@"昨天",@"今天"]];
     
     ListViewConfiguration *lc = [ListViewConfiguration new];
     
-    lc.hasSelectAnimate = YES;
+    
     lc.labelSelectTextColor = subjectColor;
     lc.labelTextColor = [UIColor darkGrayColor];
     lc.lineColor = subjectColor;
@@ -75,7 +79,7 @@ static const CGFloat navigationHeadView_H = 35;
     lc.labelWidth = 50.0f;
     lc.monitorScrollView = self.cartoonListView;
     
-    ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:weekArray Configuration:lc];
+    ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:arr Configuration:lc];
     
     [self addSubview:lv];
     [self addSubview:self.cartoonListView];

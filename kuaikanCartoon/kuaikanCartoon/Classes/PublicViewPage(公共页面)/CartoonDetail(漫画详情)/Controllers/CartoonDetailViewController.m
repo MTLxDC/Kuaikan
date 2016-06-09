@@ -151,7 +151,7 @@ static const CGFloat imageCellHeight = 250.0f;
     self.titleLabel.text = self.comicsMd.title;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     [self.cartoonContentView reloadData];
-    
+    [self.cartoonContentView setContentOffset:CGPointMake(0, -navHeight)];
 }
 
 static CGFloat progressWidth = 150;
@@ -414,7 +414,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     if (section == 0) {
         authorInfoHeadView *head = [[authorInfoHeadView alloc] initWithFrame:self.view.bounds];
         
-        head.user = self.comicsMd.topic.user;
+        head.model = self.comicsMd;
         
         return head;
     }
@@ -523,7 +523,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         [cell updateConstraintsIfNeeded];
         
         [cell setNeedsLayout];          //强制更新cell的布局
-//        [cell layoutIfNeeded];
+        [cell layoutIfNeeded];
         
         cell.bounds = CGRectMake(0.0f, 0.0f,
                                  CGRectGetWidth(tableView.bounds),
@@ -544,12 +544,19 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     return 0;
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hideOrShowHeadBottomView:YES];
+}
+
+
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sc {
     
     CGFloat offsetY = sc.contentOffset.y;
     CGFloat maxOffsetY = sc.contentSize.height - sc.height;
     
     self.progress.value = offsetY/maxOffsetY;
+    
 }
 
 

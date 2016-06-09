@@ -8,7 +8,7 @@
 
 
 //关注  use topics ID
-#define FollowTopicsUrlStringFormat   @"http://api.kuaikanmanhua.com/v1/topics/%zd/fav"
+#define FollowTopicsUrlStringFormat   @"http://api.kuaikanmanhua.com/v1/topics/%@/fav"
 
 //关注  use comics ID
-#define FollowComicsUrlStringFormat   @"http://api.kuaikanmanhua.com/v1/comics/%zd/fav"
+#define FollowComicsUrlStringFormat   @"http://api.kuaikanmanhua.com/v1/comics/%@/fav"

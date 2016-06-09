@@ -8,17 +8,15 @@
 
 #import "MyMessageViewController.h"
 #import "MyMessageCell.h"
-#import "ReplyCommentsModel.h"
+#import "ReplyDataModel.h"
 
 @interface MyMessageViewController ()
 
-@property (nonatomic,strong) NSMutableArray *modelArray;
+@property (nonatomic,strong) ReplyDataModel *model;
 
 @property (nonatomic,strong) MyMessageCell  *meesageCell;
 
 @property (nonatomic,strong) NSMutableArray *cellHeightCache;
-
-@property (nonatomic,assign) NSInteger since;
 
 @end
 
@@ -31,7 +29,6 @@
     self = [super init];
     if (self) {
         
-        self.modelArray = [NSMutableArray array];
         self.cellHeightCache = [NSMutableArray array];
         self.meesageCell = [MyMessageCell makeMyMessageCell];
         
@@ -57,44 +54,48 @@
     
     weakself(self);
     
-    [ReplyCommentsModel requestModelDataWithUrlString:url complish:^(id result) {
+    [ReplyDataModel requestModelDataWithUrlString:url complish:^(id result) {
         
-         weakSelf.modelArray = result;
+         weakSelf.model = result;
         [weakSelf.cellHeightCache removeAllObjects];
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
         
-    } cachingPolicy:ModelDataCachingPolicyDefault];
+    } cachingPolicy:ModelDataCachingPolicyReload];
         
 }
 
 - (void)loadMoreData {
     
-    self.since += 20;
+    if (self.model.since.integerValue == 0) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        return;
+    }
     
-    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comments/replies/timeline?since=%zd",self.since];
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comments/replies/timeline?since=%zd",self.model.since.integerValue];
     
     weakself(self);
     
-    [ReplyCommentsModel requestModelDataWithUrlString:url complish:^(id result) {
+    [ReplyDataModel requestModelDataWithUrlString:url complish:^(id result) {
         
-        NSArray *resultArr = (NSArray *)result;
+        ReplyDataModel *resultModel = (ReplyDataModel *)result;
         
-        if (resultArr.count < 1) {
+        if (resultModel.comments.count < 1) {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return ;
         }
         
-        [weakSelf.modelArray addObjectsFromArray:result];
+        [weakSelf.model.comments addObjectsFromArray:resultModel.comments];
+         weakSelf.model.since = resultModel.since;
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_footer endRefreshing];
         
-    } cachingPolicy:ModelDataCachingPolicyDefault];
+    } cachingPolicy:ModelDataCachingPolicyNoCache];
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.modelArray.count;
+    return self.model.comments.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -105,7 +106,7 @@
         cell = [MyMessageCell makeMyMessageCell];
     }
     
-    cell.model = [self.modelArray objectAtIndex:indexPath.row];
+    cell.model = [self.model.comments objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -126,7 +127,7 @@
     
     MyMessageCell *cell = self.meesageCell;
     
-    cell.model = self.modelArray[indexPath.row];
+    cell.model = self.model.comments[indexPath.row];
     
     [cell setNeedsLayout];
     [cell layoutIfNeeded];

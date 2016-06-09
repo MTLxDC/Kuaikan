@@ -51,7 +51,7 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     
     [self setTitleEdgeInsets:UIEdgeInsetsMake(0,5, 0, 0)];
     
-    self.titleLabel.font = [UIFont systemFontOfSize:10];
+    self.titleLabel.font = [UIFont systemFontOfSize:12];
     self.islike = false;
 }
 

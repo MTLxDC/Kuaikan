@@ -38,7 +38,6 @@ static NSUInteger itemCount = 6;
     self.contentView.frame = self.bounds;
     [topicInfoView jiuGongGeLayout:self.items WithMaxWidth:self.bounds.size.width WithRow:2];
     
-    NSLog(@"%@",self.items);
 }
 
 - (void)tap:(UITapGestureRecognizer *)tap {

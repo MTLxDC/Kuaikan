@@ -80,11 +80,14 @@
         make.width.equalTo(@(SINGLE_LINE_WIDTH));
     }];
     
+    [self btnClick:self.rightBtn];
 }
 
 
 
 - (void)btnClick:(UIButton *)btn {
+    
+    if (btn.selected == YES) return;
     
     btn.selected = YES;
     
@@ -111,7 +114,7 @@
         }
     }
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.1 animations:^{
         [self layoutIfNeeded];
     }];
     
@@ -123,7 +126,7 @@
     
     [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [btn setTitleColor:[[UIColor alloc] initWithWhite:0.5 alpha:1] forState:UIControlStateSelected];
+    [btn setTitleColor:[[UIColor alloc] initWithWhite:0.4 alpha:1] forState:UIControlStateSelected];
     [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     
     [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -136,7 +139,7 @@
 - (UIView *)creatSpaceLine {
     
     UIView *spaceLine = [[UIView alloc] init];
-    spaceLine.backgroundColor = [[UIColor alloc] initWithWhite:0.8 alpha:1];
+    spaceLine.backgroundColor = [[UIColor alloc] initWithWhite:0.9 alpha:1];
     [self addSubview:spaceLine];
     
     return spaceLine;

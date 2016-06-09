@@ -12,10 +12,9 @@
 #import "CommentsModel.h"
 #import "LoginViewController.h"
 
-@interface UserInfoManager () <UIAlertViewDelegate,MJCoding>
+@interface UserInfoManager () <UIAlertViewDelegate>
 
 @property (nonatomic,copy) NSString *savePath;
-
 
 @end
 
@@ -29,8 +28,6 @@ static NSString * const commentUrlFormat = @"http://api.kuaikanmanhua.com/v1/com
 static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/%@/reply";
 
 @implementation UserInfoManager
-
-MJCodingImplementation
 
 + (instancetype)share
 {
@@ -55,19 +52,12 @@ MJCodingImplementation
     
     NSDictionary *parameters = [NSKeyedUnarchiver unarchiveObjectWithFile:loginInfoPath];
     
-    if (parameters.count < 1) return;
+    NSDictionary *userData = parameters[@"userData"];
     
-    [self loginWithPhone:parameters[phoneKey] WithPassword:parameters[passwordKey] loginSucceed:^(UserInfoManager *user) {
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:loginSuucceedNotification object:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:loginStatusChangeNotification object:nil];
-        
-    } loginFailed:^(id faileResult, NSError *error) {
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:loginFailedNotification object:nil userInfo:parameters];
-        
-    }];
+    if (userData.count < 1) return;
+    
+    [self saveUserInfoWithData:userData];
+     
 }
 
 - (void)saveUserInfoWithData:(NSDictionary *)data {
@@ -139,11 +129,14 @@ MJCodingImplementation
             
             [self saveUserInfoWithData:data];
             
-        NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+            NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
             
-            [NSKeyedArchiver archiveRootObject:parameters toFile:loginInfoPath];
+            NSDictionary *loginInfo = @{@"userData":data,@"loginInfo":parameters};
+            
+            [NSKeyedArchiver archiveRootObject:loginInfo toFile:loginInfoPath];
             
             [manager requestWithMethod:@"GET" url:userAuthorizeUrlString parameters:nil complish:^(id res, NSError *error) {
+                
             }];
             
             if (succeed) succeed(self);
@@ -177,11 +170,11 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
         return;
     }
     
-    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
-    
     NSString *urlFormat = isreply ? replyUrlFormat : commentUrlFormat;
     
     NSString *url = [NSString stringWithFormat:urlFormat,ID];
+    
+    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
     
     dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"发送中..." inView:topWindow];
     
@@ -222,6 +215,47 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
 }
 
 
++ (void)followWithUrl:(NSString *)url isFollow:(BOOL)isfollow WithfollowCallBack:(void(^)(BOOL succeed))callback;
+{
+    
+    if ([[UserInfoManager share] hasLogin] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未登录" message:@"是否登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+        [alert show];
+        return;
+    }
+    
+    NSString *metond = isfollow ? @"POST" : @"DELETE";
+    
+    [[NetWorkManager share] requestWithMethod:metond url:url parameters:nil complish:^(id res, NSError *error) {
+        
+        NSDictionary *result = (NSDictionary *)res;
+        
+        NSNumber *code = result[@"code"];
+        NSString *message = result[@"message"];
+        
+        UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
+        
+        if (code.integerValue == 200 && [message isEqualToString:@"OK"]) {
+            
+            NSString *status = isfollow ? @"关注成功" : @"取消关注成功";
+            
+            [ProgressHUD showSuccessWithStatus:status inView:topWindow];
+            
+            callback(YES);
+        }else {
+            
+            NSString *status = isfollow ? @"关注失败" : @"取消关注失败";
+            
+            [ProgressHUD showErrorWithStatus:status inView:topWindow];
+            
+            callback(NO);
+        }
+        
+    }];
+    
+    
+}
+
 - (NSString *)savePath {
     if (!_savePath) {
         
@@ -233,5 +267,7 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
     return _savePath;
     
 }
+
+
 
 @end

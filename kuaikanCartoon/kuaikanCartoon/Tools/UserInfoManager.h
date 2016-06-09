@@ -27,6 +27,7 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 
 
 @class CommentsModel;
+@class UIButton;
 
 @interface UserInfoManager : NSObject
 
@@ -56,6 +57,10 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
           WithPassword:(NSString *)password
           loginSucceed:(void (^)(UserInfoManager *user))succeed
            loginFailed:(void (^)(id faileResult,NSError *error))failed;
+
++ (void)followWithUrl:(NSString *)url                   //关注
+             isFollow:(BOOL)isfollow                    //关注还是取消关注
+   WithfollowCallBack:(void(^)(BOOL succeed))callback;  //回调
 
 - (void)saveUserInfoWithData:(NSDictionary *)data;
 

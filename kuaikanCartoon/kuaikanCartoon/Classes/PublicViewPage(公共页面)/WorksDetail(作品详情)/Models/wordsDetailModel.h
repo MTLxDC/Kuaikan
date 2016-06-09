@@ -32,6 +32,9 @@
  "vertical_image_url": "http://i.kuaikanmanhua.com/image/160216/al5174j5l.webp-w320.w"
  */
 
+
+@class wordsModel;
+
 @interface wordsDetailModel : BaseModel
 
 @property (nonatomic,strong) NSArray *comics;

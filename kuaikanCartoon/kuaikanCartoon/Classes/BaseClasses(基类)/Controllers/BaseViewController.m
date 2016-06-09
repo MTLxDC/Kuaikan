@@ -41,21 +41,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.navigationController.viewControllers.count == 1) {
         MainTabBarController *main = (MainTabBarController *)self.tabBarController;
-        [main setHidesBottomBar:NO];
-    }
-    
+        [main setHidesBottomBar:self.navigationController.viewControllers.count > 1];
    
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (self.navigationController.viewControllers.count < 2) return;
-    MainTabBarController *main = (MainTabBarController *)self.tabBarController;
-    [main setHidesBottomBar:YES];
 }
 
 @end

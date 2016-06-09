@@ -54,7 +54,7 @@
 - (void)setModel:(topicModel *)model {
     _model = model;
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url]
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.vertical_image_url]
                       placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
     
     self.titleLabel.text = model.title;
@@ -85,7 +85,11 @@
 - (void)setupUI {
     
     UIImageView *imageView = [UIImageView new];
-
+    
+    imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    imageView.layer.borderWidth = 0.5;
+    
+    
     [self addSubview:imageView];
     
     self.imageView = imageView;

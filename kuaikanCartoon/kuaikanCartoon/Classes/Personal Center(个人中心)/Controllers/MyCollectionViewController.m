@@ -1,17 +1,18 @@
 //
-//  MyFellowViewController.m
+//  MyCollectionViewController.m
 //  kuaikanCartoon
 //
-//  Created by dengchen on 16/6/7.
+//  Created by dengchen on 16/6/8.
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import "MyFellowViewController.h"
-#import "MyFellowWordsCell.h"
-#import "FellowTopicsModel.h"
-#import "WordsDetailViewController.h"
+#import "MyCollectionViewController.h"
+#import "MyCollectionCell.h"
+#import "CollectionComicModel.h"
+#import "CommonMacro.h"
+#import "CartoonDetailViewController.h"
 
-@interface MyFellowViewController ()
+@interface MyCollectionViewController ()
 
 @property (nonatomic,strong) NSMutableArray *modelArray;
 
@@ -19,14 +20,16 @@
 
 @property (nonatomic,assign) NSInteger offset;
 
+
 @end
 
-@implementation MyFellowViewController
+@implementation MyCollectionViewController
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        self.modelArray = [[NSMutableArray alloc] init];
         self.limit  = 20;
         self.offset = 0;
     }
@@ -37,18 +40,20 @@
     [super viewDidLoad];
 
     self.tableView.rowHeight = 80;
-    self.title = @"我的关注";
+    self.title = @"我的收藏";
     
     [self updata];
+    
 }
+
 
 - (void)updata {
     
-    NSString *url = @"http://api.kuaikanmanhua.com/v1/fav/topics?limit=20&offset=0";
+    NSString *url = @"http://api.kuaikanmanhua.com/v1/fav/comics?limit=20&offset=0";
     
     weakself(self);
     
-    [FellowTopicsModel requestModelDataWithUrlString:url complish:^(id result) {
+    [CollectionComicModel requestModelDataWithUrlString:url complish:^(id result) {
         
          weakSelf.modelArray = result;
         [weakSelf.tableView reloadData];
@@ -58,16 +63,18 @@
     
 }
 
+
+
 - (void)loadMoreData {
     
     self.limit  += 20;
     self.offset += 20;
     
-    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/fav/topics?limit=%zd&offset=%zd",self.limit,self.offset];
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/fav/comics?limit=%zd&offset=%zd",self.limit,self.offset];
     
     weakself(self);
     
-    [FellowTopicsModel requestModelDataWithUrlString:url complish:^(id result) {
+    [CollectionComicModel requestModelDataWithUrlString:url complish:^(id result) {
         
         NSArray *resultArr = (NSArray *)result;
         
@@ -90,10 +97,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MyFellowWordsCell *cell = [tableView dequeueReusableCellWithIdentifier:MyFellowWordsCellName];
+    MyCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:MyCollectionCellIdentifier];
     
     if (!cell) {
-        cell = [MyFellowWordsCell makeMyFellowWordsCell];
+        cell = [MyCollectionCell makeMyCollectionCell];
     }
     
     cell.model = self.modelArray[indexPath.row];
@@ -104,13 +111,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    FellowTopicsModel *model = [self.modelArray objectAtIndex:indexPath.row];
+    CollectionComicModel *model = [self.modelArray objectAtIndex:indexPath.row];
     
-    WordsDetailViewController *wdVc = [[WordsDetailViewController alloc] init];
+    CartoonDetailViewController *cdVc = [[CartoonDetailViewController alloc] init];
     
-    wdVc.wordsID = model.ID.stringValue;
+    cdVc.cartoonId = model.ID.stringValue;
     
-    [self.navigationController pushViewController:wdVc animated:YES];
+    [self.navigationController pushViewController:cdVc animated:YES];
 }
 
 

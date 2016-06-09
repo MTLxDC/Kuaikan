@@ -8,10 +8,15 @@
 
 #import "authorInfoHeadView.h"
 #import <Masonry.h>
-#import "userModel.h"
-#import <UIImageView+WebCache.h>
+#import "comicsModel.h"
 #import "CommonMacro.h"
+#import "UrlStringDefine.h"
 #import "Color.h"
+#import "NetWorkManager.h"
+#import <UIImageView+WebCache.h>
+#import "ProgressHUD.h"
+#import "UserInfoManager.h"
+
 @interface authorInfoHeadView ()
 
 @property (nonatomic,weak) UIImageView *authorIcon;
@@ -33,18 +38,18 @@ static CGFloat imageSize = 40;
 static CGFloat followSize = 21;
 
 
-- (void)setUser:(userModel *)user {
-    _user = user;
+- (void)setModel:(comicsModel *)model {
+    _model = model;
     [self updataUI];
 }
 
 - (void)updataUI {
     
-    [self.authorIcon sd_setImageWithURL:[NSURL URLWithString:self.user.avatar_url] placeholderImage:[UIImage imageNamed:@"ic_author_info_headportrait_50x50_"]];
+    [self.authorIcon sd_setImageWithURL:[NSURL URLWithString:self.model.topic.user.avatar_url] placeholderImage:[UIImage imageNamed:@"ic_author_info_headportrait_50x50_"]];
     
-    [self.authorName setText:self.user.nickname];
+    [self.authorName setText:self.model.topic.user.nickname];
     
-
+    self.follow.selected = self.model.is_favourite;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -75,7 +80,6 @@ static CGFloat followSize = 21;
         
     }];
     
-    
     [self.follow mas_makeConstraints:^(MASConstraintMaker *make) {
        
         make.centerY.equalTo(self);
@@ -93,19 +97,36 @@ static CGFloat followSize = 21;
     
 }
 
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
 }
 
-
-
 - (void)follow:(UIButton *)sender {
     
-    printf("%s\n",__func__);
-
+    sender.userInteractionEnabled = NO;
+    
+    BOOL isfollow = !sender.selected;
+    
+    weakself(self);
+    
+    NSString *url = [NSString stringWithFormat:FollowComicsUrlStringFormat,self.model.ID.stringValue];
+    
+    [UserInfoManager followWithUrl:url isFollow:isfollow WithfollowCallBack:^(BOOL succeed) {
+       
+        if (succeed) {
+            
+            sender.selected = isfollow;
+            
+            weakSelf.model.is_favourite = isfollow;
+        }
+        
+        sender.userInteractionEnabled = YES;
+        
+    }];
 }
+
+
 
 
 - (UIImageView *)authorIcon {

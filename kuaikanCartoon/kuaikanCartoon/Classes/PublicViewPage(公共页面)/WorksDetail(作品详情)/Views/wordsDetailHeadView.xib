@@ -96,6 +96,7 @@
                         <constraint firstAttribute="width" constant="53" id="wFV-k4-oRx"/>
                     </constraints>
                     <state key="normal" image="ic_album_nav_follow_normal_53x27_"/>
+                    <state key="selected" image="ic_album_nav_followed_normal_53x27_"/>
                     <state key="highlighted" image="ic_album_nav_follow_pressed_53x27_"/>
                     <connections>
                         <action selector="follow:" destination="iN0-l3-epB" eventType="touchUpInside" id="52F-kF-6B6"/>
@@ -130,6 +131,7 @@
             <connections>
                 <outlet property="backBtn" destination="1Bz-rI-Txj" id="5Kv-kD-xVB"/>
                 <outlet property="bluredImageView" destination="pbi-2L-IKh" id="1cB-EP-2fP"/>
+                <outlet property="followBtn" destination="d55-Sl-NZ5" id="vfj-B0-OLH"/>
                 <outlet property="imageView" destination="lsZ-qv-UTP" id="hNR-SU-9de"/>
                 <outlet property="leading" destination="hfq-JN-yGe" id="NiA-9o-gJ6"/>
                 <outlet property="likeCount" destination="Wpe-wp-4cd" id="xmL-FZ-o9n"/>
@@ -148,6 +150,7 @@
         <image name="ic_album_nav_back_pressed_11x19_" width="11" height="19"/>
         <image name="ic_album_nav_follow_normal_53x27_" width="53" height="27"/>
         <image name="ic_album_nav_follow_pressed_53x27_" width="53" height="27"/>
+        <image name="ic_album_nav_followed_normal_53x27_" width="53" height="27"/>
         <image name="ic_album_praise_normal_15x15_" width="15" height="15"/>
     </resources>
 </document>

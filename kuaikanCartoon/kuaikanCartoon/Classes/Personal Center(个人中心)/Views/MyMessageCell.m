@@ -10,7 +10,7 @@
 #import "UIView+Extension.h"
 #import "Color.h"
 #import "CommonMacro.h"
-#import "ReplyCommentsModel.h"
+#import "ReplyDataModel.h"
 #import "DateManager.h"
 #import "WordsDetailViewController.h"
 

@@ -16,6 +16,8 @@
 
 @property (nonatomic) BOOL hasTimeline;     //defaut is NO 
 
+@property (nonatomic,copy) void (^NoDataCallBack)();
+
 
 @end
 

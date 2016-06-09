@@ -22,9 +22,11 @@
 @implementation DateManager
 
 
+
 - (NSInteger)currentWeek {
     return [[self.calender_CN components:NSCalendarUnitWeekday fromDate:self.currentDate] weekday];
 }
+
 
 
 - (NSDate *)dateByTodayAddingDays: (NSInteger)dDays

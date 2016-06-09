@@ -20,9 +20,6 @@
 
 @interface HomeViewController ()
 
-@property (nonatomic,weak) UIButton *leftBtn;
-@property (nonatomic,weak) UIButton *rightBtn;
-
 @property (nonatomic,weak) UIScrollView *mainView;
 
 @property (nonatomic,weak) WordsListView *wlv;
@@ -114,6 +111,7 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     wlv.hidden = YES;
     wlv.hasTimeline = YES;
+   
     
     updateCartoonView *cv = [[updateCartoonView alloc] initWithFrame:CGRectMake(mainView.width, 0, mainView.width, mainView.height)];
     
@@ -130,6 +128,11 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     [sc addSubview:tipView];
     
     weakself(self);
+    
+    [wlv setNoDataCallBack:^{
+        weakSelf.tipView.tip = tipOptionNotConcerned;
+        weakSelf.tipViewContainer.hidden = NO;
+    }];
     
     [tipView setLoginOnClick:^(UserNotLoginTipView *tv) {
        
