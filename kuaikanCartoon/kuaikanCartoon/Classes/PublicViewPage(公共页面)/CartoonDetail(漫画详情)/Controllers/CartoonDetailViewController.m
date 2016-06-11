@@ -36,15 +36,13 @@
 
 @property (nonatomic,strong) comicsModel *comicsMd;
 
-@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,weak)   UILabel *titleLabel;
 
-@property (nonatomic,weak) UITableView *cartoonContentView;
+@property (nonatomic,weak)   UITableView *cartoonContentView;
 
-@property (nonatomic,weak) CommentBottomView *bottomView;
+@property (nonatomic,weak)   CommentBottomView *bottomView;
 
-@property (nonatomic,copy) NSString *urlString;
-
-@property (nonatomic,weak) UISlider *progress;
+@property (nonatomic,weak)   UISlider *progress;
 
 @property (nonatomic,strong) NSMutableArray *commentCellHeightCache;
 
@@ -117,20 +115,22 @@ static const CGFloat imageCellHeight = 250.0f;
 
 - (void)requestData {
     
-   self.urlString = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@?",self.cartoonId];
+   NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@?",self.cartoonId];
     
     weakself(self);
     
+    self.view.hidden = YES;
     
-   [comicsModel requestModelDataWithUrlString:self.urlString complish:^(id res) {
+   [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
               
        CartoonDetailViewController *sself = weakSelf;
        
             sself.comicsMd = res;
             [sself updataUI];
-            [sself.cartoonContentView setHidden:NO];
+            if (res == nil)   sself.view.hidden = NO;
        
-   } cachingPolicy:ModelDataCachingPolicyDefault];
+       
+   } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
     
     NSString *commentUrl = [NSString stringWithFormat:hotCommentRequestUrlFormat,self.cartoonId];
@@ -142,7 +142,7 @@ static const CGFloat imageCellHeight = 250.0f;
         
         [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
                 
-    } cachingPolicy:ModelDataCachingPolicyDefault];
+    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
 }
 
@@ -225,9 +225,7 @@ static bool needHide = false;
     
     [collectedWorks setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:subjectColor}forState:UIControlStateNormal];
     
-    [super setBackItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_"];
-    [self.navigationController.navigationBar setBarTintColor:White(0.95)];
-    
+    [super setBackItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_"];    
 }
 
 - (void)setupTitleView {
@@ -382,7 +380,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     
     [self.view addSubview:contentView];
     
-    contentView.hidden = YES;
     contentView.backgroundColor = [UIColor whiteColor];
     contentView.dataSource = self;
     contentView.delegate = self;

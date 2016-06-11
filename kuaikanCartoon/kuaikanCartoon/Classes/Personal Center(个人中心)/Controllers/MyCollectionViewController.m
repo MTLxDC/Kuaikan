@@ -55,11 +55,12 @@
     
     [CollectionComicModel requestModelDataWithUrlString:url complish:^(id result) {
         
+        weakSelf.tableView.mj_footer.hidden = weakSelf.modelArray.count < 20;
          weakSelf.modelArray = result;
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
         
-    } cachingPolicy:ModelDataCachingPolicyReload];
+    } cachingPolicy:ModelDataCachingPolicyReload hubInView:self.view];
     
 }
 
@@ -87,7 +88,7 @@
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_footer endRefreshing];
         
-    } cachingPolicy:ModelDataCachingPolicyNoCache];
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     
 }
 

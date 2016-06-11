@@ -57,20 +57,16 @@
     [ReplyDataModel requestModelDataWithUrlString:url complish:^(id result) {
         
          weakSelf.model = result;
+         weakSelf.tableView.mj_footer.hidden = weakSelf.model.since.integerValue == 0;
         [weakSelf.cellHeightCache removeAllObjects];
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
         
-    } cachingPolicy:ModelDataCachingPolicyReload];
+    } cachingPolicy:ModelDataCachingPolicyReload hubInView:self.view];
         
 }
 
 - (void)loadMoreData {
-    
-    if (self.model.since.integerValue == 0) {
-        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-        return;
-    }
     
     NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comments/replies/timeline?since=%zd",self.model.since.integerValue];
     
@@ -90,7 +86,7 @@
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_footer endRefreshing];
         
-    } cachingPolicy:ModelDataCachingPolicyNoCache];
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     
 }
 

@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.95 alpha:1]];
     
     
 }

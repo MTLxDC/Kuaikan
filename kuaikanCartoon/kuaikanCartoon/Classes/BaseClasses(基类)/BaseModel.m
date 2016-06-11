@@ -24,7 +24,7 @@ MJCodingImplementation
 
 
 
-+ (void)requestModelDataWithUrlString:(NSString *)urlString complish:(void (^)(id))complish cachingPolicy:(ModelDataCachingPolicy)cachingPolicy {
++ (void)requestModelDataWithUrlString:(NSString *)urlString complish:(void (^)(id))complish cachingPolicy:(ModelDataCachingPolicy)cachingPolicy hubInView:(UIView *)view {
     
     
     BOOL useCache = YES;
@@ -40,14 +40,16 @@ MJCodingImplementation
     [self requestModelDataWithUrlString:urlString
                                complish:complish
                                useCache:useCache
-                        saveMemoryCache:saveMemoryCache];
+                        saveMemoryCache:saveMemoryCache
+                        hubInView:view];
 
 }
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString
                              complish:(void (^)(id))complish
                              useCache:(BOOL)useMemoryCache
-                             saveMemoryCache:(BOOL)saveMemoryCache   {
+                             saveMemoryCache:(BOOL)saveMemoryCache
+                             hubInView:(UIView *)view {
     
     ModelCacheManager *cache = [ModelCacheManager manager];
     
@@ -62,9 +64,17 @@ MJCodingImplementation
         
     }
     
-    UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
     
-   dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:topWindow];
+    UIView *hubView = nil;
+    
+    if (view) {
+        hubView = view;
+    }else {
+        hubView = [[[UIApplication sharedApplication] windows] lastObject];
+    }
+    
+    
+   dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:hubView];
     
     NetWorkManager *manager = [NetWorkManager share];
     
@@ -77,7 +87,7 @@ MJCodingImplementation
             DEBUG_Log(@"result:%@,error:%@",res,error);
             [ProgressHUD showErrorWithStatus:
              [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]
-                                      inView:topWindow];
+                                      inView:hubView];
             complish(nil);
             
             return;

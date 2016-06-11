@@ -83,7 +83,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
             
             [weakSelf.mj_footer endRefreshing];
             
-        } cachingPolicy:ModelDataCachingPolicyNoCache];
+        } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self];
         
     }];
     
@@ -203,7 +203,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
             [sself reloadData];
             sself.hidden = NO;
         
-    } cachingPolicy:policy];
+    } cachingPolicy:policy hubInView:self];
     
     
 }

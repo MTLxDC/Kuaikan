@@ -83,13 +83,13 @@
     [bannerModel requestModelDataWithUrlString:bannerDataUrl complish:^(id result) {
         weakSelf.bannerModelArray = result;
         [weakSelf.bannerView reloadData];
-    } cachingPolicy:cachingPolicy];
+    } cachingPolicy:cachingPolicy hubInView:self.view];
     
     [topicInfoModel requestModelDataWithUrlString:topicInfoDataUrl complish:^(id result) {
         weakSelf.modelArray = result;
         [weakSelf.mainView reloadData];
         [weakSelf.mainView.mj_header endRefreshing];
-    } cachingPolicy:cachingPolicy];
+    } cachingPolicy:cachingPolicy hubInView:self.view];
     
 }
 

@@ -31,6 +31,8 @@
     
     tableView.mj_header = header;
     tableView.mj_footer = footer;
+    tableView.mj_footer.hidden = YES;
+    
     
     [self.view addSubview:tableView];
     

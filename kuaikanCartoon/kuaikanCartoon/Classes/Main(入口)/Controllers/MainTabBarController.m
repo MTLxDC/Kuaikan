@@ -80,7 +80,6 @@ CGFloat tabbar_h = 44;
         
     }else {
         
-        
         [UIView animateWithDuration:0.25 delay:0.5 usingSpringWithDamping:0.8f initialSpringVelocity:15.0f options:UIViewAnimationOptionTransitionNone animations:^{
             
             [self.mainTabbar setY:SCREEN_HEIGHT - 44];

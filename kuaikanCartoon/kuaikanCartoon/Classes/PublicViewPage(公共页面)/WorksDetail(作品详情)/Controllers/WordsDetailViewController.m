@@ -105,7 +105,7 @@
     
     weakself(self);
     
-    [wordsDetailModel requestModelDataWithUrlString:url complish:^(id res) {
+    [wordsDetailModel  requestModelDataWithUrlString:url complish:^(id res) {
         
         if (res == nil) return;
         
@@ -113,7 +113,7 @@
         weakSelf.head.model = res;
         [weakSelf.contentView reloadData];
         
-    } cachingPolicy:ModelDataCachingPolicyDefault];
+    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
 }
 
@@ -137,7 +137,7 @@
             weakSelf.sequenceView.sortBtn.enabled = YES;
             [weakSelf.contentView reloadData];
         
-    } cachingPolicy:ModelDataCachingPolicyNoCache];
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     
 }
 

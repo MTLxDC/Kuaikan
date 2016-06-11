@@ -207,8 +207,10 @@
     
     //上拉刷新
     
-    self.commentsDisplayListView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(update)
+    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(update)
     ];
+    
+    [refreshHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
     
     //下拉加载更多
     self.since = 0;
@@ -232,7 +234,7 @@
             [weakSelf.commentsDisplayListView reloadData];
             [weakSelf.commentsDisplayListView.mj_footer endRefreshing];
             
-        } cachingPolicy:ModelDataCachingPolicyNoCache];
+        } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
         
         
     }];
@@ -264,7 +266,7 @@
         [sself.commentsDisplayListView setContentOffset:CGPointMake(0, -navHeight)];
         [sself.commentsDisplayListView.mj_header endRefreshing];
 
-    } cachingPolicy:ModelDataCachingPolicyNoCache] ;
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view] ;
     
 }
 

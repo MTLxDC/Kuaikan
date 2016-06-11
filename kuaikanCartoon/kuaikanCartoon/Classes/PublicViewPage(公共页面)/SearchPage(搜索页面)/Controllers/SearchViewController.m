@@ -179,7 +179,7 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
             [weakSelf.searchResultsView reloadData];
         }
         
-    } cachingPolicy:ModelDataCachingPolicyNoCache];
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     
     
 }

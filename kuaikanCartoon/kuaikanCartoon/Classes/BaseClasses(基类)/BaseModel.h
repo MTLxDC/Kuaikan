@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MJExtension.h>
 
+@class UIView;
 
 typedef NS_ENUM(NSUInteger, ModelDataCachingPolicy) {
     ModelDataCachingPolicyDefault,  //使用内存缓存 保存进内存
@@ -24,8 +25,8 @@ typedef NS_ENUM(NSUInteger, ModelDataCachingPolicy) {
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString
                              complish:(void (^)(id))complish
-                             cachingPolicy:(ModelDataCachingPolicy)cachingPolicy;
-
+                             cachingPolicy:(ModelDataCachingPolicy)cachingPolicy
+                             hubInView:(UIView *)view;  //如果传nil使用keywindow
 
 
 @end

@@ -200,6 +200,7 @@
 		965F930A510A009E623733B5583ABD17 /* bit_writer.c in Sources */ = {isa = PBXBuildFile; fileRef = E2F91A9E3DB7FA38A035CF1DC9ADE8E8 /* bit_writer.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
 		96EB374C03ABAC9D24C7D412F671EAE5 /* backward_references.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A74B5E28768B55725F9A16B3B0FD1 /* backward_references.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
 		978BBA389D278FA3AD96FFAC890FCF79 /* JGProgressHUDFadeZoomAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 846F47AF00279F9837D7FCEF81D02BB9 /* JGProgressHUDFadeZoomAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9867997FE3B3070802E5D932D066E6B9 /* vp8li.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A32B03E99DE036E54DCEE4A8E553007 /* vp8li.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		990C0BF36679A52AF6C83B83DD52B8E6 /* JGProgressHUDIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 218CDB6B73409EADD92D5F752A23232D /* JGProgressHUDIndicatorView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		99D8C610BC84BE231C5D3D280F3B12AF /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 239289F5623F2A9B7AB51CA8A469C004 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		99E93C567132B642135591BD622DA82F /* lossless_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 20F07798960052311FD05E20D6F10909 /* lossless_mips_dsp_r2.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
@@ -575,6 +576,7 @@
 		696E8558A4601860EE9758B9BEFB0C3D /* bit_reader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bit_reader.h; path = src/utils/bit_reader.h; sourceTree = "<group>"; };
 		6990A6D496A50D364ABEB8FC1AEEF1B6 /* MJRefreshNormalHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshNormalHeader.m; path = MJRefresh/Custom/Header/MJRefreshNormalHeader.m; sourceTree = "<group>"; };
 		69F690E8EAAF6DC33325243A22907525 /* MJExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MJExtension-prefix.pch"; sourceTree = "<group>"; };
+		6A32B03E99DE036E54DCEE4A8E553007 /* vp8li.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = vp8li.h; path = src/enc/vp8li.h; sourceTree = "<group>"; };
 		6BFE55D897C6A473D8BDBAAE88255688 /* alphai.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = alphai.h; path = src/dec/alphai.h; sourceTree = "<group>"; };
 		6ECDCCB5334703C11AC5E4C1885AB8D3 /* Pods-kuaikanCartoon-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-kuaikanCartoon-dummy.m"; sourceTree = "<group>"; };
 		6EEC0CA412D7FB80A0AB6CD28BD7C44E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
@@ -1009,6 +1011,7 @@
 				D3187EE8950F9C6DE8BBF66E12C53443 /* vp8l.c */,
 				64166EFAB87014DFF693CDC8382DD6D0 /* vp8l.c */,
 				DDFCB3F4CAB593F602CF6BD29D5DFBF7 /* vp8li.h */,
+				6A32B03E99DE036E54DCEE4A8E553007 /* vp8li.h */,
 				7E87505030C874EF3615BC4D22D70040 /* webp.c */,
 				D4311AE4225CA180BD92EBFA67034F94 /* webpenc.c */,
 				2AF9FDCF2BFFA17D3E0F5F54835BFB09 /* webpi.h */,
@@ -1653,6 +1656,7 @@
 				B77C5E0F68D22AE27E28829CF9507839 /* vp8enci.h in Headers */,
 				63FB79DE0B1EA4A263C8A300A1BE6EFA /* vp8i.h in Headers */,
 				8186D9E601BAEBDAD07CD901C45CCD34 /* vp8li.h in Headers */,
+				9867997FE3B3070802E5D932D066E6B9 /* vp8li.h in Headers */,
 				CE949EB19D9252A95BF9766B9460A7CC /* webpi.h in Headers */,
 				AB1407F84FE3C28D7CAB4199A74ED2A2 /* yuv.h in Headers */,
 			);
