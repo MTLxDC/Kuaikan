@@ -24,6 +24,7 @@
 @property (nonatomic,weak) UIView *topLine;
 @property (nonatomic,weak) UIView *bottomLine;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewWidth;
 
 
 @end
@@ -51,6 +52,13 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"MeiZhouPaiHangItem" owner:nil options:nil] firstObject];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.imageViewWidth.constant = CGRectGetWidth(self.frame) * 0.4;
+    
+    [super layoutSubviews];
+}
 
 - (void)setHideLine:(BOOL)hideLine {
     

@@ -10,13 +10,8 @@
 
 @class UserInfoManager;
 
-typedef void (^loginSucceededCallback)(UserInfoManager *userInfo);
-
 @interface LoginViewController : BaseViewController
 
-@property (nonatomic,copy) loginSucceededCallback loginSucceeded;
-
 + (void)show;
-+ (void)showWithloginSucceeded:(loginSucceededCallback)loginSucceeded;
 
 @end

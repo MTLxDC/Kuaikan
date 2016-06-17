@@ -9,7 +9,6 @@
 #import "SearchHistoryView.h"
 #import "SearchHistoryCell.h"
 #import "CommonMacro.h"
-#import "Color.h"
 
 @interface SearchHistoryView ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -17,6 +16,7 @@
 
 @end
 
+static NSString * const UserSearchHistoryDataKey = @"UserSearchHistoryDataKey";
 
 @implementation SearchHistoryView
 
@@ -52,7 +52,13 @@
     return self;
 }
 
-
+- (void)dealloc {
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:self.historyData forKey:UserSearchHistoryDataKey];
+    [ud synchronize];
+    
+}
 
 - (void)setup {
     
@@ -68,7 +74,7 @@
     UIButton *clearHistoryFooter = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
     
     clearHistoryFooter.titleLabel.font = [UIFont systemFontOfSize:15];
-    clearHistoryFooter.layer.borderWidth = 1;
+    clearHistoryFooter.layer.borderWidth = 3;
     clearHistoryFooter.layer.borderColor = subjectColor.CGColor;
     
     [clearHistoryFooter setTitleColor:subjectColor forState:UIControlStateNormal];
@@ -82,6 +88,10 @@
 }
 
 - (void)clearHistory:(UIButton *)btn {
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserSearchHistoryDataKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.historyData removeAllObjects];
     
@@ -132,7 +142,9 @@
 
 - (NSMutableArray *)historyData {
     if (!_historyData) {
-        _historyData = [[NSMutableArray alloc] init];
+        
+        NSMutableArray *data = [[NSUserDefaults standardUserDefaults] objectForKey:UserSearchHistoryDataKey];
+        _historyData = data.count > 0 ? data :[[NSMutableArray alloc] init];
     }
     return _historyData;
 }

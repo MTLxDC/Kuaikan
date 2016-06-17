@@ -49,7 +49,6 @@
                 <constraint firstItem="ijN-CO-XDy" firstAttribute="centerY" secondItem="9Oq-M9-e9p" secondAttribute="centerY" id="6Al-8G-jsj"/>
                 <constraint firstItem="4mm-8V-z8y" firstAttribute="centerX" secondItem="9Oq-M9-e9p" secondAttribute="centerX" id="Hxn-GW-9J0"/>
                 <constraint firstItem="ijN-CO-XDy" firstAttribute="leading" secondItem="9Oq-M9-e9p" secondAttribute="trailing" constant="16" id="Kdv-KQ-Kif"/>
-                <constraint firstItem="4mm-8V-z8y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="250" constant="8" id="PE3-Od-2ke"/>
                 <constraint firstItem="4mm-8V-z8y" firstAttribute="centerY" secondItem="9Oq-M9-e9p" secondAttribute="centerY" id="oqO-iV-47A"/>
                 <constraint firstItem="9Oq-M9-e9p" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="28" id="qJR-Rj-VJ4"/>
                 <constraint firstAttribute="trailing" secondItem="ijN-CO-XDy" secondAttribute="trailing" constant="8" id="wxA-kb-in2"/>
@@ -59,7 +58,6 @@
             <connections>
                 <outlet property="placeBtn" destination="4mm-8V-z8y" id="h6s-Mg-3Ea"/>
                 <outlet property="placeBtnCenterX" destination="Hxn-GW-9J0" id="bQ4-t8-lvS"/>
-                <outlet property="placeBtnLeading" destination="PE3-Od-2ke" id="zYZ-gs-OFH"/>
                 <outlet property="textField" destination="9Oq-M9-e9p" id="GtI-3o-I8t"/>
             </connections>
             <point key="canvasLocation" x="61.5" y="63"/>

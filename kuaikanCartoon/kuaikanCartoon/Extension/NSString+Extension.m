@@ -94,9 +94,6 @@
     return paramters;
 }
 
-- (NSString *)cachePath {
-    return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.md5_16];
-}
 
 //md5 32位 加密 （小写）
 - (NSString *)md5_32 {

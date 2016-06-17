@@ -11,7 +11,6 @@
 #import "comicsModel.h"
 #import "CommonMacro.h"
 #import "UrlStringDefine.h"
-#import "Color.h"
 #import "NetWorkManager.h"
 #import <UIImageView+WebCache.h>
 #import "ProgressHUD.h"
@@ -97,10 +96,6 @@ static CGFloat followSize = 21;
     
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-}
 
 - (void)follow:(UIButton *)sender {
     
@@ -152,7 +147,7 @@ static CGFloat followSize = 21;
         
         name.font = [UIFont systemFontOfSize:13];
         name.textAlignment = NSTextAlignmentLeft;
-        name.textColor = White(0.4);
+        name.textColor = colorWithWhite(0.4);
         _authorName = name;
     }
     return _authorName;
@@ -180,7 +175,7 @@ static CGFloat followSize = 21;
         UIView *line = [UIView new];
         [self addSubview:line];
         
-        line.backgroundColor = White(0.9);
+        line.backgroundColor = colorWithWhite(0.9);
         
         _line = line;
     }

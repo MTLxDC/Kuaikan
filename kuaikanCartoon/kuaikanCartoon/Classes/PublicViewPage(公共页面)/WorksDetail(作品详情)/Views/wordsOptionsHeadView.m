@@ -9,7 +9,6 @@
 #import "wordsOptionsHeadView.h"
 #import <Masonry.h>
 #import "CommonMacro.h"
-#import "Color.h"
 
 @interface wordsOptionsHeadView ()
 

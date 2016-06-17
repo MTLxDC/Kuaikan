@@ -7,7 +7,6 @@
 //
 
 #import "registerViewController.h"
-#import "Color.h"
 #import "UIView+Extension.h"
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
@@ -22,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *getSMSCode;
 @property (weak, nonatomic) IBOutlet UIButton *nextStepBtn;
 @property (weak, nonatomic) IBOutlet UIView *SMSCodeInputView;
+@property (weak, nonatomic) IBOutlet UITextField *SMSCodeTextField;
+
+@property (nonatomic,assign) BOOL registerToStart;
+
 
 @end
 
@@ -59,6 +62,11 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
  
 }
 
+- (IBAction)SMSCodeTextChange:(UITextField *)sender {
+    if (self.registerToStart) {
+        self.nextStepBtn.enabled = sender.text.length;
+    }
+}
 
 - (IBAction)getSMSCode:(id)sender {
     
@@ -89,6 +97,10 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
         NSString *message = result[@"message"];
         
         if ([message isEqualToString:@"OK"]) {
+            
+            self.registerToStart = YES;
+            
+            [self SMSCodeTextChange:self.SMSCodeTextField];
             
             [self startTiming];
             
@@ -137,6 +149,40 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
 }
 
 
+- (IBAction)nextStep:(id)sender {
+    
+    NSString *url = @"http://api.kuaikanmanhua.com/v1/phone/verify";
+    
+    weakself(self);
+    
+    [[NetWorkManager share] requestWithMethod:@"POST" url:url parameters:@{@"code":self.SMSCodeTextField.text,@"phone":self.phoneTextField.text} complish:^(id res, NSError *error) {
+        
+        NSDictionary *result = (NSDictionary *)res;
+        
+        NSNumber *code = result[@"code"];
+        NSString *message = result[@"message"];
+        
+        if ([message isEqualToString:@"OK"]) {
+            
+            [ProgressHUD showSuccessWithStatus:@"注册成功" inView:weakSelf.view];
+            
+        }else {
+            
+            NSString *errorStatus = nil;
+            
+            switch (code.integerValue) {
+                case 600005: errorStatus = @"验证码无效或者过期咯"; break;
+                    
+                default:errorStatus = @"未知错误";break;
+            }
+            
+            [ProgressHUD showErrorWithStatus:errorStatus inView:weakSelf.view];
+        }
+        
+    }];
+    
+    
+}
 
 - (IBAction)viewUserAgreement:(id)sender {
     

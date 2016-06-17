@@ -9,6 +9,7 @@
 
 #import "ModelCacheManager.h"
 #import "NSString+Extension.h"
+#import "NetWorkManager.h"
 
 
 @interface ModelCacheManager ()
@@ -18,6 +19,9 @@
 @property (nonatomic,strong) NSFileManager *fileManager;
 
 @property (nonatomic,strong) NSMutableDictionary *modelCache;
+
+@property (nonatomic,strong) dispatch_queue_t queue;
+
 
 @end
 
@@ -46,9 +50,9 @@
         
         [center addObserver:self selector:@selector(saveCache) name:UIApplicationDidEnterBackgroundNotification object:nil];
         
-        [center addObserver:self selector:@selector(removeAllObjects) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+        [center addObserver:self selector:@selector(removeAllCache) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
         
-        
+        self.queue = dispatch_queue_create(0, 0);
         self.modelCache = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -62,19 +66,20 @@
     [self.modelCache removeAllObjects];
 }
 
+
+
 - (id)cacheForKey:(NSString *)key {
     
-    BOOL meiWifiLe = NO;
+    BOOL hasNetWork = NO;
     
     id cache = [self.modelCache objectForKey:key];
     
-    if (cache || !meiWifiLe) return cache;
+    if (cache || hasNetWork) return cache;
     
     cache = [NSKeyedUnarchiver unarchiveObjectWithFile:[self cachePathForKey:key]];
     
     return cache;
 }
-
 
 - (void)setCache:(id)aCache forKey:(NSString *)aKey {
     

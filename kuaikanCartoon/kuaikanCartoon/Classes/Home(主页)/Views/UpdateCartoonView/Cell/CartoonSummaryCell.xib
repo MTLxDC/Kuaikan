@@ -28,7 +28,7 @@
                         </state>
                     </button>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恋是樱草色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-gB-fN3">
-                        <rect key="frame" x="56" y="12" width="200" height="20"/>
+                        <rect key="frame" x="56" y="12" width="180" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,9 +66,9 @@
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <button contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEN-h4-a4p">
-                        <rect key="frame" x="264" y="13.5" width="100" height="16"/>
+                        <rect key="frame" x="244" y="14" width="120" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="ufD-S8-EIk"/>
+                            <constraint firstAttribute="width" constant="120" id="ufD-S8-EIk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="收到货就收" image="home_recommend_cell_author_15x15_">
@@ -81,6 +81,13 @@
                             <constraint firstAttribute="height" constant="180" id="gBj-BP-WMT"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_common_placeholder_l_120x38_" translatesAutoresizingMaskIntoConstraints="NO" id="Dk6-3L-qfx">
+                        <rect key="frame" x="130" y="111" width="120" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="EMm-C8-c4b"/>
+                            <constraint firstAttribute="width" constant="120" id="aKo-Pz-MUM"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="U1T-gB-fN3" firstAttribute="height" secondItem="ve8-jQ-6OA" secondAttribute="height" id="1Vx-WL-138"/>
@@ -88,8 +95,10 @@
                     <constraint firstItem="JEN-h4-a4p" firstAttribute="leading" secondItem="U1T-gB-fN3" secondAttribute="trailing" constant="8" id="71b-p5-MsL"/>
                     <constraint firstItem="1lX-Ak-dQy" firstAttribute="centerY" secondItem="UHg-x4-jE9" secondAttribute="centerY" id="8jm-ux-0xK"/>
                     <constraint firstItem="z1a-pZ-wnb" firstAttribute="leading" secondItem="UHg-x4-jE9" secondAttribute="trailing" constant="5" id="CKU-uF-U7A"/>
+                    <constraint firstItem="Dk6-3L-qfx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CWS-Am-fGs"/>
                     <constraint firstAttribute="trailingMargin" secondItem="JEN-h4-a4p" secondAttribute="trailing" constant="8" id="FCM-ji-7E2"/>
                     <constraint firstItem="nwK-WN-Eyf" firstAttribute="top" secondItem="U1T-gB-fN3" secondAttribute="bottom" constant="12" id="KtG-ce-ZAb"/>
+                    <constraint firstItem="Dk6-3L-qfx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Oei-Bd-GZh"/>
                     <constraint firstItem="UHg-x4-jE9" firstAttribute="top" secondItem="nwK-WN-Eyf" secondAttribute="bottom" constant="8" id="X6G-xh-RJ5"/>
                     <constraint firstItem="U1T-gB-fN3" firstAttribute="centerY" secondItem="ve8-jQ-6OA" secondAttribute="centerY" id="Yxl-ZQ-1G1"/>
                     <constraint firstItem="z1a-pZ-wnb" firstAttribute="centerY" secondItem="UHg-x4-jE9" secondAttribute="centerY" id="coo-yv-lb4"/>
@@ -110,14 +119,16 @@
                 <outlet property="chapterTitle" destination="UHg-x4-jE9" id="ezd-W4-EDg"/>
                 <outlet property="frontCover" destination="nwK-WN-Eyf" id="m8K-cB-wY8"/>
                 <outlet property="likeCount" destination="z1a-pZ-wnb" id="ag2-gF-Ie6"/>
+                <outlet property="placeImageView" destination="Dk6-3L-qfx" id="sHH-L2-w8I"/>
                 <outlet property="tagWidth" destination="OK9-Wh-tUV" id="zcW-GD-Nx3"/>
                 <outlet property="worksName" destination="U1T-gB-fN3" id="urT-4B-6vs"/>
             </connections>
-            <point key="canvasLocation" x="191" y="-1"/>
+            <point key="canvasLocation" x="157" y="-38"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="home_recommend_cell_author_15x15_" width="15" height="15"/>
         <image name="ic_common_comment_normal_15x15_" width="15" height="15"/>
+        <image name="ic_common_placeholder_l_120x38_" width="120" height="38"/>
     </resources>
 </document>

@@ -9,8 +9,8 @@
 #import "CommentBottomView.h"
 #import "CommentDetailViewController.h"
 #import "UIView+Extension.h"
-#import "Color.h"
 #import <Masonry.h>
+#import "CommonMacro.h"
 
 static NSString * const contentSizeKeyPath = @"contentSize";
 

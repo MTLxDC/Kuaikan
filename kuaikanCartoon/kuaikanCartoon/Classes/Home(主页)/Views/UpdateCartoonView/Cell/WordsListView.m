@@ -14,12 +14,13 @@
 #import "CartoonDetailViewController.h"
 #import "wordsModel.h"
 #import "DateManager.h"
+#import "HomeViewController.h"
 
 @interface WordsListView ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) wordsModel *words;
 
-@property (nonatomic,weak) UINavigationController *myNav;
+@property (nonatomic,weak) HomeViewController *myHomeVc;
 
 @property (nonatomic,assign) NSInteger since;
 
@@ -67,8 +68,11 @@ static NSString * const cellIdentifier = @"SummaryCell";
         
         [wordsModel requestModelDataWithUrlString:url complish:^(id result) {
             
-            
             wordsModel *md = (wordsModel *)result;
+            
+            [weakSelf.mj_footer endRefreshing];
+            
+            if (!result) return ;
             
             if (md.comics.count < 1) {
                 [weakSelf.mj_footer endRefreshing];
@@ -81,7 +85,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
             
             [weakSelf reloadData];
             
-            [weakSelf.mj_footer endRefreshing];
             
         } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self];
         
@@ -174,10 +177,16 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     detailVc.cartoonId = md.ID.stringValue;
         
-    [[self findResponderWithClass:[UINavigationController class]]
-               pushViewController:detailVc animated:YES];
+    [self.myHomeVc.navigationController pushViewController:detailVc animated:YES];
+    
 }
 
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+
+    [self.myHomeVc hideNavBar:velocity.y > 0];
+    
+}
 
 
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
@@ -190,8 +199,10 @@ static NSString * const cellIdentifier = @"SummaryCell";
         WordsListView *sself = weakSelf;
         
         [sself.mj_header endRefreshing];
+
+        if (!res) return ;
         
-            sself.words = res;
+        sself.words = res;
 
         if (sself.words.comics.count < 1) {
             if (self.NoDataCallBack) {
@@ -201,9 +212,10 @@ static NSString * const cellIdentifier = @"SummaryCell";
         }
         
             [sself reloadData];
+            [sself setContentOffset:CGPointZero];
             sself.hidden = NO;
         
-    } cachingPolicy:policy hubInView:self];
+    } cachingPolicy:policy hubInView:self.myHomeVc.view];
     
     
 }
@@ -217,13 +229,12 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 }
 
-- (UINavigationController *)myNav {
-    if (!_myNav) {
-        _myNav = [self findResponderWithClass:[UINavigationController class]];
+- (HomeViewController *)myHomeVc {
+    if (!_myHomeVc) {
+        _myHomeVc = [self findResponderWithClass:[HomeViewController class]];
     }
-    return _myNav;
+    return _myHomeVc;
 }
-
 
 @end
 

@@ -11,6 +11,7 @@
 #import "topicModel.h"
 #import "UIView+Extension.h"
 #import "CommonMacro.h"
+#import "WordsDetailViewController.h"
 
 @interface MeiZhouPaiHangCell () <UIScrollViewDelegate>
 
@@ -37,6 +38,11 @@
         
         item.model = model;
         item.rankingNumber = index + 1;
+        item.tag = index;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        
+        [item addGestureRecognizer:tap];
         
         [self.scrollView addSubview:item];
         
@@ -46,7 +52,14 @@
     self.items = [items copy];
 }
 
-
+- (void)tap:(UITapGestureRecognizer *)tap {
+   
+    MeiZhouPaiHangItem *item = (MeiZhouPaiHangItem *)[tap view];
+    
+    if (self.itemOnClick) {
+        self.itemOnClick(item.tag);
+    }
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -55,7 +68,9 @@
     
     CGFloat spaceing  = 8;
     
-    self.scrollView.frame = CGRectOffset(self.contentView.bounds,0,spaceing) ;
+    self.scrollView.frame = CGRectMake(spaceing, spaceing,
+                                       self.contentView.width - spaceing,
+                                       self.contentView.height - spaceing * 2);
     
     CGFloat itemWidth  = self.scrollView.width;
     CGFloat itemHeight = self.scrollView.height * 0.33 + 1;
@@ -82,13 +97,12 @@
         
         index_Y++;
         
-        if (index_Y == 2) item.hideLine = YES;
+//        if (index_Y == 2) item.hideLine = YES;
         
         if (index_Y >= 3) {
             index_X++;
             index_Y = 0;
         }
-        
     }
     
     
@@ -102,8 +116,7 @@
         sc.pagingEnabled = YES;
         sc.showsHorizontalScrollIndicator = NO;
         sc.showsVerticalScrollIndicator = NO;
-        sc.clipsToBounds = NO;
-        sc.delegate = self;
+
         [self.contentView addSubview:sc];
         
         

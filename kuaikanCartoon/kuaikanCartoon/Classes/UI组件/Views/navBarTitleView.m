@@ -8,7 +8,6 @@
 
 #import "navBarTitleView.h"
 #import "CommonMacro.h"
-#import "Color.h"
 #import "UIView+Extension.h"
 
 @interface navBarTitleView ()

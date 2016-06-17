@@ -27,6 +27,7 @@
 #import "FindingsViewController.h"
 #import "CartoonDetailViewController.h"
 #import "SearchViewController.h"
+#import "WordsDetailViewController.h"
 
 #import "UIBarButtonItem+EXtension.h"
 #import "UIView+Extension.h"
@@ -59,10 +60,13 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+
     [self.bannerView.timer begin];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -81,14 +85,16 @@
     weakself(self);
     
     [bannerModel requestModelDataWithUrlString:bannerDataUrl complish:^(id result) {
+        if (!result) return ;
         weakSelf.bannerModelArray = result;
         [weakSelf.bannerView reloadData];
     } cachingPolicy:cachingPolicy hubInView:self.view];
     
     [topicInfoModel requestModelDataWithUrlString:topicInfoDataUrl complish:^(id result) {
+        [weakSelf.mainView.mj_header endRefreshing];
+        if (!result) return ;
         weakSelf.modelArray = result;
         [weakSelf.mainView reloadData];
-        [weakSelf.mainView.mj_header endRefreshing];
     } cachingPolicy:cachingPolicy hubInView:self.view];
     
 }
@@ -183,6 +189,26 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
+     
+    if ([cell isKindOfClass:[MeiZhouPaiHangCell class]]) {
+        MeiZhouPaiHangCell *mzph = (MeiZhouPaiHangCell *)cell;
+        if (mzph.itemOnClick == nil) {
+
+            weakself(self);
+            
+            [mzph setItemOnClick:^(NSInteger index) {
+                
+                topicInfoModel *md =  weakSelf.modelArray[1];
+                topicModel *topic = md.topics[index];
+                
+                WordsDetailViewController *wdVc = [WordsDetailViewController new];
+                wdVc.wordsID = topic.ID.stringValue;
+                
+                [weakSelf.navigationController pushViewController:wdVc animated:YES];
+                
+            }];
+        }
+    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -205,6 +231,14 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01f;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     topicInfoModel *md = [self.modelArray objectAtIndex:section];
@@ -215,21 +249,36 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     
     return head;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return self.mainView.height * 0.05;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     switch (indexPath.section) {
-        case 0:return 150;      //人气飙升
-        case 1:return 300;      //每周排行榜
-        case 2:return 270;      //新作出炉
-        case 3:return 270;      //主播力推
-        case 4:return 100;      //官方活动
+        case 0:return [self getCellHeightWithSection:1 withItemCount:3 WithScale:1.33];  //人气飙升
+        case 1:return [self getCellHeightWithSection:3 withItemCount:1 WithScale:0.2]; //每周排行榜
+        case 2:return [self getCellHeightWithSection:2 withItemCount:1 WithScale:0.4];  //新作出炉
+        case 3:return [self getCellHeightWithSection:2 withItemCount:3 WithScale:1.33];  //主播力推
+        case 4:return [self getCellHeightWithSection:1 withItemCount:2 WithScale:0.8];  //官方活动
     }
     
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    [self hideNavBar:velocity.y > 0];
+}
+
+- (CGFloat)getCellHeightWithSection:(NSInteger)section withItemCount:(NSInteger)itemCount WithScale:(CGFloat)scale {
+    
+    CGFloat maxWidth    = self.mainView.width;
+    CGFloat spaceing    = 10;
+    
+    CGFloat itemWidth  = (maxWidth - spaceing * (itemCount + 1))/itemCount;
+    CGFloat CellHeight = (itemWidth * scale * section) + ((section + 1) * spaceing);
+    
+    return CellHeight;
 }
 
 #pragma mark 设置无线轮播器
@@ -239,8 +288,9 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     DCPicScrollViewConfiguration *pcv = [DCPicScrollViewConfiguration defaultConfiguration];
     
     pcv.pageAlignment = PageContolAlignmentCenter;
+    pcv.itemConfiguration.contentMode =  UIViewContentModeScaleToFill;
     
-    DCPicScrollView *ps = [DCPicScrollView picScrollViewWithFrame:CGRectMake(0, 0, self.view.width, 200) withConfiguration:pcv withDataSource:self];
+    DCPicScrollView *ps = [DCPicScrollView picScrollViewWithFrame:CGRectMake(0, 0, self.view.width, self.mainView.height * 0.4) withConfiguration:pcv withDataSource:self];
     
     ps.delegate = self;
     
@@ -254,7 +304,7 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
 - (void)picScrollView:(DCPicScrollView *)picScrollView needUpdateItem:(DCPicItem *)item atIndex:(NSInteger)index {
     bannerModel *md = [self.bannerModelArray objectAtIndex:index];
     
-    [item.imageView sd_setImageWithURL:[NSURL URLWithString:md.pic] placeholderImage:[UIImage imageNamed:@"ic_common_placeholder_l_120x38_"]];
+    [item.imageView sd_setImageWithURL:[NSURL URLWithString:md.pic] placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
 
 }
 
@@ -272,5 +322,6 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
 - (NSUInteger)numberOfItemsInPicScrollView:(DCPicScrollView *)picScrollView {
     return self.bannerModelArray.count;
 }
+
 
 @end

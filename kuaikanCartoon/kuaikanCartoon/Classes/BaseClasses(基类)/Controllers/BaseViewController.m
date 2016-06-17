@@ -18,13 +18,22 @@
 
 @implementation BaseViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _statusBarHidden = NO;
+        _statusBarStyle  = UIStatusBarStyleDefault;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    
-    
+
+
 }
 
 - (void)setBackItemWithImage:(NSString *)image pressImage:(NSString *)pressImage {
@@ -35,6 +44,23 @@
     
 }
 
+
+- (BOOL)prefersStatusBarHidden {
+    return _statusBarHidden;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return _statusBarStyle;
+}
+
+- (void)hideNavBar:(BOOL)ishide {
+    
+    _statusBarHidden = ishide;
+    
+    [self.navigationController setNavigationBarHidden:ishide animated:YES];
+    
+}
+
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -42,9 +68,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.95 alpha:1]];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
+    
         MainTabBarController *main = (MainTabBarController *)self.tabBarController;
         [main setHidesBottomBar:self.navigationController.viewControllers.count > 1];
-   
+    
 }
 
 @end

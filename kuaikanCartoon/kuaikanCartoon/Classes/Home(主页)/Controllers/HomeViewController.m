@@ -10,7 +10,6 @@
 #import "CommonMacro.h"
 #import "navBarTitleView.h"
 #import "updateCartoonView.h"
-#import "Color.h"
 #import "SearchViewController.h"
 #import "WordsListView.h"
 #import "UIView+Extension.h"
@@ -18,7 +17,7 @@
 #import "UserInfoManager.h"
 #import "LoginViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () <UITableViewDelegate>
 
 @property (nonatomic,weak) UIScrollView *mainView;
 
@@ -46,11 +45,11 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     [self setupMainView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStatusChange) name:loginStatusChangeNotification object:nil];
+    RegisterNotify(loginStatusChangeNotification, @selector(loginStatusChange));
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    RemoveNofify
 }
 
 - (void)setupSearchItem {
@@ -94,6 +93,17 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
 }
 
+
+- (void)hideNavBar:(BOOL)ishide {
+    [super hideNavBar:ishide];
+    
+    CGFloat navY = ishide ? 0 : navHeight;
+    
+    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
+        [self.mainView setY:navY];
+    }];
+    
+}
 - (void)setupMainView {
         
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
@@ -111,7 +121,6 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     wlv.hidden = YES;
     wlv.hasTimeline = YES;
-   
     
     updateCartoonView *cv = [[updateCartoonView alloc] initWithFrame:CGRectMake(mainView.width, 0, mainView.width, mainView.height)];
     

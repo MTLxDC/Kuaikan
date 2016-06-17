@@ -13,6 +13,7 @@
 #import "CommonMacro.h"
 #import "UIView+Extension.h"
 #import "UserInfoManager.h"
+#import "WordsDetailViewController.h"
 #import "UrlStringDefine.h"
 
 @interface wordsDetailHeadView () <UIAlertViewDelegate>
@@ -42,6 +43,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leading;
 
 @property (nonatomic,assign) BOOL isFollow;
+
+@property (nonatomic,weak) WordsDetailViewController *myVc;
 
 
 @end
@@ -165,15 +168,13 @@ CGFloat const btnHeight  = 15.0f;
         
         CGFloat leftConstant = spaceing;
         CGFloat rightContstant = 128;
-        
-        UIApplication *app = [UIApplication sharedApplication];
-        
+
         if (!show) {
             rightContstant =  70;
             leftConstant   = (self.width - [self textWidth]) * 0.5;
-            [app setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+            self.myVc.statusBarStyle = UIStatusBarStyleLightContent;
         }else {
-            [app setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+            self.myVc.statusBarStyle = UIStatusBarStyleDefault;
         }
         
         self.leading.constant  = leftConstant;
@@ -249,6 +250,13 @@ CGFloat const btnHeight  = 15.0f;
         return result;
     }
     
+}
+
+- (WordsDetailViewController *)myVc {
+    if (!_myVc) {
+         _myVc = [self findResponderWithClass:[WordsDetailViewController class]];
+    }
+    return _myVc;
 }
 
 @end

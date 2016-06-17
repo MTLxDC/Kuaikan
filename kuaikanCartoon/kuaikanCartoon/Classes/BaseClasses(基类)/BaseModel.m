@@ -28,33 +28,37 @@ MJCodingImplementation
     
     
     BOOL useCache = YES;
-    BOOL saveMemoryCache = YES;
+    BOOL saveCache = YES;
     
     if (cachingPolicy == ModelDataCachingPolicyReload){
         useCache = NO;
     }else if (cachingPolicy == ModelDataCachingPolicyNoCache) {
         useCache = NO;
-        saveMemoryCache = NO;
+        saveCache = NO;
     }
     
     [self requestModelDataWithUrlString:urlString
                                complish:complish
                                useCache:useCache
-                        saveMemoryCache:saveMemoryCache
-                        hubInView:view];
+                              saveCache:saveCache
+                              hubInView:view];
 
 }
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString
                              complish:(void (^)(id))complish
                              useCache:(BOOL)useMemoryCache
-                             saveMemoryCache:(BOOL)saveMemoryCache
+                             saveCache:(BOOL)saveMemoryCache
                              hubInView:(UIView *)view {
     
     ModelCacheManager *cache = [ModelCacheManager manager];
     
-    if (useMemoryCache) {
-        
+    NetWorkManager *manager = [NetWorkManager share];
+
+    BOOL hasNetWork = [manager hasNetWork];
+    
+    if (useMemoryCache || !hasNetWork) {
+
         id memoryCache = [cache cacheForKey:urlString];
         
         if (memoryCache) {                      //内存缓存
@@ -64,8 +68,7 @@ MJCodingImplementation
         
     }
     
-    
-    UIView *hubView = nil;
+   __weak UIView *hubView = nil;
     
     if (view) {
         hubView = view;
@@ -73,10 +76,8 @@ MJCodingImplementation
         hubView = [[[UIApplication sharedApplication] windows] lastObject];
     }
     
-    
    dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:hubView];
     
-    NetWorkManager *manager = [NetWorkManager share];
     
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
        
@@ -89,7 +90,6 @@ MJCodingImplementation
              [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]
                                       inView:hubView];
             complish(nil);
-            
             return;
         }
         

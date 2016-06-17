@@ -13,4 +13,7 @@
 
 @property (nonatomic,copy) NSArray *topics;
 
+@property (nonatomic,copy)  void (^itemOnClick)(NSInteger index);
+
+
 @end

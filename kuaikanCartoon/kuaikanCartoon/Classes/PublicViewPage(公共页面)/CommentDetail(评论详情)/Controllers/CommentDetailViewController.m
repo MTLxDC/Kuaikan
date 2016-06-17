@@ -212,18 +212,18 @@
     
     [refreshHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
     
-    //下拉加载更多
-    self.since = 0;
+    self.commentsDisplayListView.mj_header = refreshHeader;
     
+    //下拉加载更多
     self.commentsDisplayListView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        self.since += 20;
 
-        NSString *moreCommentUrl = [self.requestUrl stringByReplacingOccurrencesOfString:@"0" withString:[NSString stringWithFormat:@"%zd",self.since]];
-        
+        NSString *moreCommentUrl = [self.requestUrl stringByReplacingOccurrencesOfString:@"0" withString:[NSString stringWithFormat:@"%zd",self.modelData.since.integerValue]];
+    
         [CommentDetailModel requestModelDataWithUrlString:moreCommentUrl complish:^(id res) {
             
+
             CommentDetailModel *md = (CommentDetailModel *)res;
-            
+
             if (md.comments.count < 1) {
                 [weakSelf.commentsDisplayListView.mj_footer endRefreshingWithNoMoreData];
                 return ;
@@ -233,11 +233,14 @@
              weakSelf.modelData.since = md.since;
             [weakSelf.commentsDisplayListView reloadData];
             [weakSelf.commentsDisplayListView.mj_footer endRefreshing];
+
             
         } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
         
         
     }];
+    
+    [self.commentsDisplayListView.mj_footer setHidden:YES];
 }
 
 - (void)setRequestUrlWithIsNew:(BOOL)isNew withRequestUrl:(NSString *)requestID {
@@ -259,12 +262,16 @@
     [CommentDetailModel requestModelDataWithUrlString:self.requestUrl complish:^(id res) {
         
         CommentDetailViewController *sself = weakSelf;
-        
+
          sself.modelData = res;
         [sself.cellHeightCache removeAllObjects];
         [sself.commentsDisplayListView reloadData];
         [sself.commentsDisplayListView setContentOffset:CGPointMake(0, -navHeight)];
         [sself.commentsDisplayListView.mj_header endRefreshing];
+        
+        if (sself.modelData.since.integerValue != 0) {
+            [sself.commentsDisplayListView.mj_footer setHidden:NO];
+        }
 
     } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view] ;
     
@@ -309,7 +316,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if (iOS8Later) return UITableViewAutomaticDimension;
+    if (iOS8Later) return UITableViewAutomaticDimension;
 
     if (self.cellHeightCache.count > indexPath.row) {
         

@@ -8,9 +8,9 @@
 
 #import "updateCartoonView.h"
 #import "UIView+Extension.h"
-#import "Color.h"
 #import "updateCartoonListView.h"
 #import "DateManager.h"
+#import "CommonMacro.h"
 
 @interface updateCartoonView ()<UICollectionViewDelegate>
 
@@ -86,6 +86,7 @@ static const CGFloat navigationHeadView_H = 35;
     
     self.navigationHeadView = lv;
     
+
 }
 
 

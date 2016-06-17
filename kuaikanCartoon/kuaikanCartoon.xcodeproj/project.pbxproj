@@ -216,7 +216,6 @@
 		84D979821CD85551008EAE63 /* updateCartoonListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonListView.m; sourceTree = "<group>"; };
 		84D979841CD8A6D7008EAE63 /* DateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateManager.h; sourceTree = "<group>"; };
 		84D979851CD8A6D7008EAE63 /* DateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateManager.m; sourceTree = "<group>"; };
-		84D979871CD8FE57008EAE63 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		84DD84291CE86BB100FD7300 /* DCPicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicItem.h; sourceTree = "<group>"; };
 		84DD842A1CE86BB100FD7300 /* DCPicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPicItem.m; sourceTree = "<group>"; };
 		84DD842B1CE86BB100FD7300 /* DCPicItemConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicItemConfiguration.h; sourceTree = "<group>"; };
@@ -622,7 +621,6 @@
 			isa = PBXGroup;
 			children = (
 				8471A9871CD4B89300A5D901 /* CommonMacro.h */,
-				84D979871CD8FE57008EAE63 /* Color.h */,
 				84F9B68A1D072B2200B5BADC /* UrlStringDefine.h */,
 			);
 			path = Macro;

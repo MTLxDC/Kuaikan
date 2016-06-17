@@ -48,29 +48,29 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="yBB-YF-GQ5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-98-9yI">
-                    <rect key="frame" x="341" y="244" width="60" height="15"/>
+                    <rect key="frame" x="331" y="239" width="70" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="MfX-jD-0jA"/>
-                        <constraint firstAttribute="height" constant="15" id="mdy-bG-BoX"/>
+                        <constraint firstAttribute="width" constant="70" id="MfX-jD-0jA"/>
+                        <constraint firstAttribute="height" constant="20" id="mdy-bG-BoX"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="12200" image="ic_album_comment_normal_15x15_">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-wp-4cd">
-                    <rect key="frame" x="281" y="244" width="60" height="15"/>
+                    <rect key="frame" x="261" y="239" width="70" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="15" id="XNu-G0-SSe"/>
-                        <constraint firstAttribute="width" constant="60" id="uRe-1B-Q4W"/>
+                        <constraint firstAttribute="height" constant="20" id="XNu-G0-SSe"/>
+                        <constraint firstAttribute="width" constant="70" id="uRe-1B-Q4W"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="12200" image="ic_album_praise_normal_15x15_">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

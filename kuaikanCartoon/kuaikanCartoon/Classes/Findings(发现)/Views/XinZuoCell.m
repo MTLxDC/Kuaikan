@@ -45,7 +45,7 @@ static CGFloat const spaceing = 10;
     [super layoutSubviews];
     
     CGFloat w = self.width - spaceing * 2;
-    CGFloat h = 120.0;
+    CGFloat h = (self.height - spaceing * 3) * 0.5;
     
     self.topImageView.frame = CGRectMake(spaceing, spaceing, w, h);
     self.bottomImageView.frame = CGRectMake(spaceing,h + (2 * spaceing),w, h);

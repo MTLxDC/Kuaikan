@@ -7,15 +7,13 @@
 //
 
 #import "CustomSearchBar.h"
-#import "Color.h"
 #import "UIView+Extension.h"
+#import "CommonMacro.h"
 
 
 @interface CustomSearchBar ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *placeBtnCenterX;
-
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *placeBtnLeading;
 
 @property (weak, nonatomic) IBOutlet UIButton *placeBtn;
 

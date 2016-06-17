@@ -134,8 +134,8 @@
         wordsDetailModel *model = (wordsDetailModel *)res;
         
             weakSelf.wordsModel.comics = model.comics;
-            weakSelf.sequenceView.sortBtn.enabled = YES;
             [weakSelf.contentView reloadData];
+            weakSelf.sequenceView.sortBtn.enabled = YES;
         
     } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     

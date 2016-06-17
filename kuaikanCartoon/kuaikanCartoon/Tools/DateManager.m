@@ -7,15 +7,13 @@
 //
 
 #import "DateManager.h"
-#import <objc/runtime.h>
+
 
 @interface DateManager ()
 
 @property (nonatomic,strong) NSCalendar *calender_CN;
 
 @property (nonatomic,strong) NSDate *todayDate;
-
-@property (nonatomic,assign) NSInteger counter;
 
 @end
 

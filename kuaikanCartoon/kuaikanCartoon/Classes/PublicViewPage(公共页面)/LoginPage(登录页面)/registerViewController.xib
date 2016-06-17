@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="registerViewController">
             <connections>
                 <outlet property="SMSCodeInputView" destination="tCi-gn-ijg" id="Aw6-nD-vVa"/>
+                <outlet property="SMSCodeTextField" destination="KVT-P2-AK4" id="OK8-QQ-IdX"/>
                 <outlet property="getSMSCode" destination="pm2-UA-7bB" id="SLD-jC-Y7D"/>
                 <outlet property="inputView" destination="qaM-ow-KKr" id="yxC-vw-NSg"/>
                 <outlet property="nextStepBtn" destination="xjz-G9-9ER" id="Csd-bB-gjB"/>
@@ -84,6 +85,9 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="SMSCodeTextChange:" destination="-1" eventType="editingChanged" id="SDq-4z-msB"/>
+                            </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pm2-UA-7bB">
                             <rect key="frame" x="160" y="0.0" width="80" height="45"/>
@@ -122,6 +126,9 @@
                     <state key="disabled">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="nextStep:" destination="-1" eventType="touchUpInside" id="MlI-dh-0oy"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mr7-p7-Rfh">
                     <rect key="frame" x="42" y="386.5" width="235" height="20"/>

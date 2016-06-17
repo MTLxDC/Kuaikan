@@ -7,7 +7,7 @@
 //
 
 #import "SummaryListItem.h"
-
+#import "UIView+Extension.h"
 /* SummaryListItem  */
 
 @interface SummaryListItem ()
@@ -27,7 +27,7 @@
         [self.contentView addSubview:slv];
         
         self.slv = slv;
-        
+                
         self.backgroundColor = slv.backgroundColor;
         
     }

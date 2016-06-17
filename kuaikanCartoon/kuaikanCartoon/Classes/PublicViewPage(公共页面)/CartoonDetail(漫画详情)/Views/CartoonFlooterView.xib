@@ -190,6 +190,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="navView" destination="Itg-qJ-hkF" id="UIm-ht-mTf"/>
                 <outlet property="nextPageBtn" destination="nrh-os-P1j" id="EdM-gP-Jdi"/>
                 <outlet property="previousBtn" destination="tLc-Za-XSo" id="3XL-0f-S6p"/>
                 <outlet property="upNumber" destination="pAN-Yk-1J5" id="PIw-Ct-eiT"/>

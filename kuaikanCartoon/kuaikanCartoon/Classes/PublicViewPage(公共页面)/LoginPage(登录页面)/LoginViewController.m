@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "Color.h"
 #import "UIView+Extension.h"
 #import "ProgressHUD.h"
 #import "NetWorkManager.h"
@@ -58,21 +57,6 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     }];
 }
 
-+ (void)showWithloginSucceeded:(loginSucceededCallback)loginSucceeded {
-    
-    UIViewController *rootVc = [self topViewControllerWithRootViewController:[[[[UIApplication sharedApplication] delegate] window] rootViewController]];
-
-    LoginViewController *loginVc = [LoginViewController new];
-    
-    [loginVc setLoginSucceeded:loginSucceeded];
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
-    
-    [rootVc presentViewController:nav animated:YES completion:^{
-        
-    }];
-}
-
 + (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController
 {
     
@@ -101,7 +85,7 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     self.view.backgroundColor = subjectColor;
     
     self.loginBtn.backgroundColor = RGB(32, 40, 48);
-    self.DividingLine.backgroundColor = White(0.9);
+    self.DividingLine.backgroundColor = colorWithWhite(0.9);
     
     [self.loginBtn cornerRadius:10];
     [self.inputView cornerRadius:10];
@@ -154,10 +138,6 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
         dissMiss();
         
         [ProgressHUD showSuccessWithStatus:@"登录成功" inView:weakSelf.view];
-        
-        if (weakSelf.loginSucceeded) {
-            weakSelf.loginSucceeded(user);
-        }
      
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf dismissViewControllerAnimated:YES completion:nil];

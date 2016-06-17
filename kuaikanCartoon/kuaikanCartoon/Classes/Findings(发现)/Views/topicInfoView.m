@@ -25,12 +25,13 @@
 @implementation topicInfoView
 
 
-
-+ (void)jiuGongGeLayout:(NSArray<topicInfoView *> *)views WithMaxWidth:(CGFloat)maxWidth WithRow:(NSInteger)row {
++ (void)jiuGongGeLayout:(NSArray<topicInfoView *> *)views WithMaxSize:(CGSize)maxSize WithRow:(NSInteger)row {
     
     NSInteger itemCount = 3;
     
-    CGFloat itemWidth = (maxWidth - (itemCount + 1) * spaceing)/itemCount;
+    CGFloat itemWidth = (maxSize.width - (itemCount + 1) * spaceing)/itemCount;
+    
+    CGFloat itemHeight = (maxSize.height - (row + 1) * spaceing) / row;
     
     CGFloat y,x;
     
@@ -42,12 +43,10 @@
             
             x = index *  (itemWidth + spaceing) + spaceing;
             
-            [views[index + itemCount * section] setFrame:CGRectMake(x, y, itemWidth, itemHeight)];
+            [views[index + itemCount * section] setFrame:CGRectMake(x, y, itemWidth,itemHeight)];
             
         }
     }
-
-    
     
 }
 
@@ -73,13 +72,15 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat maskH  = 30;
-    CGFloat labelH = 20;
+    CGFloat maskH  = self.height * 0.2;
+    CGFloat labelH = 12;
+    CGFloat spaceing = 5;
     
-    self.imageView.frame = self.bounds;
-    self.maskView.frame = CGRectMake(0,self.height - maskH,self.width, maskH);
-    self.titleLabel.frame = CGRectMake(5,self.height - labelH,self.width - 10, labelH);
-    
+    self.imageView.frame    = self.bounds;
+    self.maskView.frame     = CGRectMake(0,self.height - maskH,self.width, maskH);
+    self.titleLabel.frame   = CGRectMake(spaceing,
+                                         self.height - labelH - spaceing,
+                                         self.width - 10, labelH);
 }
 
 - (void)setupUI {
@@ -88,8 +89,6 @@
     
     imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     imageView.layer.borderWidth = 0.5;
-    
-    
     [self addSubview:imageView];
     
     self.imageView = imageView;

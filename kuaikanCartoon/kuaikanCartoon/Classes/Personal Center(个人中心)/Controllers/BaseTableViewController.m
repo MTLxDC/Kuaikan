@@ -47,19 +47,10 @@
     [super viewDidLoad];
     
     [super setBackItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_"];
-    [self.navigationController.navigationBar
-     setBarTintColor:[[UIColor alloc] initWithWhite:0.9 alpha:1]];
     
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    
-}
+
 - (void)updata {
     
 }

@@ -11,13 +11,12 @@
 @class topicModel;
 
 static CGFloat spaceing = 10;
-static CGFloat itemHeight = 120;
 
 @interface topicInfoView : UIView
 
 @property (nonatomic,strong) topicModel *model;
 
-+ (void)jiuGongGeLayout:(NSArray<topicInfoView *> *)views WithMaxWidth:(CGFloat)maxWidth WithRow:(NSInteger)row;
++ (void)jiuGongGeLayout:(NSArray<topicInfoView *> *)views WithMaxSize:(CGSize)maxSize WithRow:(NSInteger)row;
 
 
 @end

@@ -8,7 +8,6 @@
 
 #import "likeCountView.h"
 #import "NetWorkManager.h"
-#import "Color.h"
 #import "CommonMacro.h"
 
 static NSString * const likeUrl = @"http://api.kuaikanmanhua.com/v1/comics";

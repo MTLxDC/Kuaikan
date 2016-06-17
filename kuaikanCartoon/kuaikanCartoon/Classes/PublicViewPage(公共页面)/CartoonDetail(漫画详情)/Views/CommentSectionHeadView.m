@@ -8,8 +8,7 @@
 
 #import "CommentSectionHeadView.h"
 #import <Masonry.h>
-#import "Color.h"
-
+#import "CommonMacro.h"
 
 static const CGFloat spaceing = 8.0f;
 static const CGFloat contentHeight = 20.0f;

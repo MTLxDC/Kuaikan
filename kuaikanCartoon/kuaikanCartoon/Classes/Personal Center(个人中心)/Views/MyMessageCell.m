@@ -8,11 +8,10 @@
 
 #import "MyMessageCell.h"
 #import "UIView+Extension.h"
-#import "Color.h"
 #import "CommonMacro.h"
 #import "ReplyDataModel.h"
 #import "DateManager.h"
-#import "WordsDetailViewController.h"
+#import "CartoonDetailViewController.h"
 
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
@@ -86,13 +85,13 @@
 
 - (IBAction)gotoWordsPage:(UITapGestureRecognizer *)sender {
     
-    WordsDetailViewController *wdVc = [[WordsDetailViewController alloc] init];
+    CartoonDetailViewController *cdVc = [[CartoonDetailViewController alloc] init];
     
-    wdVc.wordsID = self.model.target_comic.ID.stringValue;
+    cdVc.cartoonId = self.model.target_comic.ID.stringValue;
     
   UINavigationController *nav = [self findResponderWithClass:[UINavigationController class]];
     
-    [nav pushViewController:wdVc animated:YES];
+    [nav pushViewController:cdVc animated:YES];
 }
 
 
@@ -105,7 +104,7 @@
     
     CALayer *layer = self.replyBtn.layer;
     
-    layer.borderColor = White(0.9).CGColor;
+    layer.borderColor = colorWithWhite(0.9).CGColor;
     layer.borderWidth   = 0.5;
     layer.cornerRadius  = 5;
     layer.masksToBounds = YES;
@@ -118,7 +117,7 @@
     
     UIView *line = [UIView new];
     
-    line.backgroundColor = White(0.9);
+    line.backgroundColor = colorWithWhite(0.9);
     
     [self.contentView addSubview:line];
     

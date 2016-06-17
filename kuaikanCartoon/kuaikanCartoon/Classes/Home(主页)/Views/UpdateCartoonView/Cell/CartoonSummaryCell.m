@@ -10,12 +10,12 @@
 #import "SummaryModel.h"
 #import <UIImageView+WebCache.h>
 
-#import "Color.h"
 #import "likeCountView.h"
 #import "CommentDetailViewController.h"
 #import "UIView+Extension.h"
 #import <Masonry.h>
 #import "CommonMacro.h"
+#import "UIColor+Extension.h"
 
 
 @interface CartoonSummaryCell ()
@@ -32,6 +32,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tagWidth;
 
+@property (weak, nonatomic) IBOutlet UIImageView *placeImageView;
 
 @end
 
@@ -51,6 +52,9 @@
     
     self.cateoryLabel.layer.cornerRadius  = self.cateoryLabel.bounds.size.height * 0.5;
     self.cateoryLabel.layer.masksToBounds = YES;
+    
+    self.frontCover.layer.borderColor = colorWithWhite(0.9).CGColor;
+    self.frontCover.layer.borderWidth = SINGLE_LINE_WIDTH;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -107,8 +111,14 @@
     
     [self.CommentCount setTitle:text forState:UIControlStateNormal];
     
-    [self.frontCover sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url]
-                       placeholderImage:[UIImage imageNamed:@"ic_common_placeholder_l_120x38_"]];
+    weakself(self);
+    
+    [self.frontCover sd_setImageWithURL:[NSURL URLWithString:model.cover_image_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        weakSelf.placeImageView.hidden = image && error == nil;
+
+    }];
+    
     
     [self.cateoryLabel setTitle:model.label_text forState:UIControlStateNormal];
     

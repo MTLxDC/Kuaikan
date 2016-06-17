@@ -29,13 +29,14 @@ static NSUInteger itemCount = 3;
        obj.model = topics[idx];
 }];
     
+
 }
 
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.contentView.frame = self.bounds;
-    [topicInfoView jiuGongGeLayout:self.items WithMaxWidth:self.bounds.size.width WithRow:1];
+    [topicInfoView jiuGongGeLayout:self.items WithMaxSize:self.contentView.bounds.size WithRow:1];
 }
 
 - (void)tap:(UITapGestureRecognizer *)tap {

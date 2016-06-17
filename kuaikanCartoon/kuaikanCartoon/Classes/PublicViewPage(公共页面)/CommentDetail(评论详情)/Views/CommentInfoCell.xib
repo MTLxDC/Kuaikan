@@ -23,13 +23,16 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dF-Me-voW" userLabel="time">
-                        <rect key="frame" x="54" y="36" width="21.5" height="10"/>
+                        <rect key="frame" x="54" y="34" width="433" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="H5A-B2-swp"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                         <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxw-fq-1zE">
-                        <rect key="frame" x="449" y="187.5" width="30" height="10"/>
+                        <rect key="frame" x="449" y="187" width="30" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="22s-U3-ScY"/>
                             <constraint firstAttribute="height" constant="10" id="kG5-Zc-cgh"/>
@@ -43,7 +46,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUg-fB-Szk" customClass="likeCountView">
-                        <rect key="frame" x="389" y="176" width="60" height="21"/>
+                        <rect key="frame" x="381" y="176" width="60" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="1lA-1v-jfL"/>
                             <constraint firstAttribute="height" constant="21" id="E0k-wI-YFk"/>
@@ -60,6 +63,9 @@
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXh-j5-J2y" userLabel="name">
                         <rect key="frame" x="54" y="16" width="425" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Vqo-YX-mwv"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -90,7 +96,7 @@
                 <constraints>
                     <constraint firstItem="oxw-fq-1zE" firstAttribute="trailing" secondItem="CBk-YY-jPY" secondAttribute="trailing" id="1Lj-OR-cHK"/>
                     <constraint firstItem="tUg-fB-Szk" firstAttribute="bottom" secondItem="2va-Gd-pDM" secondAttribute="bottom" id="7Xh-fI-q1m"/>
-                    <constraint firstItem="oxw-fq-1zE" firstAttribute="leading" secondItem="tUg-fB-Szk" secondAttribute="trailing" id="Ccr-uC-zbw"/>
+                    <constraint firstItem="oxw-fq-1zE" firstAttribute="leading" secondItem="tUg-fB-Szk" secondAttribute="trailing" constant="8" id="Ccr-uC-zbw"/>
                     <constraint firstItem="im6-Lj-Id7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Ezu-uf-Cmz"/>
                     <constraint firstAttribute="bottomMargin" secondItem="2va-Gd-pDM" secondAttribute="bottom" constant="8" id="N2z-za-HNs"/>
                     <constraint firstItem="im6-Lj-Id7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Q6e-L4-24l"/>
@@ -100,6 +106,7 @@
                     <constraint firstItem="CBk-YY-jPY" firstAttribute="top" secondItem="im6-Lj-Id7" secondAttribute="bottom" constant="8" id="dI0-qD-IqG"/>
                     <constraint firstItem="2va-Gd-pDM" firstAttribute="leading" secondItem="xXh-j5-J2y" secondAttribute="leading" id="duT-X7-pAB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="xXh-j5-J2y" secondAttribute="trailing" constant="8" id="dxy-yP-ivv"/>
+                    <constraint firstAttribute="trailing" secondItem="3dF-Me-voW" secondAttribute="trailing" constant="8" id="ipF-1I-f9k"/>
                     <constraint firstItem="3dF-Me-voW" firstAttribute="leading" secondItem="xXh-j5-J2y" secondAttribute="leading" id="jja-OR-Upr"/>
                     <constraint firstItem="xXh-j5-J2y" firstAttribute="leading" secondItem="im6-Lj-Id7" secondAttribute="trailing" constant="8" id="mnw-SR-aeG"/>
                     <constraint firstItem="3dF-Me-voW" firstAttribute="bottom" secondItem="im6-Lj-Id7" secondAttribute="bottom" id="r0m-MA-tG8"/>
@@ -120,7 +127,7 @@
                 <outlet property="userIcon" destination="im6-Lj-Id7" id="dfO-lD-ijb"/>
                 <outlet property="userName" destination="xXh-j5-J2y" id="BYW-42-MjE"/>
             </connections>
-            <point key="canvasLocation" x="304.5" y="246"/>
+            <point key="canvasLocation" x="129.5" y="230"/>
         </tableViewCell>
         <tapGestureRecognizer id="7AZ-7L-poc">
             <connections>

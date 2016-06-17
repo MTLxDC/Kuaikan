@@ -36,7 +36,7 @@ static NSUInteger itemCount = 6;
     [super layoutSubviews];
     
     self.contentView.frame = self.bounds;
-    [topicInfoView jiuGongGeLayout:self.items WithMaxWidth:self.bounds.size.width WithRow:2];
+    [topicInfoView jiuGongGeLayout:self.items WithMaxSize:self.contentView.bounds.size WithRow:2];
     
 }
 

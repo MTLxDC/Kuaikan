@@ -6,11 +6,24 @@
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AFNetworking.h>
 
+/*网络相关
+ {result:ok, data:data}
+ {result:error,message:""}
+ {result:invalidatetoken, message:"token失效"}
+ */
+#define NetOk               @"OK"
+#define NetData             @"data"
+#define NetMessage          @"message"
+#define NetInvalidateToken  @"invalidetoken"
+#define HTTPSchema          @"http:"
+#define HTTPGET             @"GET"
+#define HTTPPOST            @"POST"
 
 @interface NetWorkManager : AFHTTPSessionManager
+
+@property (nonatomic,readonly) BOOL hasNetWork;
 
 
 + (instancetype)share;

@@ -9,7 +9,7 @@
 #import "ProgressHUD.h"
 
 static CGFloat dissmissDelay = 0.5;
-static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
+static JGProgressHUDStyle style = JGProgressHUDStyleLight;
 
 
 @implementation ProgressHUD
@@ -19,8 +19,6 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
     HUD.userInteractionEnabled = NO;
-    HUD.textLabel.textColor = [[UIColor alloc] initWithWhite:0.4 alpha:1];
-    HUD.textLabel.text = status;
     [HUD showInView:view];
     
     return ^{[HUD dismiss];};

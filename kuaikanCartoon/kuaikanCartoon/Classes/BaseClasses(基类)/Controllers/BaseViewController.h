@@ -10,7 +10,12 @@
 
 @interface BaseViewController : UIViewController
 
+@property (nonatomic) BOOL statusBarHidden;
+
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
 
 - (void)setBackItemWithImage:(NSString *)image pressImage:(NSString *)pressImage;
+
+- (void)hideNavBar:(BOOL)ishide;
 
 @end

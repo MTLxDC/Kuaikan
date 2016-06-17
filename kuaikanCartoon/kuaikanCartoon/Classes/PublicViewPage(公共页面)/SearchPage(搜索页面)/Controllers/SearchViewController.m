@@ -14,6 +14,7 @@
 #import "SearchHistoryView.h"
 #import "NoResultTipView.h"
 
+#import <MJRefresh.h>
 #import "SearchResultsCell.h"
 #import "searchWordModel.h"
 #import "WordsDetailViewController.h"
@@ -29,7 +30,7 @@
 @property (nonatomic,weak) NoResultTipView *noResultTipView;
 
 
-@property (nonatomic,strong) NSArray *wordModelArray;
+@property (nonatomic,strong) NSMutableArray *wordModelArray;
 
 @property (nonatomic,assign) BOOL showHistory;
 
@@ -109,7 +110,41 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
     tableView.dataSource = self;
     tableView.delegate = self;
     
+    tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    tableView.mj_footer.hidden = YES;
+    
     self.searchResultsView = tableView;
+}
+
+static NSInteger limit  = 20;
+static NSInteger offset = 0;
+
+
+- (void)loadMoreData {
+    
+    limit  += 20;
+    offset += 20;
+
+    NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&limit=%zd&offset=%zd",searchBaseUrl,self.currentSeachText,limit,offset];
+    
+    weakself(self);
+    
+    [searchWordModel requestModelDataWithUrlString:urlString complish:^(id result) {
+        
+        NSMutableArray *resultArr = (NSMutableArray *)result;
+        
+        if (resultArr.count < 1) {
+            [weakSelf.searchResultsView.mj_footer endRefreshingWithNoMoreData];
+            return ;
+        }
+        
+        [weakSelf.wordModelArray addObjectsFromArray:resultArr];
+        [weakSelf.searchResultsView reloadData];
+        [weakSelf.searchResultsView.mj_footer endRefreshing];
+        
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
+    
+    
 }
 
 - (void)setupNoResultTipView {
@@ -158,11 +193,11 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
     
     if (self.showHistory || text.length > 12) return;
     
-    self.currentSeachText = text;
+    self.currentSeachText = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *keyword   = [self.currentSeachText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&limit=%zd&offset=%zd",searchBaseUrl,text,20,0];
+    NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&limit=%d&offset=%d",searchBaseUrl,keyword,20,0];
     
     weakself(self);
     
@@ -176,6 +211,7 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
         weakSelf.searchResultsView.hidden = !hasResult;
         
         if (hasResult) {
+             weakSelf.searchResultsView.mj_footer.hidden = NO;
             [weakSelf.searchResultsView reloadData];
         }
         

@@ -11,4 +11,7 @@
 
 @interface HomeViewController : BaseViewController
 
+
+- (void)hideNavBar:(BOOL)ishide;
+
 @end

@@ -46,7 +46,7 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 @property (nonatomic,strong) NSNumber *update_remind_flag;
 
 
-+ (void)autoLogin;  //自动登录,前提是登录过并且网络正常
++ (void)autoLogin;  //自动登录
 
 + (void)sendMessage:(NSString *)meassage        //评论和回复
             isReply:(BOOL)isreply               //是否是回复

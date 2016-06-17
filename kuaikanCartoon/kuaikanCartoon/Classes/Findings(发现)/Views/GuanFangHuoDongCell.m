@@ -28,12 +28,12 @@ static CGFloat spaceing = 10;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat labelH = 20;
-    CGFloat imageViewH = self.height - labelH - spaceing;
+    CGFloat labelH = 15;
+    CGFloat imageViewH = self.height - labelH - spaceing * 2;
     
-    self.imageView.frame = CGRectMake(0, 0, self.width, self.height - labelH);
-    
-    self.label.frame = CGRectMake(0, imageViewH + spaceing, self.width, labelH);
+    self.imageView.frame = CGRectMake(0, 0, self.width,imageViewH);
+    self.label.frame = CGRectMake(0,CGRectGetMaxY(self.imageView.frame) + spaceing,
+                                  self.width, labelH);
     
 }
 
@@ -48,7 +48,7 @@ static CGFloat spaceing = 10;
 - (UILabel *)label {
     if (!_label) {
         _label = [UILabel new];
-        _label.font = [UIFont systemFontOfSize:12];
+        _label.font = [UIFont systemFontOfSize:13];
         [self addSubview:_label];
     }
     return _label;

@@ -62,13 +62,20 @@
     self = [super init];
     if (self) {
         
-//        self.completionQueue = dispatch_queue_create("completionQueue", DISPATCH_QUEUE_CONCURRENT);
         self.requestSerializer.timeoutInterval = 10;
+        self.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
         
     }
     return self;
 }
 
+- (void)dealloc {
+    [[AFNetworkReachabilityManager sharedManager] stopMonitoring] ;
+}
 
+- (BOOL)hasNetWork {
+    return [[AFNetworkReachabilityManager sharedManager] isReachable];
+}
 
 @end

@@ -14,8 +14,6 @@
 
 - (NSDictionary *)getUrlStringParameters;
 
-- (NSString *)cachePath;
-
 - (NSString *)md5_32;
 
 - (NSString *)md5_16;

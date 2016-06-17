@@ -10,7 +10,6 @@
 #import "CommentDetailViewController.h"
 #import "WordsDetailViewController.h"
 
-#import "Color.h"
 #import "NetWorkManager.h"
 #import "ProgressHUD.h"
 #import "UserInfoManager.h"
@@ -67,20 +66,16 @@ static const CGFloat imageCellHeight = 250.0f;
     
     [self setupNavigationBar];
     
-    [self setupTitleView];
-    
     [self setupCommentBottomView];
+    
+    [self setupProgress];
     
     [self requestData];
     
-    [self setupProgress];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -119,7 +114,7 @@ static const CGFloat imageCellHeight = 250.0f;
     
     weakself(self);
     
-    self.view.hidden = YES;
+    self.cartoonContentView.hidden = YES;
     
    [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
               
@@ -127,7 +122,7 @@ static const CGFloat imageCellHeight = 250.0f;
        
             sself.comicsMd = res;
             [sself updataUI];
-            if (res == nil)   sself.view.hidden = NO;
+            if (res != nil)   sself.cartoonContentView.hidden = NO;
        
        
    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
@@ -152,6 +147,8 @@ static const CGFloat imageCellHeight = 250.0f;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     [self.cartoonContentView reloadData];
     [self.cartoonContentView setContentOffset:CGPointMake(0, -navHeight)];
+    self.progress.maximumValue = self.comicsMd.images.count - 1;
+    
 }
 
 static CGFloat progressWidth = 150;
@@ -160,6 +157,8 @@ static CGFloat progressWidth = 150;
 {
     
     [self.view endEditing:needhide];
+    
+    self.statusBarHidden = needhide;
     
     [self.navigationController setNavigationBarHidden:needhide animated:YES];
     
@@ -213,9 +212,7 @@ static bool needHide = false;
     }
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return needHide;
-}
+
 
 - (void)setupNavigationBar {
     
@@ -223,9 +220,11 @@ static bool needHide = false;
     
     self.navigationItem.rightBarButtonItem = collectedWorks;
     
-    [collectedWorks setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:subjectColor}forState:UIControlStateNormal];
+    [collectedWorks setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:subjectColor}forState:UIControlStateNormal];
     
-    [super setBackItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_"];    
+    [super setBackItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_"];
+    
+    [self setupTitleView];
 }
 
 - (void)setupTitleView {
@@ -235,8 +234,9 @@ static bool needHide = false;
     UILabel *label = [[UILabel alloc] initWithFrame:textView.frame];
     
     label.textColor = [UIColor blackColor];
-    label.font = [UIFont systemFontOfSize:15];
+    label.font = [UIFont systemFontOfSize:18];
     label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"漫画内容";
     
     [textView addSubview:label];
     
@@ -360,18 +360,13 @@ CGFloat contentSizeMaxHeight = 100.0f;
 }
 
 - (void)sliderDragUp:(UISlider *)progress {
-    
-    CGFloat y = (self.cartoonContentView.contentSize.height -
-                 self.cartoonContentView.height) * progress.value;
-    
-    [self.cartoonContentView setContentOffset:CGPointMake(0, y)];
+    [self.cartoonContentView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:progress.value inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
 }
 
 
 
 #pragma mark 设置tableview
 
-static NSString * const CartoonFlooterViewIdentifier = @"CartoonFlooterView";
 static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 - (void)setupCartoonContentView {
@@ -384,6 +379,8 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     contentView.dataSource = self;
     contentView.delegate = self;
     contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if (iOS8Later)  contentView.estimatedRowHeight = imageCellHeight;
     
     [contentView registerClass:[CartoonContentCell class] forCellReuseIdentifier:CartoonContentCellIdentifier];
     
@@ -488,10 +485,22 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 
 
 #pragma mark UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        self.progress.value = indexPath.row;
+    }
     
 }
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
+    
+    if (indexPath.section == 0 && indexPath.row == self.comicsMd.images.count) {
+        [self hideOrShowProgressView:YES];
+    }
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -500,6 +509,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         
     }else if (indexPath.section == 1) {
         
+        if (iOS8Later) return UITableViewAutomaticDimension;
         
         if (self.commentCellHeightCache.count > indexPath.row) {
             
@@ -542,20 +552,17 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    needHide = YES;
     [self hideOrShowHeadBottomView:YES];
 }
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    if (targetContentOffset -> y == 0) {
+        needHide = NO;
+        [self hideOrShowHeadBottomView:NO];
+    }
 
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)sc {
-    
-    CGFloat offsetY = sc.contentOffset.y;
-    CGFloat maxOffsetY = sc.contentSize.height - sc.height;
-    
-    self.progress.value = offsetY/maxOffsetY;
-    
 }
-
 
 #pragma mark CartoonFlooterViewDelegate
 

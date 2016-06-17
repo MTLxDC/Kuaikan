@@ -7,11 +7,11 @@
 //
 #import <Masonry.h>
 #import "FindHeaderSectionView.h"
-#import "Color.h"
 #import "UIView+Extension.h"
+#import "CommonMacro.h"
 
-static const CGFloat spaceing = 12.0f;
-static const CGFloat contentHeight = 20.0f;
+static const CGFloat spaceing = 10.0f;
+static const CGFloat contentHeight = 22.0f;
 
 static NSString * const Leaderboard = @"每周排行榜";
 
@@ -35,7 +35,9 @@ static NSString * const Leaderboard = @"每周排行榜";
 }
 
 
+
 - (void)setup {
+    
     
     CGFloat w = 5;
     
@@ -50,15 +52,15 @@ static NSString * const Leaderboard = @"每周排行榜";
     [yellowView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(spaceing);
-        make.height.equalTo(@(contentHeight));
+        make.height.equalTo(@(contentHeight * 0.8));
         make.width.equalTo(@(w));
     }];
     
     
     UILabel *titleView = [[UILabel alloc] init];
     
-    titleView.font = [UIFont systemFontOfSize:16];
-    titleView.textColor = White(0.5);
+    titleView.font = [UIFont systemFontOfSize:15];
+    titleView.textColor = colorWithWhite(0.5);
     
     [self addSubview:titleView];
     
@@ -70,8 +72,6 @@ static NSString * const Leaderboard = @"每周排行榜";
     }];
     
     self.titleView = titleView;
-    
-    
     
     UIButton *more = [[UIButton alloc] init];
     
@@ -98,10 +98,9 @@ static NSString * const Leaderboard = @"每周排行榜";
     if ([title isEqualToString:Leaderboard]) {        
         [self.moreBtn setImage:[UIImage imageNamed:@"ic_discover_time_15x15_"] forState:UIControlStateNormal];
         [self.moreBtn setTitle:@"每周一出榜" forState:UIControlStateNormal];
-        [self.moreBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [self.moreBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        self.moreBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         self.moreBtn.userInteractionEnabled = NO;
-        
         [self.moreBtn.titleLabel sizeToFit];
     }
 }

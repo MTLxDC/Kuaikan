@@ -24,14 +24,12 @@
 
 @implementation MainTabBarController
 
-CGFloat tabbar_h = 44;
-
 - (void)loadView {
     [super loadView];
     
     weakself(self);
  
-    MainTabbar *tabbar = [[MainTabbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH,tabbar_h)];
+    MainTabbar *tabbar = [[MainTabbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH,bottomBarHeight)];
     tabbar.backgroundColor = [UIColor whiteColor];
     [tabbar addItemWithImageNames:@[@"home",@"discover",@"me"]];
     [tabbar setSelectAtIndex:^(UIButton *btn, NSInteger index) {
@@ -47,8 +45,6 @@ CGFloat tabbar_h = 44;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
     
     HomeViewController * home = [[HomeViewController alloc] init];
     
