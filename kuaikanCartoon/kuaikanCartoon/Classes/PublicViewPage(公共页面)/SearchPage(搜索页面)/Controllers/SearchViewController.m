@@ -122,7 +122,6 @@ static NSInteger offset = 0;
 
 - (void)loadMoreData {
     
-    limit  += 20;
     offset += 20;
 
     NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&limit=%zd&offset=%zd",searchBaseUrl,self.currentSeachText,limit,offset];

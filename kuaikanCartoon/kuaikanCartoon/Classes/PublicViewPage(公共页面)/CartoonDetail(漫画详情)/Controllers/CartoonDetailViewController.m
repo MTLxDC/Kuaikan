@@ -9,6 +9,7 @@
 #import "CartoonDetailViewController.h"
 #import "CommentDetailViewController.h"
 #import "WordsDetailViewController.h"
+#import "AuthorInfoViewController.h"
 
 #import "NetWorkManager.h"
 #import "ProgressHUD.h"
@@ -61,6 +62,8 @@ static const CGFloat imageCellHeight = 250.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
  
     [self setupCartoonContentView];
     
@@ -115,14 +118,19 @@ static const CGFloat imageCellHeight = 250.0f;
     weakself(self);
     
     self.cartoonContentView.hidden = YES;
+    self.progress.hidden = YES;
     
    [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
               
        CartoonDetailViewController *sself = weakSelf;
        
-            sself.comicsMd = res;
-            [sself updataUI];
-            if (res != nil)   sself.cartoonContentView.hidden = NO;
+        sself.comicsMd = res;
+        [sself updataUI];
+       
+       if (res != nil) {
+           sself.cartoonContentView.hidden = NO;
+           [sself hideOrShowProgressView:NO];
+       }
        
        
    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
@@ -155,6 +163,7 @@ static CGFloat progressWidth = 150;
 
 - (void)hideOrShowHeadBottomView:(BOOL)needhide
 {
+    if (self.navigationController.navigationBar.hidden == needhide) return;
     
     [self.view endEditing:needhide];
     
@@ -403,12 +412,23 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     return 0;
 }
 
+- (void)gotoAuthorInfoPage {
+    
+    AuthorInfoViewController *AIVc = [AuthorInfoViewController new];
+    
+    AIVc.authorID = self.comicsMd.topic.user.ID.stringValue;
+    
+    [self.navigationController pushViewController:AIVc animated:YES];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     if (section == 0) {
         authorInfoHeadView *head = [[authorInfoHeadView alloc] initWithFrame:self.view.bounds];
         
         head.model = self.comicsMd;
+        
+        [head addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoAuthorInfoPage)]];
         
         return head;
     }
@@ -557,7 +577,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if (targetContentOffset -> y == 0) {
+    if (targetContentOffset -> y == 0){
         needHide = NO;
         [self hideOrShowHeadBottomView:NO];
     }

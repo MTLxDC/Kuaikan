@@ -11,6 +11,7 @@
 #import "ProgressHUD.h"
 #import "CommentsModel.h"
 #import "LoginViewController.h"
+#import "CommonMacro.h"
 
 @interface UserInfoManager () <UIAlertViewDelegate>
 
@@ -57,7 +58,8 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
     if (userData.count < 1) return;
     
     [self saveUserInfoWithData:userData];
-     
+    
+    SendNotify(loginStatusChangeNotification, nil);
 }
 
 - (void)saveUserInfoWithData:(NSDictionary *)data {

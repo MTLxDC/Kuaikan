@@ -18,7 +18,7 @@ static NSString * const userLogoutNotification        = @"UserLogoutNotification
 //登陆成功
 static NSString * const loginSuucceedNotification     = @"UserLoginSuucceedNotification";
 
-//登录失败 userInfo is a dict object,please use phoneKey and passwordKey get value
+//登录失败 
 
 static NSString * const loginFailedNotification       = @"UserLoginFailedNotification";
 

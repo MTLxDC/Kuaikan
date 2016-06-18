@@ -140,7 +140,7 @@
                 <outlet property="rigthing" destination="wQf-jn-6Rv" id="Pxr-31-ube"/>
                 <outlet property="titleLabel" destination="L5G-H4-PYl" id="OlX-hu-ViF"/>
             </connections>
-            <point key="canvasLocation" x="-466.5" y="-36.5"/>
+            <point key="canvasLocation" x="-413.5" y="-38.5"/>
         </view>
     </objects>
     <resources>

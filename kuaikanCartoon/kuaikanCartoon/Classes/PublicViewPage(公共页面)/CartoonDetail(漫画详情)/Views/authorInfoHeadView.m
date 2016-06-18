@@ -96,7 +96,6 @@ static CGFloat followSize = 21;
     
 }
 
-
 - (void)follow:(UIButton *)sender {
     
     sender.userInteractionEnabled = NO;

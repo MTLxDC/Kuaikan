@@ -17,7 +17,7 @@
 #import "UserInfoManager.h"
 #import "LoginViewController.h"
 
-@interface HomeViewController () <UITableViewDelegate>
+@interface HomeViewController ()
 
 @property (nonatomic,weak) UIScrollView *mainView;
 
@@ -36,8 +36,6 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     [self setupTitleView];
    
@@ -105,8 +103,10 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
 }
 - (void)setupMainView {
-        
-    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,self.view.height - 44)];
+    
+    CGFloat mainViewHeight = self.view.height - bottomBarHeight;
+    
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,mainViewHeight)];
     
     mainView.scrollEnabled = NO;
     mainView.contentSize   = CGSizeMake(mainView.width * 2, 0);
@@ -172,9 +172,9 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self hideNavBar:NO];
     [self.navigationController.navigationBar setBarTintColor:subjectColor];
     
-    [self loginStatusChange];
 }
 
 - (void)loginStatusChange {

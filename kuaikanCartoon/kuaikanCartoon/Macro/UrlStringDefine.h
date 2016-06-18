@@ -12,3 +12,6 @@
 
 //关注  use comics ID
 #define FollowComicsUrlStringFormat   @"http://api.kuaikanmanhua.com/v1/comics/%@/fav"
+
+//用户信息获取 使用user ID
+#define AuthorInfoUrlStringFormat @"http://api.kuaikanmanhua.com/v1/users/%@?"

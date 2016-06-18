@@ -40,12 +40,13 @@
 
 #define isPad   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define isPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define isRetina ([MainScreen scale] >= 2.0)
+#define isRetina (SCREEN_SCALE >= 2.0)
 
 #define IsiPhone4   (IsiPhone && ScreenMaxLength < 568.0)
 #define IsiPhone5   (IsiPhone && ScreenMaxLength == 568.0)
 #define IsiPhone6   (IsiPhone && ScreenMaxLength == 667.0)
 #define IsiPhone6P  (IsiPhone && ScreenMaxLength == 736.0)
+
 
 // 日志输出
 #ifdef DEBUG
@@ -79,7 +80,7 @@ selector:_selector name:_name object:nil];
 
 #define colorWithWhite(value) [[UIColor alloc] initWithWhite:value alpha:1]
 
-
+#define placeImage_comic [UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]
 
 
 

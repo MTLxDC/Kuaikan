@@ -116,7 +116,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     if (context == (__bridge void *)self) {
         
-        CGFloat offsetX = [change[NSKeyValueChangeNewKey] CGPointValue].x * self.itemScale +self.configuration.spaceing;
+        CGFloat offsetX = [change[NSKeyValueChangeNewKey] CGPointValue].x * self.itemScale + self.configuration.spaceing;
         
         [self scrollWithOffsetX:offsetX];
     }
@@ -137,7 +137,6 @@ static NSString * const offsetKeyPath = @"contentOffset";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self setupSubviews];
     }
     return self;
@@ -383,7 +382,6 @@ static NSString * const offsetKeyPath = @"contentOffset";
 }
 
 
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -395,7 +393,6 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     
 }
-
 
 
 - (ListViewConfiguration *)configuration {

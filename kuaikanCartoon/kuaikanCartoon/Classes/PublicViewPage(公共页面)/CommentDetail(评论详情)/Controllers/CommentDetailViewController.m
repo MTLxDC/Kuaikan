@@ -49,6 +49,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setAutomaticallyAdjustsScrollViewInsets:YES];
 
     [self setupNavBar];
     

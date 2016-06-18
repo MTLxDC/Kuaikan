@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface BaseViewController : UIViewController
 
 @property (nonatomic) BOOL statusBarHidden;

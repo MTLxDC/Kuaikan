@@ -16,7 +16,6 @@
 @class DCPicScrollView;
 
 
-
 @protocol DCPicScrollViewDataSource <NSObject>
 
 @required
@@ -51,7 +50,6 @@
 
 @property (nonatomic,strong,readonly) NSTimer *timer;
 
-- (void)removeTimer;
 
 //if you not set Configuration,will use defaultConfiguration
 
@@ -69,6 +67,7 @@
             withConfiguration:(DCPicScrollViewConfiguration *)configuration
                withDataSource:(id<DCPicScrollViewDataSource>)dataSource;
 
+- (void)removeTimer;
 
 - (void)reloadData;
 

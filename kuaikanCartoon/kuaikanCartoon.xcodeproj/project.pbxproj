@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		580FD319EB36E41F73FC3BF8 /* libPods-kuaikanCartoon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BD0117F02A8B0B805C131 /* libPods-kuaikanCartoon.a */; };
+		8428DBE21D13FC4100D5BC15 /* AuthorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8428DBE11D13FC4100D5BC15 /* AuthorInfoViewController.m */; };
+		8428DBE51D1400AF00D5BC15 /* AuthorInfoDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8428DBE41D1400AF00D5BC15 /* AuthorInfoDetailHeadView.m */; };
+		8428DBE71D14011900D5BC15 /* AuthorInfoDetailHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8428DBE61D14011900D5BC15 /* AuthorInfoDetailHeadView.xib */; };
+		8428DBEA1D140EFD00D5BC15 /* AuthorInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8428DBE91D140EFD00D5BC15 /* AuthorInfoModel.m */; };
+		8428DBEE1D142F1700D5BC15 /* AuthorTopicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8428DBEC1D142F1700D5BC15 /* AuthorTopicInfoCell.m */; };
+		8428DBFA1D14F3A300D5BC15 /* AuthorShareInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8428DBF91D14F3A300D5BC15 /* AuthorShareInfoCell.m */; };
 		84390CB81CD5D8B800D0AB8D /* updateCartoonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */; };
 		84390CBE1CD71F4B00D0AB8D /* CartoonSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84390CBC1CD71F4B00D0AB8D /* CartoonSummaryCell.m */; };
 		84390CBF1CD71F4B00D0AB8D /* CartoonSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84390CBD1CD71F4B00D0AB8D /* CartoonSummaryCell.xib */; };
@@ -121,6 +127,17 @@
 /* Begin PBXFileReference section */
 		45A94D6E4ED7BD72AD967888 /* Pods-kuaikanCartoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.release.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.release.xcconfig"; sourceTree = "<group>"; };
 		6953C1E92549B024393B5A8D /* Pods-kuaikanCartoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kuaikanCartoon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kuaikanCartoon/Pods-kuaikanCartoon.debug.xcconfig"; sourceTree = "<group>"; };
+		8428DBE01D13FC4100D5BC15 /* AuthorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorInfoViewController.h; sourceTree = "<group>"; };
+		8428DBE11D13FC4100D5BC15 /* AuthorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorInfoViewController.m; sourceTree = "<group>"; };
+		8428DBE31D1400AF00D5BC15 /* AuthorInfoDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorInfoDetailHeadView.h; sourceTree = "<group>"; };
+		8428DBE41D1400AF00D5BC15 /* AuthorInfoDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorInfoDetailHeadView.m; sourceTree = "<group>"; };
+		8428DBE61D14011900D5BC15 /* AuthorInfoDetailHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorInfoDetailHeadView.xib; sourceTree = "<group>"; };
+		8428DBE81D140EFD00D5BC15 /* AuthorInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorInfoModel.h; sourceTree = "<group>"; };
+		8428DBE91D140EFD00D5BC15 /* AuthorInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorInfoModel.m; sourceTree = "<group>"; };
+		8428DBEB1D142F1700D5BC15 /* AuthorTopicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorTopicInfoCell.h; sourceTree = "<group>"; };
+		8428DBEC1D142F1700D5BC15 /* AuthorTopicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorTopicInfoCell.m; sourceTree = "<group>"; };
+		8428DBF81D14F3A300D5BC15 /* AuthorShareInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorShareInfoCell.h; sourceTree = "<group>"; };
+		8428DBF91D14F3A300D5BC15 /* AuthorShareInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorShareInfoCell.m; sourceTree = "<group>"; };
 		84390CB61CD5D8B800D0AB8D /* updateCartoonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateCartoonView.h; sourceTree = "<group>"; };
 		84390CB71CD5D8B800D0AB8D /* updateCartoonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateCartoonView.m; sourceTree = "<group>"; };
 		84390CBB1CD71F4B00D0AB8D /* CartoonSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartoonSummaryCell.h; path = UpdateCartoonView/Cell/CartoonSummaryCell.h; sourceTree = "<group>"; };
@@ -354,6 +371,48 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8428DBDC1D13FB0900D5BC15 /* AuthorInfoPage(作者信息页面) */ = {
+			isa = PBXGroup;
+			children = (
+				8428DBDD1D13FB0900D5BC15 /* Controllers */,
+				8428DBDE1D13FB0900D5BC15 /* Models */,
+				8428DBDF1D13FB0900D5BC15 /* Views */,
+			);
+			path = "AuthorInfoPage(作者信息页面)";
+			sourceTree = "<group>";
+		};
+		8428DBDD1D13FB0900D5BC15 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8428DBE01D13FC4100D5BC15 /* AuthorInfoViewController.h */,
+				8428DBE11D13FC4100D5BC15 /* AuthorInfoViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8428DBDE1D13FB0900D5BC15 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8428DBE81D140EFD00D5BC15 /* AuthorInfoModel.h */,
+				8428DBE91D140EFD00D5BC15 /* AuthorInfoModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8428DBDF1D13FB0900D5BC15 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8428DBE31D1400AF00D5BC15 /* AuthorInfoDetailHeadView.h */,
+				8428DBE41D1400AF00D5BC15 /* AuthorInfoDetailHeadView.m */,
+				8428DBE61D14011900D5BC15 /* AuthorInfoDetailHeadView.xib */,
+				8428DBEB1D142F1700D5BC15 /* AuthorTopicInfoCell.h */,
+				8428DBEC1D142F1700D5BC15 /* AuthorTopicInfoCell.m */,
+				8428DBF81D14F3A300D5BC15 /* AuthorShareInfoCell.h */,
+				8428DBF91D14F3A300D5BC15 /* AuthorShareInfoCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		84390CB51CD5D8B800D0AB8D /* UpdateCartoonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +641,7 @@
 		8471A9401CD499B400A5D901 /* PublicViewPage(公共页面) */ = {
 			isa = PBXGroup;
 			children = (
+				8428DBDC1D13FB0900D5BC15 /* AuthorInfoPage(作者信息页面) */,
 				84E364341CF2B5A9005EDDD6 /* LoginPage(登录页面) */,
 				84E3C0101CF9B306000B61A7 /* CartoonDetail(漫画详情) */,
 				84E3C0241CF9B306000B61A7 /* CommentDetail(评论详情) */,
@@ -1044,6 +1104,7 @@
 				84E364391CF2B69B005EDDD6 /* LoginViewController.xib in Resources */,
 				84E3C0391CF9B306000B61A7 /* CartoonFlooterView.xib in Resources */,
 				84E3C03B1CF9B306000B61A7 /* CommentBottomView.xib in Resources */,
+				8428DBE71D14011900D5BC15 /* AuthorInfoDetailHeadView.xib in Resources */,
 				8470B9BE1CE0CFF700CE12DA /* Assets.xcassets in Resources */,
 				84C4AA191D05106B00FB1248 /* MyFellowWordsCell.xib in Resources */,
 				84DD85121CF07BFB00FD7300 /* SearchResultsCell.xib in Resources */,
@@ -1126,8 +1187,10 @@
 				84B296EB1CE1D9D200D927CE /* UIImage+ImageEffects.m in Sources */,
 				84DD84361CE86BB100FD7300 /* DCPicScrollViewConfiguration.m in Sources */,
 				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
+				8428DBFA1D14F3A300D5BC15 /* AuthorShareInfoCell.m in Sources */,
 				84E3C0331CF9B306000B61A7 /* CartoonDetailViewController.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
+				8428DBE51D1400AF00D5BC15 /* AuthorInfoDetailHeadView.m in Sources */,
 				84DD84331CE86BB100FD7300 /* DCPicItem.m in Sources */,
 				84C4AA181D05106B00FB1248 /* MyFellowWordsCell.m in Sources */,
 				84BA93C81CDDE58F009CFDC6 /* likeCountView.m in Sources */,
@@ -1151,8 +1214,10 @@
 				84F9B69B1D0B17EB00B5BADC /* MeiZhouPaiHangItem.m in Sources */,
 				84DD84461CE8E1DD00FD7300 /* XinZuoCell.m in Sources */,
 				846A46E21CDF1FD500F99B36 /* BaseTableView.m in Sources */,
+				8428DBEA1D140EFD00D5BC15 /* AuthorInfoModel.m in Sources */,
 				84B0343A1CE6E033003680F8 /* topicInfoModel.m in Sources */,
 				84F9B6921D08333600B5BADC /* CollectionComicModel.m in Sources */,
+				8428DBEE1D142F1700D5BC15 /* AuthorTopicInfoCell.m in Sources */,
 				84E3C03E1CF9B306000B61A7 /* CommentsModel.m in Sources */,
 				84E3642D1CF171B6005EDDD6 /* NoResultTipView.m in Sources */,
 				8480CAC21CD7620B0072A17B /* NetWorkManager.m in Sources */,
@@ -1205,6 +1270,7 @@
 				8471A98A1CD4BECC00A5D901 /* MainTabbar.m in Sources */,
 				8471A95A1CD49DA100A5D901 /* HomeViewController.m in Sources */,
 				84DD84491CE8E22B00FD7300 /* ZhuBianLiTuiCell.m in Sources */,
+				8428DBE21D13FC4100D5BC15 /* AuthorInfoViewController.m in Sources */,
 				84E3C0371CF9B306000B61A7 /* CartoonContentCell.m in Sources */,
 				84E3C03A1CF9B306000B61A7 /* CommentBottomView.m in Sources */,
 			);
