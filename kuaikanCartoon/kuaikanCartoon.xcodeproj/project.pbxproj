@@ -46,6 +46,7 @@
 		849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849DE6A51CDB2FDC00879190 /* BaseModel.m */; };
 		84A218B91D166E1000EFCF1D /* wordDescSectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A218B81D166E1000EFCF1D /* wordDescSectionHeadView.m */; };
 		84A218BC1D167BEB00EFCF1D /* wordAuthorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A218BB1D167BEB00EFCF1D /* wordAuthorCell.m */; };
+		84A218BF1D19946F00EFCF1D /* CommentSendViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A218BE1D19946F00EFCF1D /* CommentSendViewContainer.m */; };
 		84B0343A1CE6E033003680F8 /* topicInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B034391CE6E033003680F8 /* topicInfoModel.m */; };
 		84B296EB1CE1D9D200D927CE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B296EA1CE1D9D200D927CE /* UIImage+ImageEffects.m */; };
 		84B51F1E1CE450AE00EB4CB0 /* wordsDetailHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B51F1D1CE450AE00EB4CB0 /* wordsDetailHeadView.xib */; };
@@ -201,6 +202,8 @@
 		84A218B81D166E1000EFCF1D /* wordDescSectionHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordDescSectionHeadView.m; sourceTree = "<group>"; };
 		84A218BA1D167BEB00EFCF1D /* wordAuthorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordAuthorCell.h; sourceTree = "<group>"; };
 		84A218BB1D167BEB00EFCF1D /* wordAuthorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordAuthorCell.m; sourceTree = "<group>"; };
+		84A218BD1D19946F00EFCF1D /* CommentSendViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentSendViewContainer.h; sourceTree = "<group>"; };
+		84A218BE1D19946F00EFCF1D /* CommentSendViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentSendViewContainer.m; sourceTree = "<group>"; };
 		84B034381CE6E033003680F8 /* topicInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topicInfoModel.h; sourceTree = "<group>"; };
 		84B034391CE6E033003680F8 /* topicInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topicInfoModel.m; sourceTree = "<group>"; };
 		84B296E91CE1D9D200D927CE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -1036,6 +1039,8 @@
 				84E3C05F1CFC8DB6000B61A7 /* CommentSendView.h */,
 				84E3C0601CFC8DB6000B61A7 /* CommentSendView.m */,
 				84E3C0621CFC8DC9000B61A7 /* CommentSendView.xib */,
+				84A218BD1D19946F00EFCF1D /* CommentSendViewContainer.h */,
+				84A218BE1D19946F00EFCF1D /* CommentSendViewContainer.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1268,6 +1273,7 @@
 				8471A9801CD4B7DC00A5D901 /* FindingsViewController.m in Sources */,
 				84B51F2A1CE5A3AF00EB4CB0 /* ModelCacheManager.m in Sources */,
 				84B51F261CE4D91F00EB4CB0 /* wordTableViewCell.m in Sources */,
+				84A218BF1D19946F00EFCF1D /* CommentSendViewContainer.m in Sources */,
 				849DE6A61CDB2FDC00879190 /* BaseModel.m in Sources */,
 				84A218B91D166E1000EFCF1D /* wordDescSectionHeadView.m in Sources */,
 				84BA93B91CDDA862009CFDC6 /* WordsDetailViewController.m in Sources */,

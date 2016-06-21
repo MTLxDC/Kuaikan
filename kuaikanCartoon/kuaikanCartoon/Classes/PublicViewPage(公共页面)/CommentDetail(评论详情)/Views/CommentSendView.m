@@ -46,13 +46,9 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     
     if (h >= maxH) h = maxH;
     if (h <= bottomBarHeight) h = bottomBarHeight;
-
-    [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(h));
-    }];
     
     [UIView animateWithDuration:0.25 animations:^{
-        [self layoutIfNeeded];
+        [self setHeight:h];
     }];
     
 }

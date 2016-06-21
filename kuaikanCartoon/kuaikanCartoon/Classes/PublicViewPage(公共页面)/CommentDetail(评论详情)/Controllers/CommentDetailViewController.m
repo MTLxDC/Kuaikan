@@ -16,15 +16,15 @@
 
 #import "CommentInfoCell.h"
 #import "CommentDetailModel.h"
+#import "CommentSendViewContainer.h"
+
 #import <MJRefresh.h>
 
-@interface CommentDetailViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface CommentDetailViewController () <UITableViewDataSource,UITableViewDelegate,CommentSendViewContainerDelegate>
 
 @property (nonatomic,weak)   UITableView *commentsDisplayListView;
 
-@property (nonatomic,weak)   CommentSendView *sendView;
-
-@property (nonatomic,weak) UIView *sendViewContainer;
+@property (nonatomic,weak)   CommentSendViewContainer *sendViewContainer;
 
 @property (nonatomic,strong) CommentDetailModel *modelData;
 
@@ -36,14 +36,17 @@
 
 @property (nonatomic,copy)   NSString *requestUrl;
 
-@property (nonatomic,assign) BOOL isreply;
-
-@property (nonatomic,strong) CommentsModel *replyComment;
-
-@property (nonatomic,assign) NSInteger since;
-
+@property (nonatomic,assign) BOOL isNew;
 
 @end
+
+
+static NSString * const hotCommentRequestUrlFormat =
+@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/%zd?order=score";
+
+static NSString * const newCommentRequestUrlFormat =
+@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/%zd?";
+
 
 @implementation CommentDetailViewController
 
@@ -56,47 +59,11 @@
     
     [self setupCommentDetailView];
     
-    [self setupCommentSendView];
-    
-    [self setRequestUrlWithIsNew:YES withRequestUrl:self.requestID];
+    [self update];
 
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
+    [self sendViewContainer];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [self.sendView resignFirstResponder];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-    
-- (void)keyboardFrameChange:(NSNotification *)not {
-    
-    CGFloat end_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
-    
-    CGFloat offset = SCREEN_HEIGHT - end_Y;
-    
-    [self.sendView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-offset);
-    }];
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        
-        self.sendViewContainer.alpha  = offset == 0 ? 0 : 0.6;
-        [self.view layoutIfNeeded];
-        
-    } completion:^(BOOL finished) {
-        
-        self.sendViewContainer.hidden = offset == 0;
-    }];
-}
 
 #pragma mark setupSubViews
 
@@ -125,65 +92,6 @@
 
     self.sc = sc;
 }
-
-- (void)sendViewContinerDidTap {
-    [self.sendView resignFirstResponder];
-}
-
-- (void)setupCommentSendView {
-    
-    UIView *sendViewContiner = [[UIView alloc] init];
-    [self.view addSubview:sendViewContiner];
-    
-    sendViewContiner.hidden = YES;
-    sendViewContiner.backgroundColor = [UIColor blackColor];
-    sendViewContiner.alpha = 0;
-    
-    [sendViewContiner mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-    
-    [sendViewContiner addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendViewContinerDidTap)]];
-    
-    self.sendViewContainer = sendViewContiner;
-    
-    CommentSendView *csv = [CommentSendView makeCommentSendView];
-    [self.view addSubview:csv];
-    
-    self.sendView = csv;
-    
-    [csv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(self.view);
-        make.height.equalTo(@(bottomBarHeight));
-    }];
-    
-    weakself(self);
-
-    [csv setSendMessage:^(NSString *message) {
-        [weakSelf userCommentWithMessage:message];
-    }];
-    
-    
-}
-
-- (void)userCommentWithMessage:(NSString *)message {
-    
-    NSString *requestID = self.isreply ? self.replyComment.ID.stringValue : self.requestID;
-    
-    weakself(self);
-    
-    [UserInfoManager sendMessage:message isReply:self.isreply withID:requestID withSucceededCallback:^(CommentsModel *resultModel) {
-        
-        [[weakSelf sendView] clearText];
-        if (weakSelf.sc.selectedSegmentIndex == 0) {
-            [weakSelf update];
-        }
-        
-    }];
-    
-    self.isreply = NO;
-}
-
 
 - (void)setupCommentDetailView {
     
@@ -218,18 +126,15 @@
     
     //下拉加载更多
     self.commentsDisplayListView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-
-        NSString *moreCommentUrl = [self.requestUrl stringByReplacingOccurrencesOfString:@"0" withString:[NSString stringWithFormat:@"%zd",self.modelData.since.integerValue]];
-    
-        [CommentDetailModel requestModelDataWithUrlString:moreCommentUrl complish:^(id res) {
+        
+        [CommentDetailModel requestModelDataWithUrlString:self.requestUrl complish:^(id res) {
             
-
             CommentDetailModel *md = (CommentDetailModel *)res;
-
+            
             if (md.comments.count < 1) {
                 [weakSelf.commentsDisplayListView.mj_footer endRefreshingWithNoMoreData];
                 return ;
-            };
+            }
             
             [weakSelf.modelData.comments addObjectsFromArray:md.comments];
              weakSelf.modelData.since = md.since;
@@ -245,32 +150,46 @@
     [self.commentsDisplayListView.mj_footer setHidden:YES];
 }
 
-- (void)setRequestUrlWithIsNew:(BOOL)isNew withRequestUrl:(NSString *)requestID {
-    
-    NSString *requestFormat = isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
-    
-    NSString *requestUrl = [NSString stringWithFormat:requestFormat,requestID];
-    
-    self.requestUrl = requestUrl;
-    
-    [self update];
+- (BOOL)isNew {
+    return self.sc.selectedSegmentIndex == 0;
 }
 
+- (NSString *)requestUrl {
+    
+    NSString *requestFormat = self.isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
+    
+    NSInteger since = 0;
+    
+    if (self.modelData.comments.count > 0) {
+        since = self.modelData.since.integerValue;
+    }
+    
+    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.comicID.stringValue,since];
+    
+    return requestUrl;
+}
 
 - (void)update {
     
+    [self.commentsDisplayListView.mj_footer resetNoMoreData];
+    
     weakself(self);
     
-    [CommentDetailModel requestModelDataWithUrlString:self.requestUrl complish:^(id res) {
+    
+    NSString *requestFormat = self.isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
+    
+    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.comicID.stringValue,0];
+    
+    [CommentDetailModel requestModelDataWithUrlString:requestUrl complish:^(id res) {
         
         CommentDetailViewController *sself = weakSelf;
 
          sself.modelData = res;
         [sself.cellHeightCache removeAllObjects];
         [sself.commentsDisplayListView reloadData];
-        [sself.commentsDisplayListView setContentOffset:CGPointMake(0, -navHeight)];
         [sself.commentsDisplayListView.mj_header endRefreshing];
-        
+        [sself.commentsDisplayListView setContentOffset:CGPointMake(0,-navHeight)];
+
         if (sself.modelData.since.integerValue != 0) {
             [sself.commentsDisplayListView.mj_footer setHidden:NO];
         }
@@ -304,16 +223,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         CommentsModel *md = self.modelData.comments[indexPath.row];
-    
-        self.isreply = YES;
-        self.replyComment = md;
-    
-    NSString *userName = md.user.nickname;
-    
-    NSString *placeText = [NSString stringWithFormat:@"回复@%@",userName];
-
-        [self.sendView becomeFirstResponder];
-        [self.sendView setPlaceText:placeText];
+        [self.sendViewContainer replyWithCommentModel:md];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -353,6 +263,11 @@
     
 }
 
+- (void)sendMessageSucceeded:(CommentsModel *)commentContent {
+    if (self.sc.selectedSegmentIndex == 0)  [self update];
+    
+}
+
 - (CommentInfoCell *)commentCell {
     if (!_commentCell) {
         _commentCell = [CommentInfoCell makeCommentInfoCell];
@@ -360,10 +275,17 @@
     return _commentCell;
 }
 
+- (CommentSendViewContainer *)sendViewContainer {
+    if (!_sendViewContainer) {
+        _sendViewContainer = [CommentSendViewContainer showWithComicID:self.comicID inView:self.view];
+        _sendViewContainer.delegate = self;
+    }
+    return _sendViewContainer;
+}
 
 - (void)selectedSegmentIndex:(UISegmentedControl *)sc
 {
-    [self setRequestUrlWithIsNew:!sc.selectedSegmentIndex withRequestUrl:self.requestID];
+    [self update];
 }
 
 - (void)dismiss {

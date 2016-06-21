@@ -139,7 +139,7 @@ static const CGFloat imageCellHeight = 250.0f;
    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
     
-    NSString *commentUrl = [NSString stringWithFormat:hotCommentRequestUrlFormat,self.cartoonId];
+    NSString *commentUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/hot_comments?",self.cartoonId];
     
     [CommentsModel requestModelDataWithUrlString:commentUrl complish:^(id result) {
         
@@ -315,7 +315,7 @@ CGFloat contentSizeMaxHeight = 100.0f;
     
     CommentDetailViewController  *cdVc = [[CommentDetailViewController alloc] init];
     
-    cdVc.requestID = self.comicsMd.ID.stringValue;
+    cdVc.comicID = self.comicsMd.ID;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdVc];
     

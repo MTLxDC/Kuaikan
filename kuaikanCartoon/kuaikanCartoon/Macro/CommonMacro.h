@@ -39,6 +39,7 @@
 
 #define SPACEING UseScaleWithSize(4)
 
+
 #define navHeight  (iOS7Later ? 64.0 : 44.0)
 #define bottomBarHeight 44.0
 
@@ -78,9 +79,6 @@ selector:_selector name:_name object:nil];
 #define subjectColor RGB(254,208,9) //主题颜色
 
 #define colorWithImageName(name) [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:name]]
-
-#define line_Darkgray colorWithImageName(@"line_#aeaeae_0x0_")
-#define line_Lightgray colorWithImageName(@"line_#e1e1e1_0x0_")
 
 #define colorWithWhite(value) [[UIColor alloc] initWithWhite:value alpha:1]
 

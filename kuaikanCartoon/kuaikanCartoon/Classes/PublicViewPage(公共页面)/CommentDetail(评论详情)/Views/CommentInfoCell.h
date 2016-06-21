@@ -10,12 +10,6 @@
 
 @class CommentsModel;
 
-static NSString * const hotCommentRequestUrlFormat =
-@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/0?order=score";
-
-static NSString * const newCommentRequestUrlFormat =
-@"http://api.kuaikanmanhua.com/v1/comics/%@/comments/0?";
-
 static NSString * const commentInfoCellName = @"CommentInfoCellIdentifier";
 
 @interface CommentInfoCell : UITableViewCell
