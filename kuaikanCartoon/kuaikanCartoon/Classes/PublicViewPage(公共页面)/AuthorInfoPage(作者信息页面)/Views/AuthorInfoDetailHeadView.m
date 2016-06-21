@@ -37,7 +37,7 @@
 }
 
 
-static CGFloat iconTop = 64;
+static CGFloat iconTop  = 64;
 
 - (void)layoutSubviews {
     
@@ -47,12 +47,25 @@ static CGFloat iconTop = 64;
     
     BOOL isDragUp = offsetY > 0;
     
-    CGFloat scale = isDragUp ? 0.86 : 0.43;
+    /*
+     
+     navHeight = 64;
+     statusbar = 20;
+     
+     64 - 20 * 0.5 = 22;    //得到导航条的中心
+     22 + 8 = 30;           //8是标题label的一半高,得到目标X为30
+     
+     0.85 = 1 - 30/AuthorInfoDetailHeadViewHeight
+     
+     */
+    
+    CGFloat scale = isDragUp ? 0.85 : 0.43;
 
     CGFloat alpha = 1;
     
     if (isDragUp) {
-        alpha = 1 - (offsetY + 64)/AuthorInfoDetailHeadViewHeight;
+        CGFloat prograss = offsetY/AuthorInfoDetailHeadViewHeight;
+        alpha = 1 - prograss - 0.3;
     }
     
     self.authorIcon.alpha    = alpha;
@@ -63,6 +76,7 @@ static CGFloat iconTop = 64;
     [super layoutSubviews];
 
 }
+
 
 - (IBAction)back:(id)sender {
     

@@ -46,6 +46,8 @@
 
 @property (nonatomic,weak) WordsDetailViewController *myVc;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upCountBtnWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *replyCountBtnWidth;
 
 @end
 
@@ -60,6 +62,7 @@ CGFloat const btnHeight  = 15.0f;
 
 
 @implementation wordsDetailHeadView
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
@@ -125,10 +128,11 @@ CGFloat const btnHeight  = 15.0f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     
+    
     CGFloat offsetY = -[change[NSKeyValueChangeNewKey] CGPointValue].y;
     
-    printf("offsetY:%f\n",offsetY);
-
+    if (offsetY < 1) return;
+    
     [self setHeight:offsetY > navHeight ? offsetY : navHeight];
     
     if (offsetY > navHeight + 20) {
@@ -220,13 +224,29 @@ CGFloat const btnHeight  = 15.0f;
     
     [self.titleLabel setText:model.title];
     
-    [self.replyCount setTitle:[self makeTextWithCount:model.comments_count.integerValue]
+    NSString *replyCountText = [self makeTextWithCount:model.comments_count.integerValue];
+    NSString *likeCountText = [self makeTextWithCount:model.likes_count.integerValue];
+
+    [self.replyCount setTitle:replyCountText
                      forState:UIControlStateNormal];
     
-    [self.likeCount setTitle:[self makeTextWithCount:model.likes_count.integerValue]
-                     forState:UIControlStateNormal];
+    [self.likeCount setTitle:likeCountText
+                    forState:UIControlStateNormal];
+    
+    static CGFloat imageWidth = 20;
+    
+    self.replyCountBtnWidth.constant = [self getTextWidth:replyCountText] + imageWidth;
+    
+    self.upCountBtnWidth.constant    = [self getTextWidth:likeCountText] + imageWidth;
     
     self.followBtn.selected = model.is_favourite;
+    
+    self.replyCount.hidden = NO;
+    self.likeCount.hidden  = NO;
+}
+
+- (CGFloat)getTextWidth:(NSString *)text {
+    return [text boundingRectWithSize:CGSizeMake(self.width, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.likeCount.titleLabel.font} context:nil].size.width + 5;
 }
 
 - (NSString *)makeTextWithCount:(NSInteger)count {

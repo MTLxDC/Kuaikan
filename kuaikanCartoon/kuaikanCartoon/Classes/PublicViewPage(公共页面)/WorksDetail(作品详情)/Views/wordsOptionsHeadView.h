@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonMacro.h"
 
-static CGFloat wordsOptionsHeadViewHeight = 40;
+#define wordsOptionsHeadViewHeight UseScaleWithSize(20)
 
 @interface wordsOptionsHeadView : UIView
 

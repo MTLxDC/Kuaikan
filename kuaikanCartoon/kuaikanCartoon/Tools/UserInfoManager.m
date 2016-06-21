@@ -59,7 +59,6 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
     
     [self saveUserInfoWithData:userData];
     
-    SendNotify(loginStatusChangeNotification, nil);
 }
 
 - (void)saveUserInfoWithData:(NSDictionary *)data {
@@ -71,6 +70,7 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
     self.reg_type = data[@"reg_type"];
     self.update_remind_flag = data[@"update_remind_flag"];
     
+    SendNotify(loginStatusChangeNotification, nil);
 }
 
 - (void)logoutUserInfo {
@@ -86,10 +86,23 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
 
     [[NSFileManager defaultManager] removeItemAtPath:loginInfoPath error:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:userLogoutNotification object:nil];
+    SendNotify(userLogoutNotification, nil);
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:loginStatusChangeNotification object:nil];
+    SendNotify(loginStatusChangeNotification, nil);
 
+}
+
++ (BOOL)needLogin {
+    return [[UserInfoManager share] needLogin];
+}
+
+- (BOOL)needLogin {
+    if (self.hasLogin == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未登录" message:@"是否登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+        [alert show];
+        return YES;
+    }
+    return NO;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -143,8 +156,6 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
             
             if (succeed) succeed(self);
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:loginSuucceedNotification object:nil];
-            
         }else {
             
             if (failed) failed(res,error);
@@ -165,12 +176,7 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
         withID:(NSString *)ID
 withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
     
-    
-    if (self.hasLogin == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未登录" message:@"是否登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        [alert show];
-        return;
-    }
+    if ([self needLogin]) return;
     
     NSString *urlFormat = isreply ? replyUrlFormat : commentUrlFormat;
     
@@ -219,10 +225,7 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
 
 + (void)followWithUrl:(NSString *)url isFollow:(BOOL)isfollow WithfollowCallBack:(void(^)(BOOL succeed))callback;
 {
-    
-    if ([[UserInfoManager share] hasLogin] == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未登录" message:@"是否登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        [alert show];
+    if ([[UserInfoManager share] needLogin]) {
         return;
     }
     

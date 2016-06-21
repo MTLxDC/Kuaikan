@@ -38,6 +38,8 @@
     [self.userIcon cornerRadius:0];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStatusChange) name:loginStatusChangeNotification object:nil];
+    
+    [self loginStatusChange];
 }
 
 - (void)dealloc {
@@ -53,7 +55,6 @@
     
     [self.navigationController setNavigationBarHidden:YES];
   
-    [self loginStatusChange];
 }
 
 - (void)loginStatusChange {
@@ -82,7 +83,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (!self.user.hasLogin) return;
+    if ([UserInfoManager needLogin]) return;
     
     if (indexPath.section == 0)
     {

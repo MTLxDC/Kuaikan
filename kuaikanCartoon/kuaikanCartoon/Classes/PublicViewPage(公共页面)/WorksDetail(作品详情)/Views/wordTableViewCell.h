@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CartonnWordsModel.h"
+#import "CommonMacro.h"
+
+#define wordTableViewCellHeight UseScaleWithSize(50)
 
 @interface wordTableViewCell : UITableViewCell
 

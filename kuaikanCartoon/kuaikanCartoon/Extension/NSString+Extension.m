@@ -12,6 +12,7 @@
 
 @implementation NSString (Extension)
 
+
 - (BOOL)isMobile {
     
     if (self.length < 11) return NO;

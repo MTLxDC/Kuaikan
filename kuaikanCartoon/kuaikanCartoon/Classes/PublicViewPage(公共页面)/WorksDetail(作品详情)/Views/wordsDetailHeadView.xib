@@ -52,8 +52,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-98-9yI">
-                    <rect key="frame" x="331" y="239" width="70" height="20"/>
+                <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc4-98-9yI">
+                    <rect key="frame" x="323" y="239" width="70" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="MfX-jD-0jA"/>
                         <constraint firstAttribute="height" constant="20" id="mdy-bG-BoX"/>
@@ -64,8 +64,8 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-wp-4cd">
-                    <rect key="frame" x="261" y="239" width="70" height="20"/>
+                <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-wp-4cd">
+                    <rect key="frame" x="245" y="239" width="70" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="XNu-G0-SSe"/>
                         <constraint firstAttribute="width" constant="70" id="uRe-1B-Q4W"/>
@@ -106,7 +106,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Wpe-wp-4cd" firstAttribute="top" secondItem="cW6-g7-DAg" secondAttribute="bottom" id="3tF-uG-aBH"/>
-                <constraint firstItem="xc4-98-9yI" firstAttribute="leading" secondItem="Wpe-wp-4cd" secondAttribute="trailing" id="C2R-fC-uZb"/>
+                <constraint firstItem="xc4-98-9yI" firstAttribute="leading" secondItem="Wpe-wp-4cd" secondAttribute="trailing" constant="8" id="C2R-fC-uZb"/>
                 <constraint firstAttribute="bottom" secondItem="xc4-98-9yI" secondAttribute="bottom" constant="8" id="F71-UR-jAH"/>
                 <constraint firstAttribute="bottom" secondItem="cW6-g7-DAg" secondAttribute="bottom" id="Ict-AM-DyT"/>
                 <constraint firstItem="cW6-g7-DAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Nkh-ww-a9H"/>
@@ -119,7 +119,7 @@
                 <constraint firstAttribute="bottom" secondItem="L5G-H4-PYl" secondAttribute="bottom" constant="8" id="dxN-gb-QhA"/>
                 <constraint firstItem="L5G-H4-PYl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="hfq-JN-yGe"/>
                 <constraint firstAttribute="trailing" secondItem="cW6-g7-DAg" secondAttribute="trailing" id="lqM-33-hdp"/>
-                <constraint firstAttribute="trailing" secondItem="xc4-98-9yI" secondAttribute="trailing" id="w0U-eQ-Jyc"/>
+                <constraint firstAttribute="trailing" secondItem="xc4-98-9yI" secondAttribute="trailing" constant="8" id="w0U-eQ-Jyc"/>
                 <constraint firstAttribute="trailing" secondItem="L5G-H4-PYl" secondAttribute="trailing" constant="128" id="wQf-jn-6Rv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -137,10 +137,12 @@
                 <outlet property="likeCount" destination="Wpe-wp-4cd" id="xmL-FZ-o9n"/>
                 <outlet property="maskImageView" destination="OXD-8Q-1oL" id="V6j-vR-z6V"/>
                 <outlet property="replyCount" destination="xc4-98-9yI" id="oTQ-SG-4PV"/>
+                <outlet property="replyCountBtnWidth" destination="MfX-jD-0jA" id="0Kz-no-q15"/>
                 <outlet property="rigthing" destination="wQf-jn-6Rv" id="Pxr-31-ube"/>
                 <outlet property="titleLabel" destination="L5G-H4-PYl" id="OlX-hu-ViF"/>
+                <outlet property="upCountBtnWidth" destination="uRe-1B-Q4W" id="OM1-a4-gaK"/>
             </connections>
-            <point key="canvasLocation" x="-413.5" y="-38.5"/>
+            <point key="canvasLocation" x="-493.5" y="-46.5"/>
         </view>
     </objects>
     <resources>

@@ -215,7 +215,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
             [sself setContentOffset:CGPointZero];
             sself.hidden = NO;
         
-    } cachingPolicy:policy hubInView:self.myHomeVc.view];
+    } cachingPolicy:policy hubInView:self];
     
     
 }

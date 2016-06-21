@@ -12,5 +12,4 @@
 
 @property (nonatomic,copy) NSString *authorID;
 
-
 @end

@@ -66,7 +66,7 @@
 
 @property (nonatomic,strong) NSNumber *comments_count;
 
-@property (nonatomic,copy) NSString *cover_image_url;
+@property (nonatomic,copy)   NSString *cover_image_url;
 
 @property (nonatomic,strong) NSNumber *created_at;
 

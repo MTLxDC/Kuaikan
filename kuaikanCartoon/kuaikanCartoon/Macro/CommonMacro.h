@@ -32,8 +32,12 @@
 #define SCREEN_WIDTH    [MainScreen bounds].size.width
 #define SCREEN_HEIGHT   [MainScreen bounds].size.height
 
-#define SINGLE_LINE_WIDTH           (1 / SCREEN_SCALE)
-#define SINGLE_LINE_ADJUST_OFFSET   ((1 / SCREEN_SCALE) / 2)
+#define SINGLE_LINE_WIDTH           (0.25 * SCREEN_SCALE)
+#define SINGLE_LINE_ADJUST_OFFSET   ((0.25 * SCREEN_SCALE) / 2)
+
+#define UseScaleWithSize(Size) (Size * 2)
+
+#define SPACEING UseScaleWithSize(4)
 
 #define navHeight  (iOS7Later ? 64.0 : 44.0)
 #define bottomBarHeight 44.0

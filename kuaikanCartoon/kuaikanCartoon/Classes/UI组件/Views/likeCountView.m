@@ -45,7 +45,7 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 - (void)setup {
 
     [self addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
-    [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [self setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     
     [self setTitleEdgeInsets:UIEdgeInsetsMake(0,5, 0, 0)];

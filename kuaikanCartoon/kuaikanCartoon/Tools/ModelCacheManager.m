@@ -70,7 +70,7 @@
 
 - (id)cacheForKey:(NSString *)key {
     
-    BOOL hasNetWork = NO;
+    BOOL hasNetWork = [[NetWorkManager share] hasNetWork];
     
     id cache = [self.modelCache objectForKey:key];
     

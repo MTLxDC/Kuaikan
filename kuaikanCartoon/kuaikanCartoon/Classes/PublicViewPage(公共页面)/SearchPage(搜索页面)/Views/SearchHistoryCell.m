@@ -8,6 +8,7 @@
 
 #import "SearchHistoryCell.h"
 #import <Masonry.h>
+#import "CommonMacro.h"
 
 static CGFloat spaceing = 8;
 
@@ -45,8 +46,8 @@ static CGFloat spaceing = 8;
     [self.contentView addSubview:timeIcon];
     
     [timeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.left.equalTo(self).offset(spaceing);
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).offset(spaceing);
         make.width.height.equalTo(@14);
     }];
     
@@ -60,8 +61,8 @@ static CGFloat spaceing = 8;
     [self.contentView addSubview:deleteBtn];
     
     [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-spaceing);
+        make.centerY.equalTo(self.contentView);
+        make.right.equalTo(self.contentView).offset(-spaceing);
         make.width.height.equalTo(@14);
     }];
     
@@ -73,13 +74,24 @@ static CGFloat spaceing = 8;
     historyInfo.textColor = [UIColor lightGrayColor];
     
     [historyInfo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(self.contentView);
         make.left.equalTo(timeIcon.mas_right).offset(spaceing);
         make.right.equalTo(deleteBtn).offset(-spaceing);
         make.height.equalTo(@14);
     }];
     
     self.historyInfo = historyInfo;
+    
+    UIView *bottomLine = [UIView new];
+    
+    bottomLine.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+    
+    [self.contentView addSubview:bottomLine];
+    
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.equalTo(self.contentView);
+        make.height.equalTo(@(SINGLE_LINE_WIDTH));
+    }];
 }
 
 - (void)deleteItem {

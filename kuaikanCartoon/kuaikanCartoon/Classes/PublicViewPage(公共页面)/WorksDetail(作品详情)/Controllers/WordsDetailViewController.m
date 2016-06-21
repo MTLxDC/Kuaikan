@@ -11,12 +11,18 @@
 #import "CommonMacro.h"
 #import <Masonry.h>
 #import "UIView+Extension.h"
+
+#import "wordAuthorCell.h"
 #import "wordTableViewCell.h"
+
+#import "AuthorInfoViewController.h"
 #import "CartoonDetailViewController.h"
 
 #import "wordsDetailHeadView.h"
 #import "wordsOptionsHeadView.h"
 #import "wordsSequenceView.h"
+#import "wordDescSectionHeadView.h"
+
 
 @interface WordsDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -30,6 +36,8 @@
 
 @property (nonatomic,strong) wordsSequenceView *sequenceView;
 
+@property (nonatomic,strong) wordDescSectionHeadView *descHeadView;
+
 @end
 
 
@@ -37,17 +45,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self setup];
-
+    
     [self setupWordsDetailContentView];
     
     [self updata];
-}
-
-- (void)setup {
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,14 +58,14 @@
 }
 
 - (void)setupWordsDetailContentView {
-    
+
    
     UITableView *contenView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    
+        
+    contenView.backgroundColor = [UIColor whiteColor];
     contenView.contentInset = UIEdgeInsetsMake(wordsDetailHeadViewHeight, 0, 0, 0);
     contenView.dataSource = self;
     contenView.delegate = self;
-    contenView.rowHeight = 100.0f;
     contenView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     wordsDetailHeadView *head = [wordsDetailHeadView wordsDetailHeadViewWithFrame:CGRectMake(0, 0, self.view.width, wordsDetailHeadViewHeight) scorllView:contenView];
@@ -73,12 +74,15 @@
     
     [headView setFrame:CGRectMake(0, 0,self.view.width, wordsOptionsHeadViewHeight)];
     
+    weakself(self);
+    
     [headView setLefeBtnClick:^(UIButton *btn) {
-        
+        weakSelf.showIntroduction = YES;
+        [weakSelf.contentView setContentOffset:CGPointMake(0, -wordsDetailHeadViewHeight)];
     }];
     
     [headView setRightBtnClick:^(UIButton *btn) {
-        
+        weakSelf.showIntroduction = NO;
     }];
     
     contenView.tableHeaderView = headView;
@@ -145,8 +149,29 @@
 
 #pragma mark UITableViewDataSource
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.showIntroduction) {
+        return wordAuthorCellHeight;
+    }else {
+        return wordTableViewCellHeight;
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.showIntroduction) {
+        
+        wordAuthorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"wordAuthorCell"];
+        
+        if (!cell) {
+            cell = [[wordAuthorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"wordAuthorCell"];
+        }
+        
+        cell.model = self.wordsModel.user;
+        
+        return cell;
+    }
     
     wordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"wordCell"];
     
@@ -166,12 +191,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.wordsModel.comics.count;
+    return self.showIntroduction ? 1 : self.wordsModel.comics.count;
 }
 
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.showIntroduction) {
+        
+        AuthorInfoViewController *aiVc = [AuthorInfoViewController new];
+        
+        aiVc.authorID = self.wordsModel.user.ID.stringValue;
+        
+        [self.navigationController pushViewController:aiVc animated:YES];
+        
+        return;
+    }
+    
     CartoonDetailViewController *cdv = [[CartoonDetailViewController alloc] init];
     
     CartonnWordsModel *md = self.wordsModel.comics[indexPath.row];
@@ -182,12 +219,57 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return wordsSequenceViewHeight;
+    
+    if (self.showIntroduction) {
+        
+        self.descHeadView.desc = self.wordsModel.desc;
+        
+        return self.descHeadView.myHeight;
+        
+    }else {
+        return wordsSequenceViewHeight;
+    }
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return self.sequenceView;
+    if (self.showIntroduction) {
+        
+        self.descHeadView.desc = self.wordsModel.desc;
+
+        return self.descHeadView;
+        
+    }else {
+        return self.sequenceView;
+    }
 }
+
+
+- (void)setShowIntroduction:(BOOL)showIntroduction {
+    if (_showIntroduction == showIntroduction) return;
+    
+    _showIntroduction = showIntroduction;
+    
+    [self.contentView reloadData];
+}
+
+- (wordDescSectionHeadView *)descHeadView {
+    if (!_descHeadView) {
+        
+        _descHeadView = [[wordDescSectionHeadView alloc] initWithFrame:self.view.bounds];
+        
+        weakself(self);
+        
+        [_descHeadView setNeedReloadHeight:^{
+            
+            [weakSelf.contentView reloadData];
+            
+        }];
+        
+    }
+    return _descHeadView;
+}
+
 
 - (wordsSequenceView *)sequenceView {
     if (!_sequenceView) {

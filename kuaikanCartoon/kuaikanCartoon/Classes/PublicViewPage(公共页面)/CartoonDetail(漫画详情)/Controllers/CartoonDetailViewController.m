@@ -48,6 +48,8 @@
 
 @property (nonatomic,strong) CommentInfoCell *commentCell;  //计算CellHeight用
 
+@property (nonatomic,strong) NSMutableArray *imageCellHeightCache;
+
 @property (nonatomic,strong) NSArray *commentModels;
 
 @property (nonatomic,strong) CartoonFlooterView *flooter;
@@ -61,6 +63,7 @@ static const CGFloat imageCellHeight = 250.0f;
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
@@ -144,7 +147,7 @@ static const CGFloat imageCellHeight = 250.0f;
         sself.commentModels = result;
         
         [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-                
+        
     } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
 }
@@ -238,7 +241,7 @@ static bool needHide = false;
 
 - (void)setupTitleView {
     
-    UIView *textView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.66, 40)];
+    UIView *textView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.8, 40)];
     
     UILabel *label = [[UILabel alloc] initWithFrame:textView.frame];
     
@@ -481,8 +484,30 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         
         NSURL *imageUrl = [NSURL URLWithString:self.comicsMd.images[indexPath.row]];
         
-        [cell.content sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];
+        weakself(self);
         
+        [cell.content sd_setImageWithURL:imageUrl placeholderImage:placeImage_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            /*有个别图片高度不为250,如果与250的高偏差过大的话,
+             获取该图片实际高,更新高的缓存,刷新tableview*/
+           
+            CGFloat imageHeight = image.size.height * 0.5;
+            
+            CGFloat cacheHeight = [weakSelf.imageCellHeightCache[indexPath.row] doubleValue];
+            
+            CGFloat offset = fabs(imageHeight - cacheHeight);
+            
+            if (offset > 8) {
+                
+                NSNumber *newHeight = [NSNumber numberWithDouble:imageHeight];
+                
+                [weakSelf.imageCellHeightCache replaceObjectAtIndex:indexPath.row withObject:newHeight];
+                
+                [weakSelf.cartoonContentView reloadData];
+                
+            }
+            
+        }];
         
         return cell;
 
@@ -514,18 +539,12 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     
 }
 
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
-    
-    if (indexPath.section == 0 && indexPath.row == self.comicsMd.images.count) {
-        [self hideOrShowProgressView:YES];
-    }
-    
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    
+    if (indexPath.section == 0 && self.comicsMd) {
         
-        return imageCellHeight;
+        return [self.imageCellHeightCache[indexPath.row] doubleValue];
         
     }else if (indexPath.section == 1) {
         
@@ -571,17 +590,9 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     return 0;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    needHide = YES;
-    [self hideOrShowHeadBottomView:YES];
-}
-
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if (targetContentOffset -> y == 0){
-        needHide = NO;
-        [self hideOrShowHeadBottomView:NO];
-    }
-
+         needHide = targetContentOffset -> y;
+        [self hideOrShowHeadBottomView:needHide];
 }
 
 #pragma mark CartoonFlooterViewDelegate
@@ -596,7 +607,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }                       //上一篇
 
 - (void)nextPage {
-    
     self.cartoonId = self.comicsMd.next_comic_id.stringValue;
     [self requestData];
 }                       //下一篇
@@ -606,6 +616,20 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }                       //显示分享视图
 
 #pragma mark Lazy load
+
+- (NSMutableArray *)imageCellHeightCache {
+    if (!_imageCellHeightCache && self.comicsMd) {
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        
+        for (NSInteger index = 0; index < self.comicsMd.images.count; index++) {
+            [arr addObject:@(imageCellHeight)];
+        }
+        
+        _imageCellHeightCache = arr;
+    }
+    return _imageCellHeightCache;
+}
 
 - (NSMutableArray *)commentCellHeightCache {
     if (!_commentCellHeightCache) {

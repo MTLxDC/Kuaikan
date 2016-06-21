@@ -28,7 +28,6 @@
 
 @interface AuthorInfoModel : BaseModel
 
-
 @property (nonatomic,copy)   NSString *avatar_url;
 
 @property (nonatomic,strong) NSNumber *bind_phone;

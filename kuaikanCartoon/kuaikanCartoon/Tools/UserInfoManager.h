@@ -18,8 +18,7 @@ static NSString * const userLogoutNotification        = @"UserLogoutNotification
 //登陆成功
 static NSString * const loginSuucceedNotification     = @"UserLoginSuucceedNotification";
 
-//登录失败 
-
+//登录失败
 static NSString * const loginFailedNotification       = @"UserLoginFailedNotification";
 
 //登录状态发生改变
@@ -47,6 +46,7 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 
 
 + (void)autoLogin;  //自动登录
++ (BOOL)needLogin;
 
 + (void)sendMessage:(NSString *)meassage        //评论和回复
             isReply:(BOOL)isreply               //是否是回复
@@ -61,8 +61,6 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 + (void)followWithUrl:(NSString *)url                   //关注
              isFollow:(BOOL)isfollow                    //关注还是取消关注
    WithfollowCallBack:(void(^)(BOOL succeed))callback;  //回调
-
-- (void)saveUserInfoWithData:(NSDictionary *)data;
 
 - (void)logoutUserInfo; //注销
 

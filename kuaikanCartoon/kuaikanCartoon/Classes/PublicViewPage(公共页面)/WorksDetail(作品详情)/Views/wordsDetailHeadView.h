@@ -9,9 +9,9 @@
 
 #import <UIKit/UIKit.h>
 #import "wordsDetailModel.h"
+#import "CommonMacro.h"
 
-
-static CGFloat wordsDetailHeadViewHeight = 200.0f;
+#define wordsDetailHeadViewHeight  200
 
 @interface wordsDetailHeadView : UIView
 

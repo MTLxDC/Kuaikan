@@ -97,6 +97,30 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES];
+    
+    RegisterNotify(UIKeyboardWillChangeFrameNotification, @selector(keyboardFrameChange:));
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    RemoveNofify
+}
+
+- (void)keyboardFrameChange:(NSNotification *)not {
+    
+    CGFloat keyboard_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+    
+    CGFloat inputViewMaxY = CGRectGetMaxY(self.inputView.frame);
+    
+    CGFloat yoffset = keyboard_Y - inputViewMaxY;
+    
+    self.inputViewCenterY.constant = yoffset < 0 ? yoffset + 10 : 0;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

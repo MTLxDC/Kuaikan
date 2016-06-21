@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *creat_Time;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidth;
+
 @end
 
 @implementation wordTableViewCell
@@ -27,7 +29,7 @@
 - (void)awakeFromNib {
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    self.imageWidth.constant = UseScaleWithSize(60);
 }
 
 - (void)setModel:(CartonnWordsModel *)model {

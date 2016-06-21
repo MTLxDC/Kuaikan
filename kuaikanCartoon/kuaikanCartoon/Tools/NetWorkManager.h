@@ -13,10 +13,12 @@
  {result:error,message:""}
  {result:invalidatetoken, message:"token失效"}
  */
+
+
+#define NetCode             @"code"
 #define NetOk               @"OK"
 #define NetData             @"data"
 #define NetMessage          @"message"
-#define NetInvalidateToken  @"invalidetoken"
 #define HTTPSchema          @"http:"
 #define HTTPGET             @"GET"
 #define HTTPPOST            @"POST"
@@ -28,10 +30,10 @@
 
 + (instancetype)share;
 
-- (void)requestWithMethod:(NSString *)method
-                      url:(NSString *)url
-               parameters:(id)parameters
-                 complish:(void (^)(id res,NSError *error))complish;
+- (NSURLSessionDataTask *)requestWithMethod:(NSString *)method
+                                        url:(NSString *)url
+                                 parameters:(id)parameters
+                                   complish:(void (^)(id res,NSError *error))complish;
 
 
 @end

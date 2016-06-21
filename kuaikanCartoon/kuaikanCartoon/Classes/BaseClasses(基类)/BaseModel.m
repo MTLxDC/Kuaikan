@@ -22,8 +22,6 @@ MJCodingImplementation
     return nil;
 }
 
-
-
 + (void)requestModelDataWithUrlString:(NSString *)urlString complish:(void (^)(id))complish cachingPolicy:(ModelDataCachingPolicy)cachingPolicy hubInView:(UIView *)view {
     
     
@@ -44,6 +42,7 @@ MJCodingImplementation
                               hubInView:view];
 
 }
+
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString
                              complish:(void (^)(id))complish
@@ -75,9 +74,8 @@ MJCodingImplementation
     }else {
         hubView = [[[UIApplication sharedApplication] windows] lastObject];
     }
-    
+        
    dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:hubView];
-    
     
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
        
@@ -106,10 +104,7 @@ MJCodingImplementation
         }else {
             result = [[self class] mj_objectWithKeyValues:res];
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
             complish(result);
-        });
         
         if (saveMemoryCache) {
             [cache setCache:result forKey:urlString];

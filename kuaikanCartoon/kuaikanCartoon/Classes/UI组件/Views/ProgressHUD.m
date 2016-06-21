@@ -8,7 +8,7 @@
 
 #import "ProgressHUD.h"
 
-static CGFloat dissmissDelay = 0.5;
+static CGFloat dissmissDelay = 1;
 static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 
 

@@ -49,7 +49,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N5-I0-8tD">
                         <rect key="frame" x="140" y="10" width="246" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -71,6 +71,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="creat_Time" destination="tby-F3-xL4" id="ZCV-bl-iOt"/>
+                <outlet property="imageWidth" destination="bks-v4-v2i" id="bkQ-P5-VJE"/>
                 <outlet property="like_Count" destination="6Yn-CW-PlA" id="tRy-Iy-Zv7"/>
                 <outlet property="wordImageView" destination="qfV-ci-g69" id="hVz-Xw-TFJ"/>
                 <outlet property="wordTitleLable" destination="6N5-I0-8tD" id="ShL-WR-Gmf"/>

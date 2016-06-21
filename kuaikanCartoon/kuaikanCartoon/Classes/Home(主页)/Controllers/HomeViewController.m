@@ -44,6 +44,8 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     [self setupMainView];
     
     RegisterNotify(loginStatusChangeNotification, @selector(loginStatusChange));
+    
+    [self loginStatusChange];
 }
 
 - (void)dealloc {

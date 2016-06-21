@@ -20,7 +20,7 @@
     [_window makeKeyAndVisible];
     
     [UserInfoManager autoLogin];
-    
+
     return YES;
 }
 

@@ -34,14 +34,14 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1a-pZ-wnb" customClass="likeCountView">
-                        <rect key="frame" x="252" y="225" width="60" height="30"/>
+                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1a-pZ-wnb" customClass="likeCountView">
+                        <rect key="frame" x="252" y="223" width="60" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="K1z-8R-dUz"/>
                         </constraints>
                         <state key="normal" title="1111"/>
                     </button>
-                    <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-Ak-dQy">
+                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-Ak-dQy">
                         <rect key="frame" x="312" y="232" width="60" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="5zp-cz-bZO"/>

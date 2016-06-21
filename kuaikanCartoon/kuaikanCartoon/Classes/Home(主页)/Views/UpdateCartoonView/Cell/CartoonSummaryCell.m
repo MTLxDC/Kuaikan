@@ -100,6 +100,8 @@
 
 - (void)setModel:(SummaryModel *)model {
     _model = model;
+    
+    self.placeImageView.hidden = NO;
 
     self.likeCount.likeCount = model.likes_count.integerValue;
     

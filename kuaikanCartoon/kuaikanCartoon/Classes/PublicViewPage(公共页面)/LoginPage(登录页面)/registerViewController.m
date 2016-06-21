@@ -25,7 +25,6 @@
 
 @property (nonatomic,assign) BOOL registerToStart;
 
-
 @end
 
 static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send_code";
@@ -119,15 +118,19 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
     
 }
 
+- (void)dealloc {
+
+}
+
 -(void)startTiming{
     
     __block int timeout = 30; //倒计时时间
     
     dispatch_queue_t queue = dispatch_get_main_queue();
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); //每秒执行
     
-    dispatch_source_set_event_handler(_timer, ^{
+    dispatch_source_set_event_handler(timer, ^{
         
         if(timeout <= 0){   //倒计时结束，关闭
             
@@ -135,7 +138,7 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
                 [self.getSMSCode setTitle:@"发送验证码" forState:UIControlStateNormal];
                 self.getSMSCode.userInteractionEnabled = YES;
             
-            dispatch_source_cancel(_timer);
+            dispatch_source_cancel(timer);
 
         }else{
             
@@ -145,7 +148,8 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
             timeout--;
         }
     });
-    dispatch_resume(_timer);
+    dispatch_resume(timer);
+
 }
 
 
@@ -159,12 +163,14 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
         
         NSDictionary *result = (NSDictionary *)res;
         
-        NSNumber *code = result[@"code"];
-        NSString *message = result[@"message"];
+        NSNumber *code = result[NetCode];
+        NSString *message = result[NetMessage];
         
         if ([message isEqualToString:@"OK"]) {
             
             [ProgressHUD showSuccessWithStatus:@"注册成功" inView:weakSelf.view];
+            
+            [self.navigationController popViewControllerAnimated:YES];
             
         }else {
             
@@ -173,7 +179,11 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
             switch (code.integerValue) {
                 case 600005: errorStatus = @"验证码无效或者过期咯"; break;
                     
-                default:errorStatus = @"未知错误";break;
+                default:{
+                    errorStatus = @"未知错误";
+                    DEBUG_Log(@"%@",error.userInfo);
+                    break;
+                }
             }
             
             [ProgressHUD showErrorWithStatus:errorStatus inView:weakSelf.view];

@@ -17,7 +17,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_personal_320x150_" translatesAutoresizingMaskIntoConstraints="NO" id="lkJ-wv-Nze">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljt-Kr-qYz">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljt-Kr-qYz">
                             <rect key="frame" x="30" y="152" width="260" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="Rzs-WK-aVl"/>
@@ -38,7 +38,7 @@
                                 <action selector="back:" destination="iN0-l3-epB" eventType="touchUpInside" id="VoV-eQ-TcZ"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBL-3B-sOx">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBL-3B-sOx">
                             <rect key="frame" x="30" y="175" width="260" height="14.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="iqh-1h-tjs"/>

@@ -73,8 +73,6 @@
 
 - (void)setupTableViewAndHeadView {
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -277,7 +275,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = -scrollView.contentOffset.y;
     
-    if (offsetY <= navHeight) return;
+    if (offsetY <= navHeight) offsetY = navHeight;
     
     [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(offsetY));
@@ -302,10 +300,10 @@
         NSString *site   = self.model.site;
         NSString *ios    = self.model.ios;
         
-        if (weibo)  [arr addObject:weibo];
-        if (wechat) [arr addObject:wechat];
-        if (site)   [arr addObject:site];
-        if (ios)    [arr addObject:ios];
+        if (weibo.length)  [arr addObject:weibo];
+        if (wechat.length) [arr addObject:wechat];
+        if (site.length)   [arr addObject:site];
+        if (ios.length)    [arr addObject:ios];
 
         _shareText = [arr copy];
     }

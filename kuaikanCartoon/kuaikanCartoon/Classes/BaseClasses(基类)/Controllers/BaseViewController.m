@@ -44,6 +44,20 @@
     
 }
 
+- (void)setStatusBarHidden:(BOOL)statusBarHidden {
+    if (_statusBarHidden != statusBarHidden) {
+        _statusBarHidden = statusBarHidden;
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
+    if (_statusBarStyle != statusBarStyle) {
+        _statusBarStyle = statusBarStyle;
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
 
 - (BOOL)prefersStatusBarHidden {
     return _statusBarHidden;

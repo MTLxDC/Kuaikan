@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonMacro.h"
 
-static CGFloat const wordsSequenceViewHeight = 40;
+#define wordsSequenceViewHeight UseScaleWithSize(20)
 
 @interface wordsSequenceView : UIView
 
