@@ -20,15 +20,27 @@
 
 @property (nonatomic,assign) BOOL isreply;
 
-@property (nonatomic,strong) CommentsModel *replyComment;
-
-@property (nonatomic,strong) NSNumber *comicID;
+@property (nonatomic,strong) NSNumber *replyCommentID;
 
 @property (nonatomic,weak) UIView *mySuperView;
 
 @end
 
 @implementation CommentSendViewContainer
+
++ (instancetype)showInView:(UIView *)view {
+    return [[[self class] alloc] initInView:view];
+}
+
+- (instancetype)initInView:(UIView *)view {
+    
+    self = [self initWithFrame:CGRectZero];
+    
+    self.mySuperView = view;
+    
+    return self;
+    
+}
 
 + (instancetype)showWithComicID:(NSNumber *)ID inView:(UIView *)view {
     return [[[self class] alloc] initWithComicID:ID inView:view];
@@ -86,7 +98,7 @@
     [UIView animateWithDuration:0.25 animations:^{
         
         self.alpha  = offset == 0 ? 0 : 0.6;
-        [self layoutIfNeeded];
+        [self.mySuperView layoutIfNeeded];
         
     } completion:^(BOOL finished) {
         self.hidden = offset == 0;
@@ -115,14 +127,12 @@
     
 }
 
-- (void)replyWithCommentModel:(CommentsModel *)commentModel {
+- (void)replyWithUserName:(NSString *)nickName commentID:(NSNumber *)ID {
     
     self.isreply = YES;
-    self.replyComment = commentModel;
+    self.replyCommentID = ID;
     
-    NSString *userName = commentModel.user.nickname;
-    
-    NSString *placeText = [NSString stringWithFormat:@"回复@%@",userName];
+    NSString *placeText = [NSString stringWithFormat:@"回复@%@",nickName];
     
     [self.sendView becomeFirstResponder];
     [self.sendView setPlaceText:placeText];
@@ -131,7 +141,7 @@
 
 - (void)userCommentWithMessage:(NSString *)message {
     
-    NSString *requestID = self.isreply ? self.replyComment.ID.stringValue : self.comicID.stringValue;
+    NSString *requestID = self.isreply ? self.replyCommentID.stringValue : self.comicID.stringValue;
     
     weakself(self);
     
@@ -149,6 +159,8 @@
 
 
 - (void)setMySuperView:(UIView *)mySuperView {
+    if (_mySuperView == mySuperView) return;
+    
     _mySuperView = mySuperView;
     
     [mySuperView  addSubview:self];

@@ -312,16 +312,7 @@ CGFloat contentSizeMaxHeight = 100.0f;
 }
 
 - (void)showCommentPage {
-    
-    CommentDetailViewController  *cdVc = [[CommentDetailViewController alloc] init];
-    
-    cdVc.comicID = self.comicsMd.ID;
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdVc];
-    
-    [self presentViewController:nav animated:YES completion:^{
-        
-    }];
+    [CommentDetailViewController showInVc:self.navigationController withComicID:self.comicsMd.ID];
 }
 
 

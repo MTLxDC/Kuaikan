@@ -123,7 +123,7 @@ static NSString * const UserSearchHistoryDataKey = @"UserSearchHistoryDataKey";
             [weakSelf.historyData removeObjectAtIndex:index];
             [weakSelf deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
             
-            weakSelf.tableFooterView.hidden = self.historyData.count < 3;
+            weakSelf.tableFooterView.hidden = weakSelf.historyData.count < 3;
 
         }];
     }
@@ -142,7 +142,6 @@ static NSString * const UserSearchHistoryDataKey = @"UserSearchHistoryDataKey";
 
 - (NSMutableArray *)historyData {
     if (!_historyData) {
-        
         NSMutableArray *data = [[NSUserDefaults standardUserDefaults] objectForKey:UserSearchHistoryDataKey];
         _historyData = data.count > 0 ? data :[[NSMutableArray alloc] init];
     }

@@ -65,6 +65,21 @@ static NSString * const newCommentRequestUrlFormat =
 }
 
 
++ (instancetype)showInVc:(UIViewController *)vc withComicID:(NSNumber *)ID {
+    
+    CommentDetailViewController *cdvc  = [[CommentDetailViewController alloc] init];
+    
+    cdvc.comicID = ID;
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdvc];
+    
+    [vc presentViewController:nav animated:YES completion:^{
+        
+    }];
+    
+    return cdvc;
+}
+
 #pragma mark setupSubViews
 
 - (void)setupNavBar {
@@ -223,7 +238,8 @@ static NSString * const newCommentRequestUrlFormat =
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         CommentsModel *md = self.modelData.comments[indexPath.row];
-        [self.sendViewContainer replyWithCommentModel:md];
+    
+        [self.sendViewContainer replyWithUserName:md.user.nickname commentID:md.ID];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

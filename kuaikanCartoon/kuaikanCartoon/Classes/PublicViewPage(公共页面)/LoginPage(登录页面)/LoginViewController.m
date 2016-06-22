@@ -79,6 +79,12 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     return [super initWithNibName:@"LoginViewController" bundle:nil];
 }
 
+- (void)dealloc {
+    
+}
+
+static CGFloat inputViewMaxY = 0;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -90,7 +96,8 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     [self.loginBtn cornerRadius:10];
     [self.inputView cornerRadius:10];
     
-    
+    inputViewMaxY = CGRectGetMaxY(self.inputView.frame);
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -111,11 +118,9 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
     
     CGFloat keyboard_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
     
-    CGFloat inputViewMaxY = CGRectGetMaxY(self.inputView.frame);
-    
     CGFloat yoffset = keyboard_Y - inputViewMaxY;
     
-    self.inputViewCenterY.constant = yoffset < 0 ? yoffset + 10 : 0;
+    self.inputViewCenterY.constant = yoffset < 0 ? yoffset - 10 : 0;
     
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
@@ -241,8 +246,6 @@ static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/
 - (IBAction)passwordEditBegin:(UITextField *)sender {
     self.loginIcon.highlighted = YES;
     self.loginPasswordIcon.highlighted = YES;
-    
-    
 }
 
 //用户编辑发生改动

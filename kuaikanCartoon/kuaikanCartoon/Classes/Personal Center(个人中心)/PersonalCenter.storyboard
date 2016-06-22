@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F2d-tx-MMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1747" y="-10"/>
+            <point key="canvasLocation" x="-2811" y="246"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="bYj-SY-a5w">
@@ -187,7 +187,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1209.5" y="-29.5"/>
+            <point key="canvasLocation" x="-1917.5" y="134.5"/>
         </scene>
         <!--SettingVc-->
         <scene sceneID="gGs-4m-KmH">
@@ -372,11 +372,12 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="LogoutBtn" destination="6YH-qA-guQ" id="HQq-rM-lWU"/>
+                        <outlet property="cacheSizeText" destination="3Th-Cp-5eF" id="2ZT-JA-O4e"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBf-c3-GkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-851.5" y="297.5"/>
+            <point key="canvasLocation" x="-2079.5" y="-765.5"/>
         </scene>
     </scenes>
     <resources>

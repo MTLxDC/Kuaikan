@@ -262,7 +262,7 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
         case 1:return [self getCellHeightWithSection:3 withItemCount:1 WithScale:0.2]; //每周排行榜
         case 2:return [self getCellHeightWithSection:2 withItemCount:1 WithScale:0.4];  //新作出炉
         case 3:return [self getCellHeightWithSection:2 withItemCount:3 WithScale:1.33];  //主播力推
-        case 4:return [self getCellHeightWithSection:1 withItemCount:2 WithScale:0.8];  //官方活动
+        case 4:return [self getCellHeightWithSection:1 withItemCount:2 WithScale:0.66];  //官方活动
     }
     
     return 0;

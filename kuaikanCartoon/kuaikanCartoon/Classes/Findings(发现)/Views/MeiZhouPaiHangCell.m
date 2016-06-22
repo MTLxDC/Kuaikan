@@ -97,7 +97,7 @@
         
         index_Y++;
         
-//        if (index_Y == 2) item.hideLine = YES;
+        if (index_Y == 2) item.hideLine = YES;
         
         if (index_Y >= 3) {
             index_X++;

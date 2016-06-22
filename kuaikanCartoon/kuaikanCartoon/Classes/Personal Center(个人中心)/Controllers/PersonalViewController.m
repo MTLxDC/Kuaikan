@@ -83,6 +83,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) return;
     if ([UserInfoManager needLogin]) return;
     
     if (indexPath.section == 0)

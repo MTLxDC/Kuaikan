@@ -29,7 +29,6 @@
 
 @property (nonatomic,weak) NoResultTipView *noResultTipView;
 
-
 @property (nonatomic,strong) NSMutableArray *wordModelArray;
 
 @property (nonatomic,assign) BOOL showHistory;
@@ -45,10 +44,14 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
 
 @implementation SearchViewController
 
+- (void)dealloc {
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self setupSeachBar];
     
@@ -99,7 +102,6 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
     UITableView *tableView = [UITableView new];
     
     [self.view addSubview:tableView];
-
     
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
@@ -164,6 +166,8 @@ static NSInteger offset = 0;
 
 - (void)setupSearchHistoryView {
     
+    weakself(self);
+    
     SearchHistoryView *historyView = [SearchHistoryView new];
     [self.view addSubview:historyView];
     
@@ -173,9 +177,7 @@ static NSInteger offset = 0;
     }];
     
     [historyView setNeedSearchHistory:^(NSString *needSearchText) {
-       
-        [self.searchBar changeSearchText:needSearchText];
-        
+        [weakSelf.searchBar changeSearchText:needSearchText];
     }];
     
     self.historyView = historyView;
@@ -192,8 +194,10 @@ static NSInteger offset = 0;
     
     if (self.showHistory || text.length > 12) return;
     
+    //清空格
     self.currentSeachText = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
+    //转UTF-8
     NSString *keyword   = [self.currentSeachText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSString *urlString = [NSString stringWithFormat:@"%@?keyword=%@&limit=%d&offset=%d",searchBaseUrl,keyword,20,0];

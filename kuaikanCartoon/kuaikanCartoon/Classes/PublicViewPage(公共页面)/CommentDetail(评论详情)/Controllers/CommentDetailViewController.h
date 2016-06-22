@@ -13,5 +13,6 @@
 
 @property (nonatomic,copy) NSNumber *comicID;
 
++ (instancetype)showInVc:(UIViewController *)vc withComicID:(NSNumber *)ID;
 
 @end

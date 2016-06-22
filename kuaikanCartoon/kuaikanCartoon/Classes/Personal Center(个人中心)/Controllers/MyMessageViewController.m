@@ -9,8 +9,10 @@
 #import "MyMessageViewController.h"
 #import "MyMessageCell.h"
 #import "ReplyDataModel.h"
+#import "CommentSendViewContainer.h"
+#import "CommentDetailViewController.h"
 
-@interface MyMessageViewController ()
+@interface MyMessageViewController () <CommentSendViewContainerDelegate>
 
 @property (nonatomic,strong) ReplyDataModel *model;
 
@@ -18,8 +20,9 @@
 
 @property (nonatomic,strong) NSMutableArray *cellHeightCache;
 
-@end
+@property (nonatomic,weak)   CommentSendViewContainer *csvc;
 
+@end
 
 
 @implementation MyMessageViewController
@@ -40,13 +43,15 @@
     [super viewDidLoad];
     
     self.title = @"我的消息";
-    self.tableView.estimatedRowHeight = SCREEN_HEIGHT * 0.33;
+    self.tableView.estimatedRowHeight = SCREEN_HEIGHT * 0.2;
+    
+    self.csvc = [CommentSendViewContainer showInView:self.view];
+    self.csvc.delegate = self;
     
     [self updata];
     
     
 }
-
 
 - (void)updata {
 
@@ -68,6 +73,8 @@
 
 - (void)loadMoreData {
     
+    if (self.model.since.integerValue == 0) return;
+    
     NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comments/replies/timeline?since=%zd",self.model.since.integerValue];
     
     weakself(self);
@@ -76,14 +83,15 @@
         
         ReplyDataModel *resultModel = (ReplyDataModel *)result;
         
-        if (resultModel.comments.count < 1) {
+        [weakSelf.model.comments addObjectsFromArray:resultModel.comments];
+         weakSelf.model.since = resultModel.since;
+        [weakSelf.tableView reloadData];
+        
+        if (resultModel.comments.count < 1 || resultModel.since.integerValue == 0) {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return ;
         }
         
-        [weakSelf.model.comments addObjectsFromArray:resultModel.comments];
-         weakSelf.model.since = resultModel.since;
-        [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_footer endRefreshing];
         
     } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
@@ -109,7 +117,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if (iOS8Later) return UITableViewAutomaticDimension;
+    if (iOS8Later) return UITableViewAutomaticDimension;
   
     if (self.cellHeightCache.count > indexPath.row) {
         
@@ -142,6 +150,20 @@
     
     return height;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ReplyCommentsModel *model = self.model.comments[indexPath.row];
+    
+    self.csvc.comicID = model.target_comic.ID;
+    
+    [self.csvc replyWithUserName:model.user.nickname commentID:model.ID];
+    
+}
+
+- (void)sendMessageSucceeded:(CommentsModel *)commentContent {
+    [CommentDetailViewController showInVc:self withComicID:self.csvc.comicID];
 }
 
 
