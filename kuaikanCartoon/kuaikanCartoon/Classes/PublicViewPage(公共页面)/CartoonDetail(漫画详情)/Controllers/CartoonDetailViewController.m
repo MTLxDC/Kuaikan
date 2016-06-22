@@ -157,6 +157,7 @@ static const CGFloat imageCellHeight = 250.0f;
     self.titleLabel.text = self.comicsMd.title;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     [self.cartoonContentView reloadData];
+    [self.cartoonContentView layoutIfNeeded];
     [self.cartoonContentView setContentOffset:CGPointMake(0, -navHeight)];
     self.progress.maximumValue = self.comicsMd.images.count - 1;
     

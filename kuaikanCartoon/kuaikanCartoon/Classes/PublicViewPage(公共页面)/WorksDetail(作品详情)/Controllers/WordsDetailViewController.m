@@ -78,6 +78,7 @@
     
     [headView setLefeBtnClick:^(UIButton *btn) {
         weakSelf.showIntroduction = YES;
+        [weakSelf.contentView layoutIfNeeded];
         [weakSelf.contentView setContentOffset:CGPointMake(0, -wordsDetailHeadViewHeight)];
     }];
     
