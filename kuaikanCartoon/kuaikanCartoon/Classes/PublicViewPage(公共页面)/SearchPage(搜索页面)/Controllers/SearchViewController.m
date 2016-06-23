@@ -121,7 +121,6 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
 static NSInteger limit  = 20;
 static NSInteger offset = 0;
 
-
 - (void)loadMoreData {
     
     offset += 20;
@@ -251,7 +250,6 @@ static NSInteger offset = 0;
     
     [self.historyView addHistory:self.currentSeachText];
 
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

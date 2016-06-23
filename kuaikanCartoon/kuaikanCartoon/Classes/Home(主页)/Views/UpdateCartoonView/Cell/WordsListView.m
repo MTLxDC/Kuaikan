@@ -22,9 +22,6 @@
 
 @property (nonatomic,weak) HomeViewController *myHomeVc;
 
-@property (nonatomic,assign) NSInteger since;
-
-
 @end
 
 
@@ -49,7 +46,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
     self.rowHeight = 260;
     self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.since = 0;
     
     weakself(self);
     
@@ -62,9 +58,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     MJRefreshAutoFooter *footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         
-        self.since += 20;
-        
-        NSString *url = [NSString stringWithFormat:@"%@?since=%zd",self.urlString,self.since];
+        NSString *url = [NSString stringWithFormat:@"%@?since=%zd",self.urlString,self.words.since.integerValue];
         
         [wordsModel requestModelDataWithUrlString:url complish:^(id result) {
             
@@ -75,7 +69,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
             if (!result) return ;
             
             if (md.comics.count < 1) {
-                [weakSelf.mj_footer endRefreshing];
                 [weakSelf.tableFooterView setHidden:NO];
                 return ;
             }
@@ -84,7 +77,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
              weakSelf.words.since = md.since;
             
             [weakSelf reloadData];
-            
             
         } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self];
         
@@ -161,7 +153,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     SummaryModel *md = [self.words.comics objectAtIndex:section];
     
     NSString *updateTime = [[DateManager share] conversionDateVer2:[NSDate dateWithTimeIntervalSince1970:md.updated_at.doubleValue]];
-    
+            
     [timeLineHeadView setTitle:updateTime forState:UIControlStateNormal];
     
     return timeLineHeadView;
@@ -191,6 +183,8 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
+     self.words = nil;
+    [self reloadData];
     
     weakself(self);
     
@@ -213,7 +207,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
         
             [sself reloadData];
             [sself setContentOffset:CGPointZero];
-            sself.hidden = NO;
         
     } cachingPolicy:policy hubInView:self];
     
@@ -222,7 +215,8 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)setUrlString:(NSString *)urlString {
     
-    self.hidden = YES;
+    if ([_urlString isEqualToString:urlString]) return;
+    
     [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault];
     
     _urlString = urlString;

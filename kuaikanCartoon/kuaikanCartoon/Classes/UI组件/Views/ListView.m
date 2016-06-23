@@ -21,7 +21,7 @@
     lc.labelSelectTextColor = [UIColor redColor];
     lc.labelTextColor = [UIColor blackColor];
     lc.lineColor = [UIColor redColor];
-    lc.fontSize = 15.0f;
+    lc.font = [UIFont systemFontOfSize:12];
     
     
     return lc;
@@ -192,7 +192,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
         
         UILabel *label = [UILabel new];
         
-        label.font = [UIFont systemFontOfSize:self.configuration.fontSize];
+        label.font = self.configuration.font;
         label.userInteractionEnabled = YES;
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = index;
@@ -328,7 +328,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
             
             CGSize textSize = [text boundingRectWithSize:CGSizeMake(MAXFLOAT,self.height)
                                                  options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                              attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.configuration.fontSize * 1.2]} context:nil].size;
+                                              attributes:@{NSFontAttributeName:self.configuration.font} context:nil].size;
             
             labelSize = textSize;
             

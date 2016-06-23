@@ -70,13 +70,12 @@ static const CGFloat navigationHeadView_H = 35;
     
     ListViewConfiguration *lc = [ListViewConfiguration new];
     
-    
     lc.labelSelectTextColor = subjectColor;
     lc.labelTextColor = [UIColor darkGrayColor];
     lc.lineColor = subjectColor;
-    lc.fontSize = 12.0f;
-    lc.spaceing = 20.0f;
-    lc.labelWidth = 50.0f;
+    lc.font = [UIFont systemFontOfSize:12];
+    lc.spaceing = SCREEN_WIDTH * 0.05;
+    lc.labelWidth = SCREEN_WIDTH * 0.15;
     lc.monitorScrollView = self.cartoonListView;
     
     ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:arr Configuration:lc];
@@ -86,11 +85,7 @@ static const CGFloat navigationHeadView_H = 35;
     
     self.navigationHeadView = lv;
     
-
 }
-
-
-
 
 - (updateCartoonListView *)cartoonListView {
     if (!_cartoonListView) {

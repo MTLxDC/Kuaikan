@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonMacro.h"
 
-#define wordsOptionsHeadViewHeight UseScaleWithSize(20)
+#define wordsOptionsHeadViewHeight 40
 
 @interface wordsOptionsHeadView : UIView
 

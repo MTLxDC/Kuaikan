@@ -10,7 +10,7 @@
 #import "CartonnWordsModel.h"
 #import "CommonMacro.h"
 
-#define wordTableViewCellHeight UseScaleWithSize(50)
+#define wordTableViewCellHeight 100
 
 @interface wordTableViewCell : UITableViewCell
 

@@ -21,7 +21,7 @@
 
 @property (nonatomic) CGFloat spaceing; //间距
 
-@property (nonatomic) CGFloat  fontSize; //字体大小
+@property (nonatomic,strong) UIFont  *font; //字体
 
 @property (nonatomic) CGFloat  labelWidth;
 

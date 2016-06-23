@@ -11,7 +11,7 @@
 
 @class userModel;
 
-#define wordAuthorCellHeight UseScaleWithSize(25)
+#define wordAuthorCellHeight 50
 
 @interface wordAuthorCell : UITableViewCell
 

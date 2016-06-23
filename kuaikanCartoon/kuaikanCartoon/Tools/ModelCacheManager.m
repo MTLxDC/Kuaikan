@@ -20,9 +20,6 @@
 
 @property (nonatomic,strong) NSMutableDictionary *modelCache;
 
-@property (nonatomic,strong) dispatch_queue_t queue;
-
-
 @end
 
 @implementation ModelCacheManager
@@ -51,8 +48,6 @@
         [center addObserver:self selector:@selector(saveCache) name:UIApplicationDidEnterBackgroundNotification object:nil];
         
         [center addObserver:self selector:@selector(removeAllCache) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
-        
-        self.queue = dispatch_queue_create(0, 0);
         self.modelCache = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -82,9 +77,7 @@
 }
 
 - (void)setCache:(id)aCache forKey:(NSString *)aKey {
-    
     [self.modelCache setObject:aCache forKey:aKey];
-    
 }
 
 - (void)removeCacheForKey:(NSString *)key {

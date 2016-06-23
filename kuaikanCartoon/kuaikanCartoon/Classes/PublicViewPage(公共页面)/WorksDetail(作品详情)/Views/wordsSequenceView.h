@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonMacro.h"
 
-#define wordsSequenceViewHeight UseScaleWithSize(20)
+#define wordsSequenceViewHeight 40
 
 @interface wordsSequenceView : UIView
 

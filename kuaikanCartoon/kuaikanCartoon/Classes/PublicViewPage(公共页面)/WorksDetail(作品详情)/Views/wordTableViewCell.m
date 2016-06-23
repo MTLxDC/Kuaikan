@@ -29,7 +29,7 @@
 - (void)awakeFromNib {
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.imageWidth.constant = UseScaleWithSize(60);
+    self.imageWidth.constant = 120;
 }
 
 - (void)setModel:(CartonnWordsModel *)model {

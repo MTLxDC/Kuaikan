@@ -14,7 +14,7 @@
 
 
 
-#define iconSize UseScaleWithSize(15)
+#define iconSize 30
 
 @interface wordAuthorCell ()
 
