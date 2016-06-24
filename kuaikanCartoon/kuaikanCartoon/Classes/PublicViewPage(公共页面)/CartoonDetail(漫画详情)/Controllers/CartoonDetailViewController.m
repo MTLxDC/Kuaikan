@@ -123,29 +123,33 @@ static const CGFloat imageCellHeight = 250.0f;
     self.cartoonContentView.hidden = YES;
     self.progress.hidden = YES;
     
+    
    [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
-              
+       
+       if (res == nil) return ;
+       
        CartoonDetailViewController *sself = weakSelf;
        
+        sself.imageCellHeightCache = nil;
         sself.comicsMd = res;
         [sself updataUI];
        
-       if (res != nil) {
-           sself.cartoonContentView.hidden = NO;
-           [sself hideOrShowProgressView:NO];
-       }
+        sself.cartoonContentView.hidden = NO;
+        [sself hideOrShowProgressView:NO];
        
        
-   } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
+   } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     
     
     NSString *commentUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/hot_comments?",self.cartoonId];
     
     [CommentsModel requestModelDataWithUrlString:commentUrl complish:^(id result) {
         
+        if (result == nil) return ;
+        
         CartoonDetailViewController *sself = weakSelf;
         sself.commentModels = result;
-        
+        sself.commentCellHeightCache = nil;
         [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         
     } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
@@ -157,8 +161,8 @@ static const CGFloat imageCellHeight = 250.0f;
     self.titleLabel.text = self.comicsMd.title;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     [self.cartoonContentView reloadData];
-    [self.cartoonContentView layoutIfNeeded];
-    [self.cartoonContentView setContentOffset:CGPointMake(0, -navHeight)];
+    [self.cartoonContentView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                         atScrollPosition:UITableViewScrollPositionNone animated:NO];
     self.progress.maximumValue = self.comicsMd.images.count - 1;
     
 }

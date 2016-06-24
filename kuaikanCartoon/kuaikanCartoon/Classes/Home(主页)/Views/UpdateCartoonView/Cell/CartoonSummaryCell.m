@@ -96,6 +96,8 @@
 
 - (void)like {
     self.model.is_liked = !self.model.is_liked;
+    int upCount = self.model.is_liked ? 1 : -1;
+    self.model.likes_count = [NSNumber numberWithInteger:self.model.likes_count.integerValue + upCount];
 }
 
 - (void)setModel:(SummaryModel *)model {

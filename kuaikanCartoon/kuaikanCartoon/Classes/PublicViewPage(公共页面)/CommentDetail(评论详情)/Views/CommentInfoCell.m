@@ -34,6 +34,8 @@
 
 - (IBAction)likeEevent:(id)sender {
     self.commentsModel.is_liked = !self.commentsModel.is_liked;
+    int upCount = self.commentsModel.is_liked ? 1 : -1;
+    self.commentsModel.likes_count = [NSNumber numberWithInteger:self.commentsModel.likes_count.integerValue + upCount];
 }
 - (IBAction)reply:(id)sender {
 }
@@ -57,7 +59,6 @@
     self.likeCount.islike    = commentsModel.is_liked;
     self.likeCount.likeCount = commentsModel.likes_count.integerValue;
     self.likeCount.requestID = commentsModel.comic_id.stringValue;
-
 
 }
 

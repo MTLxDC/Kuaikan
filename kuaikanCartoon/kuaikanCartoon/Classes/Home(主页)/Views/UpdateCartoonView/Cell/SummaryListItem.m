@@ -41,6 +41,10 @@
     
 }
 
+- (void)setHasNotBeenUpdated:(BOOL)hasNotBeenUpdated {
+    self.slv.hasNotBeenUpdated = hasNotBeenUpdated;
+}
+
 - (void)setUrlString:(NSString *)urlString {
     self.slv.urlString = urlString;
 }

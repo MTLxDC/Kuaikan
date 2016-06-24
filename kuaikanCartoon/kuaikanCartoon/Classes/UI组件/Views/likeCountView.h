@@ -16,7 +16,7 @@
 
 @property (nonatomic,copy) NSString *requestID;     //点赞请求ID
 
-@property (nonatomic) NSUInteger likeCount;         //设置赞数
+@property (nonatomic) NSInteger  likeCount;         //设置赞数
 
 + (instancetype)likeCountViewWithCount:(NSInteger)count requestID:(NSString *)ID;
 

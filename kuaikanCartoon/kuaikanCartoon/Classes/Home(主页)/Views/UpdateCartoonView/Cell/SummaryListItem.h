@@ -13,4 +13,6 @@
 
 @property (nonatomic,copy) NSString *urlString;
 
+@property (nonatomic,assign) BOOL hasNotBeenUpdated;
+
 @end

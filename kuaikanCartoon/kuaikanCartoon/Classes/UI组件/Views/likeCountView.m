@@ -57,6 +57,10 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 - (void)setIslike:(BOOL)islike {
     _islike = islike;
     
+    int upCount = islike ? 1 : -1;
+    
+    self.likeCount = self.likeCount + upCount;
+    
     NSString *imageName = self.islike ? pressedImageName : normalImageName;
     
     [self setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
@@ -67,9 +71,9 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 
 }
 
-- (void)setLikeCount:(NSUInteger)likeCount {
+- (void)setLikeCount:(NSInteger)likeCount {
     _likeCount = likeCount;
-        
+    
     [self setTitle:[self makeTextWithCount:likeCount] forState:UIControlStateNormal];
 }
 
@@ -78,10 +82,6 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     self.userInteractionEnabled = NO;
     
     self.islike = !self.islike;
-    
-    self.likeCount += (self.islike ? 1 : -1);
-    
-    [self setTitle:[self makeTextWithCount:self.likeCount] forState:UIControlStateNormal];
     
     [UIView animateWithDuration:0.25 animations:^{
         
@@ -95,21 +95,19 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
         }];
         
     }];
-    
-    
-    NetWorkManager *manger = [NetWorkManager share];
-    
-    NSArray *parameter  = self.islike ? @[@"POST",@"/like"] : @[@"DELETE",@"/like?"];   //取消赞DELETE,反则POST
-    
-    NSMutableString *newUrl = [likeUrl mutableCopy];
-    
-    [newUrl appendFormat:@"/%@%@",self.requestID,parameter.lastObject];
-    
-    [manger requestWithMethod:parameter.firstObject url:newUrl parameters:nil complish:^(id res, NSError *error) {
-        if (error == nil) {
-            DEBUG_Log(@"%@",res);
-        }
-    }];
+//    
+//    
+//    NetWorkManager *manger = [NetWorkManager share];
+//
+//    NSArray *parameter  = self.islike ? @[@"POST",@"/like"] : @[@"DELETE",@"/like?"];   //取消赞DELETE,反则POST
+//    
+//    NSMutableString *newUrl = [likeUrl mutableCopy];
+//    
+//    [newUrl appendFormat:@"/%@%@",self.requestID,parameter.lastObject];
+//    
+//    [manger requestWithMethod:parameter.firstObject url:newUrl parameters:nil complish:^(id res, NSError *error) {
+//            DEBUG_Log(@"%@",error);
+//    }];
     
 }
 

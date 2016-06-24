@@ -28,7 +28,7 @@
                         </state>
                     </button>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恋是樱草色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-gB-fN3">
-                        <rect key="frame" x="56" y="12" width="180" height="20"/>
+                        <rect key="frame" x="56" y="12" width="200" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,9 +66,9 @@
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <button contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEN-h4-a4p">
-                        <rect key="frame" x="244" y="14" width="120" height="16"/>
+                        <rect key="frame" x="264" y="14" width="100" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="120" id="ufD-S8-EIk"/>
+                            <constraint firstAttribute="width" constant="100" id="ufD-S8-EIk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="收到货就收" image="home_recommend_cell_author_15x15_">

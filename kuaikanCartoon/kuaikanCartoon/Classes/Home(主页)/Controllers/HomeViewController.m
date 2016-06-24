@@ -27,6 +27,7 @@
 
 @property (nonatomic,weak) UIScrollView *tipViewContainer;
 
+@property (nonatomic,weak) updateCartoonView *updateCartoonView;
 
 @end
 
@@ -165,10 +166,19 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     [self.view addSubview:mainView];
     
+    self.updateCartoonView = cv;
     self.mainView = mainView;
     self.wlv = wlv;
     self.tipView = tipView;
     self.tipViewContainer = sc;
+    
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    [self.updateCartoonView.cartoonListView scrollToToday];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ListView.h"
+#import "updateCartoonListView.h"
 
 @interface updateCartoonView : UIView
 
+@property (nonatomic,strong,readonly) updateCartoonListView *cartoonListView;
 
 @end

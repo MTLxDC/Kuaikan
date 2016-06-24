@@ -8,13 +8,13 @@
 
 #import "updateCartoonView.h"
 #import "UIView+Extension.h"
-#import "updateCartoonListView.h"
 #import "DateManager.h"
 #import "CommonMacro.h"
 
-@interface updateCartoonView ()<UICollectionViewDelegate>
-
-@property (nonatomic,strong) updateCartoonListView *cartoonListView;
+@interface updateCartoonView ()
+{
+    updateCartoonListView *  _cartoonListView;
+}
 
 @property (nonatomic,strong) ListView *navigationHeadView;
 
@@ -89,9 +89,8 @@ static const CGFloat navigationHeadView_H = 35;
 
 - (updateCartoonListView *)cartoonListView {
     if (!_cartoonListView) {
-        updateCartoonListView *clv = [[updateCartoonListView alloc] initWithFrame:CGRectMake(0, navigationHeadView_H, self.width, self.height - navigationHeadView_H)];
         
-        clv.delegate = self;
+        updateCartoonListView *clv = [[updateCartoonListView alloc] initWithFrame:CGRectMake(0, navigationHeadView_H, self.width, self.height - navigationHeadView_H)];
         
         _cartoonListView = clv;
     }

@@ -100,7 +100,6 @@ static NSString * const UserSearchHistoryDataKey = @"UserSearchHistoryDataKey";
     self.tableFooterView.hidden = YES;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.historyData.count;
 }
@@ -142,7 +141,7 @@ static NSString * const UserSearchHistoryDataKey = @"UserSearchHistoryDataKey";
 
 - (NSMutableArray *)historyData {
     if (!_historyData) {
-        NSMutableArray *data = [[NSUserDefaults standardUserDefaults] objectForKey:UserSearchHistoryDataKey];
+        NSMutableArray *data = [[[NSUserDefaults standardUserDefaults] objectForKey:UserSearchHistoryDataKey] mutableCopy];
         _historyData = data.count > 0 ? data :[[NSMutableArray alloc] init];
     }
     return _historyData;

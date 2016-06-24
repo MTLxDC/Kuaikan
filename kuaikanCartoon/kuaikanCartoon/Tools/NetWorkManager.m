@@ -67,8 +67,10 @@
         
         self.requestSerializer.timeoutInterval = 10;
         self.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;
-        [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
+        [self.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
+    
     }
     return self;
 }

@@ -18,6 +18,7 @@
 
 @property (nonatomic,copy) void (^NoDataCallBack)();
 
+@property (nonatomic,assign) BOOL hasNotBeenUpdated;
 
 @end
 

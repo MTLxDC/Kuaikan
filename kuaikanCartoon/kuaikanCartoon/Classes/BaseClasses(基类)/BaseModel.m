@@ -74,7 +74,8 @@ MJCodingImplementation
     }else {
         hubView = [[[UIApplication sharedApplication] windows] lastObject];
     }
-        
+    
+    
    dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:hubView];
     
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {

@@ -22,6 +22,9 @@
 
 @property (nonatomic,weak) HomeViewController *myHomeVc;
 
+@property (nonatomic,weak) UIImageView *hasNotBeenUpdatedView;
+
+
 @end
 
 
@@ -93,6 +96,22 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     self.tableFooterView = imageView;
     self.tableFooterView.hidden = YES;
+    
+    UIImageView *hasNotBeenUpdatedView = [[UIImageView alloc] init];
+    
+    hasNotBeenUpdatedView.image = [UIImage imageNamed:@"6_clock_191x234_"];
+    hasNotBeenUpdatedView.hidden = YES;
+    
+    [self addSubview:hasNotBeenUpdatedView];
+    
+    self.hasNotBeenUpdatedView = hasNotBeenUpdatedView;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.hasNotBeenUpdatedView.frame  = CGRectMake(50,self.center.y, 191, 234);
+    self.hasNotBeenUpdatedView.center = self.center;
     
 }
 
@@ -183,9 +202,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
-     self.words = nil;
-    [self reloadData];
-    
     weakself(self);
     
     [wordsModel requestModelDataWithUrlString:url complish:^(id res) {
@@ -213,10 +229,14 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
 }
 
+- (void)setHasNotBeenUpdated:(BOOL)hasNotBeenUpdated {
+    _hasNotBeenUpdated = hasNotBeenUpdated;
+    self.hasNotBeenUpdatedView.hidden = !hasNotBeenUpdated;
+    self.mj_footer.hidden = hasNotBeenUpdated;
+}
+
 - (void)setUrlString:(NSString *)urlString {
-    
-    if ([_urlString isEqualToString:urlString]) return;
-    
+        
     [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault];
     
     _urlString = urlString;

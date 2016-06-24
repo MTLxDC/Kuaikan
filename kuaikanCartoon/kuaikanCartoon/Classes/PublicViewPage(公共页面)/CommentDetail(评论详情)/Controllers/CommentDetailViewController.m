@@ -203,13 +203,14 @@ static NSString * const newCommentRequestUrlFormat =
         [sself.cellHeightCache removeAllObjects];
         [sself.commentsDisplayListView reloadData];
         [sself.commentsDisplayListView.mj_header endRefreshing];
-        [sself.commentsDisplayListView setContentOffset:CGPointMake(0,-navHeight)];
+        [sself.commentsDisplayListView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                             atScrollPosition:UITableViewScrollPositionNone animated:NO];
 
         if (sself.modelData.since.integerValue != 0) {
             [sself.commentsDisplayListView.mj_footer setHidden:NO];
         }
 
-    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view] ;
+    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view] ;
     
 }
 

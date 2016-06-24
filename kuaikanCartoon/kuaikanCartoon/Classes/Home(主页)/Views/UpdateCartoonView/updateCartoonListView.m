@@ -20,6 +20,10 @@
 
 @implementation updateCartoonListView
 
+- (void)scrollToToday {
+    [self scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.requestUrlArray.count - 1 inSection:0]
+                 atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -53,7 +57,20 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     SummaryListItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:@"SummaryListItem" forIndexPath:indexPath];
+    
     item.urlString = self.requestUrlArray[indexPath.item];
+    
+    if (self.requestUrlArray.count - 1 == indexPath.row) {
+        
+        NSCalendar *calender = [NSCalendar currentCalendar];
+        
+        NSInteger hour = [calender components:NSCalendarUnitHour fromDate:[NSDate date]].hour;
+        
+        item.hasNotBeenUpdated = hour < 6;
+        
+    }else {
+        item.hasNotBeenUpdated = NO;
+    }
     
     return item;
 }
@@ -77,8 +94,6 @@
     return _flowLayout;
 }
 
-
-
 - (NSArray *)requestUrlArray {
     if (!_requestUrlArray) {
         
@@ -96,7 +111,6 @@
         }
         
         _requestUrlArray = [array copy];
-        
         
     }
     return _requestUrlArray;
