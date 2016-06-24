@@ -202,6 +202,8 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
+    [self setHidden:YES];
+    
     weakself(self);
     
     [wordsModel requestModelDataWithUrlString:url complish:^(id res) {
@@ -222,9 +224,11 @@ static NSString * const cellIdentifier = @"SummaryCell";
         }
         
             [sself reloadData];
+            [sself layoutIfNeeded];
             [sself setContentOffset:CGPointZero];
+            [sself setHidden:NO];
         
-    } cachingPolicy:policy hubInView:self];
+    } cachingPolicy:policy hubInView:self.superview];
     
     
 }
@@ -236,7 +240,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
 }
 
 - (void)setUrlString:(NSString *)urlString {
-        
+
     [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault];
     
     _urlString = urlString;

@@ -31,12 +31,12 @@
 
 - (void)changeSearchText:(NSString *)text {
     self.textField.text = text;
+    [self beginOrEndEditing:YES];
     [self textFieldDidChange:self.textField];
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     
     self.backgroundColor = subjectColor;
     self.textField.delegate = self;
@@ -74,6 +74,8 @@
         [self beginOrEndEditing:NO];
     }
 }
+
+
 
 - (void)beginOrEndEditing:(BOOL)isbegin {
     

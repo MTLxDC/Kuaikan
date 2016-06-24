@@ -11,6 +11,8 @@
 #import "HomeViewController.h"
 #import "FindingsViewController.h"
 #import "PersonalViewController.h"
+#import "BaseNavigationController.h"
+
 #import "CommonMacro.h"
 #import "CartoonDetailViewController.h"
 #import "UIView+Extension.h"
@@ -61,7 +63,7 @@
 - (void)addChildViewControllers:(NSArray *)childControllers  {
     
     for (NSInteger index = 0; index < childControllers.count; index++) {
-        UINavigationController *navHome = [[UINavigationController alloc] initWithRootViewController:childControllers[index]];
+        BaseNavigationController *navHome = [[BaseNavigationController alloc] initWithRootViewController:childControllers[index]];
         [super addChildViewController:navHome];
     }
 }

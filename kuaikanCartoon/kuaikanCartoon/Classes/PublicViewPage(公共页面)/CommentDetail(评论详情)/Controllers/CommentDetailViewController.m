@@ -190,7 +190,6 @@ static NSString * const newCommentRequestUrlFormat =
     
     weakself(self);
     
-    
     NSString *requestFormat = self.isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
     
     NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.comicID.stringValue,0];
@@ -200,17 +199,18 @@ static NSString * const newCommentRequestUrlFormat =
         CommentDetailViewController *sself = weakSelf;
 
          sself.modelData = res;
+        
         [sself.cellHeightCache removeAllObjects];
         [sself.commentsDisplayListView reloadData];
         [sself.commentsDisplayListView.mj_header endRefreshing];
-        [sself.commentsDisplayListView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                             atScrollPosition:UITableViewScrollPositionNone animated:NO];
+        [sself.commentsDisplayListView layoutIfNeeded];
+        [sself.commentsDisplayListView setContentOffset:CGPointMake(0, -navHeight)];
 
         if (sself.modelData.since.integerValue != 0) {
             [sself.commentsDisplayListView.mj_footer setHidden:NO];
         }
 
-    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view] ;
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view] ;
     
 }
 

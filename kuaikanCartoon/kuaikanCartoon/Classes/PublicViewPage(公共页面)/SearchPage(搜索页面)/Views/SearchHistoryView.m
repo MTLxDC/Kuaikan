@@ -9,6 +9,7 @@
 #import "SearchHistoryView.h"
 #import "SearchHistoryCell.h"
 #import "CommonMacro.h"
+#import "UIView+Extension.h"
 
 @interface SearchHistoryView ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -67,6 +68,11 @@ static NSString * const UserSearchHistoryDataKey = @"UserSearchHistoryDataKey";
     self.rowHeight = 50;
     
     [self setupClearHistoryFooter];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    UIViewController *myvc = [self findResponderWithClass:[UIViewController class]];
+    [myvc.view endEditing:YES];
 }
 
 - (void)setupClearHistoryFooter {

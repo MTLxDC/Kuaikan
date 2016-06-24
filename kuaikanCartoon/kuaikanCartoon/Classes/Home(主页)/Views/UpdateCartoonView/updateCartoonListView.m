@@ -38,16 +38,17 @@
 
 - (void)setup {
     
-    
     self.dataSource = self;
     self.pagingEnabled = YES;
     self.bounces = NO;
     
     [self registerClass:[SummaryListItem class] forCellWithReuseIdentifier:@"SummaryListItem"];
-    
 }
 
-
+- (void)reloadData {
+    [super reloadData];
+    [self scrollToToday];
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.requestUrlArray.count;
@@ -77,7 +78,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     
     self.flowLayout.itemSize = self.bounds.size;
     

@@ -174,13 +174,6 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    [self.updateCartoonView.cartoonListView scrollToToday];
-
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     

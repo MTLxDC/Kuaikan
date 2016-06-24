@@ -122,7 +122,7 @@ static const CGFloat imageCellHeight = 250.0f;
     
     self.cartoonContentView.hidden = YES;
     self.progress.hidden = YES;
-    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
    [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
        

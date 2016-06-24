@@ -10,6 +10,4 @@
 
 @interface updateCartoonListView : UICollectionView
 
-- (void)scrollToToday;
-
 @end
