@@ -1423,7 +1423,7 @@
 					"\"UIKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kuaikanCartoon;
 			};
 			name = Debug;
 		};
@@ -1467,7 +1467,7 @@
 					"\"UIKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.name.kuaikanCartoon;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kuaikanCartoon;
 			};
 			name = Release;
 		};

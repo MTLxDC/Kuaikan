@@ -128,7 +128,6 @@ CGFloat const btnHeight  = 15.0f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     
-    
     CGFloat offsetY = -[change[NSKeyValueChangeNewKey] CGPointValue].y;
     
     if (offsetY < 1) return;
@@ -137,16 +136,12 @@ CGFloat const btnHeight  = 15.0f;
     
     if (offsetY > navHeight + 20) {
         
-        if (offsetY < wordsDetailHeadViewHeight) {
-            
-            CGFloat alpha = 0.0f;
+        CGFloat alpha = 0.0f;
 
-            alpha = (wordsDetailHeadViewHeight * 0.5)/offsetY - 0.3;
+        alpha = (wordsDetailHeadViewHeight * 0.5)/offsetY - 0.3;
             
-            self.bluredImageView.alpha = alpha;
-            self.maskImageView.alpha = 1 - alpha;
-            
-        }
+        self.bluredImageView.alpha = alpha;
+        self.maskImageView.alpha = 1 - alpha;
         
         self.show = YES;
         

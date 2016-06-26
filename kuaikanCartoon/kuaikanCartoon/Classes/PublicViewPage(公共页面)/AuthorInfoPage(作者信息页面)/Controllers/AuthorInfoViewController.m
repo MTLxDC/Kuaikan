@@ -27,7 +27,7 @@
 
 @property (nonatomic,strong) AuthorInfoModel *model;
 
-@property (nonatomic,strong) NSArray<NSString *> *shareText;
+@property (nonatomic,strong) NSArray<NSString  *> *shareText;
 
 @end
 

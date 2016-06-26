@@ -202,13 +202,17 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
     
-    [self setHidden:YES];
+    self.tableFooterView.hidden = YES;
+    self.words = nil;
+    [self reloadData];
     
     weakself(self);
     
     [wordsModel requestModelDataWithUrlString:url complish:^(id res) {
         
         WordsListView *sself = weakSelf;
+        
+        if (!sself) return;
         
         [sself.mj_header endRefreshing];
 
@@ -226,7 +230,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
             [sself reloadData];
             [sself layoutIfNeeded];
             [sself setContentOffset:CGPointZero];
-            [sself setHidden:NO];
         
     } cachingPolicy:policy hubInView:self.superview];
     
