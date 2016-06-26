@@ -1,13 +1,8 @@
-//
-//  AppDelegate.m
-//  DCWebPicScrollView
-//
-//  Created by dengchen on 15/12/4.
-//  Copyright © 2015年 name. All rights reserved.
-//
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MainTabBarController.h"
+#import "UserInfoManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -16,14 +11,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    _window.rootViewController = [[ViewController alloc] init];
+    _window.rootViewController = [MainTabBarController new];
     
     [_window makeKeyAndVisible];
     
+    [UserInfoManager autoLogin];
+
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -44,7 +44,6 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end
