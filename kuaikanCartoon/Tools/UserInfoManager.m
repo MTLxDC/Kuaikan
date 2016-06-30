@@ -19,14 +19,14 @@
 
 @end
 
-static NSString * const loginInfoFileName = @"loginInfo";   //账号密码保存文件名
+static NSString * const loginInfoName = @"loginInfo";   //账号密码保存
 
 static NSString * const userAuthorizeUrlString = @"http://api.kuaikanmanhua.com/v1/timeline/polling";
 
-static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/phone/signin";
+static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/phone/signin";  //登录接口
 
-static NSString * const commentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comics/%@/comments";
-static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/%@/reply";
+static NSString * const commentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comics/%@/comments"; //评论接口
+static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/%@/reply";  //回复接口
 
 @implementation UserInfoManager
 
@@ -49,15 +49,24 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
 
 - (void)autoLogin {
     
-    NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+    NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoName];
     
     NSDictionary *parameters = [NSKeyedUnarchiver unarchiveObjectWithFile:loginInfoPath];
     
-    NSDictionary *userData = parameters[@"userData"];
+    NSDictionary *userData  = parameters[@"userData"];
+    NSDictionary *loginInfo = parameters[@"loginInfo"];
     
     if (userData.count < 1) return;
     
-    [self saveUserInfoWithData:userData];
+    [self loginWithPhone:loginInfo[phoneKey] WithPassword:loginInfo[passwordKey] loginSucceed:^(UserInfoManager *user) {
+        
+        DEBUG_Log(@"自动登录成功");
+        
+    } loginFailed:^(id faileResult, NSError *error) {
+        
+        [self saveUserInfoWithData:userData];
+        
+    }];
     
 }
 
@@ -82,7 +91,7 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
     self.reg_type = nil;
     self.update_remind_flag = nil;
     
-    NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+    NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoName];
 
     [[NSFileManager defaultManager] removeItemAtPath:loginInfoPath error:nil];
     
@@ -144,20 +153,17 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
             
             [self saveUserInfoWithData:data];
             
-            NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoFileName];
+            NSString *loginInfoPath = [self.savePath stringByAppendingPathComponent:loginInfoName];
             
             NSDictionary *loginInfo = @{@"userData":data,@"loginInfo":parameters};
             
             [NSKeyedArchiver archiveRootObject:loginInfo toFile:loginInfoPath];
             
-            [manager requestWithMethod:@"GET" url:userAuthorizeUrlString parameters:nil complish:^(id res, NSError *error) {
-                
-            }];
-            
             if (succeed) succeed(self);
             
         }else {
             
+            DEBUG_Log(@"登录失败,错误信息:%@",error);
             if (failed) failed(res,error);
             
         }
@@ -262,6 +268,7 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
 }
 
 - (NSString *)savePath {
+    
     if (!_savePath) {
         
          _savePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:NSStringFromClass([self class])];

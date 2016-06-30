@@ -8,11 +8,7 @@
 
 #import "NetWorkManager.h"
 #import "NSString+Extension.h"
-
-@interface NetWorkManager ()
-
-
-@end
+#import <libkern/OSAtomic.h>
 
 @implementation NetWorkManager
 
@@ -24,8 +20,7 @@
                                    complish:(void (^)(id res,NSError *error))complish {
     
     NSParameterAssert(complish);
-    
-    
+
    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:method URLString:url parameters:parameters uploadProgress:nil downloadProgress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject) {
         
         if (complish) {

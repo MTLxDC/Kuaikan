@@ -304,6 +304,7 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
 #pragma mark 无线轮播器代理方法
 
 - (void)picScrollView:(DCPicScrollView *)picScrollView needUpdateItem:(DCPicItem *)item atIndex:(NSInteger)index {
+    
     bannerModel *md = [self.bannerModelArray objectAtIndex:index];
     
     [item.imageView sd_setImageWithURL:[NSURL URLWithString:md.pic] placeholderImage:[UIImage imageNamed:@"ic_new_comic_placeholder_s_355x149_"]];

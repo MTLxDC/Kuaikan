@@ -7,7 +7,6 @@
 //
 
 #import "bannerInfoModel.h"
-#import <MJExtension.h>
 
 @implementation bannerInfoModel
 

@@ -80,15 +80,17 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.95 alpha:1]];
-
+    
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
-        MainTabBarController *main = (MainTabBarController *)self.tabBarController;
-        [main setHidesBottomBar:self.navigationController.viewControllers.count > 1];
+    
+    [super viewWillAppear:animated];
+
+    MainTabBarController *main = (MainTabBarController *)self.tabBarController;
+    [main setHidesBottomBar:self.navigationController.viewControllers.count > 1];
     
 }
 

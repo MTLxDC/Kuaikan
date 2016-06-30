@@ -85,12 +85,23 @@
     
 }
 
+- (void)clearCache {
+    
+    [self.fileManager removeItemAtPath:self.cacheDirectory error:NULL];
+    
+    [self.fileManager createDirectoryAtPath:self.cacheDirectory withIntermediateDirectories:NO attributes:nil error:NULL];
+    
+}
+
 - (void)saveCache {
+    
+    [self clearCache];
     
     [self.modelCache enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
        BOOL succeeded = [NSKeyedArchiver archiveRootObject:obj toFile:[self cachePathForKey:key]];
         printf("保存磁盘对象%s\n",succeeded ? "成功" : "失败");
     }];
+    
 }
 
 - (NSString *)cachePathForKey:(NSString *)key {
@@ -104,7 +115,7 @@
         
         _cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"com.kuaikan.cacheDirectory"];
         
-        [self.fileManager createDirectoryAtPath:_cacheDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+        [self.fileManager createDirectoryAtPath:_cacheDirectory withIntermediateDirectories:NO attributes:nil error:NULL];
        
     }
     return _cacheDirectory;

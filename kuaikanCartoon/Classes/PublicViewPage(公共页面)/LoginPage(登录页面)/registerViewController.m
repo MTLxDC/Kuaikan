@@ -25,6 +25,10 @@
 
 @property (nonatomic,assign) BOOL registerToStart;
 
+@property (nonatomic,assign) NSInteger timeout;
+
+@property (nonatomic,strong) NSTimer *timer;
+
 @end
 
 static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send_code";
@@ -101,8 +105,9 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
             
             [self SMSCodeTextChange:self.SMSCodeTextField];
             
-            [self startTiming];
-            
+            self.timeout = 30;
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(startTiming) userInfo:nil repeats:YES];
+
         }else if (code.integerValue == 600003) {
             
             [ProgressHUD showErrorWithStatus:@"手机号已经被注册了\n(╯°Д°)╯︵ ┻━┻ " inView:self.view];
@@ -119,37 +124,26 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
 }
 
 - (void)dealloc {
-
+    
 }
 
--(void)startTiming{
+-(void)startTiming {
     
-    __block int timeout = 30; //倒计时时间
-    
-    dispatch_queue_t queue = dispatch_get_main_queue();
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); //每秒执行
-    
-    dispatch_source_set_event_handler(timer, ^{
+    if (self.timeout > 0) {
+        self.timeout--;
         
-        if(timeout <= 0){   //倒计时结束，关闭
-            
-                //设置界面的按钮显示 根据自己需求设置
-                [self.getSMSCode setTitle:@"发送验证码" forState:UIControlStateNormal];
-                self.getSMSCode.userInteractionEnabled = YES;
-            
-            dispatch_source_cancel(timer);
-
-        }else{
-            
-            [self.getSMSCode setTitle:[NSString stringWithFormat:@"%d秒后重新发送",timeout] forState:UIControlStateNormal];
-            self.getSMSCode.userInteractionEnabled = NO;
-            
-            timeout--;
-        }
-    });
-    dispatch_resume(timer);
-
+        [self.getSMSCode setTitle:[NSString stringWithFormat:@"%zd秒后重新发送",self.timeout] forState:UIControlStateNormal];
+         self.getSMSCode.userInteractionEnabled = NO;
+        
+    }else {
+        
+        [self.getSMSCode setTitle:@"发送验证码" forState:UIControlStateNormal];
+         self.getSMSCode.userInteractionEnabled = YES;
+        
+         self.timer = nil;
+        [self.timer invalidate];
+    }
+    
 }
 
 
@@ -198,6 +192,7 @@ static NSString * const send_code = @"http://api.kuaikanmanhua.com/v1/phone/send
     
     
 }
+
 - (IBAction)back:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

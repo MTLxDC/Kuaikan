@@ -408,9 +408,9 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
     
     #pragma ---- 改动
     
-    NSArray *allHub = [JGProgressHUD allProgressHUDsInView:view];
-    
-    if (allHub.count > 0) for (JGProgressHUD *hub in allHub)  [hub dismiss];
+//    NSArray *allHub = [JGProgressHUD allProgressHUDsInView:view];
+//    
+//    if (allHub.count > 0) for (JGProgressHUD *hub in allHub)  [hub dismiss];
     
     #pragma ---- 改动结束
     

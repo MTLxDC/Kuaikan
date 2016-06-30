@@ -151,7 +151,7 @@ static const NSUInteger totalItem = 1000;
 
 - (void)scrollToCenterIfNeed {
     
-    CGFloat offsetX    = self.cycleScrollView.contentOffset.x;
+    CGFloat offsetX = self.cycleScrollView.contentOffset.x;
     
     if (offsetX > 1 || offsetX < self.maxOffsetX) return;
     
@@ -184,6 +184,7 @@ static const NSUInteger totalItem = 1000;
     }
     
     self.pageFrame = CGRectMake(x, y, pageSize.width, pageSize.height);
+    
     [self.page setFrame:self.pageFrame];
 }
 

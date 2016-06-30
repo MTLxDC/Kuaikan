@@ -57,5 +57,4 @@
 @property (nonatomic,copy)   NSString *weibo_name;
 
 
-
 @end

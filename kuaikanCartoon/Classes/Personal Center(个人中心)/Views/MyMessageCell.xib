@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="335" height="185"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="335" height="185"/>
+                <rect key="frame" x="0.0" y="0.0" width="335" height="184.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0x-nk-UNE">
@@ -163,7 +163,7 @@
                 <outlet property="wordsName" destination="H7c-PQ-z5i" id="Uxu-fB-GMf"/>
                 <outlet property="wordsTitle" destination="PqO-BV-grB" id="TOn-Xf-zhn"/>
             </connections>
-            <point key="canvasLocation" x="167.5" y="137.5"/>
+            <point key="canvasLocation" x="319.5" y="165.5"/>
         </tableViewCell>
         <tapGestureRecognizer id="RZA-7j-XPX">
             <connections>

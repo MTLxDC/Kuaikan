@@ -50,6 +50,10 @@ MJCodingImplementation
                              saveCache:(BOOL)saveMemoryCache
                              hubInView:(UIView *)view {
     
+    NSArray *needDissmissHubViews = [JGProgressHUD allProgressHUDsInView:view];
+    
+    for (JGProgressHUD *hub in needDissmissHubViews)  [hub dismiss];
+    
     ModelCacheManager *cache = [ModelCacheManager manager];
     
     NetWorkManager *manager = [NetWorkManager share];
@@ -74,7 +78,6 @@ MJCodingImplementation
     }else {
         hubView = [[[UIApplication sharedApplication] windows] lastObject];
     }
-    
     
    dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:hubView];
     
@@ -119,6 +122,7 @@ MJCodingImplementation
 + (void)initialize
 {
     if (self == [self class]) {
+        
         [self mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
             return @{
                      @"ID":@"id",

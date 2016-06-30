@@ -27,7 +27,6 @@
 
 @property (nonatomic,readonly) BOOL hasNetWork;
 
-
 + (instancetype)share;
 
 - (NSURLSessionDataTask *)requestWithMethod:(NSString *)method
