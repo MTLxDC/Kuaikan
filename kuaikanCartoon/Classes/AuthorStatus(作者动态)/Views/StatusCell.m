@@ -1,0 +1,317 @@
+//
+//  StatusCell.m
+//  kuaikanCartoon
+//
+//  Created by dengchen on 16/7/2.
+//  Copyright © 2016年 name. All rights reserved.
+//
+
+#import "StatusCell.h"
+#import <Masonry.h>
+#import "UIImage+Extension.h"
+#import "likeCountView.h"
+#import "userAuthenticationIcon.h"
+#import "StatusImageContentView.h"
+#import "FeedsDataModel.h"
+#import "DateManager.h"
+
+#import "CommonMacro.h"
+#import "NSString+Extension.h"
+
+@interface StatusCell ()
+
+@property (nonatomic,weak) UIView *statusContentView;
+
+@property (nonatomic,weak) userAuthenticationIcon *userAuthenticationIcon;
+
+@property (nonatomic,weak) UILabel *userNameLabel;
+
+@property (nonatomic,weak) UILabel *contentTextLabel;
+
+@property (nonatomic,weak) StatusImageContentView *imageContentView;
+
+@property (nonatomic,weak) UILabel *timeLabel;
+
+@property (nonatomic,weak) likeCountView *likeCountView;
+
+@property (nonatomic,weak) UIButton *replyCountView;
+
+
+@end
+
+static CGFloat iconSize = 50;
+
+@implementation StatusCell
+
++ (StatusCell *)configureCellWithModel:(FeedsDataModel *)model inTableView:(UITableView *)tableView AtIndexPath:(NSIndexPath *)indexPath
+{
+    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StatusCell"];
+
+    if (!cell) {
+        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatusCell"];
+    }
+    
+    cell.model = [model.feeds objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+- (void)setModel:(FeedsModel *)model {
+    _model = model;
+    [self updateUIWithModel:model];
+}
+
+- (void)updateUIWithModel:(FeedsModel *)model {
+    
+    [self.userAuthenticationIcon updateIconWithImageUrl:model.user.avatar_url];
+    
+    self.userNameLabel.text  = model.user.nickname;
+    
+    self.contentTextLabel.text = model.content.text;
+    
+    self.likeCountView.islike = model.is_liked;
+    
+    self.imageContentView.imageUrls = [self getImageUrlsWithContentModel:model.content];
+    
+    self.timeLabel.text = [[DateManager share] conversionTimeStamp:model.created_at];
+    
+    self.likeCountView.likeCount = model.likes_count.integerValue;
+    self.likeCountView.requestID = model.feed_id.stringValue;
+    
+    NSString *likeCountText   = [self.likeCountView titleForState:UIControlStateNormal];
+    NSString *replayCountText = [NSString makeTextWithCount:model.comments_count.integerValue];
+    
+    [self.replyCountView setTitle:replayCountText forState:UIControlStateNormal];
+    
+    CGFloat likeCountWidth  = [likeCountText   getTextWidthWithFont:self.likeCountView.titleLabel.font] + 30;
+    CGFloat replyCountWidth = [replayCountText getTextWidthWithFont:self.replyCountView.titleLabel.font] + 30;
+    
+    [self.likeCountView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(likeCountWidth));
+    }];
+    
+    [self.replyCountView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(replyCountWidth));
+    }];
+
+}
+
+
+- (NSArray *)getImageUrlsWithContentModel:(FeedsContentModel *)model {
+    
+    NSMutableArray *imageUrls = [[NSMutableArray alloc] initWithCapacity:model.images.count];
+    
+    for (NSString *url in model.images) {
+        
+        NSString *imageUrl = [model.image_base stringByAppendingString:url];
+        
+        [imageUrls addObject:imageUrl];
+        
+    }
+    
+    return imageUrls;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        [self setupUI];
+        
+    }
+    
+    return self;
+}
+
+- (void)setupUI {
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    CGFloat spaceing = SPACEING;
+    CGFloat margin = 4;
+    
+    [self.userAuthenticationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.statusContentView);
+        make.width.height.equalTo(@(iconSize));
+    }];
+    
+    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.userAuthenticationIcon.mas_right).offset(margin);
+        make.centerY.equalTo(self.userAuthenticationIcon);
+        make.right.equalTo(self.statusContentView);
+    }];
+    
+    [self.contentTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.statusContentView);
+        make.top.equalTo(self.userAuthenticationIcon.mas_bottom).offset(spaceing);
+    }];
+    
+    [self.imageContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentTextLabel.mas_bottom).offset(spaceing);
+        make.left.equalTo(self.statusContentView);
+        make.height.width.equalTo(@0);
+    }];
+    
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.statusContentView);
+        make.right.equalTo(self.likeCountView.mas_left).offset(-spaceing);
+        make.top.equalTo(self.imageContentView.mas_bottom).offset(spaceing);
+    }];
+    
+    [self.replyCountView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.statusContentView);
+        make.bottom.equalTo(self.timeLabel);
+        make.width.equalTo(@0);
+    }];
+    
+    [self.likeCountView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.replyCountView);
+        make.right.equalTo(self.replyCountView.mas_left).offset(-spaceing);
+        make.width.equalTo(@0);
+    }];
+    
+    [self.statusContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.contentView).offset(spaceing);
+        make.right.equalTo(self.contentView).offset(-spaceing);
+        make.bottom.equalTo(self.timeLabel);
+    }];
+    
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self);
+        make.bottom.equalTo(self.statusContentView).offset(spaceing);
+    }];
+    
+}
+
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    self.contentTextLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.contentTextLabel.frame);
+    
+    [super layoutSubviews];
+    
+}
+
+- (UIView *)statusContentView {
+    if (!_statusContentView) {
+        UIView *statusContentView = [UIView new];
+        [self.contentView addSubview:statusContentView];
+        _statusContentView = statusContentView;
+    }
+    return _statusContentView;
+}
+
+- (userAuthenticationIcon *)userAuthenticationIcon {
+    if (!_userAuthenticationIcon) {
+        
+        userAuthenticationIcon *icon = [[userAuthenticationIcon alloc] init];
+        
+        icon.hasAuthentication   = YES;
+        icon.authenticatIconSize = iconSize * 0.2;
+        
+        [self.statusContentView addSubview:icon];
+        
+        _userAuthenticationIcon = icon;
+        
+    }
+    return _userAuthenticationIcon;
+}
+
+
+- (UILabel *)userNameLabel {
+    if (!_userNameLabel) {
+        
+        UILabel *label = [[UILabel alloc] init];
+        
+        label.font = [UIFont systemFontOfSize:14];
+        
+        [self.statusContentView addSubview:label];
+        
+        _userNameLabel = label;
+        
+    }
+    return _userNameLabel;
+ }
+
+- (UILabel *)contentTextLabel {
+    if (!_contentTextLabel) {
+        
+        UILabel *label = [[UILabel alloc] init];
+        
+        label.font = [UIFont systemFontOfSize:16];
+        label.textColor = [UIColor darkGrayColor];
+        label.numberOfLines = 0;
+        
+        [self.statusContentView addSubview:label];
+        
+        _contentTextLabel = label;
+    }
+    return _contentTextLabel;
+}
+
+- (StatusImageContentView *)imageContentView {
+    if (!_imageContentView) {
+        StatusImageContentView *sicv = [StatusImageContentView makeStatusImageContentView];
+        [self.statusContentView addSubview:sicv];
+        _imageContentView = sicv;
+    }
+    return _imageContentView;
+}
+
+- (UILabel *)timeLabel {
+    if (!_timeLabel) {
+        
+        UILabel *label = [[UILabel alloc] init];
+        
+        label.font = [UIFont systemFontOfSize:13];
+        label.textColor = [UIColor lightGrayColor];
+        label.numberOfLines = 1;
+        
+        [self.statusContentView addSubview:label];
+        
+        _timeLabel = label;
+        
+    }
+    return _timeLabel;
+}
+
+- (likeCountView *)likeCountView {
+    if (!_likeCountView) {
+        likeCountView *lcv = [[likeCountView alloc] init];
+        
+        weakself(self);
+        
+        [lcv setOnClick:^(likeCountView *btn) {
+            weakSelf.model.is_liked = !weakSelf.model.is_liked;
+        }];
+        
+        [self.statusContentView addSubview:lcv];
+        
+        _likeCountView = lcv;
+    }
+    return _likeCountView;
+}
+
+- (UIButton *)replyCountView {
+    if (!_replyCountView) {
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        btn.titleLabel.font = [UIFont systemFontOfSize:12];
+    
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+        [btn setTitleColor:[self.likeCountView titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"ic_common_comment_normal_15x15_"] forState:UIControlStateNormal];
+        
+        [self.statusContentView addSubview:btn];
+        
+        _replyCountView = btn;
+    }
+    
+    return _replyCountView;
+}
+
+
+@end

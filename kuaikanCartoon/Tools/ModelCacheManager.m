@@ -77,7 +77,9 @@
 }
 
 - (void)setCache:(id)aCache forKey:(NSString *)aKey {
-    [self.modelCache setObject:aCache forKey:aKey];
+    if (aCache) {
+        [self.modelCache setObject:aCache forKey:aKey];
+    }
 }
 
 - (void)removeCacheForKey:(NSString *)key {

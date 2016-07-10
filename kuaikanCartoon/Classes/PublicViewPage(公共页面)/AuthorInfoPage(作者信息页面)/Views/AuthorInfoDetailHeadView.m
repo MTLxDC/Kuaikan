@@ -9,8 +9,8 @@
 #import "AuthorInfoDetailHeadView.h"
 #import "UIView+Extension.h"
 #import "AuthorInfoModel.h"
-#import <UIImageView+WebCache.h>
 #import <Masonry.h>
+#import "UIImageView+Extension.h"
 
 @interface AuthorInfoDetailHeadView ()
 
@@ -29,7 +29,7 @@
 - (void)setModel:(AuthorInfoModel *)model {
     _model = model;
 
-    [self.authorIcon sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]      placeholderImage:[UIImage imageNamed:@"ic_author_info_headportrait_50x50_"]];
+    [self.authorIcon setRoundImageWithURL:model.avatar_url placeImageName:@"ic_author_info_headportrait_50x50_"];
     
     self.authorName.text = model.nickname;
     self.authorSummary.text = model.intro;

@@ -47,6 +47,7 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     RegisterNotify(loginStatusChangeNotification, @selector(loginStatusChange));
     
     [self loginStatusChange];
+    
 }
 
 - (void)dealloc {
@@ -109,7 +110,7 @@ static NSString * const usersCorcernedWordsUrl = @"http://api.kuaikanmanhua.com/
     
     CGFloat mainViewHeight = self.view.height - bottomBarHeight;
     
-    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,mainViewHeight)];
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0, self.view.width,mainViewHeight)];
     
     mainView.scrollEnabled = NO;
     mainView.contentSize   = CGSizeMake(mainView.width * 2, 0);

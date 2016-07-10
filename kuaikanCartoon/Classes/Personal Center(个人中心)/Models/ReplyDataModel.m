@@ -18,11 +18,6 @@
 
 @implementation ReplyCommentsModel
 
-+ (NSDictionary *)mj_objetctClassInArray {
-    return @{@"target_comic":[TargetComicModel class],
-             @"target_comment":[TargetCommentModel class]};
-}
-
 @end
 
 @implementation ReplyDataModel

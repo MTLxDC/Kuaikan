@@ -10,6 +10,7 @@
 
 #import "HomeViewController.h"
 #import "FindingsViewController.h"
+#import "AuthorStatusViewController.h"
 #import "PersonalViewController.h"
 #import "BaseNavigationController.h"
 
@@ -33,7 +34,7 @@
  
     MainTabbar *tabbar = [[MainTabbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH,bottomBarHeight)];
     tabbar.backgroundColor = [UIColor whiteColor];
-    [tabbar addItemWithImageNames:@[@"home",@"discover",@"me"]];
+    [tabbar addItemWithImageNames:@[@"home",@"discover",@"media",@"me"]];
     [tabbar setSelectAtIndex:^(UIButton *btn, NSInteger index) {
         weakSelf.selectedIndex = index;
     }];
@@ -51,13 +52,13 @@
     HomeViewController * home = [[HomeViewController alloc] init];
     
     FindingsViewController * find = [[FindingsViewController alloc] init];
+    
+    AuthorStatusViewController *AuthorStatus = [[AuthorStatusViewController alloc] init];
 
     UIViewController *person = [UIStoryboard storyboardWithName:@"PersonalCenter" bundle:nil].instantiateInitialViewController;
-
     
-    [self addChildViewControllers:@[home,find]];
+    [self addChildViewControllers:@[home,find,AuthorStatus,person]];
     
-    [super addChildViewController:person];
 }
 
 - (void)addChildViewControllers:(NSArray *)childControllers  {

@@ -53,17 +53,22 @@ static const CGFloat navigationHeadView_H = 35;
     NSMutableArray *weekArray = [NSMutableArray arrayWithArray:
     @[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"]];
     
-    NSInteger week = [[DateManager share] currentWeek] - 1;
+    // 1(星期天) 2(星期二) 3(星期三) 4(星期四) 5(星期五) 6(星期六) 7(星期天)
+    // 获取今天是星期几
+    
+    NSInteger week    = [[DateManager share] currentWeek] - 1;  //获取今天是星期几，因为数组是从0开始所以-1
+    
+    NSInteger newWeek = 0;
     
     NSMutableArray *arr = [NSMutableArray array];
     
     for (NSInteger index = 6; index > 1; index--) {
     
-        NSInteger newWeek = week - index;
+        newWeek = week - index;                 //获取后面7天是星期几
         
-        if (newWeek < 0) newWeek = 7 + newWeek;
+        if (newWeek < 0) newWeek = 7 + newWeek; //如果小与0,表示是上一个星期,
         
-        [arr addObject:weekArray[newWeek]];
+        [arr addObject:weekArray[newWeek]];       //取出对应的日期,并添加到另外个数组内
     }
     
     [arr addObjectsFromArray:@[@"昨天",@"今天"]];

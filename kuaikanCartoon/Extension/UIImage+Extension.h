@@ -10,8 +10,7 @@
 
 @interface UIImage (Extension)
 
-//- (UIImage *)roundedImageWithRadius:(CGFloat)radius;
+- (UIImage *)clipImageWithRadius:(CGFloat)radius;
 
-- (UIImage *)clipImageToSize:(CGSize)size;
 
 @end

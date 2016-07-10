@@ -29,8 +29,8 @@ static NSString * const defautFormat = @"yyyy-MM-dd";
 - (NSString *)timeStampWithDate:(NSDate *)date;
 - (NSString *)timeWithTimeStamp:(NSInteger)timeStamp;
 
-- (NSString *)conversionDate:(NSDate *)date;
-- (NSString *)conversionDateVer2:(NSDate *)date;
+- (NSString *)conversionTimeStamp:(NSNumber *)timeStamp;
+- (NSString *)conversionTimeStampVer2:(NSNumber *)timeStamp;
 
 + (instancetype)share;
 

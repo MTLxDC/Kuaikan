@@ -12,10 +12,16 @@
 
 @implementation NSString (Extension)
 
+- (CGFloat)getTextWidthWithFont:(UIFont *)font {
+    return [self boundingRectWithSize:CGSizeMake(MAXFLOAT,MAXFLOAT)
+                                   options:NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading
+                                attributes:@{NSFontAttributeName:font} context:nil].size.width;
+}
+
 
 - (BOOL)isMobile {
     
-    if (self.length < 11) return NO;
+    if (self.length != 11) return NO;
     
     /**
      * 手机号码

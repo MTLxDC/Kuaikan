@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger,tipOption) {
 
 @property (nonatomic) tipOption tip;
 
-
 + (instancetype)makeUserNotLoginTipView;
 
 @end

@@ -17,6 +17,10 @@
 
 @end
 
+static inline NSTimeInterval getDefaultTimeStamp(NSNumber *timeStamp) {
+    return timeStamp.stringValue.length > 10 ? timeStamp.doubleValue * 0.001 : timeStamp.doubleValue;
+}
+
 @implementation DateManager
 
 
@@ -48,14 +52,16 @@
     return [self.format stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
 }
 
-- (NSString *)conversionDate:(NSDate *)date {
+- (NSString *)conversionTimeStamp:(NSNumber *)timeStamp {
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:getDefaultTimeStamp(timeStamp)];
         
-  NSCalendarUnit unit = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute;
+   NSCalendarUnit unit = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute;
 
    NSDateComponents *dc     = [self.calender_CN components:unit fromDate:date];
 
    NSDateComponents *nowDc  = [self.calender_CN components:unit fromDate:self.currentDate];
-    
+
     [self.format setDateFormat:@"yyyy-MM-dd HH:mm"];
     
     NSArray *times = [[self.format stringFromDate:date] componentsSeparatedByString:@" "];
@@ -83,7 +89,9 @@
     return nil;
 }
 
-- (NSString *)conversionDateVer2:(NSDate *)date {
+- (NSString *)conversionTimeStampVer2:(NSNumber *)timeStamp {
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:getDefaultTimeStamp(timeStamp)];
     
     NSCalendarUnit unit      = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
     
@@ -122,18 +130,16 @@
     self = [super init];
     if (self) {
         
-        _format = [NSDateFormatter new];
+        _format = [[NSDateFormatter alloc] init];
         
         [_format setDateFormat:defautFormat];
         
+        _format.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        
         self.calender_CN = [NSCalendar currentCalendar];
+        [NSTimeZone setDefaultTimeZone:[NSTimeZone systemTimeZone]];
+        [self.calender_CN setTimeZone:[NSTimeZone systemTimeZone]];
         
-        NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
-        [NSTimeZone setDefaultTimeZone:timeZone];
-        
-        [self.calender_CN setTimeZone:timeZone];
-        
-
     }
     return self;
 }

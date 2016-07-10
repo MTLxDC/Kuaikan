@@ -87,7 +87,7 @@ static CGFloat const MyHeight = 30;
     UIButton *btn = [UIButton new];
     
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:18];
+    btn.titleLabel.font = [UIFont systemFontOfSize:17];
     
     btn.layer.cornerRadius = MyHeight * 0.5;
     btn.layer.masksToBounds = YES;
@@ -100,7 +100,7 @@ static CGFloat const MyHeight = 30;
     
     CGFloat w = self.width * 0.5;
     
-    self.leftBtn.frame = CGRectMake(0, 0, w, self.height);
+    self.leftBtn.frame  = CGRectMake(0, 0, w, self.height);
     self.rightBtn.frame = CGRectMake(w, 0, w, self.height);
     
 }

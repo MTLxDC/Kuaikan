@@ -48,7 +48,7 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [self setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     
-    [self setTitleEdgeInsets:UIEdgeInsetsMake(0,5, 0, 0)];
+    [self setTitleEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
     
     self.titleLabel.font = [UIFont systemFontOfSize:12];
     self.islike = false;
@@ -82,6 +82,10 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     self.userInteractionEnabled = NO;
     
     self.islike = !self.islike;
+    
+    if (self.onClick) {
+        self.onClick(self);
+    }
     
     [UIView animateWithDuration:0.25 animations:^{
         

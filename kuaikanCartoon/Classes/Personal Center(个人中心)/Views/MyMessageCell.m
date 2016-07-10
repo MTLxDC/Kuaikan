@@ -53,9 +53,7 @@
     self.wordsName.text     = model.target_comic.topic_title;
     self.wordsTitle.text    = model.target_comic.title;
     
-    NSDate *creatDate       = [NSDate dateWithTimeIntervalSince1970:model.created_at.doubleValue];
-    
-    [self.replyTime setText:[[DateManager share] conversionDate:creatDate]];
+    [self.replyTime setText:[[DateManager share] conversionTimeStamp:model.created_at]];
     
     [self.userIcon sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url]
                      placeholderImage:[UIImage imageNamed:@"ic_personal_avatar_83x83_"]];

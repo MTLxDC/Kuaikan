@@ -18,6 +18,9 @@
 
 @property (nonatomic) NSInteger  likeCount;         //设置赞数
 
+@property (nonatomic,copy) void (^onClick)(likeCountView *btn);
+
+
 + (instancetype)likeCountViewWithCount:(NSInteger)count requestID:(NSString *)ID;
 
 @end

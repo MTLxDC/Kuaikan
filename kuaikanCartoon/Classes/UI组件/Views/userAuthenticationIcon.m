@@ -1,0 +1,92 @@
+//
+//  userAuthenticationIcon.m
+//  kuaikanCartoon
+//
+//  Created by dengchen on 16/7/6.
+//  Copyright © 2016年 name. All rights reserved.
+//
+
+#import "userAuthenticationIcon.h"
+#import <Masonry.h>
+#import "UIImageView+Extension.h"
+
+@interface userAuthenticationIcon ()
+
+@property (nonatomic,weak,) UIImageView *userIcon;
+
+@property (nonatomic,weak) UIImageView *authenticatIcon;
+
+@end
+
+@implementation userAuthenticationIcon
+
+- (void)updateIconWithImageUrl:(NSString *)imageUrl {
+    
+    [self.userIcon setRoundImageWithURL:imageUrl placeImageName:@"ic_personal_avatar_83x83_"];
+    
+}
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        CGFloat size = self.bounds.size.width;
+        CGFloat margin = size * 0.01;
+        
+        UIImageView *icon = [[UIImageView alloc] init];
+        
+        [self addSubview:icon];
+        
+        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self).insets(UIEdgeInsetsMake(margin, margin, margin, margin));
+        }];
+        
+        _userIcon = icon;
+        
+        NSString *imageName = size > 30 ? @"ic_author_info_headportrait_v_78x78_":@"ic_details_top_auther_headportrait_v_45x45_";
+        
+        self.authenticatIcon.image = [UIImage imageNamed:imageName];
+        
+    }
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat size = self.bounds.size.width;
+    CGFloat margin = size * 0.01;
+    
+    [self.userIcon mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self).insets(UIEdgeInsetsMake(margin, margin, margin, margin));
+    }];
+    
+    NSString *imageName = size > 30 ? @"ic_author_info_headportrait_v_78x78_":@"ic_details_top_auther_headportrait_v_45x45_";
+    
+    self.authenticatIcon.image = [UIImage imageNamed:imageName];
+}
+
+
+- (void)setHasAuthentication:(BOOL)hasAuthentication {
+    _hasAuthentication = hasAuthentication;
+    self.authenticatIcon.hidden = !hasAuthentication;
+}
+
+- (UIImageView *)authenticatIcon {
+    if (!_authenticatIcon) {
+        
+        UIImageView *authenticatIcon = [[UIImageView alloc] init];
+        [self.userIcon addSubview:authenticatIcon];
+        
+        [authenticatIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
+        
+        _authenticatIcon = authenticatIcon;
+    }
+    return _authenticatIcon;
+}
+
+@end

@@ -8,11 +8,11 @@
 
 #import "CommentInfoCell.h"
 #import "CommentsModel.h"
-#import <UIImageView+WebCache.h>
 #import "DateManager.h"
 #import "likeCountView.h"
 #import "CommonMacro.h"
 #import <Masonry.h>
+#import "UIImageView+Extension.h"
 
 @interface CommentInfoCell ()
 
@@ -46,13 +46,11 @@
 - (void)setCommentsModel:(CommentsModel *)commentsModel {
     _commentsModel = commentsModel;
     
-    [self.userIcon sd_setImageWithURL:[NSURL URLWithString:commentsModel.user.avatar_url] placeholderImage:[UIImage imageNamed:@"ic_personal_avatar_83x83_"]];
+    [self.userIcon setRoundImageWithURL:commentsModel.user.avatar_url placeImageName:@"ic_personal_avatar_83x83_"];
     
     self.userName.text = commentsModel.user.nickname;
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:commentsModel.created_at.doubleValue];
-    
-    self.releaseTime.text = [[DateManager share] conversionDate:date];
+    self.releaseTime.text = [[DateManager share] conversionTimeStamp:commentsModel.created_at];
     
     self.CommentContent.text = commentsModel.content;
     
@@ -64,7 +62,6 @@
 
 
 - (void)awakeFromNib {
-
     
     UIView *line = [UIView new];
     

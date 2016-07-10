@@ -171,7 +171,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     SummaryModel *md = [self.words.comics objectAtIndex:section];
     
-    NSString *updateTime = [[DateManager share] conversionDateVer2:[NSDate dateWithTimeIntervalSince1970:md.updated_at.doubleValue]];
+    NSString *updateTime = [[DateManager share] conversionTimeStampVer2:md.updated_at];
             
     [timeLineHeadView setTitle:updateTime forState:UIControlStateNormal];
     
@@ -219,7 +219,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
         if (!res) return ;
         
         sself.words = res;
-
+        
         if (sself.words.comics.count < 1) {
             if (self.NoDataCallBack) {
                 self.NoDataCallBack();
@@ -228,8 +228,6 @@ static NSString * const cellIdentifier = @"SummaryCell";
         }
         
             [sself reloadData];
-            [sself layoutIfNeeded];
-            [sself setContentOffset:CGPointZero];
         
     } cachingPolicy:policy hubInView:self.superview];
     

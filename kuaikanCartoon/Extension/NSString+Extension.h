@@ -6,9 +6,12 @@
 //  Copyright © 2016年 name. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface NSString (Extension)
+
+
+- (CGFloat)getTextWidthWithFont:(UIFont *)font;
 
 + (NSString *)makeTextWithCount:(NSInteger)count;
 

@@ -18,6 +18,8 @@
 
 @property (nonatomic,copy) void (^rightBtnOnClick)(UIButton *btn);
 
+- (void)selectBtn:(UIButton *)btn;
+
 
 + (instancetype)defaultTitleView;
 

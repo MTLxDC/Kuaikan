@@ -71,6 +71,4 @@
 
 @property (nonatomic,strong) NSNumber *updated_at;
 
-
-
 @end
