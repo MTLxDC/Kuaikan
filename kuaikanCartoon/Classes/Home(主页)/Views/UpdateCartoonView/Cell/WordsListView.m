@@ -24,7 +24,6 @@
 
 @property (nonatomic,weak) UIImageView *hasNotBeenUpdatedView;
 
-
 @end
 
 
@@ -53,7 +52,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     weakself(self);
     
     MJRefreshNormalHeader *normalHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf updateWithUrl:self.urlString CachingPolicy:ModelDataCachingPolicyReload];
+        [weakSelf updateWithUrl:self.urlString CachingPolicy:ModelDataCachingPolicyReload hubView:nil];
     }];
     
     [normalHeader.arrowView setImage:[UIImage imageNamed:@"ic_pull_refresh_arrow_22x22_"]];
@@ -81,7 +80,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
             
             [weakSelf reloadData];
             
-        } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self];
+        } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:nil];
         
     }];
     
@@ -199,12 +198,11 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
 }
 
-
-- (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy{
+- (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy hubView:(UIView *)hubView{
     
     self.tableFooterView.hidden = YES;
-    self.words = nil;
-    [self reloadData];
+    
+    self.hidden = YES;
     
     weakself(self);
     
@@ -215,22 +213,21 @@ static NSString * const cellIdentifier = @"SummaryCell";
         if (!sself) return;
         
         [sself.mj_header endRefreshing];
-
-        if (!res) return ;
+        
+        if (!res && !sself.hasNotBeenUpdated) return ;
         
         sself.words = res;
+        
+        [sself reloadData];
+         sself.hidden = NO;
         
         if (sself.words.comics.count < 1) {
             if (self.NoDataCallBack) {
                 self.NoDataCallBack();
             }
-            return ;
         }
         
-            [sself reloadData];
-        
-    } cachingPolicy:policy hubInView:self.superview];
-    
+    } cachingPolicy:policy hubInView:hubView];
     
 }
 
@@ -238,11 +235,12 @@ static NSString * const cellIdentifier = @"SummaryCell";
     _hasNotBeenUpdated = hasNotBeenUpdated;
     self.hasNotBeenUpdatedView.hidden = !hasNotBeenUpdated;
     self.mj_footer.hidden = hasNotBeenUpdated;
+    self.hidden = NO;
 }
 
 - (void)setUrlString:(NSString *)urlString {
 
-    [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault];
+    [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault hubView:self.superview];
     
     _urlString = urlString;
 

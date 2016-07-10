@@ -36,17 +36,17 @@
 
 #define SPACEING 8
 
-#define navHeight  (iOS7Later ? 64.0 : 44.0)
-#define bottomBarHeight 44.0
+#define navHeight  (iOS7Later ? 64.0f : 44.0f)
+#define bottomBarHeight 44.0f
 
 #define isPad   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define isPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define isRetina (SCREEN_SCALE >= 2.0)
+#define isRetina (SCREEN_SCALE >= 2.0f)
 
-#define IsiPhone4   (IsiPhone && ScreenMaxLength < 568.0)
-#define IsiPhone5   (IsiPhone && ScreenMaxLength == 568.0)
-#define IsiPhone6   (IsiPhone && ScreenMaxLength == 667.0)
-#define IsiPhone6P  (IsiPhone && ScreenMaxLength == 736.0)
+#define IsiPhone4   (IsiPhone && ScreenMaxLength < 568.0f)
+#define IsiPhone5   (IsiPhone && ScreenMaxLength == 568.0f)
+#define IsiPhone6   (IsiPhone && ScreenMaxLength == 667.0f)
+#define IsiPhone6P  (IsiPhone && ScreenMaxLength == 736.0f)
 
 
 // 日志输出
@@ -70,7 +70,7 @@ selector:_selector name:_name object:nil];
 
 // 设置颜色值
 
-#define RGB(r,g,b)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define RGB(r,g,b)  [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1]
 
 #define subjectColor RGB(254,208,9) //主题颜色
 

@@ -13,16 +13,18 @@
 #import "CommonMacro.h"
 #import <Masonry.h>
 #import "UIImageView+Extension.h"
+#import "userAuthenticationIcon.h"
 
 @interface CommentInfoCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *userIcon;
+@property (weak, nonatomic) IBOutlet userAuthenticationIcon *userIcon;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
 @property (weak, nonatomic) IBOutlet UILabel *CommentContent;
 @property (weak, nonatomic) IBOutlet likeCountView *likeCount;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *likeCountWidth;
 
 @end
 
@@ -46,7 +48,9 @@
 - (void)setCommentsModel:(CommentsModel *)commentsModel {
     _commentsModel = commentsModel;
     
-    [self.userIcon setRoundImageWithURL:commentsModel.user.avatar_url placeImageName:@"ic_personal_avatar_83x83_"];
+    [self.userIcon updateIconWithImageUrl:commentsModel.user.avatar_url];
+    
+    self.userIcon.hasAuthentication = [commentsModel.user.reg_type isEqualToString:reg_Type_Author];
     
     self.userName.text = commentsModel.user.nickname;
     
@@ -73,15 +77,12 @@
         make.top.left.right.equalTo(self.contentView);
         make.height.equalTo(@(SINGLE_LINE_WIDTH));
     }];
-}
-
-- (void)layoutSubviews {
-
-    [super layoutSubviews];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
     
     self.CommentContent.preferredMaxLayoutWidth = CGRectGetWidth(self.CommentContent.frame);
-    
-    [super layoutSubviews];
-
+    self.userIcon.authenticatIconSize = CGRectGetWidth(self.userIcon.frame) * 0.1;
 }
+
 @end

@@ -36,10 +36,9 @@
 
 @property (nonatomic,weak) UIButton *replyCountView;
 
-
 @end
 
-static CGFloat iconSize = 50;
+static CGFloat iconSize = 40;
 
 @implementation StatusCell
 
@@ -83,12 +82,12 @@ static CGFloat iconSize = 50;
     
     [self.replyCountView setTitle:replayCountText forState:UIControlStateNormal];
     
-    CGFloat likeCountWidth  = [likeCountText   getTextWidthWithFont:self.likeCountView.titleLabel.font] + 30;
+//    CGFloat likeCountWidth  = [likeCountText   getTextWidthWithFont:self.likeCountView.titleLabel.font] + 30;
     CGFloat replyCountWidth = [replayCountText getTextWidthWithFont:self.replyCountView.titleLabel.font] + 30;
     
-    [self.likeCountView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(likeCountWidth));
-    }];
+//    [self.likeCountView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(@(likeCountWidth));
+//    }];
     
     [self.replyCountView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(replyCountWidth));
@@ -185,11 +184,6 @@ static CGFloat iconSize = 50;
 
 
 - (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    
-    self.contentTextLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.contentTextLabel.frame);
-    
     [super layoutSubviews];
     
 }
@@ -243,6 +237,7 @@ static CGFloat iconSize = 50;
         label.font = [UIFont systemFontOfSize:16];
         label.textColor = [UIColor darkGrayColor];
         label.numberOfLines = 0;
+        label.preferredMaxLayoutWidth = SCREEN_WIDTH - SPACEING * 2;
         
         [self.statusContentView addSubview:label];
         

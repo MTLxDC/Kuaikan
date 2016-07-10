@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "BaseModel.h"
 
+
+static NSString * const reg_Type_Author = @"author";
+
 @interface userModel : BaseModel
 
 @property (nonatomic,copy)   NSString *avatar_url;

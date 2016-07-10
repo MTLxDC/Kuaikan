@@ -31,26 +31,32 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        CGFloat size = self.bounds.size.width;
-        CGFloat margin = size * 0.01;
-        
-        UIImageView *icon = [[UIImageView alloc] init];
-        
-        [self addSubview:icon];
-        
-        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self).insets(UIEdgeInsetsMake(margin, margin, margin, margin));
-        }];
-        
-        _userIcon = icon;
-        
-        NSString *imageName = size > 30 ? @"ic_author_info_headportrait_v_78x78_":@"ic_details_top_auther_headportrait_v_45x45_";
-        
-        self.authenticatIcon.image = [UIImage imageNamed:imageName];
-        
+        [self setupUI];
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
+
+- (void)setupUI {
+    
+    UIImageView *icon = [[UIImageView alloc] init];
+    
+    [self addSubview:icon];
+    
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
+    
+    _userIcon = icon;
+    
 }
 
 - (void)layoutSubviews {
@@ -66,6 +72,8 @@
     NSString *imageName = size > 30 ? @"ic_author_info_headportrait_v_78x78_":@"ic_details_top_auther_headportrait_v_45x45_";
     
     self.authenticatIcon.image = [UIImage imageNamed:imageName];
+    
+    [super layoutSubviews];
 }
 
 

@@ -71,15 +71,7 @@ MJCodingImplementation
         
     }
     
-   __weak UIView *hubView = nil;
-    
-    if (view) {
-        hubView = view;
-    }else {
-        hubView = [[[UIApplication sharedApplication] windows] lastObject];
-    }
-    
-   dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:hubView];
+   dissmissCallBack dissmiss = [ProgressHUD showProgressWithStatus:@"loading..." inView:view];
     
     [manager requestWithMethod:@"GET" url:urlString parameters:nil complish:^(id res, NSError *error) {
        
@@ -90,7 +82,7 @@ MJCodingImplementation
             DEBUG_Log(@"result:%@,error:%@",res,error);
             [ProgressHUD showErrorWithStatus:
              [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]
-                                      inView:hubView];
+                                      inView:view];
             complish(nil);
             return;
         }

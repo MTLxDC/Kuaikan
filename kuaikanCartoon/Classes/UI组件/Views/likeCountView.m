@@ -9,12 +9,16 @@
 #import "likeCountView.h"
 #import "NetWorkManager.h"
 #import "CommonMacro.h"
+#import "NSString+Extension.h"
+#import "UIView+Extension.h"
+#import <Masonry.h>
 
 static NSString * const likeUrl = @"http://api.kuaikanmanhua.com/v1/comics";
 
 static NSString * const normalImageName = @"ic_common_praise_normal_15x15_";
 static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 
+#define MyWidth 30.0f
 
 @implementation likeCountView
 
@@ -74,7 +78,24 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 - (void)setLikeCount:(NSInteger)likeCount {
     _likeCount = likeCount;
     
-    [self setTitle:[self makeTextWithCount:likeCount] forState:UIControlStateNormal];
+    if (likeCount < 1)  [self setTitle:nil forState:UIControlStateNormal];
+    
+    NSString *title = [NSString makeTextWithCount:likeCount];
+    
+    [self setTitle:title forState:UIControlStateNormal];
+    
+    CGFloat width = [title getTextWidthWithFont:self.titleLabel.font] + MyWidth;
+
+    if (self.translatesAutoresizingMaskIntoConstraints) {
+        [self setWidth:width];
+    }else {
+        for (NSLayoutConstraint *constraint in self.constraints) {
+            if (constraint.firstAttribute == NSLayoutAttributeWidth) {
+                constraint.constant = width;
+                break;
+            }
+        }
+    }
 }
 
 - (void)like {
@@ -115,19 +136,6 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     
 }
 
-
-- (NSString *)makeTextWithCount:(NSInteger)count {
-    
-    NSString *topCountText = @"";
-    
-    if (count >= 100000) {
-        topCountText = [NSString stringWithFormat:@"%zd万",count/10000];
-    }else if (count > 0) {
-        topCountText = [NSString stringWithFormat:@"%zd",count];
-    }
-    
-    return topCountText;
-}
 
 
 @end

@@ -30,6 +30,7 @@
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
+        imageView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
         
         [self.contentView addSubview:imageView];
         

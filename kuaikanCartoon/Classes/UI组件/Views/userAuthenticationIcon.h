@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface userAuthenticationIcon : UIView
 
 @property (nonatomic,assign) BOOL hasAuthentication;

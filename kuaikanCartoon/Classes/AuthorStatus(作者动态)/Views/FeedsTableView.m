@@ -65,9 +65,8 @@
 
 - (void)update {
     
-         self.mj_footer.hidden = NO;
-        [self.mj_footer resetNoMoreData];
-    
+     [self.mj_footer resetNoMoreData];
+
         NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=1&since=0&uid=0",self.dataType];
     
         weakself(self);
@@ -80,6 +79,7 @@
             
             if (!md) return ;
             
+             weakSelf.mj_footer.hidden = NO;
              weakSelf.modelData = md;
             [weakSelf.cellHeightCache removeAllObjects];
             [weakSelf reloadData];
@@ -153,7 +153,7 @@
     StatusCell *cell = self.statusCell;
     
     cell.model = [self.modelData.feeds objectAtIndex:indexPath.row];
-    
+
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
     

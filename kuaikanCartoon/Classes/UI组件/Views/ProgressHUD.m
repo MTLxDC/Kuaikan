@@ -16,6 +16,8 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 
 + (dissmissCallBack)showProgressWithStatus:(NSString *)status inView:(UIView *)view {
     
+    if (!view) return ^{};
+    
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
     HUD.userInteractionEnabled = NO;
@@ -28,6 +30,7 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 
 
 + (void)showErrorWithStatus:(NSString *)status inView:(UIView *)view {
+    if (!view) return;
     
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
@@ -45,6 +48,8 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 
 + (void)showSuccessWithStatus:(NSString *)status inView:(UIView *)view {
     
+    if (!view) return;
+    
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
     HUD.textLabel.text = status;
@@ -58,6 +63,8 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 }
 
 + (void)showCustomImage:(NSString *)imageName inView:(UIView *)view {
+    
+    if (!view) return;
     
     JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:style];
     
