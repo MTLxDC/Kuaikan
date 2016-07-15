@@ -7,6 +7,7 @@
 //
 
 
+
 #define weakself(self)  __weak __typeof(self) weakSelf = self
 
 // iOS系统版本
@@ -31,8 +32,8 @@
 #define SCREEN_WIDTH    [MainScreen bounds].size.width
 #define SCREEN_HEIGHT   [MainScreen bounds].size.height
 
-#define SINGLE_LINE_WIDTH           (0.25 * SCREEN_SCALE)
-#define SINGLE_LINE_ADJUST_OFFSET   ((0.25 * SCREEN_SCALE) / 2)
+#define SINGLE_LINE_WIDTH           (0.5 * SCREEN_SCALE)
+#define SINGLE_LINE_ADJUST_OFFSET   ((0.5 * SCREEN_SCALE) / 2)
 
 #define SPACEING 8
 

@@ -64,6 +64,14 @@
 
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.CommentContent.preferredMaxLayoutWidth = CGRectGetWidth(self.CommentContent.frame);
+    self.userIcon.authenticatIconSize = CGRectGetWidth(self.userIcon.frame) * 0.1;
+    
+    [super layoutSubviews];
+}
 
 - (void)awakeFromNib {
     
@@ -77,12 +85,7 @@
         make.top.left.right.equalTo(self.contentView);
         make.height.equalTo(@(SINGLE_LINE_WIDTH));
     }];
-    
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-    
-    self.CommentContent.preferredMaxLayoutWidth = CGRectGetWidth(self.CommentContent.frame);
-    self.userIcon.authenticatIconSize = CGRectGetWidth(self.userIcon.frame) * 0.1;
+
 }
 
 @end

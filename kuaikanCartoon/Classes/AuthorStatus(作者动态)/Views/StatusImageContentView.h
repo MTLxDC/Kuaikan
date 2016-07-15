@@ -10,7 +10,9 @@
 
 @interface StatusImageContentView : UICollectionView
 
-@property (nonatomic,copy) NSArray *imageUrls;
+@property (nonatomic,copy)   NSArray<NSString *> *photoImages; //原图
+
+@property (nonatomic,copy)   NSArray<NSString *> *thumbImages; //缩略图
 
 + (instancetype)makeStatusImageContentView ;
 

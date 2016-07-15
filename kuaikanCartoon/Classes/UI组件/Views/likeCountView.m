@@ -75,6 +75,8 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 
 }
 
+
+
 - (void)setLikeCount:(NSInteger)likeCount {
     _likeCount = likeCount;
     
@@ -89,13 +91,11 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
     if (self.translatesAutoresizingMaskIntoConstraints) {
         [self setWidth:width];
     }else {
-        for (NSLayoutConstraint *constraint in self.constraints) {
-            if (constraint.firstAttribute == NSLayoutAttributeWidth) {
-                constraint.constant = width;
-                break;
-            }
-        }
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(width));
+        }];
     }
+
 }
 
 - (void)like {

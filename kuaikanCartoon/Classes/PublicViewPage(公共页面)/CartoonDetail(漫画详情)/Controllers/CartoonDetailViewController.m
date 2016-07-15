@@ -17,6 +17,7 @@
 
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
+#import <UITableView+FDTemplateLayoutCell.h>
 
 #import "comicsModel.h"
 #import "CommentsModel.h"
@@ -43,10 +44,6 @@
 @property (nonatomic,weak)   CommentBottomView *bottomView;
 
 @property (nonatomic,weak)   UISlider *progress;
-
-@property (nonatomic,strong) NSMutableArray *commentCellHeightCache;
-
-@property (nonatomic,strong) CommentInfoCell *commentCell;  //计算CellHeight用
 
 @property (nonatomic,strong) NSMutableArray *imageCellHeightCache;
 
@@ -120,8 +117,7 @@ static const CGFloat imageCellHeight = 250.0f;
     
     weakself(self);
     
-    self.cartoonContentView.hidden = YES;
-    self.progress.hidden = YES;
+    self.view.hidden = YES;
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     
    [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
@@ -134,7 +130,7 @@ static const CGFloat imageCellHeight = 250.0f;
         sself.comicsMd = res;
         [sself updataUI];
        
-        sself.cartoonContentView.hidden = NO;
+        sself.view.hidden = NO;
         [sself hideOrShowProgressView:NO];
        
        
@@ -149,7 +145,6 @@ static const CGFloat imageCellHeight = 250.0f;
         
         CartoonDetailViewController *sself = weakSelf;
         sself.commentModels = result;
-        sself.commentCellHeightCache = nil;
         [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         
     } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
@@ -160,10 +155,10 @@ static const CGFloat imageCellHeight = 250.0f;
     
     self.titleLabel.text = self.comicsMd.title;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
+    self.progress.maximumValue = self.comicsMd.images.count - 1;
     [self.cartoonContentView reloadData];
     [self.cartoonContentView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                          atScrollPosition:UITableViewScrollPositionNone animated:NO];
-    self.progress.maximumValue = self.comicsMd.images.count - 1;
     
 }
 
@@ -392,6 +387,8 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     
     [contentView registerClass:[CartoonContentCell class] forCellReuseIdentifier:CartoonContentCellIdentifier];
     
+    [contentView registerNib:[UINib nibWithNibName:@"CommentInfoCell" bundle:nil]  forCellReuseIdentifier:commentInfoCellName];
+    
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
     }];
@@ -423,6 +420,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     if (section == 0) {
+        
         authorInfoHeadView *head = [[authorInfoHeadView alloc] initWithFrame:self.view.bounds];
         
         head.model = self.comicsMd;
@@ -512,9 +510,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     if (indexPath.section == 1)
     {
         CommentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:commentInfoCellName];
-        if (!cell) {
-            cell = [CommentInfoCell makeCommentInfoCell];
-        }
         
         cell.commentsModel = self.commentModels[indexPath.row];
         
@@ -544,42 +539,13 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         
     }else if (indexPath.section == 1) {
         
-        if (iOS8Later) return UITableViewAutomaticDimension;
-        
-        if (self.commentCellHeightCache.count > indexPath.row) {
+        return [self.cartoonContentView fd_heightForCellWithIdentifier:commentInfoCellName cacheByIndexPath:indexPath configuration:^(id cell) {
+          
+            CommentInfoCell *cell1 = (CommentInfoCell *)cell;
             
-            NSNumber *cacheHeight = self.commentCellHeightCache[indexPath.row];
+            cell1.commentsModel = self.commentModels[indexPath.row];
             
-            if (cacheHeight) return cacheHeight.doubleValue;
-            
-        }
-        
-        //实例一个Cell专门用来算高,如果是多个Cell,用字典,重用标识符做key,cell做value;
-        
-        CommentInfoCell *cell = self.commentCell;
-        
-        //将数据传给cell
-        cell.commentsModel = self.commentModels[indexPath.row];
-        
-        [cell setNeedsUpdateConstraints];
-        [cell updateConstraintsIfNeeded];
-        
-        [cell setNeedsLayout];          //强制更新cell的布局
-        [cell layoutIfNeeded];
-        
-        cell.bounds = CGRectMake(0.0f, 0.0f,
-                                 CGRectGetWidth(tableView.bounds),
-                                 CGRectGetHeight(cell.bounds));
-        
-        // 得到cell的contentView需要的真实高度
-        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        
-        // 要为cell的分割线加上额外的1pt高度。因为分隔线是被加在cell底边和contentView底边之间的。
-        height += 1.0f;
-        
-        [self.commentCellHeightCache addObject:@(height)];
-        
-        return height;
+        }];
 
     }
 
@@ -625,20 +591,6 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         _imageCellHeightCache = arr;
     }
     return _imageCellHeightCache;
-}
-
-- (NSMutableArray *)commentCellHeightCache {
-    if (!_commentCellHeightCache) {
-        _commentCellHeightCache = [[NSMutableArray alloc] init];
-    }
-    return _commentCellHeightCache;
-}
-
-- (CommentInfoCell *)commentCell {
-    if (!_commentCell) {
-        _commentCell = [CommentInfoCell makeCommentInfoCell];
-    }
-    return _commentCell;
 }
 
 - (CartoonFlooterView *)flooter {

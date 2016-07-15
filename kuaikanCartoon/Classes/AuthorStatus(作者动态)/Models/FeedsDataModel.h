@@ -67,6 +67,10 @@
 
 @property (nonatomic,strong) FeedsContentModel *content;
 
+@property (nonatomic,copy)   NSArray<NSString *> *photoImages; //原图
+
+@property (nonatomic,copy)   NSArray<NSString *> *thumbImages; //缩略图
+
 @property (nonatomic,strong) NSNumber *feed_id;
 
 @property (nonatomic,assign) BOOL is_liked;

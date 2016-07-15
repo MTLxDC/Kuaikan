@@ -11,6 +11,7 @@
 #import "FeedsDataModel.h"
 #import "CommonMacro.h"
 #import "StatusCell.h"
+#import <UITableView+FDTemplateLayoutCell.h>
 
 @interface FeedsTableView () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -20,10 +21,6 @@
 @property (nonatomic,strong) FeedsDataModel *modelData;
 
 @property (nonatomic) catalog_type dataType;
-
-@property (nonatomic,strong) StatusCell *statusCell;
-
-@property (nonatomic,strong) NSMutableArray *cellHeightCache;
 
 @end
 
@@ -45,9 +42,12 @@
         
         _page_num = 1;
         
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate   = self;
         self.estimatedRowHeight = 200;
+        
+        [self registerClass:[StatusCell class] forCellReuseIdentifier:statusCellReuseIdentifier];
         
         MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(update)];
         
@@ -81,8 +81,7 @@
             
              weakSelf.mj_footer.hidden = NO;
              weakSelf.modelData = md;
-            [weakSelf.cellHeightCache removeAllObjects];
-            [weakSelf reloadData];
+             [weakSelf reloadData];
             
         } cachingPolicy:ModelDataCachingPolicyReload hubInView:self];
     
@@ -91,7 +90,7 @@
 
 - (void)loadMoreDate {
     
-    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=%zd&since=%zd&uid=0",self.dataType,_page_num,self.modelData.since.integerValue];
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=%zd&since=%@&uid=0",self.dataType,_page_num,self.modelData.since];
     
     weakself(self);
     
@@ -108,7 +107,7 @@
         
         [weakSelf.modelData.feeds addObjectsFromArray:md.feeds];
          weakSelf.modelData.since = md.since;
-        [weakSelf reloadData];
+        [weakSelf fd_reloadDataWithoutInvalidateIndexPathHeightCache];
         _page_num++;
         
     } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self];
@@ -117,9 +116,14 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (iOS8Later) return UITableViewAutomaticDimension;
-
-    return [self getCellHeightWithIndexPath:indexPath];
+    
+    return [self fd_heightForCellWithIdentifier:statusCellReuseIdentifier cacheByIndexPath:indexPath configuration:^(id cell) {
+        
+        StatusCell *cell1 = (StatusCell *)cell;
+        
+        cell1.model = self.modelData.feeds[indexPath.row];
+        
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,52 +136,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [StatusCell configureCellWithModel:self.modelData inTableView:tableView AtIndexPath:indexPath];
-}
-
-- (CGFloat)getCellHeightWithIndexPath:(NSIndexPath *)indexPath {
-    
-    if (!_cellHeightCache) {
-        _cellHeightCache = [[NSMutableArray alloc] init];
-    }
-    
-    if (self.cellHeightCache.count > indexPath.row) {
-        
-        NSNumber *cacheHeight = self.cellHeightCache[indexPath.row];
-        
-        if (cacheHeight) return cacheHeight.doubleValue;
-        
-    }
-    
-    //实例一个Cell专门用来算高,如果是多个Cell,用字典,重用标识符做key,cell做value;
-    
-    StatusCell *cell = self.statusCell;
-    
-    cell.model = [self.modelData.feeds objectAtIndex:indexPath.row];
-
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
-    
-    cell.bounds = CGRectMake(0.0f, 0.0f,
-                             CGRectGetWidth(self.bounds),
-                             CGRectGetHeight(cell.bounds));
-    
-    // 得到cell的contentView需要的真实高度
-    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    
-    // 要为cell的分割线加上额外的1pt高度。因为分隔线是被加在cell底边和contentView底边之间的。
-    height += 1.0f;
-    
-    [self.cellHeightCache addObject:@(height)];
-    
-    return height;
-    
-}
-
-- (StatusCell *)statusCell {
-    if (!_statusCell) {
-        _statusCell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    }
-    return _statusCell;
 }
 
 @end

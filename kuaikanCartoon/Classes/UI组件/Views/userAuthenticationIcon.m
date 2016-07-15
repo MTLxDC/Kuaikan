@@ -57,6 +57,9 @@
     
     _userIcon = icon;
     
+    
+    self.backgroundColor = [UIColor clearColor];
+    icon.backgroundColor = [UIColor clearColor];
 }
 
 - (void)layoutSubviews {
@@ -74,6 +77,7 @@
     self.authenticatIcon.image = [UIImage imageNamed:imageName];
     
     [super layoutSubviews];
+    
 }
 
 

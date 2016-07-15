@@ -10,7 +10,7 @@
 
 @interface UIImage (Extension)
 
-- (UIImage *)clipImageWithRadius:(CGFloat)radius;
+- (UIImage *)clipEllipseImage;
 
 
 @end

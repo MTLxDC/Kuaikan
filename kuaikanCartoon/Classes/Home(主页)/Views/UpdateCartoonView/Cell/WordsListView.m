@@ -198,11 +198,12 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
 }
 
-- (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy hubView:(UIView *)hubView{
+- (void)updateWithUrl:(NSString *)url CachingPolicy:(ModelDataCachingPolicy)policy hubView:(UIView *)hubView {
     
     self.tableFooterView.hidden = YES;
     
-    self.hidden = YES;
+     self.words = nil;
+    [self reloadData];
     
     weakself(self);
     
@@ -214,12 +215,12 @@ static NSString * const cellIdentifier = @"SummaryCell";
         
         [sself.mj_header endRefreshing];
         
-        if (!res && !sself.hasNotBeenUpdated) return ;
+        if (!res && sself.hasNotBeenUpdated) return ;
         
         sself.words = res;
+        sself.hasNotBeenUpdated = NO;
         
         [sself reloadData];
-         sself.hidden = NO;
         
         if (sself.words.comics.count < 1) {
             if (self.NoDataCallBack) {
@@ -240,7 +241,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
 
 - (void)setUrlString:(NSString *)urlString {
 
-    [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault hubView:self.superview];
+    [self updateWithUrl:urlString CachingPolicy:ModelDataCachingPolicyDefault hubView:self];
     
     _urlString = urlString;
 

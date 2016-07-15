@@ -59,8 +59,6 @@
     
     SummaryListItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:@"SummaryListItem" forIndexPath:indexPath];
     
-    item.urlString = self.requestUrlArray[indexPath.item];
-    
     if (self.requestUrlArray.count - 1 == indexPath.row) {
         
         NSCalendar *calender = [NSCalendar currentCalendar];
@@ -72,6 +70,8 @@
     }else {
         item.hasNotBeenUpdated = NO;
     }
+    
+    item.urlString = self.requestUrlArray[indexPath.item];
     
     return item;
 }

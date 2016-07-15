@@ -11,10 +11,11 @@
 #import "AuthorInfoModel.h"
 #import <Masonry.h>
 #import "UIImageView+Extension.h"
+#import "userAuthenticationIcon.h"
 
 @interface AuthorInfoDetailHeadView ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *authorIcon;
+@property (weak, nonatomic) IBOutlet userAuthenticationIcon *authorIcon;
 
 @property (weak, nonatomic) IBOutlet UILabel *authorName;
 
@@ -29,7 +30,7 @@
 - (void)setModel:(AuthorInfoModel *)model {
     _model = model;
 
-    [self.authorIcon setRoundImageWithURL:model.avatar_url placeImageName:@"ic_author_info_headportrait_50x50_"];
+    [self.authorIcon updateIconWithImageUrl:model.avatar_url];
     
     self.authorName.text = model.nickname;
     self.authorSummary.text = model.intro;
@@ -92,9 +93,7 @@ static CGFloat iconTop  = 64;
 
 
 - (void)awakeFromNib {
-    
-    [self.authorIcon cornerRadius:0];
-    
+        
 }
 
 @end

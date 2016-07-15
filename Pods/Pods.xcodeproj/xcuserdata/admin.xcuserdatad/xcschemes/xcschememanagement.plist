@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>libwebp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,11 +52,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>135D0610CC5FAE6B17B3F88E01128143</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3116F685117B044E8E119EA475203BA9</key>
 		<dict>
 			<key>primary</key>
@@ -62,7 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>506CBDB3553FE49FE9A81AD85F278B94</key>
+		<key>4DD8ACFD612E47539848D161AA7B44D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +83,16 @@
 			<true/>
 		</dict>
 		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A00AC28A66EBC9864CA344EBFC401CEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E79310404D7F995704B525D6A7AF1B05</key>
 		<dict>
 			<key>primary</key>
 			<true/>

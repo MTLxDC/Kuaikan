@@ -12,6 +12,10 @@
 #import "UIView+Extension.h"
 #import "CommonMacro.h"
 
+#import "AuthorStatusViewController.h"
+#import "ZLPhotoPickerBrowserViewController.h"
+
+
 @interface statusImageCell : UICollectionViewCell
 {
     UIImageView *_imageView;
@@ -25,12 +29,14 @@
 
 - (UIImageView *)imageView {
     if (!_imageView) {
+        
         UIImageView *imageView = [[UIImageView alloc] init];
         
-        imageView.backgroundColor = [UIColor whiteColor];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         imageView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
+        imageView.layer.borderColor = imageView.backgroundColor.CGColor;
+        imageView.layer.borderWidth = 1;
         
         [self.contentView addSubview:imageView];
         
@@ -46,13 +52,15 @@
 
 @end
 
-@interface StatusImageContentView () <UICollectionViewDataSource,UICollectionViewDelegate>
+
+
+@interface StatusImageContentView () <UICollectionViewDataSource,UICollectionViewDelegate,ZLPhotoPickerBrowserViewControllerDelegate>
 {
     CGFloat _defaultItemSize;
     CGFloat _defaultWidth;
 }
 
-@property (nonatomic,weak) UITableView *myTableView;
+@property (nonatomic,strong) NSArray<ZLPhotoPickerBrowserPhoto *> *photos;
 
 @end
 
@@ -60,9 +68,14 @@ static CGFloat margin = 5;
 
 @implementation StatusImageContentView
 
-- (void)setImageUrls:(NSArray *)imageUrls {
-    _imageUrls = imageUrls;
-    [self calculateMySizeWithImageCount:imageUrls.count];
+- (void)setPhotoImages:(NSArray<NSString *> *)photoImages {
+    _photoImages = photoImages;
+    self.photos = nil;
+}
+
+- (void)setThumbImages:(NSArray<NSString *> *)thumbImages {
+    _thumbImages = thumbImages;
+    [self calculateMySizeWithImageCount:thumbImages.count];
     [self reloadData];
 }
 
@@ -95,16 +108,58 @@ static CGFloat margin = 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.imageUrls.count;
+    return self.thumbImages.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     statusImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"statusImageCell" forIndexPath:indexPath];
     
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrls[indexPath.row]]];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.thumbImages[indexPath.row]]];
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // 图片游览器
+    ZLPhotoPickerBrowserViewController *pickerBrowser = [[ZLPhotoPickerBrowserViewController alloc] init];
+    // 淡入淡出效果
+    //     pickerBrowser.status = UIViewAnimationAnimationStatusFade;
+    // 数据源/delegate
+    
+    pickerBrowser.photos = self.photos;
+    // 能够删除
+    pickerBrowser.delegate = self;
+    // 当前选中的值
+    pickerBrowser.currentIndex = indexPath.row;
+    // 展示控制器
+    [pickerBrowser showPickerVc:[self findResponderWithClass:[AuthorStatusViewController class]]];
+
+}
+
+- (NSArray *)photos {
+    
+    if (!_photos) {
+        
+        NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:self.thumbImages.count];
+        
+        [self.photoImages enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+           
+            statusImageCell *cell = (statusImageCell *)[self cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+            
+            ZLPhotoPickerBrowserPhoto *photo = [[ZLPhotoPickerBrowserPhoto alloc] init];
+            
+            photo.photoURL = [NSURL URLWithString:obj];
+            photo.toView   = cell.imageView;
+            photo.thumbImage = cell.imageView.image;
+            
+            [arr addObject:photo];
+        }];
+        
+        _photos = [arr copy];
+    }
+    
+    return _photos;
 }
 
 
@@ -156,12 +211,6 @@ static CGFloat margin = 5;
     }];
 }
 
-- (UITableView *)myTableView {
-    if (!_myTableView) {
-        _myTableView = [self findResponderWithClass:[UITableView class]];
-    }
-    return _myTableView;
-}
 
 
 

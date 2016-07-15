@@ -79,14 +79,6 @@ static CGFloat const tbSpaceing = 12;
     
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    self.descLabel.preferredMaxLayoutWidth = self.width - spaceing * 2;
-    
-    [super layoutSubviews];
-}
-
 - (void)setupUI {
     
     UILabel *descLabel = [UILabel new];
@@ -94,6 +86,7 @@ static CGFloat const tbSpaceing = 12;
     descLabel.numberOfLines = 2;
     descLabel.font = [UIFont systemFontOfSize:12];
     descLabel.textColor = [UIColor lightGrayColor];
+    descLabel.preferredMaxLayoutWidth = SCREEN_WIDTH - spaceing * 2;
     
     [self addSubview:descLabel];
     
@@ -116,6 +109,7 @@ static CGFloat const tbSpaceing = 12;
         make.left.right.bottom.equalTo(self);
         make.height.equalTo(@(SINGLE_LINE_WIDTH));
     }];
+    
 }
 
 - (CGFloat)textHeight {

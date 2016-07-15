@@ -10,6 +10,7 @@
 #import "UIView+Extension.h"
 #import <UIImageView+WebCache.h>
 #import "WordsDetailViewController.h"
+#import "FindingsViewController.h"
 #import "topicModel.h"
 
 static CGFloat const spaceing = 10;
@@ -62,7 +63,7 @@ static CGFloat const spaceing = 10;
     
     wdvc.wordsID = md.ID.stringValue;
     
-    [[self findResponderWithClass:[UINavigationController class]] pushViewController:wdvc animated:YES];
+    [[[self findResponderWithClass:[FindingsViewController class]] navigationController] pushViewController:wdvc animated:YES];
     
 }
 

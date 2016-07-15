@@ -20,7 +20,6 @@
 
 @property (nonatomic,assign) NSInteger offset;
 
-
 @end
 
 @implementation MyCollectionViewController
@@ -42,7 +41,7 @@
     self.tableView.rowHeight = 80;
     self.title = @"我的收藏";
     
-    [self updata];
+    [self.tableView.mj_header beginRefreshing];
     
 }
 

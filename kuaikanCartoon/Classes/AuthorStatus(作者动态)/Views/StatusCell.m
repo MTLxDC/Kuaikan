@@ -15,6 +15,7 @@
 #import "FeedsDataModel.h"
 #import "DateManager.h"
 
+
 #import "CommonMacro.h"
 #import "NSString+Extension.h"
 
@@ -40,15 +41,12 @@
 
 static CGFloat iconSize = 40;
 
+
 @implementation StatusCell
 
 + (StatusCell *)configureCellWithModel:(FeedsDataModel *)model inTableView:(UITableView *)tableView AtIndexPath:(NSIndexPath *)indexPath
 {
-    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StatusCell"];
-
-    if (!cell) {
-        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatusCell"];
-    }
+    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:statusCellReuseIdentifier];
     
     cell.model = [model.feeds objectAtIndex:indexPath.row];
     
@@ -70,24 +68,19 @@ static CGFloat iconSize = 40;
     
     self.likeCountView.islike = model.is_liked;
     
-    self.imageContentView.imageUrls = [self getImageUrlsWithContentModel:model.content];
+    self.imageContentView.photoImages = model.photoImages;
+    self.imageContentView.thumbImages = model.thumbImages;
     
     self.timeLabel.text = [[DateManager share] conversionTimeStamp:model.created_at];
     
     self.likeCountView.likeCount = model.likes_count.integerValue;
     self.likeCountView.requestID = model.feed_id.stringValue;
     
-    NSString *likeCountText   = [self.likeCountView titleForState:UIControlStateNormal];
     NSString *replayCountText = [NSString makeTextWithCount:model.comments_count.integerValue];
     
     [self.replyCountView setTitle:replayCountText forState:UIControlStateNormal];
     
-//    CGFloat likeCountWidth  = [likeCountText   getTextWidthWithFont:self.likeCountView.titleLabel.font] + 30;
     CGFloat replyCountWidth = [replayCountText getTextWidthWithFont:self.replyCountView.titleLabel.font] + 30;
-    
-//    [self.likeCountView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@(likeCountWidth));
-//    }];
     
     [self.replyCountView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(replyCountWidth));
@@ -95,21 +88,6 @@ static CGFloat iconSize = 40;
 
 }
 
-
-- (NSArray *)getImageUrlsWithContentModel:(FeedsContentModel *)model {
-    
-    NSMutableArray *imageUrls = [[NSMutableArray alloc] initWithCapacity:model.images.count];
-    
-    for (NSString *url in model.images) {
-        
-        NSString *imageUrl = [model.image_base stringByAppendingString:url];
-        
-        [imageUrls addObject:imageUrl];
-        
-    }
-    
-    return imageUrls;
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -166,7 +144,6 @@ static CGFloat iconSize = 40;
     [self.likeCountView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.replyCountView);
         make.right.equalTo(self.replyCountView.mas_left).offset(-spaceing);
-        make.width.equalTo(@0);
     }];
     
     [self.statusContentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -175,16 +152,21 @@ static CGFloat iconSize = 40;
         make.bottom.equalTo(self.timeLabel);
     }];
     
+    UIView *bottomLine = [UIView new];
+    
+    bottomLine.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+    
+    [self addSubview:bottomLine];
+    
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.contentView);
+        make.height.equalTo(@(SINGLE_LINE_WIDTH));
+    }];
+    
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
         make.bottom.equalTo(self.statusContentView).offset(spaceing);
     }];
-    
-}
-
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
     
 }
 

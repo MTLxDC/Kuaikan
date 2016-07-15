@@ -92,14 +92,14 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    CGFloat spaceing = 8;
+    CGFloat spaceing = SPACEING;
     
     UIImageView *iconView = [[UIImageView alloc] init];
     
     [self.contentView addSubview:iconView];
     
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).offset(spaceing * 2);
+        make.left.equalTo(self.contentView).offset(spaceing);
         make.centerY.equalTo(self.contentView);
         make.width.height.equalTo(@22);
     }];
@@ -144,7 +144,7 @@
     [self.contentView addSubview:spaceLine];
     
     [spaceLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo(self.contentView);
+        make.top.right.equalTo(self.contentView);
         make.left.equalTo(self.contentView).offset(spaceing);
         make.height.equalTo(@(SINGLE_LINE_WIDTH));
     }];

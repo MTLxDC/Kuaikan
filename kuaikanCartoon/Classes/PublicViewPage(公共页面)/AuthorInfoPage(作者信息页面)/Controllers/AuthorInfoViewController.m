@@ -19,6 +19,18 @@
 #import "AuthorTopicInfoCell.h"
 #import "ProgressHUD.h"
 
+#import <MJRefreshAutoNormalFooter.h>
+#import <UITableView+FDTemplateLayoutCell.h>
+#import "StatusCell.h"
+#import "FeedsDataModel.h"
+#import "wordsOptionsHeadView.h"
+#import "AuthorProfileView.h"
+
+typedef enum : NSUInteger {
+    displayProfile = 1, //简介
+    displayDynamic = 0, //动态`
+} displayTypeOfInfo;
+
 @interface AuthorInfoViewController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,weak) UITableView *tableView;
@@ -29,13 +41,26 @@
 
 @property (nonatomic,strong) NSArray<NSString  *> *shareText;
 
+@property (nonatomic,assign) displayTypeOfInfo displayTypeOfInfo;
+
+@property (nonatomic,strong) FeedsDataModel *feedsDataModel;
+
+
+@property (nonatomic,strong) AuthorProfileView *profileView;
+
+@property (nonatomic,strong) wordsOptionsHeadView *optionHeadView;
+
 @end
+
+static NSInteger page_num = 0;
 
 @implementation AuthorInfoViewController
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.statusBarStyle = UIStatusBarStyleLightContent;
     
     [self setupTableViewAndHeadView];
     
@@ -54,12 +79,29 @@
         
         if (!md) return;
         
-        weakSelf.model = md;
         weakSelf.headView.model = md;
-       [weakSelf.tableView reloadData];
-        
+        weakSelf.model = md;
         
     } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
+    
+    NSString *feedDataUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=3&page_num=1&since=0&uid=%@",self.authorID];
+    
+    
+    [FeedsDataModel requestModelDataWithUrlString:feedDataUrl complish:^(id result) {
+        
+        FeedsDataModel *md = (FeedsDataModel *)result;
+        
+        if (!md) {
+            return ;
+        }
+        
+        weakSelf.feedsDataModel = md;
+        
+        if (weakSelf.displayTypeOfInfo == displayDynamic) {
+            [weakSelf.tableView reloadData];
+        }
+        
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:nil];
     
 }
 
@@ -80,9 +122,15 @@
     tableView.delegate   = self;
     tableView.contentInset = UIEdgeInsetsMake(AuthorInfoDetailHeadViewHeight, 0, 0, 0);
     
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDate)];
+    
+    tableView.mj_footer = footer;
+    
     [tableView registerClass:[AuthorTopicInfoCell class] forCellReuseIdentifier:AuthorTopicInfoCellReuseIdentifier];
     
     [tableView registerClass:[AuthorShareInfoCell class] forCellReuseIdentifier:AuthorShareInfoCellIdentifier];
+    
+    [tableView registerClass:[StatusCell class] forCellReuseIdentifier:statusCellReuseIdentifier];
     
     AuthorInfoDetailHeadView *headView = [AuthorInfoDetailHeadView makeAuthorInfoDetailHeadView];
     
@@ -103,16 +151,54 @@
     
 }
 
+- (void)loadMoreDate {
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=3&page_num=%zd&since=%@&uid=%@",page_num,self.feedsDataModel.since,self.authorID];
+    
+    weakself(self);
+    
+    [FeedsDataModel requestModelDataWithUrlString:url complish:^(id result) {
+        
+        [weakSelf.tableView.mj_footer endRefreshing];
+        
+        FeedsDataModel *md = (FeedsDataModel *)result;
+        
+        if (md.feeds.count < 1) {
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+            return ;
+        }
+        
+        [weakSelf.feedsDataModel.feeds addObjectsFromArray:md.feeds];
+         weakSelf.feedsDataModel.since = md.since;
+        [weakSelf.tableView fd_reloadDataWithoutInvalidateIndexPathHeightCache];
+        page_num++;
+        
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:nil];
+    
+}
+
+
 #pragma mark -cell
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.displayTypeOfInfo == displayDynamic ? 2 : 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    
+    if (self.displayTypeOfInfo == displayDynamic) {
+        return [self.tableView fd_heightForCellWithIdentifier:statusCellReuseIdentifier cacheByIndexPath:indexPath configuration:^(id cell) {
+            
+            StatusCell *cell1 = (StatusCell *)cell;
+            
+            cell1.model = [self.feedsDataModel.feeds objectAtIndex:indexPath.row];
+            
+        }];
+    }
+    
+    if (indexPath.section == 2) {
         return AuthorShareInfoCellHeight;
-    }else if (indexPath.section == 1) {
+    }else if (indexPath.section == 3) {
         return AuthorTopicInfoCellHeight;
     }
     
@@ -121,8 +207,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (self.displayTypeOfInfo == displayDynamic) {
+        return [StatusCell configureCellWithModel:self.feedsDataModel inTableView:tableView AtIndexPath:indexPath];
+    }
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 2) {
         
         AuthorShareInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:AuthorShareInfoCellIdentifier];
         
@@ -132,7 +221,7 @@
         
         return cell;
         
-    }else if (indexPath.section == 1) {
+    }else if (indexPath.section == 3) {
         
         AuthorTopicInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:AuthorTopicInfoCellReuseIdentifier];
         
@@ -146,9 +235,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    
+    if (section == 0) return 0;
+    
+    if (self.displayTypeOfInfo == displayDynamic) {
+        return self.feedsDataModel.feeds.count;
+    }
+    
+    if (section == 2) {
         return self.shareText.count;
-    }else if(section == 1) {
+    }else if(section == 3) {
         return self.model.topics.count;
     }
     
@@ -162,11 +258,11 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     
-    if (section == 0) {
+    if (section == 2) {
         
         if (row < 2) {
             
-            NSString *text = self.shareText[row];
+             NSString *text = self.shareText[row];
             [[UIPasteboard generalPasteboard] setString:text];
             [ProgressHUD showSuccessWithStatus:@"复制成功" inView:self.view];
             
@@ -177,7 +273,7 @@
             
             NSString *urlString = self.shareText[row];
             
-           urlString = [urlString stringByReplacingOccurrencesOfString:@"https://" withString:@"itms-apps://"];
+            urlString = [urlString stringByReplacingOccurrencesOfString:@"https://" withString:@"itms-apps://"];
             
             NSURL *url = [NSURL URLWithString:urlString];
             
@@ -196,7 +292,7 @@
             
         }
         
-    }else if (section == 1) {
+    }else if (section == 3) {
         
         topicModel *md = self.model.topics[indexPath.row];
 
@@ -210,62 +306,96 @@
     
 }
 
-
 #pragma mark - sectionHeader
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) return 30;
+    if (section == 0) return wordsOptionsHeadViewHeight;
     
-    return 0.01;
+    if (self.displayTypeOfInfo == displayProfile) {
+        
+        switch (section) {
+            case 1:
+            {
+                return 100;
+            }
+            case 2:
+            {
+                return 40;
+            }
+            case 3:
+            {
+                return 40;
+            }
+        }
+        
+    }
+    
+    return 0.01f;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    if (section == 1) {
-        
-        UIView *sectionHeadView = [[UIView alloc] initWithFrame:self.view.bounds];
-        sectionHeadView.backgroundColor = [UIColor whiteColor];
-        
-        UILabel *label = [UILabel new];
-        
-        label.text = @"TA的作品";
-        label.font = [UIFont systemFontOfSize:15];
-        label.textColor = [UIColor darkGrayColor];
-        
-        [sectionHeadView addSubview:label];
-        
-        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(sectionHeadView).offset(8);
-            make.top.bottom.equalTo(sectionHeadView);
-        }];
-        
-        return sectionHeadView;
-        
+    if (section == 0) return self.optionHeadView;
+    
+    if (self.displayTypeOfInfo == displayDynamic) {
+        return [[UIView alloc] initWithFrame:self.view.bounds];
+    }
+    
+    switch (section) {
+        case 1:
+        {
+            return self.profileView;
+        }
+        case 2:
+        {
+            return [self creatSectionHeadViewWithTitle:@"更多信息"];
+        }
+        case 3:
+        {
+            return [self creatSectionHeadViewWithTitle:@"TA的作品"];
+        }
     }
     
     return [[UIView alloc] initWithFrame:self.view.bounds];
+}
+
+- (UIView *)creatSectionHeadViewWithTitle:(NSString *)title {
+    
+    UIView *sectionHeadView = [[UIView alloc] initWithFrame:self.view.bounds];
+    sectionHeadView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *label = [[UILabel alloc] init];
+    
+    label.text = title;
+    label.font = [UIFont systemFontOfSize:14];
+    label.textColor = [UIColor lightGrayColor];
+    
+    [sectionHeadView addSubview:label];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(sectionHeadView).offset(8);
+        make.top.bottom.equalTo(sectionHeadView);
+    }];
+    
+    return sectionHeadView;
     
 }
 
 #pragma mark - sectionFooter
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 0) {
-        
-        UIView *spaceLine = [[UIView alloc] initWithFrame:self.view.bounds];
-        
-        spaceLine.backgroundColor = [UIColor clearColor];
-        
-        return spaceLine;
-    }
     
-    return [[UIView alloc] initWithFrame:self.view.bounds];
+    UIView *spaceLine = [[UIView alloc] initWithFrame:self.view.bounds];
+        
+    spaceLine.backgroundColor = [UIColor clearColor];
+        
+    return spaceLine;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (section == 0) return 10;
+    if (section == 0 || self.displayTypeOfInfo == displayProfile) return 10;
     
     return 0.01;
 }
@@ -309,6 +439,46 @@
     }
     
     return _shareText;
+}
+
+- (void)setDisplayTypeOfInfo:(displayTypeOfInfo)displayTypeOfInfo {
+    _displayTypeOfInfo = displayTypeOfInfo;
+    
+    self.tableView.mj_footer.hidden = displayTypeOfInfo == displayProfile;
+    
+    [self.tableView fd_reloadDataWithoutInvalidateIndexPathHeightCache];
+}
+
+
+- (AuthorProfileView *)profileView {
+    if (!_profileView) {
+        _profileView = [[AuthorProfileView alloc] initWithFrame:self.view.bounds];
+    }
+    return _profileView;
+}
+
+- (wordsOptionsHeadView *)optionHeadView {
+    
+    if (!_optionHeadView) {
+        
+        _optionHeadView = [[wordsOptionsHeadView alloc] initWithFrame:self.view.bounds];
+        
+        [_optionHeadView.leftBtn  setTitle:@"资料" forState:UIControlStateNormal];
+        [_optionHeadView.rightBtn setTitle:@"动态" forState:UIControlStateNormal];
+        
+        weakself(self);
+
+        [_optionHeadView setLefeBtnClick:^(UIButton *btn) {
+            weakSelf.displayTypeOfInfo = displayProfile;
+        }];
+        
+        [_optionHeadView setRightBtnClick:^(UIButton *btn) {
+            weakSelf.displayTypeOfInfo = displayDynamic;
+        }];
+        
+    }
+    
+    return _optionHeadView;
 }
 
 @end

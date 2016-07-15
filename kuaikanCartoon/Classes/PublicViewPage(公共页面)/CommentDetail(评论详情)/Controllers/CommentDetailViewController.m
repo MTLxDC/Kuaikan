@@ -18,6 +18,7 @@
 #import "CommentDetailModel.h"
 #import "CommentSendViewContainer.h"
 
+#import <UITableView+FDTemplateLayoutCell.h>
 #import <MJRefresh.h>
 
 @interface CommentDetailViewController () <UITableViewDataSource,UITableViewDelegate,CommentSendViewContainerDelegate>
@@ -31,8 +32,6 @@
 @property (nonatomic,strong) CommentInfoCell *commentCell;
 
 @property (nonatomic,weak)   UISegmentedControl *sc;
-
-@property (nonatomic,strong) NSMutableArray *cellHeightCache;
 
 @property (nonatomic,copy)   NSString *requestUrl;
 
@@ -125,8 +124,7 @@ static NSString * const newCommentRequestUrlFormat =
     self.commentsDisplayListView.delegate = self;
     self.commentsDisplayListView.estimatedRowHeight = 100;
     
-    self.cellHeightCache = [NSMutableArray array];
-    
+    [self.commentsDisplayListView registerNib:[UINib nibWithNibName:@"CommentInfoCell" bundle:nil]                       forCellReuseIdentifier:commentInfoCellName];
     
     weakself(self);
     
@@ -153,7 +151,7 @@ static NSString * const newCommentRequestUrlFormat =
             
             [weakSelf.modelData.comments addObjectsFromArray:md.comments];
              weakSelf.modelData.since = md.since;
-            [weakSelf.commentsDisplayListView reloadData];
+            [weakSelf.commentsDisplayListView fd_reloadDataWithoutInvalidateIndexPathHeightCache];;
             [weakSelf.commentsDisplayListView.mj_footer endRefreshing];
 
             
@@ -200,7 +198,6 @@ static NSString * const newCommentRequestUrlFormat =
 
          sself.modelData = res;
         
-        [sself.cellHeightCache removeAllObjects];
         [sself.commentsDisplayListView reloadData];
         [sself.commentsDisplayListView.mj_header endRefreshing];
         [sself.commentsDisplayListView layoutIfNeeded];
@@ -224,16 +221,10 @@ static NSString * const newCommentRequestUrlFormat =
     
     CommentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:commentInfoCellName];
     
-    if (!cell) {
-        cell = [CommentInfoCell makeCommentInfoCell];
-    }
-    
     cell.commentsModel = self.modelData.comments[indexPath.row];
     
     return cell;
 }
-
-
 
 #pragma mark commentsDisplayListView Delegate
 
@@ -244,52 +235,20 @@ static NSString * const newCommentRequestUrlFormat =
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (iOS8Later) return UITableViewAutomaticDimension;
-
-    if (self.cellHeightCache.count > indexPath.row) {
         
-        NSNumber *cacheHeight = self.cellHeightCache[indexPath.row];
+    return [tableView fd_heightForCellWithIdentifier:commentInfoCellName cacheByIndexPath:indexPath configuration:^(id cell) {
         
-        if (cacheHeight) return cacheHeight.doubleValue;
+        CommentInfoCell *commentCell = (CommentInfoCell *)cell;
         
-    }
-    
-    //实例一个Cell专门用来算高,如果是多个Cell,用字典,重用标识符做key,cell做value;
-    
-    CommentInfoCell *cell = self.commentCell;
-    
-    cell.commentsModel = self.modelData.comments[indexPath.row];
-    
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
-    
-    cell.bounds = CGRectMake(0.0f, 0.0f,
-                             CGRectGetWidth(tableView.bounds),
-                             CGRectGetHeight(cell.bounds));
-    
-    // 得到cell的contentView需要的真实高度
-    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    
-    // 要为cell的分割线加上额外的1pt高度。因为分隔线是被加在cell底边和contentView底边之间的。
-    height += 1.0f;
-    
-    [self.cellHeightCache addObject:@(height)];
-    
-    return height;
+        commentCell.commentsModel = self.modelData.comments[indexPath.row];
+        
+    }];
     
 }
 
 - (void)sendMessageSucceeded:(CommentsModel *)commentContent {
     if (self.sc.selectedSegmentIndex == 0)  [self update];
     
-}
-
-- (CommentInfoCell *)commentCell {
-    if (!_commentCell) {
-        _commentCell = [CommentInfoCell makeCommentInfoCell];
-    }
-    return _commentCell;
 }
 
 - (CommentSendViewContainer *)sendViewContainer {

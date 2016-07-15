@@ -12,36 +12,22 @@
 
 #import "UIImageView+Extension.h"
 #import "UIImage+Extension.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImageManager.h>
 
 @implementation UIImageView (Extension)
 
 - (void)setRoundImageWithURL:(NSString *)url placeImageName:(NSString *)placeImage {
     
-    SDImageCache *cache = [SDImageCache sharedImageCache];
+    __weak UIImageView *weakSelf = self;
+
+    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:url]
+                                                    options:SDWebImageRetryFailed
+                                                   progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                       
+                                                       __block __strong UIImageView *sself  = weakSelf;
+                                                       sself.image = [image clipEllipseImage]; //对图片进行倒圆角
     
-    UIImage *clipImageCache = [cache imageFromDiskCacheForKey:url];  //是否有缓存倒角后的图片,如果有直接取出,方法结束
-    
-    if (clipImageCache) {
-        self.image = clipImageCache;
-        return;
-    }
-    
-    [self sd_setImageWithURL:[NSURL URLWithString:url]
-                     placeholderImage:[UIImage imageNamed:placeImage]
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                
-                                [cache removeImageForKey:url];  //移除未倒角的图片
-                                
-                                CGFloat radius = MIN(image.size.width, image.size.height) * 0.5;
-                                
-                                UIImage *roundImage = [image clipImageWithRadius:radius]; //对图片进行倒圆角
-                                
-                                self.image = roundImage;
-                                
-                                [cache storeImage:roundImage forKey:url];   //缓存倒圆角后的图片
-                                
-                            }];
+                                                   }];
     
 }
 

@@ -11,6 +11,8 @@
 @class FeedsDataModel;
 @class FeedsModel;
 
+static NSString * const statusCellReuseIdentifier = @"StatusCell";
+
 @interface StatusCell : UITableViewCell
 
 @property (nonatomic,strong) FeedsModel *model;

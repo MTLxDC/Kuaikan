@@ -9,6 +9,7 @@
 #import "wordTableViewCell.h"
 #import <UIImageView+WebCache.h>
 #import "NSString+Extension.h"
+#import "DateManager.h"
 
 @interface wordTableViewCell ()
 
@@ -41,7 +42,7 @@
     
     [self.like_Count setTitle:[NSString makeTextWithCount:model.likes_count.integerValue] forState:UIControlStateNormal];
     
-    self.creat_Time.text = [[NSString timeWithTimeStamp:model.created_at.integerValue] substringFromIndex:5];
+    self.creat_Time.text = [[DateManager share] conversionTimeStamp:model.created_at];
     
     [self.like_Count sizeToFit];
     

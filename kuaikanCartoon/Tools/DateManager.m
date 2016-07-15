@@ -137,7 +137,6 @@ static inline NSTimeInterval getDefaultTimeStamp(NSNumber *timeStamp) {
         _format.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
         
         self.calender_CN = [NSCalendar currentCalendar];
-        [NSTimeZone setDefaultTimeZone:[NSTimeZone systemTimeZone]];
         [self.calender_CN setTimeZone:[NSTimeZone systemTimeZone]];
         
     }

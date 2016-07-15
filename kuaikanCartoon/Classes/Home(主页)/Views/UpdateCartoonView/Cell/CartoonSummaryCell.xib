@@ -35,19 +35,16 @@
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1a-pZ-wnb" customClass="likeCountView">
-                        <rect key="frame" x="252" y="223" width="60" height="34"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="K1z-8R-dUz"/>
-                        </constraints>
+                        <rect key="frame" x="155" y="223" width="147" height="34"/>
                         <state key="normal" title="1111"/>
                     </button>
                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lX-Ak-dQy">
-                        <rect key="frame" x="312" y="232" width="60" height="15"/>
+                        <rect key="frame" x="302" y="232" width="70" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="5zp-cz-bZO"/>
+                            <constraint firstAttribute="width" constant="70" id="5zp-cz-bZO"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="11111" image="ic_common_comment_normal_15x15_">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -56,7 +53,7 @@
                         </connections>
                     </button>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第61话 弹珠决胜! (上)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHg-x4-jE9">
-                        <rect key="frame" x="8" y="232" width="239" height="15.5"/>
+                        <rect key="frame" x="8" y="232" width="142" height="15.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="oak-W7-zl9"/>
@@ -123,7 +120,7 @@
                 <outlet property="tagWidth" destination="OK9-Wh-tUV" id="zcW-GD-Nx3"/>
                 <outlet property="worksName" destination="U1T-gB-fN3" id="urT-4B-6vs"/>
             </connections>
-            <point key="canvasLocation" x="157" y="-38"/>
+            <point key="canvasLocation" x="228" y="-26"/>
         </tableViewCell>
     </objects>
     <resources>

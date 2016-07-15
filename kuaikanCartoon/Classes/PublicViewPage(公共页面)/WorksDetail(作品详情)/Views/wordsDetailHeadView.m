@@ -15,6 +15,7 @@
 #import "UserInfoManager.h"
 #import "WordsDetailViewController.h"
 #import "UrlStringDefine.h"
+#import "NSString+Extension.h"
 
 @interface wordsDetailHeadView () <UIAlertViewDelegate>
 
@@ -55,11 +56,7 @@
 
 static NSString * const offsetKeyPath = @"contentOffset";
 
-
-CGFloat const maskHeight = 40.0f;
-CGFloat const spaceing   = 8.0f;
-CGFloat const btnHeight  = 15.0f;
-
+static CGFloat const spaceing   = 8.0f;
 
 @implementation wordsDetailHeadView
 
@@ -155,13 +152,6 @@ CGFloat const btnHeight  = 15.0f;
     
 }
 
-- (CGFloat)textWidth {
-    
- return [self.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT,15)
-                                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                                      attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size.width;
-}
-
 - (void)setShow:(BOOL)show {
     if (_show != show) {
         
@@ -170,7 +160,7 @@ CGFloat const btnHeight  = 15.0f;
 
         if (!show) {
             rightContstant =  70;
-            leftConstant   = (self.width - [self textWidth]) * 0.5;
+            leftConstant   = (self.width - [self.titleLabel.text getTextWidthWithFont:self.titleLabel.font]) * 0.5;
             self.myVc.statusBarStyle = UIStatusBarStyleLightContent;
         }else {
             self.myVc.statusBarStyle = UIStatusBarStyleDefault;
@@ -219,8 +209,8 @@ CGFloat const btnHeight  = 15.0f;
     
     [self.titleLabel setText:model.title];
     
-    NSString *replyCountText = [self makeTextWithCount:model.comments_count.integerValue];
-    NSString *likeCountText = [self makeTextWithCount:model.likes_count.integerValue];
+    NSString *replyCountText = [NSString makeTextWithCount:model.comments_count.integerValue];
+    NSString *likeCountText =  [NSString makeTextWithCount:model.likes_count.integerValue];
 
     [self.replyCount setTitle:replyCountText
                      forState:UIControlStateNormal];
@@ -228,34 +218,20 @@ CGFloat const btnHeight  = 15.0f;
     [self.likeCount setTitle:likeCountText
                     forState:UIControlStateNormal];
     
-    static CGFloat imageWidth = 20;
+    static CGFloat imageWidth = 30;
     
-    self.replyCountBtnWidth.constant = [self getTextWidth:replyCountText] + imageWidth;
+    self.replyCountBtnWidth.constant = [replyCountText getTextWidthWithFont:self.replyCount.titleLabel.font] + imageWidth;
     
-    self.upCountBtnWidth.constant    = [self getTextWidth:likeCountText] + imageWidth;
+    self.upCountBtnWidth.constant    = [likeCountText  getTextWidthWithFont:self.likeCount.titleLabel.font] + imageWidth;
     
     self.followBtn.selected = model.is_favourite;
     
     self.replyCount.hidden = NO;
     self.likeCount.hidden  = NO;
+    
+    [self setNeedsLayout];
 }
 
-- (CGFloat)getTextWidth:(NSString *)text {
-    return [text boundingRectWithSize:CGSizeMake(self.width, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.likeCount.titleLabel.font} context:nil].size.width + 5;
-}
-
-- (NSString *)makeTextWithCount:(NSInteger)count {
-    
-    NSString *topCountText = nil;
-    
-    if (count >= 100000) {
-        topCountText = [NSString stringWithFormat:@"%zd万",count/10000];
-    }else {
-        topCountText = [NSString stringWithFormat:@"%zd",count];
-    }
-    
-    return topCountText;
-}
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *result = [super hitTest:point withEvent:event];

@@ -11,7 +11,8 @@
 @class topicModel;
 
 static NSString * const AuthorTopicInfoCellReuseIdentifier = @"AuthorTopicInfoCell";
-static CGFloat AuthorTopicInfoCellHeight = 80.0f;
+
+static CGFloat AuthorTopicInfoCellHeight = 120.0f;
 
 @interface AuthorTopicInfoCell : UITableViewCell
 

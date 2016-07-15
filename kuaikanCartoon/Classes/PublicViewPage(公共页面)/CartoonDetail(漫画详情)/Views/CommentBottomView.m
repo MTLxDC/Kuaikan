@@ -9,6 +9,7 @@
 #import "CommentBottomView.h"
 #import "CommentDetailViewController.h"
 #import "UIView+Extension.h"
+#import "NSString+Extension.h"
 #import <Masonry.h>
 #import "CommonMacro.h"
 
@@ -163,7 +164,7 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 - (void)setRecommend_count:(NSInteger)recommend_count {
     _recommend_count = recommend_count;
     
-    NSString *commntCountText = [NSString stringWithFormat:@"%zd",_recommend_count];
+    NSString *commntCountText = [NSString makeTextWithCount:recommend_count];
     
     CGSize textSize = [commntCountText boundingRectWithSize:CGSizeMake(MAXFLOAT,20)
                                                     options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading

@@ -38,10 +38,9 @@
                             <action selector="reply:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="R8O-Eq-CCi"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUg-fB-Szk" customClass="likeCountView">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUg-fB-Szk" customClass="likeCountView">
                         <rect key="frame" x="381" y="176" width="60" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="1lA-1v-jfL"/>
                             <constraint firstAttribute="height" constant="21" id="E0k-wI-YFk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -74,9 +73,6 @@
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="7AZ-7L-poc" appends="YES" id="j8q-0L-EDt"/>
-                        </connections>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXc-Wn-hwF" customClass="userAuthenticationIcon">
                         <rect key="frame" x="8" y="8" width="30" height="30"/>
@@ -116,21 +112,16 @@
                     <constraint firstItem="CBk-YY-jPY" firstAttribute="leading" secondItem="xXh-j5-J2y" secondAttribute="leading" id="vtv-u0-5Zd"/>
                 </constraints>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <connections>
                 <outlet property="CommentContent" destination="CBk-YY-jPY" id="RLU-D8-agI"/>
                 <outlet property="likeCount" destination="tUg-fB-Szk" id="td3-nF-77h"/>
-                <outlet property="likeCountWidth" destination="1lA-1v-jfL" id="uQ5-81-3iK"/>
                 <outlet property="releaseTime" destination="3dF-Me-voW" id="KlB-qG-9By"/>
                 <outlet property="userIcon" destination="dXc-Wn-hwF" id="VjG-6s-yWS"/>
                 <outlet property="userName" destination="xXh-j5-J2y" id="BYW-42-MjE"/>
             </connections>
-            <point key="canvasLocation" x="427.5" y="208"/>
+            <point key="canvasLocation" x="345.5" y="207"/>
         </tableViewCell>
-        <tapGestureRecognizer id="7AZ-7L-poc">
-            <connections>
-                <action selector="report:" destination="KGk-i7-Jjw" id="CbZ-kV-FdQ"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="ic_common_praise_pressed_15x15_" width="15" height="15"/>

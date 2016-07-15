@@ -12,10 +12,6 @@
 
 @interface wordsOptionsHeadView ()
 
-@property (nonatomic,weak) UIButton *leftBtn;
-
-@property (nonatomic,weak) UIButton *rightBtn;
-
 @property (nonatomic,weak) UIView *line;
 
 @end
@@ -23,9 +19,9 @@
 
 @implementation wordsOptionsHeadView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         [self setup];
     }
@@ -36,11 +32,11 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    self.leftBtn  = [self creatBtn];
+    _leftBtn  = [self creatBtn];
     
     [self.leftBtn setTitle:@"简介" forState:UIControlStateNormal];
     
-    self.rightBtn = [self creatBtn];
+    _rightBtn = [self creatBtn];
     
     [self.rightBtn setTitle:@"内容" forState:UIControlStateNormal];
 

@@ -46,6 +46,7 @@ PODS:
   - SDWebImage/WebP (3.7.6):
     - libwebp
     - SDWebImage/Core
+  - UITableView+FDTemplateLayoutCell (1.4)
 
 DEPENDENCIES:
   - AFNetworking
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - SDWebImage/WebP
+  - UITableView+FDTemplateLayoutCell
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -63,5 +65,6 @@ SPEC CHECKSUMS:
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
 COCOAPODS: 0.39.0

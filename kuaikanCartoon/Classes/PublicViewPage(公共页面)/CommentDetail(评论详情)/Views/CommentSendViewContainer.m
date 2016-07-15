@@ -64,6 +64,7 @@
         self.hidden = YES;
         self.backgroundColor = [UIColor blackColor];
         self.alpha = 0;
+        self.opaque = NO;
         
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)]];
     

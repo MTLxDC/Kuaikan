@@ -32,7 +32,7 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 
 + (instancetype)share;
 
-@property BOOL hasLogin;
+@property (nonatomic)        BOOL hasLogin;
 
 @property (nonatomic,copy)   NSString *avatar_url;      //头像
 

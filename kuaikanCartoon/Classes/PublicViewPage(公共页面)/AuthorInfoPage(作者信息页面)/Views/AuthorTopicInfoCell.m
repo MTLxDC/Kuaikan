@@ -49,8 +49,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     CGFloat spaceing = 8;
-    CGFloat imageWidth = SCREEN_WIDTH - spaceing * 2;
-
+    
     UIImageView *topicImage = [UIImageView new];
     
     [self.contentView addSubview:topicImage];
@@ -58,15 +57,14 @@
     [topicImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.contentView).offset(spaceing);
         make.bottom.equalTo(self.contentView).offset(-spaceing);
-        make.width.equalTo(@(imageWidth * 0.33));
+        make.width.equalTo(self.contentView.mas_width).multipliedBy(0.6);
     }];
     
     self.topicImage = topicImage;
     
-    
     UILabel *topicTitle = [UILabel new];
     
-    topicTitle.font      = [UIFont systemFontOfSize:13];
+    topicTitle.font      = [UIFont systemFontOfSize:15];
     topicTitle.textColor = [UIColor blackColor];
     
     [self.contentView addSubview:topicTitle];
@@ -82,9 +80,9 @@
     
     UILabel *topicDesc = [UILabel new];
     
-    topicDesc.font      = [UIFont systemFontOfSize:11];
+    topicDesc.font      = [UIFont systemFontOfSize:12];
     topicDesc.textColor = colorWithWhite(0.6);
-    topicDesc.numberOfLines = 3;
+    topicDesc.numberOfLines = 0;
     
     [self.contentView addSubview:topicDesc];
     
