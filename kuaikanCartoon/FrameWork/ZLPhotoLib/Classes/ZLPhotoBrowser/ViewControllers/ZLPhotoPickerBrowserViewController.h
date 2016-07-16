@@ -5,7 +5,6 @@
 //  Created by 张磊 on 14-11-14.
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 #import "ZLPhotoPickerBrowserPhoto.h"
 #import "ZLPhotoPickerCommon.h"
@@ -16,6 +15,9 @@
 
 @protocol ZLPhotoPickerBrowserViewControllerDelegate <NSObject>
 @optional
+
+
+- (void)photoBrowser:(ZLPhotoPickerBrowserViewController *)pickerBrowser saveImage:(BOOL)success atIndex:(NSInteger)index;
 
 /**
  *  点击每个Item时候调用
@@ -84,6 +86,5 @@
 // 展示控制器
 - (void)showPickerVc:(UIViewController *)vc;
 - (void)showPushPickerVc:(UIViewController *)vc;
-
 
 @end

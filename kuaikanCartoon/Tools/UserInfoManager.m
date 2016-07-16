@@ -23,9 +23,12 @@ static NSString * const loginInfoName = @"loginInfo";   //账号密码保存
 
 static NSString * const userAuthorizeUrlString = @"http://api.kuaikanmanhua.com/v1/timeline/polling";
 
-static NSString * const signinBaseUrlString = @"http://api.kuaikanmanhua.com/v1/phone/signin";  //登录接口
+static NSString * const signinBaseUrlString   = @"http://api.kuaikanmanhua.com/v1/phone/signin";  //登录接口
 
-static NSString * const commentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comics/%@/comments"; //评论接口
+static NSString * const comicCommentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comics/%@/comments"; //漫画评论接口
+
+static NSString * const feedsCommentUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/feed/%@/add"; //作者动态评论接口
+
 static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comments/%@/reply";  //回复接口
 
 @implementation UserInfoManager
@@ -173,16 +176,29 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
 }
 
 
-+ (void)sendMessage:(NSString *)meassage isReply:(BOOL)isreply withID:(NSString *)ID withSucceededCallback:(void (^)(CommentsModel *))succeededCallback {
-    [[UserInfoManager share] sendMessage:meassage isReply:isreply withID:ID withSucceededCallback:succeededCallback];
++ (void) sendMessage:(NSString *)meassage
+             isReply:(BOOL)isreply
+              withID:(NSNumber *)ID
+        withDataType:(commentDataType)dataType
+withSucceededCallback:(void (^)(CommentsModel *))succeededCallback  {
+    [[UserInfoManager share] sendMessage:meassage isReply:isreply withID:ID withDataType:dataType withSucceededCallback:succeededCallback];
 }
 
 - (void)sendMessage:(NSString *)meassage
             isReply:(BOOL)isreply
-        withID:(NSString *)ID
+        withID:(NSNumber *)ID
+        withDataType:(commentDataType)dataType
 withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
     
     if ([self needLogin]) return;
+    
+    NSString *commentUrlFormat = nil;
+    
+    if (dataType == FeedsCommentDataType) {
+        commentUrlFormat = feedsCommentUrlFormat;
+    }else if(dataType == ComicsCommentDataType) {
+        commentUrlFormat = comicCommentUrlFormat;
+    }
     
     NSString *urlFormat = isreply ? replyUrlFormat : commentUrlFormat;
     

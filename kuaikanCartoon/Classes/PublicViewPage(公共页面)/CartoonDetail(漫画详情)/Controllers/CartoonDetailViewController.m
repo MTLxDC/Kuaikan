@@ -282,11 +282,11 @@ CGFloat contentSizeMaxHeight = 100.0f;
 }
 
 - (void)sendMessage:(NSString *)message {
-    weakself(self);
-    
-    [UserInfoManager sendMessage:message isReply:NO withID:self.cartoonId withSucceededCallback:^(CommentsModel *md) {
-        [weakSelf.bottomView sendSucceeded];
-    }];
+    [UserInfoManager sendMessage:message
+                         isReply:NO
+                          withID:self.cartoonId
+                    withDataType:ComicsCommentDataType
+           withSucceededCallback:nil];
 }
 
 
@@ -312,7 +312,9 @@ CGFloat contentSizeMaxHeight = 100.0f;
 }
 
 - (void)showCommentPage {
-    [CommentDetailViewController showInVc:self.navigationController withComicID:self.comicsMd.ID];
+    [CommentDetailViewController showInVc:self.navigationController
+                         withDataRequstID:self.cartoonId
+                             WithDataType:ComicsCommentDataType];
 }
 
 
@@ -480,11 +482,13 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         
         weakself(self);
         
-        [cell.content sd_setImageWithURL:imageUrl placeholderImage:placeImage_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell.content sd_setImageWithURL:imageUrl placeholderImage:placeImage_comic
+                                 options:SDWebImageDelayPlaceholder|SDWebImageHighPriority
+                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             /*有个别图片高度不为250,如果与250的高偏差过大的话,
              获取该图片实际高,更新高的缓存,刷新tableview*/
-           
+            
             CGFloat imageHeight = image.size.height * 0.5;
             
             CGFloat cacheHeight = [weakSelf.imageCellHeightCache[indexPath.row] doubleValue];
@@ -564,12 +568,12 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 }                       //开启评论
 
 - (void)previousPage {
-    self.cartoonId = self.comicsMd.previous_comic_id.stringValue;
+    self.cartoonId = self.comicsMd.previous_comic_id;
     [self requestData];
 }                       //上一篇
 
 - (void)nextPage {
-    self.cartoonId = self.comicsMd.next_comic_id.stringValue;
+    self.cartoonId = self.comicsMd.next_comic_id;
     [self requestData];
 }                       //下一篇
 

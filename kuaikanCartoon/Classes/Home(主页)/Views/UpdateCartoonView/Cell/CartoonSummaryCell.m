@@ -80,7 +80,7 @@
     
     CommentDetailViewController *cdv = [[CommentDetailViewController alloc] init];
     
-    cdv.comicID = self.model.topic.ID;
+    cdv.dataRequstID = self.model.topic.ID;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdv];
     

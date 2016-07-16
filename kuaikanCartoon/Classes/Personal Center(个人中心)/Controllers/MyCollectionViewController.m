@@ -115,7 +115,7 @@
     
     CartoonDetailViewController *cdVc = [[CartoonDetailViewController alloc] init];
     
-    cdVc.cartoonId = model.ID.stringValue;
+    cdVc.cartoonId = model.ID;
     
     [self.navigationController pushViewController:cdVc animated:YES];
 }

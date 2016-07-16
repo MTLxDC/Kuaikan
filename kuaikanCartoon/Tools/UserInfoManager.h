@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CommentDetailViewController.h"
 
 static NSString * const passwordKey = @"password";
 static NSString * const phoneKey    = @"phone";
@@ -27,6 +28,8 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 
 @class CommentsModel;
 @class UIButton;
+
+
 
 @interface UserInfoManager : NSObject
 
@@ -50,7 +53,8 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 
 + (void)sendMessage:(NSString *)meassage        //评论和回复
             isReply:(BOOL)isreply               //是否是回复
-             withID:(NSString *)ID              //评论使用作品的ID,回复使用要回复的用户评论ID
+             withID:(NSNumber *)ID              //评论使用作品的ID,回复使用要回复的用户评论ID
+       withDataType:(commentDataType)dataType
              withSucceededCallback:(void (^)(CommentsModel *))succeededCallback;
 
 + (void)loginWithPhone:(NSString *)phone        //登录

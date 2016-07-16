@@ -72,6 +72,7 @@ static CGFloat iconTop  = 64;
     self.authorIcon.alpha    = alpha;
     self.authorSummary.alpha = alpha;
     
+    self.authorSummary.preferredMaxLayoutWidth = CGRectGetWidth(self.authorSummary.frame);
     self.iconTopConstraints.constant = iconTop - offsetY * scale;
     
     [super layoutSubviews];

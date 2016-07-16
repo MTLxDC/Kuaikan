@@ -81,11 +81,11 @@
 - (IBAction)replyBtnOnClick:(UIButton *)sender {
 }
 
-- (IBAction)gotoWordsPage:(UITapGestureRecognizer *)sender {
+- (void)gotoWordsPage:(UITapGestureRecognizer *)sender {
     
     CartoonDetailViewController *cdVc = [[CartoonDetailViewController alloc] init];
     
-    cdVc.cartoonId = self.model.target_comic.ID.stringValue;
+    cdVc.cartoonId = self.model.target_comic.ID;
     
   UINavigationController *nav = [self findResponderWithClass:[UINavigationController class]];
     
@@ -108,6 +108,7 @@
     layer.masksToBounds = YES;
     
     [self.replyContentContainer cornerRadius:5];
+    [self.wordsContentContainer addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoWordsPage:)]];
     
 }
 

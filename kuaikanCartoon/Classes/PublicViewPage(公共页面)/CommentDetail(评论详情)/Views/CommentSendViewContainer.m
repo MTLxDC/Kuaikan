@@ -42,16 +42,21 @@
     
 }
 
-+ (instancetype)showWithComicID:(NSNumber *)ID inView:(UIView *)view {
-    return [[[self class] alloc] initWithComicID:ID inView:view];
++ (instancetype)showWithID:(NSNumber *)ID
+              WithDataType:(commentDataType)dataType
+                    inView:(UIView *)view  {
+    return [[[self class] alloc] initWithID:ID WithDataType:dataType inView:view];
 }
 
-- (instancetype)initWithComicID:(NSNumber *)ID inView:(UIView *)view
+- (instancetype)initWithID:(NSNumber *)ID
+              WithDataType:(commentDataType)dataType
+                    inView:(UIView *)view
 {
     self = [self initWithFrame:CGRectZero];
     
-    self.comicID = ID;
+    self.dataRequstID = ID;
     self.mySuperView = view;
+    self.dataType = dataType;
     
     return self;
 }
@@ -142,11 +147,11 @@
 
 - (void)userCommentWithMessage:(NSString *)message {
     
-    NSString *requestID = self.isreply ? self.replyCommentID.stringValue : self.comicID.stringValue;
+    NSNumber *requestID = self.isreply ? self.replyCommentID : self.dataRequstID;
     
     weakself(self);
     
-    [UserInfoManager sendMessage:message isReply:self.isreply withID:requestID withSucceededCallback:^(CommentsModel *resultModel) {
+    [UserInfoManager sendMessage:message isReply:self.isreply withID:requestID withDataType:self.dataType withSucceededCallback:^(CommentsModel *resultModel) {
         [[weakSelf sendView] clearText];
         
         if ([weakSelf.delegate respondsToSelector:@selector(sendMessageSucceeded:)]) {

@@ -39,13 +39,20 @@
 
 @end
 
-
-static NSString * const hotCommentRequestUrlFormat =
+static NSString * const hotComicsCommentRequestUrlFormat =
 @"http://api.kuaikanmanhua.com/v1/comics/%@/comments/%zd?order=score";
 
-static NSString * const newCommentRequestUrlFormat =
+static NSString * const newComicsCommentRequestUrlFormat =
 @"http://api.kuaikanmanhua.com/v1/comics/%@/comments/%zd?";
 
+static NSString * const newFeedsCommentRequestUrlFormat =
+@"http://api.kuaikanmanhua.com/v1/comments/feed/%@/order/time?offset=%zd";
+
+static NSString * const hotFeedsCommentRequestUrlFormat =
+@"http://api.kuaikanmanhua.com/v1/comments/feed/%@/order/score?offset=%zd";
+
+static NSString * newCommentRequestUrlFormat;
+static NSString * hotCommentRequestUrlFormat;
 
 @implementation CommentDetailViewController
 
@@ -63,12 +70,23 @@ static NSString * const newCommentRequestUrlFormat =
     [self sendViewContainer];
 }
 
+- (void)setDataType:(commentDataType)dataType {
+    _dataType  = dataType;
+    if (dataType == ComicsCommentDataType) {
+        newCommentRequestUrlFormat = newComicsCommentRequestUrlFormat;
+        hotCommentRequestUrlFormat = hotComicsCommentRequestUrlFormat;
+    }else if(dataType == FeedsCommentDataType){
+        newCommentRequestUrlFormat = newFeedsCommentRequestUrlFormat;
+        hotCommentRequestUrlFormat = hotFeedsCommentRequestUrlFormat;
+    }
+}
 
-+ (instancetype)showInVc:(UIViewController *)vc withComicID:(NSNumber *)ID {
++ (instancetype)showInVc:(UIViewController *)vc withDataRequstID:(NSNumber *)ID WithDataType:(commentDataType)dataType {
     
     CommentDetailViewController *cdvc  = [[CommentDetailViewController alloc] init];
     
-    cdvc.comicID = ID;
+    cdvc.dataRequstID = ID;
+    cdvc.dataType = dataType;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cdvc];
     
@@ -167,6 +185,7 @@ static NSString * const newCommentRequestUrlFormat =
     return self.sc.selectedSegmentIndex == 0;
 }
 
+
 - (NSString *)requestUrl {
     
     NSString *requestFormat = self.isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
@@ -177,7 +196,7 @@ static NSString * const newCommentRequestUrlFormat =
         since = self.modelData.since.integerValue;
     }
     
-    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.comicID.stringValue,since];
+    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.dataRequstID,since];
     
     return requestUrl;
 }
@@ -190,7 +209,7 @@ static NSString * const newCommentRequestUrlFormat =
     
     NSString *requestFormat = self.isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
     
-    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.comicID.stringValue,0];
+    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.dataRequstID.stringValue,0];
     
     [CommentDetailModel requestModelDataWithUrlString:requestUrl complish:^(id res) {
         
@@ -253,7 +272,7 @@ static NSString * const newCommentRequestUrlFormat =
 
 - (CommentSendViewContainer *)sendViewContainer {
     if (!_sendViewContainer) {
-        _sendViewContainer = [CommentSendViewContainer showWithComicID:self.comicID inView:self.view];
+        _sendViewContainer = [CommentSendViewContainer showWithID:self.dataRequstID WithDataType:self.dataType inView:self.view];
         _sendViewContainer.delegate = self;
     }
     return _sendViewContainer;

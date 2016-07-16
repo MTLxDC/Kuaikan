@@ -398,6 +398,10 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)setupReload{
     if (self.isPush) {
         [self reloadData];
@@ -443,7 +447,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 
 
 #pragma mark - reloadData
-- (void)reloadData{
+- (void)reloadData {
     if (self.currentPage <= 0){
         self.currentPage = self.currentIndex;
     }else{
@@ -511,13 +515,22 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         // 为了监听单击photoView事件
         scrollView.frame = tempF;
         scrollView.tag = 101;
+        
+        __weak typeof(self)weakSelf = self;
+
+        [scrollView setSaveImageCallBack:^(NSURL *url, NSError *error) {
+            if ([weakSelf.delegate respondsToSelector:@selector(photoBrowser:saveImage:atIndex:)]) {
+                BOOL success = error == nil && url != nil;
+                [weakSelf.delegate photoBrowser:weakSelf saveImage:success atIndex:weakSelf.currentPage];
+            }
+        }];
+        
         if (self.isPush) {
             scrollView.zl_y -= 32;
         }
         scrollView.photoScrollViewDelegate = self;
         scrollView.photo = photo;
         __weak typeof(scrollBoxView)weakScrollBoxView = scrollBoxView;
-        __weak typeof(self)weakSelf = self;
         if ([self.delegate respondsToSelector:@selector(photoBrowser:photoDidSelectView:atIndex:)]) {
             [[scrollBoxView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
             scrollView.callback = ^(id obj){

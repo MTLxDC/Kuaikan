@@ -38,11 +38,8 @@
                                 <action selector="back:" destination="iN0-l3-epB" eventType="touchUpInside" id="VoV-eQ-TcZ"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBL-3B-sOx">
-                            <rect key="frame" x="30" y="175" width="260" height="14.5"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="15" id="iqh-1h-tjs"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="bBL-3B-sOx">
+                            <rect key="frame" x="30" y="175" width="260" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -71,6 +68,7 @@
                         <constraint firstAttribute="trailing" secondItem="lkJ-wv-Nze" secondAttribute="trailing" id="Xbv-TN-9vg"/>
                         <constraint firstItem="lkJ-wv-Nze" firstAttribute="top" secondItem="dXj-oP-rr1" secondAttribute="top" id="d3w-UA-K8w"/>
                         <constraint firstItem="jOw-vm-uVZ" firstAttribute="top" secondItem="dXj-oP-rr1" secondAttribute="top" constant="64" id="faX-E8-laa"/>
+                        <constraint firstAttribute="bottom" secondItem="bBL-3B-sOx" secondAttribute="bottom" constant="8" id="iki-xk-ctl"/>
                         <constraint firstItem="jOw-vm-uVZ" firstAttribute="centerX" secondItem="dXj-oP-rr1" secondAttribute="centerX" id="wV8-pf-31f"/>
                         <constraint firstAttribute="trailing" secondItem="Ljt-Kr-qYz" secondAttribute="trailing" constant="30" id="wr5-sJ-MO5"/>
                         <constraint firstItem="Ljt-Kr-qYz" firstAttribute="top" secondItem="jOw-vm-uVZ" secondAttribute="bottom" constant="8" id="zjx-D0-HQZ"/>

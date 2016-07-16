@@ -185,7 +185,7 @@ static NSString * const cellIdentifier = @"SummaryCell";
     
     SummaryModel *md = self.words.comics[indexPath.section];
     
-    detailVc.cartoonId = md.ID.stringValue;
+    detailVc.cartoonId = md.ID;
         
     [self.myHomeVc.navigationController pushViewController:detailVc animated:YES];
     

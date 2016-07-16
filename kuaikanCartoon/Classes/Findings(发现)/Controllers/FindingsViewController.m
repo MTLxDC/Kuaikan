@@ -317,7 +317,7 @@ static NSString * const GuanFangHuoDongCellIdentifier   = @"GuanFangHuoDongCell"
     
     CartoonDetailViewController *cdv = [[CartoonDetailViewController alloc] init];
     
-    cdv.cartoonId = md.value;
+    cdv.cartoonId = [NSNumber numberWithInteger:md.value.integerValue];
     
     [self.navigationController pushViewController:cdv animated:YES];
 }

@@ -11,9 +11,11 @@
 #import <UIImageView+WebCache.h>
 #import "UIView+Extension.h"
 #import "CommonMacro.h"
+#import "ProgressHUD.h"
 
 #import "AuthorStatusViewController.h"
 #import "ZLPhotoPickerBrowserViewController.h"
+
 
 
 @interface statusImageCell : UICollectionViewCell
@@ -62,18 +64,20 @@
 
 @property (nonatomic,strong) NSArray<ZLPhotoPickerBrowserPhoto *> *photos;
 
+@property (nonatomic,strong) ZLPhotoPickerBrowserViewController *photoBrowserVc;
+
 @end
 
 static CGFloat margin = 5;
 
 @implementation StatusImageContentView
 
-- (void)setPhotoImages:(NSArray<NSString *> *)photoImages {
+- (void)setPhotoImages:(NSArray<NSURL *> *)photoImages {
     _photoImages = photoImages;
     self.photos = nil;
 }
 
-- (void)setThumbImages:(NSArray<NSString *> *)thumbImages {
+- (void)setThumbImages:(NSArray<NSURL *> *)thumbImages {
     _thumbImages = thumbImages;
     [self calculateMySizeWithImageCount:thumbImages.count];
     [self reloadData];
@@ -115,25 +119,34 @@ static CGFloat margin = 5;
     
     statusImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"statusImageCell" forIndexPath:indexPath];
     
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.thumbImages[indexPath.row]]];
+    [cell.imageView sd_setImageWithURL:self.thumbImages[indexPath.row]];
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // 图片游览器
-    ZLPhotoPickerBrowserViewController *pickerBrowser = [[ZLPhotoPickerBrowserViewController alloc] init];
-    // 淡入淡出效果
-    //     pickerBrowser.status = UIViewAnimationAnimationStatusFade;
-    // 数据源/delegate
     
-    pickerBrowser.photos = self.photos;
-    // 能够删除
-    pickerBrowser.delegate = self;
+    ZLPhotoPickerBrowserViewController *photoBrowserVc = [[ZLPhotoPickerBrowserViewController alloc] init];
+    
+    photoBrowserVc.delegate = self;
+    // 数据源/delegate
+    photoBrowserVc.photos = self.photos;
     // 当前选中的值
-    pickerBrowser.currentIndex = indexPath.row;
+    photoBrowserVc.currentIndex = indexPath.row;
+    
     // 展示控制器
-    [pickerBrowser showPickerVc:[self findResponderWithClass:[AuthorStatusViewController class]]];
+    [photoBrowserVc showPickerVc:[self findResponderWithClass:[AuthorStatusViewController class]]];
+
+}
+
+- (void)photoBrowser:(ZLPhotoPickerBrowserViewController *)pickerBrowser saveImage:(BOOL)success atIndex:(NSInteger)index {
+    
+    if (success) {
+        [ProgressHUD showSuccessWithStatus:@"保存图片成功" inView:pickerBrowser.view];
+    }else {
+        [ProgressHUD showErrorWithStatus:@"保存图片失败" inView:pickerBrowser.view];
+    }
 
 }
 
@@ -143,13 +156,13 @@ static CGFloat margin = 5;
         
         NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:self.thumbImages.count];
         
-        [self.photoImages enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.photoImages enumerateObjectsUsingBlock:^(NSURL * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
            
             statusImageCell *cell = (statusImageCell *)[self cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
             
             ZLPhotoPickerBrowserPhoto *photo = [[ZLPhotoPickerBrowserPhoto alloc] init];
             
-            photo.photoURL = [NSURL URLWithString:obj];
+            photo.photoURL = obj;
             photo.toView   = cell.imageView;
             photo.thumbImage = cell.imageView.image;
             

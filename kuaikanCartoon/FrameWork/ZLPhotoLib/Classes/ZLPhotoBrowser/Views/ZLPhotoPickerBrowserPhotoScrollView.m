@@ -89,13 +89,7 @@
     if (buttonIndex == 0){
         if([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
             ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc]init];
-            [assetsLibrary writeImageToSavedPhotosAlbum:[_photoImageView.image CGImage] orientation:(ALAssetOrientation)_photoImageView.image.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
-                if (error) {
-                    NSLog(@"Save image fail：%@",error);
-                }else{
-                    NSLog(@"Save image succeed.");
-                }
-            }];
+            [assetsLibrary writeImageToSavedPhotosAlbum:[_photoImageView.image CGImage] orientation:(ALAssetOrientation)_photoImageView.image.imageOrientation completionBlock:self.saveImageCallBack];
         }else{
             if (_photoImageView.image) {
                 [self showMessageWithText:@"没有用户权限,保存失败"];
@@ -255,7 +249,9 @@
         [self setMaxMinZoomScalesForCurrentBounds];
         
     }
-    [self setNeedsLayout];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+    }];
 }
 
 #pragma mark - Loading Progress

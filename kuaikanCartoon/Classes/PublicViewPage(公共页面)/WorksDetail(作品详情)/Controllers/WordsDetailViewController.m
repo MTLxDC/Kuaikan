@@ -214,7 +214,7 @@
     
     CartonnWordsModel *md = self.wordsModel.comics[indexPath.row];
     
-    cdv.cartoonId = md.ID.stringValue;
+    cdv.cartoonId = md.ID;
     
     [self.navigationController pushViewController:cdv animated:YES];
 }

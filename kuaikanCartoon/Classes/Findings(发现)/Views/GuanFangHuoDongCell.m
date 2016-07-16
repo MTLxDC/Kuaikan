@@ -106,7 +106,7 @@ static CGFloat spaceing = 10;
     
     CartoonDetailViewController *cdvc = [CartoonDetailViewController new];
     
-    cdvc.cartoonId = md.target_id.stringValue;
+    cdvc.cartoonId = md.target_id;
     
     [[self findResponderWithClass:[UINavigationController class]] pushViewController:cdvc animated:YES];
     

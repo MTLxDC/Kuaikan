@@ -67,9 +67,9 @@
 
 @property (nonatomic,strong) FeedsContentModel *content;
 
-@property (nonatomic,copy)   NSArray<NSString *> *photoImages; //原图
+@property (nonatomic,copy)   NSArray<NSURL *> *photoImages; //原图
 
-@property (nonatomic,copy)   NSArray<NSString *> *thumbImages; //缩略图
+@property (nonatomic,copy)   NSArray<NSURL *> *thumbImages; //缩略图
 
 @property (nonatomic,strong) NSNumber *feed_id;
 

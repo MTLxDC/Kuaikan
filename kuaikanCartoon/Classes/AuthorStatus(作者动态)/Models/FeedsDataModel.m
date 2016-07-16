@@ -37,7 +37,7 @@
         
         if (appendStr) [imageUrl appendString:appendStr];
 
-        [imageUrls addObject:imageUrl];
+        [imageUrls addObject:[NSURL URLWithString:imageUrl]];
         
     }
     

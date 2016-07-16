@@ -345,6 +345,7 @@ static NSInteger page_num = 0;
     switch (section) {
         case 1:
         {
+            self.profileView.profileText.text = self.model.intro;
             return self.profileView;
         }
         case 2:

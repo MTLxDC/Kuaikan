@@ -15,7 +15,8 @@
 #import "FeedsDataModel.h"
 #import "DateManager.h"
 
-
+#import "UIView+Extension.h"
+#import "CommentDetailViewController.h"
 #import "CommonMacro.h"
 #import "NSString+Extension.h"
 
@@ -36,6 +37,8 @@
 @property (nonatomic,weak) likeCountView *likeCountView;
 
 @property (nonatomic,weak) UIButton *replyCountView;
+
+@property (nonatomic,weak) UIViewController *myVc;
 
 @end
 
@@ -281,7 +284,7 @@ static CGFloat iconSize = 40;
         [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
         [btn setTitleColor:[self.likeCountView titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"ic_common_comment_normal_15x15_"] forState:UIControlStateNormal];
-        
+        [btn addTarget:self action:@selector(showCommentVc) forControlEvents:UIControlEventTouchUpInside];
         [self.statusContentView addSubview:btn];
         
         _replyCountView = btn;
@@ -290,5 +293,17 @@ static CGFloat iconSize = 40;
     return _replyCountView;
 }
 
+- (UIViewController *)myVc {
+    if (!_myVc) {
+        _myVc = [self findResponderWithClass:[UIViewController class]];
+    }
+    return _myVc;
+}
+
+- (void)showCommentVc {
+    [CommentDetailViewController showInVc:self.myVc
+                         withDataRequstID:self.model.feed_id
+                             WithDataType:FeedsCommentDataType];
+}
 
 @end
