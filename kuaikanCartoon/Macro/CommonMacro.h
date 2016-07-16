@@ -32,8 +32,10 @@
 #define SCREEN_WIDTH    [MainScreen bounds].size.width
 #define SCREEN_HEIGHT   [MainScreen bounds].size.height
 
-#define SINGLE_LINE_WIDTH           (0.5 * SCREEN_SCALE)
-#define SINGLE_LINE_ADJUST_OFFSET   ((0.5 * SCREEN_SCALE) / 2)
+#define ScreenMaxLength MAX(SCREEN_WIDTH,SCREEN_HEIGHT)
+
+#define SINGLE_LINE_WIDTH           (0.25 * SCREEN_SCALE)
+#define SINGLE_LINE_ADJUST_OFFSET   ((0.25 * SCREEN_SCALE) / 2)
 
 #define SPACEING 8
 
@@ -44,10 +46,10 @@
 #define isPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define isRetina (SCREEN_SCALE >= 2.0f)
 
-#define IsiPhone4   (IsiPhone && ScreenMaxLength < 568.0f)
-#define IsiPhone5   (IsiPhone && ScreenMaxLength == 568.0f)
-#define IsiPhone6   (IsiPhone && ScreenMaxLength == 667.0f)
-#define IsiPhone6P  (IsiPhone && ScreenMaxLength == 736.0f)
+#define IsiPhone4   (isPhone  && ScreenMaxLength < 568.0f)
+#define IsiPhone5   (isPhone  && ScreenMaxLength == 568.0f)
+#define IsiPhone6   (isPhone  && ScreenMaxLength == 667.0f)
+#define IsiPhone6P  (isPhone  && ScreenMaxLength == 736.0f)
 
 
 // 日志输出

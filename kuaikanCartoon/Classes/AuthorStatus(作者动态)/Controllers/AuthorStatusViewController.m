@@ -7,6 +7,7 @@
 //
 
 #import "AuthorStatusViewController.h"
+
 #import "navBarTitleView.h"
 #import "CommonMacro.h"
 #import "UIView+Extension.h"
@@ -120,11 +121,11 @@ static bool flag = NO;
 - (FeedsTableView *)creatFeedsTableView {
 
     FeedsTableView *ftv = [[FeedsTableView alloc] init];
-    
     [self.mainView addSubview:ftv];
     
     return ftv;
 }
+
 
 
 @end

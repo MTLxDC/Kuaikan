@@ -2,6 +2,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "UserInfoManager.h"
+#import "GuideViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,13 +16,31 @@
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    _window.rootViewController = [MainTabBarController new];
+    _window.rootViewController = [self isFirstOpen] ? [GuideViewController new] : [MainTabBarController new];
     
     [_window makeKeyAndVisible];
     
     [UserInfoManager autoLogin];
 
     return YES;
+}
+
+
+- (BOOL)isFirstOpen {
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+
+    NSString *key = NSStringFromSelector(_cmd);
+    
+    BOOL isLastOpen = [ud boolForKey:key];
+    
+    if (isLastOpen) {
+        return NO;
+    }else {
+        [ud setBool:YES forKey:key];
+        return YES;
+    }
+    
 }
 
 

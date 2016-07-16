@@ -12,23 +12,25 @@
 
 #import "UIImageView+Extension.h"
 #import "UIImage+Extension.h"
-#import <SDWebImageManager.h>
+#import <UIImageView+WebCache.h>
 
 @implementation UIImageView (Extension)
 
 - (void)setRoundImageWithURL:(NSString *)url placeImageName:(NSString *)placeImage {
     
     __weak UIImageView *weakSelf = self;
+    
+    [self sd_setImageWithURL:[NSURL URLWithString:url]
+            placeholderImage:[UIImage imageNamed:placeImage]
+                     options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+         __strong UIImageView *sself  = weakSelf;
+        
+         sself.image = [image clipEllipseImage]; //对图片进行倒圆角
+        
+    }];
 
-    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:url]
-                                                    options:SDWebImageRetryFailed
-                                                   progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                                       
-                                                       __block __strong UIImageView *sself  = weakSelf;
-                                                       sself.image = [image clipEllipseImage]; //对图片进行倒圆角
-    
-                                                   }];
-    
+
 }
 
 

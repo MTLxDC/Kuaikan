@@ -194,6 +194,11 @@ static CGFloat inputViewMaxY = 0;
 }
 
 
+- (IBAction)autoLogin:(id)sender {
+    self.userInputView.text     = @"18210337715";
+    self.passwordInputView.text = @"a123124125";
+    [self login:nil];
+}
 
 - (BOOL)canLogin {
     

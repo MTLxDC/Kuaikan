@@ -11,7 +11,11 @@
 #import "FeedsDataModel.h"
 #import "CommonMacro.h"
 #import "StatusCell.h"
+
+#import "UIView+Extension.h"
 #import <UITableView+FDTemplateLayoutCell.h>
+#import "AuthorStatusDetailViewController.h"
+
 
 @interface FeedsTableView () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -43,8 +47,8 @@
         _page_num = 1;
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.delegate = self;
         self.dataSource = self;
-        self.delegate   = self;
         self.estimatedRowHeight = 200;
         
         [self registerClass:[StatusCell class] forCellReuseIdentifier:statusCellReuseIdentifier];
@@ -126,10 +130,6 @@
     }];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.modelData.feeds.count;
 }
@@ -137,5 +137,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [StatusCell configureCellWithModel:self.modelData inTableView:tableView AtIndexPath:indexPath];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    FeedsModel *model  = [self.modelData.feeds objectAtIndex:indexPath.row];
+    
+    CGFloat cellHeight = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    
+    AuthorStatusDetailViewController *asdVc = [[AuthorStatusDetailViewController alloc] initWithFeedsModel:model WithCellHeight:cellHeight];
+    
+    [self.myViewController.navigationController pushViewController:asdVc animated:YES];
+}
+
 
 @end

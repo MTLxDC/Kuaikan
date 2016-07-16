@@ -24,6 +24,9 @@ static const CGFloat contentHeight = 20.0f;
 @implementation CommentSectionHeadView
 
 
+- (void)setText:(NSString *)text {
+    self.titleView.text = text;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

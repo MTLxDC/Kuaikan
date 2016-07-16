@@ -80,9 +80,18 @@ MJCodingImplementation
         if (res == nil || error != nil) {
             
             DEBUG_Log(@"result:%@,error:%@",res,error);
+            
+            UIView *noNilView = nil;
+            
+            if (!view) {
+                noNilView = [UIApplication sharedApplication].keyWindow;
+            }else {
+                noNilView = view;
+            }
+            
             [ProgressHUD showErrorWithStatus:
              [NSString stringWithFormat:@"网络提了个问题\n错误代码:%zd",error.code]
-                                      inView:view];
+                                      inView:noNilView];
             complish(nil);
             return;
         }

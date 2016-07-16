@@ -34,6 +34,7 @@
 		8407E5E01D3931D600DE8C55 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407E5C51D3931D600DE8C55 /* DACircularProgressView.m */; };
 		8407E5E11D3931D600DE8C55 /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407E5C71D3931D600DE8C55 /* DALabeledCircularProgressView.m */; };
 		8407E5E21D3931D600DE8C55 /* ZLPhotoLib.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8407E5C81D3931D600DE8C55 /* ZLPhotoLib.bundle */; };
+		8407E5E51D3A547000DE8C55 /* AuthorStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8407E5E41D3A547000DE8C55 /* AuthorStatusDetailViewController.m */; };
 		841EEE9A1D2E433100135DD6 /* FeedsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841EEE991D2E433100135DD6 /* FeedsTableView.m */; };
 		841EEE9D1D2EB59C00135DD6 /* UIImageView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 841EEE9C1D2EB59C00135DD6 /* UIImageView+Extension.m */; };
 		84261E241D37E1620090AC44 /* AuthorProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84261E231D37E1620090AC44 /* AuthorProfileView.m */; };
@@ -53,9 +54,9 @@
 		845785F41D27F0DC004D9CA8 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845785EA1D27F0DC004D9CA8 /* BaseTableViewController.m */; };
 		845785F51D27F0DC004D9CA8 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845785EC1D27F0DC004D9CA8 /* BaseViewController.m */; };
 		845785F61D27F0DC004D9CA8 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 845785EF1D27F0DC004D9CA8 /* BaseModel.m */; };
-		845785F71D27F0DC004D9CA8 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845785F21D27F0DC004D9CA8 /* BaseTableView.m */; };
 		845785FA1D27FCBF004D9CA8 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845785F91D27FCBF004D9CA8 /* StatusCell.m */; };
 		845786001D280317004D9CA8 /* StatusImageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845785FF1D280317004D9CA8 /* StatusImageContentView.m */; };
+		846269831D3A811B00C6E42B /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846269821D3A811B00C6E42B /* GuideViewController.m */; };
 		8465795A1CE33B6F0094072E /* wordsDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846579591CE33B6F0094072E /* wordsDetailHeadView.m */; };
 		846A46E51CDF249800F99B36 /* wordsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A46E41CDF249800F99B36 /* wordsDetailModel.m */; };
 		846A46E81CDF273200F99B36 /* CartonnWordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A46E71CDF273200F99B36 /* CartonnWordsModel.m */; };
@@ -218,6 +219,8 @@
 		8407E5C61D3931D600DE8C55 /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		8407E5C71D3931D600DE8C55 /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		8407E5C81D3931D600DE8C55 /* ZLPhotoLib.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZLPhotoLib.bundle; sourceTree = "<group>"; };
+		8407E5E31D3A547000DE8C55 /* AuthorStatusDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorStatusDetailViewController.h; sourceTree = "<group>"; };
+		8407E5E41D3A547000DE8C55 /* AuthorStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorStatusDetailViewController.m; sourceTree = "<group>"; };
 		841EEE981D2E433100135DD6 /* FeedsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedsTableView.h; sourceTree = "<group>"; };
 		841EEE991D2E433100135DD6 /* FeedsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedsTableView.m; sourceTree = "<group>"; };
 		841EEE9B1D2EB59C00135DD6 /* UIImageView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Extension.h"; sourceTree = "<group>"; };
@@ -253,12 +256,12 @@
 		845785EC1D27F0DC004D9CA8 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		845785EE1D27F0DC004D9CA8 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		845785EF1D27F0DC004D9CA8 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
-		845785F11D27F0DC004D9CA8 /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
-		845785F21D27F0DC004D9CA8 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
 		845785F81D27FCBF004D9CA8 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
 		845785F91D27FCBF004D9CA8 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
 		845785FE1D280317004D9CA8 /* StatusImageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusImageContentView.h; sourceTree = "<group>"; };
 		845785FF1D280317004D9CA8 /* StatusImageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusImageContentView.m; sourceTree = "<group>"; };
+		846269811D3A811B00C6E42B /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
+		846269821D3A811B00C6E42B /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
 		846579581CE33B6F0094072E /* wordsDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordsDetailHeadView.h; sourceTree = "<group>"; };
 		846579591CE33B6F0094072E /* wordsDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wordsDetailHeadView.m; sourceTree = "<group>"; };
 		846A46E31CDF249800F99B36 /* wordsDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wordsDetailModel.h; sourceTree = "<group>"; };
@@ -730,6 +733,8 @@
 			children = (
 				845785DF1D27B659004D9CA8 /* AuthorStatusViewController.h */,
 				845785E01D27B659004D9CA8 /* AuthorStatusViewController.m */,
+				8407E5E31D3A547000DE8C55 /* AuthorStatusDetailViewController.h */,
+				8407E5E41D3A547000DE8C55 /* AuthorStatusDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -791,8 +796,6 @@
 		845785F01D27F0DC004D9CA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				845785F11D27F0DC004D9CA8 /* BaseTableView.h */,
-				845785F21D27F0DC004D9CA8 /* BaseTableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1106,6 +1109,8 @@
 			children = (
 				8471A9731CD4A5C500A5D901 /* MainTabBarController.h */,
 				8471A9741CD4A5C500A5D901 /* MainTabBarController.m */,
+				846269811D3A811B00C6E42B /* GuideViewController.h */,
+				846269821D3A811B00C6E42B /* GuideViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1538,6 +1543,7 @@
 				84D979831CD85551008EAE63 /* updateCartoonListView.m in Sources */,
 				8428DBFA1D14F3A300D5BC15 /* AuthorShareInfoCell.m in Sources */,
 				8407E5D01D3931D600DE8C55 /* ZLPhotoPickerBrowserPhotoScrollView.m in Sources */,
+				846269831D3A811B00C6E42B /* GuideViewController.m in Sources */,
 				84E3C0331CF9B306000B61A7 /* CartoonDetailViewController.m in Sources */,
 				8407E5D91D3931D600DE8C55 /* ZLPhotoPickerGroupViewController.m in Sources */,
 				8471A9831CD4B7F600A5D901 /* PersonalViewController.m in Sources */,
@@ -1608,9 +1614,9 @@
 				8480CAC81CD779FB0072A17B /* UIColor+Extension.m in Sources */,
 				84DD84371CE86BB100FD7300 /* NSTimer+Control.m in Sources */,
 				8407E5D81D3931D600DE8C55 /* ZLPhotoPickerAssetsViewController.m in Sources */,
-				845785F71D27F0DC004D9CA8 /* BaseTableView.m in Sources */,
 				8480CAB91CD74A4A0072A17B /* SummaryModel.m in Sources */,
 				84C4AA131D0505A000FB1248 /* MyMessageCell.m in Sources */,
+				8407E5E51D3A547000DE8C55 /* AuthorStatusDetailViewController.m in Sources */,
 				845785FA1D27FCBF004D9CA8 /* StatusCell.m in Sources */,
 				8407E5CB1D3931D600DE8C55 /* ZLPhotoPickerBrowserPhoto.m in Sources */,
 				84F9B6861D0720A700B5BADC /* FellowTopicsModel.m in Sources */,

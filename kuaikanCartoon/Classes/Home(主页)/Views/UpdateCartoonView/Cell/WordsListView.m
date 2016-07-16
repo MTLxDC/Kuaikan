@@ -213,11 +213,12 @@ static NSString * const cellIdentifier = @"SummaryCell";
         
         if (!sself) return;
         
+        wordsModel *md = (wordsModel *)res;
         [sself.mj_header endRefreshing];
         
-        if (!res && sself.hasNotBeenUpdated) return ;
+        if (md.comics.count < 1 && sself.hasNotBeenUpdated) return ;
         
-        sself.words = res;
+        sself.words = md;
         sself.hasNotBeenUpdated = NO;
         
         [sself reloadData];

@@ -12,4 +12,7 @@ static const CGFloat CommentSectionHeadViewHeight = 40.0f;
 
 @interface CommentSectionHeadView : UIView
 
+@property (nonatomic,copy) NSString *text;
+
+
 @end

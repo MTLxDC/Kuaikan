@@ -10,6 +10,9 @@
 
 @implementation UIView (Extension)
 
+- (UIViewController *)myViewController {
+    return [self findResponderWithClass:[UIViewController class]];
+}
 
 - (void)cornerRadius:(CGFloat)size
 {

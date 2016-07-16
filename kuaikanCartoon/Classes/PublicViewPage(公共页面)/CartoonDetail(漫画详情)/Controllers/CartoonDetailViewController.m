@@ -385,7 +385,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     contentView.delegate = self;
     contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    if (iOS8Later)  contentView.estimatedRowHeight = imageCellHeight;
+    contentView.estimatedRowHeight = imageCellHeight;
     
     [contentView registerClass:[CartoonContentCell class] forCellReuseIdentifier:CartoonContentCellIdentifier];
     

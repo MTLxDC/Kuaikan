@@ -80,14 +80,22 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 - (void)setLikeCount:(NSInteger)likeCount {
     _likeCount = likeCount;
     
-    if (likeCount < 1)  [self setTitle:nil forState:UIControlStateNormal];
+    CGFloat width = MyWidth;
     
-    NSString *title = [NSString makeTextWithCount:likeCount];
-    
-    [self setTitle:title forState:UIControlStateNormal];
-    
-    CGFloat width = [title getTextWidthWithFont:self.titleLabel.font] + MyWidth;
+    if (likeCount < 1) {
+        
+       [self setTitle:nil forState:UIControlStateNormal];
+        
+    }else {
+        
+        NSString *title = [NSString makeTextWithCount:likeCount];
+        
+        [self setTitle:title forState:UIControlStateNormal];
+        
+        width = [title getTextWidthWithFont:self.titleLabel.font] + MyWidth;
 
+    }
+    
     if (self.translatesAutoresizingMaskIntoConstraints) {
         [self setWidth:width];
     }else {
@@ -95,7 +103,7 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
             make.width.equalTo(@(width));
         }];
     }
-
+    
 }
 
 - (void)like {

@@ -136,7 +136,7 @@ static CGFloat margin = 5;
     photoBrowserVc.currentIndex = indexPath.row;
     
     // 展示控制器
-    [photoBrowserVc showPickerVc:[self findResponderWithClass:[AuthorStatusViewController class]]];
+    [photoBrowserVc showPickerVc:self.myViewController];
 
 }
 

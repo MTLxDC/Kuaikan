@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-7G-fy8">
-                    <rect key="frame" x="135.5" y="243" width="240" height="90"/>
+                    <rect key="frame" x="135" y="243" width="240" height="90"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C5i-de-ZxX">
                             <rect key="frame" x="0.0" y="44" width="240" height="1"/>
@@ -130,7 +130,7 @@
                     </connections>
                 </button>
                 <button contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VIO-pv-II4">
-                    <rect key="frame" x="135.5" y="351" width="240" height="40"/>
+                    <rect key="frame" x="135" y="351" width="240" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="dnN-5Y-O5H"/>
                     </constraints>
@@ -145,16 +145,29 @@
                         <action selector="login:" destination="-1" eventType="touchUpInside" id="pYs-4n-s1K"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3T-8s-zil">
+                    <rect key="frame" x="0.0" y="461" width="511" height="30"/>
+                    <state key="normal" title="使用作者账号登录">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="autoLogin:" destination="-1" eventType="touchUpInside" id="tpM-jB-Knb"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="s3T-8s-zil" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Xp-LM-Vts"/>
+                <constraint firstItem="s3T-8s-zil" firstAttribute="top" secondItem="brk-h8-AGQ" secondAttribute="bottom" constant="20" id="4OZ-l5-CXv"/>
                 <constraint firstItem="H8K-6Z-mv2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="9u2-7S-OIf"/>
                 <constraint firstItem="8Ed-N8-pY7" firstAttribute="centerY" secondItem="H8K-6Z-mv2" secondAttribute="centerY" id="AAW-gL-a4F"/>
                 <constraint firstItem="brk-h8-AGQ" firstAttribute="top" secondItem="VIO-pv-II4" secondAttribute="bottom" constant="30" id="ECT-HS-W2I"/>
                 <constraint firstItem="brk-h8-AGQ" firstAttribute="centerX" secondItem="VIO-pv-II4" secondAttribute="centerX" id="G7p-f0-hKt"/>
+                <constraint firstAttribute="trailing" secondItem="s3T-8s-zil" secondAttribute="trailing" id="K9P-Xb-QrQ"/>
                 <constraint firstItem="GT4-7G-fy8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Pr5-pr-Iyt"/>
                 <constraint firstItem="GT4-7G-fy8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="YjR-gh-sYp"/>
                 <constraint firstItem="VIO-pv-II4" firstAttribute="centerX" secondItem="GT4-7G-fy8" secondAttribute="centerX" id="Yx8-gS-DrV"/>
+                <constraint firstItem="s3T-8s-zil" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aLz-d8-l7u"/>
                 <constraint firstAttribute="trailing" secondItem="8Ed-N8-pY7" secondAttribute="trailing" constant="8" id="dm9-9S-9kG"/>
                 <constraint firstItem="H8K-6Z-mv2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="nSZ-Or-TTt"/>
                 <constraint firstItem="VIO-pv-II4" firstAttribute="top" secondItem="GT4-7G-fy8" secondAttribute="bottom" constant="18" id="qIY-eQ-T2t"/>

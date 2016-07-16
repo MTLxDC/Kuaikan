@@ -144,6 +144,15 @@ static void __FD_TEMPLATE_LAYOUT_CELL_PRIMARY_CALL_IF_CRASH_NOT_OUR_BUG__(void(^
     FDPrimaryCall([self fd_reloadData];);
 }
 
+char* concat(char *s1,const char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
+    //in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
 + (void)load {
     // All methods that trigger height cache's invalidation
     SEL selectors[] = {
@@ -159,8 +168,12 @@ static void __FD_TEMPLATE_LAYOUT_CELL_PRIMARY_CALL_IF_CRASH_NOT_OUR_BUG__(void(^
     };
     
     for (NSUInteger index = 0; index < sizeof(selectors) / sizeof(SEL); ++index) {
+        
         SEL originalSelector = selectors[index];
-        SEL swizzledSelector = NSSelectorFromString([@"fd_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
+        char *selName = concat("fd_", sel_getName(originalSelector));
+        SEL swizzledSelector = sel_registerName(selName);
+        free(selName);
+    
         Method originalMethod = class_getInstanceMethod(self, originalSelector);
         Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);
         method_exchangeImplementations(originalMethod, swizzledMethod);

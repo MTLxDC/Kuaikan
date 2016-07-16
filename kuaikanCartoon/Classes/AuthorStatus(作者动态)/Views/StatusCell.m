@@ -19,6 +19,7 @@
 #import "CommentDetailViewController.h"
 #import "CommonMacro.h"
 #import "NSString+Extension.h"
+#import "AuthorInfoViewController.h"
 
 @interface StatusCell ()
 
@@ -189,6 +190,7 @@ static CGFloat iconSize = 40;
         
         icon.hasAuthentication   = YES;
         icon.authenticatIconSize = iconSize * 0.2;
+        [icon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoAuthorInfoVc)]];
         
         [self.statusContentView addSubview:icon];
         
@@ -198,6 +200,14 @@ static CGFloat iconSize = 40;
     return _userAuthenticationIcon;
 }
 
+- (void)gotoAuthorInfoVc {
+    
+    AuthorInfoViewController *aiVc = [[AuthorInfoViewController alloc] init];
+    
+    aiVc.authorID = self.model.user.ID.stringValue;
+    
+    [self.myVc.navigationController pushViewController:aiVc animated:YES];
+}
 
 - (UILabel *)userNameLabel {
     if (!_userNameLabel) {
