@@ -79,4 +79,5 @@ static JGProgressHUDStyle style = JGProgressHUDStyleExtraLight;
 }
 
 
+
 @end

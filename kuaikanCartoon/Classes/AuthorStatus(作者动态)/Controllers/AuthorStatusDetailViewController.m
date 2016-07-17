@@ -17,13 +17,15 @@
 #import "CommentDetailModel.h"
 #import "FeedsDataModel.h"
 #import "CommentSectionHeadView.h"
+#import "CommentBottomView.h"
 
-@interface AuthorStatusDetailViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface AuthorStatusDetailViewController () <UITableViewDataSource,UITableViewDelegate,CommentBottomViewDelegate>
 
 @property (nonatomic,weak) UITableView *feedContentView;
 
 @property (nonatomic,strong) CommentDetailModel *model;
 
+@property (nonatomic,weak) CommentBottomView *bottomView;
 
 @end
 
@@ -71,6 +73,24 @@
         [weakSelf.feedContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         
     } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:nil];
+    
+}
+
+- (void)setupCommentBottomView {
+    
+    CommentBottomView *cb = [CommentBottomView commentBottomView];
+    
+    cb.delegate = self;
+    
+    [self.view addSubview:cb];
+    
+    [cb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+        make.height.equalTo(@(bottomBarHeight));
+    }];
+    
+    self.bottomView = cb;
     
 }
 

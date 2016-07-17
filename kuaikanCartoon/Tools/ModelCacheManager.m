@@ -84,7 +84,6 @@
 
 - (void)removeCacheForKey:(NSString *)key {
     [self.modelCache removeObjectForKey:key];
-    
 }
 
 - (void)clearCache {

@@ -119,8 +119,11 @@ static CGFloat margin = 5;
     
     statusImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"statusImageCell" forIndexPath:indexPath];
     
-    [cell.imageView sd_setImageWithURL:self.thumbImages[indexPath.row]];
+    NSURL *imageUrl = self.thumbImages[indexPath.row];
     
+     cell.imageView.image = nil;
+    [cell.imageView performSelector:@selector(sd_setImageWithURL:) withObject:imageUrl afterDelay:0.0f inModes:@[NSDefaultRunLoopMode]];
+
     return cell;
 }
 

@@ -128,8 +128,8 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
         }];
         
     }];
-//    
-//    
+    
+    
 //    NetWorkManager *manger = [NetWorkManager share];
 //
 //    NSArray *parameter  = self.islike ? @[@"POST",@"/like"] : @[@"DELETE",@"/like?"];   //取消赞DELETE,反则POST
@@ -138,7 +138,7 @@ static NSString * const pressedImageName = @"ic_common_praise_pressed_15x15_";
 //    
 //    [newUrl appendFormat:@"/%@%@",self.requestID,parameter.lastObject];
 //    
-//    [manger requestWithMethod:parameter.firstObject url:newUrl parameters:nil complish:^(id res, NSError *error) {
+//    [manger requestWithMethod:parameter.firstObject url:newUrl.copy parameters:nil complish:^(id res, NSError *error) {
 //            DEBUG_Log(@"%@",error);
 //    }];
     

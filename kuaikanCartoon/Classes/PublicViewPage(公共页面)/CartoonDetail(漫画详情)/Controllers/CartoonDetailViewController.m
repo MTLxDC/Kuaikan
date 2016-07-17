@@ -278,7 +278,6 @@ CGFloat contentSizeMaxHeight = 100.0f;
     
     self.bottomView = cb;
 
-
 }
 
 - (void)sendMessage:(NSString *)message {
@@ -481,17 +480,23 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
         NSURL *imageUrl = [NSURL URLWithString:self.comicsMd.images[indexPath.row]];
         
         weakself(self);
-        
+            
         [cell.content sd_setImageWithURL:imageUrl placeholderImage:placeImage_comic
-                                 options:SDWebImageDelayPlaceholder|SDWebImageHighPriority
+                                 options:SDWebImageHighPriority|SDWebImageRetryFailed
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                   
+            __strong CartoonDetailViewController *sself = weakSelf;
+                                   
+                if (sself == nil) {
+                   return ;
+                }
             
             /*有个别图片高度不为250,如果与250的高偏差过大的话,
              获取该图片实际高,更新高的缓存,刷新tableview*/
             
             CGFloat imageHeight = image.size.height * 0.5;
             
-            CGFloat cacheHeight = [weakSelf.imageCellHeightCache[indexPath.row] doubleValue];
+            CGFloat cacheHeight = [sself.imageCellHeightCache[indexPath.row] doubleValue];
             
             CGFloat offset = fabs(imageHeight - cacheHeight);
             
@@ -499,9 +504,9 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
                 
                 NSNumber *newHeight = [NSNumber numberWithDouble:imageHeight];
                 
-                [weakSelf.imageCellHeightCache replaceObjectAtIndex:indexPath.row withObject:newHeight];
+                [sself.imageCellHeightCache replaceObjectAtIndex:indexPath.row withObject:newHeight];
                 
-                [weakSelf.cartoonContentView reloadData];
+                [sself.cartoonContentView reloadData];
                 
             }
             

@@ -66,11 +66,11 @@ static CGFloat iconSize = 40;
     
     [self.userAuthenticationIcon updateIconWithImageUrl:model.user.avatar_url];
     
-    self.userNameLabel.text  = model.user.nickname;
+    self.userNameLabel.text    = model.user.nickname;
     
     self.contentTextLabel.text = model.content.text;
     
-    self.likeCountView.islike = model.is_liked;
+    self.likeCountView.islike  = model.is_liked;
     
     self.imageContentView.photoImages = model.photoImages;
     self.imageContentView.thumbImages = model.thumbImages;

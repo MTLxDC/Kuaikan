@@ -190,14 +190,14 @@ static NSString * hotCommentRequestUrlFormat;
 }
 
 - (void)update {
-    
+    [self setDataType:self.dataType];
     [self.commentsDisplayListView.mj_footer resetNoMoreData];
     
     weakself(self);
     
     NSString *requestFormat = self.isNew ? newCommentRequestUrlFormat : hotCommentRequestUrlFormat;
     
-    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.dataRequstID.stringValue,0];
+    NSString *requestUrl = [NSString stringWithFormat:requestFormat,self.dataRequstID,0];
     
     [CommentDetailModel requestModelDataWithUrlString:requestUrl complish:^(id res) {
         
