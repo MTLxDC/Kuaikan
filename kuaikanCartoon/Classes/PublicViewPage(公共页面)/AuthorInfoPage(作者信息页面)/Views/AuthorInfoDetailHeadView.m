@@ -81,10 +81,7 @@ static CGFloat iconTop  = 64;
 
 
 - (IBAction)back:(id)sender {
-    
-    UINavigationController *myNav = [self findResponderWithClass:[UINavigationController class]];
-    
-    [myNav popViewControllerAnimated:YES];
+    [self.myViewController.navigationController popViewControllerAnimated:YES];
     
 }
 

@@ -33,7 +33,7 @@
 #import "UIView+Extension.h"
 
 
-@interface CartoonDetailViewController () <UITableViewDataSource,UITableViewDelegate,CartoonFlooterViewDelegate,CommentBottomViewDelegate>
+@interface CartoonDetailViewController () <UITableViewDataSource,UITableViewDelegate,CartoonFlooterViewDelegate>
 
 @property (nonatomic,strong) comicsModel *comicsMd;
 
@@ -260,13 +260,12 @@ static bool needHide = false;
 
 #pragma mark CommentBottomView
 
-CGFloat contentSizeMaxHeight = 100.0f;
-
 - (void)setupCommentBottomView {
     
     CommentBottomView *cb = [CommentBottomView commentBottomView];
     
-    cb.delegate = self;
+    cb.dataType = ComicsCommentDataType;
+    cb.commentID = self.cartoonId;
     
     [self.view addSubview:cb];
     
@@ -279,43 +278,6 @@ CGFloat contentSizeMaxHeight = 100.0f;
     self.bottomView = cb;
 
 }
-
-- (void)sendMessage:(NSString *)message {
-    [UserInfoManager sendMessage:message
-                         isReply:NO
-                          withID:self.cartoonId
-                    withDataType:ComicsCommentDataType
-           withSucceededCallback:nil];
-}
-
-
-- (void)textView:(UITextView *)textView ContenSizeDidChange:(CGSize)size {
-    
-    CGFloat offset_H = size.height;
-    
-    textView.showsVerticalScrollIndicator = offset_H > contentSizeMaxHeight;
-
-    if (offset_H > contentSizeMaxHeight) return;
-    
-    if (offset_H < bottomBarHeight) {
-        offset_H = bottomBarHeight;
-    }
-    
-    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(offset_H));
-    }];
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        [self.bottomView layoutIfNeeded];
-    }];
-}
-
-- (void)showCommentPage {
-    [CommentDetailViewController showInVc:self.navigationController
-                         withDataRequstID:self.cartoonId
-                             WithDataType:ComicsCommentDataType];
-}
-
 
 - (void)gotoCollectedWorksPage {
     
@@ -569,7 +531,7 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
 #pragma mark CartoonFlooterViewDelegate
 
 - (void)commentButtonAction {
-    [self showCommentPage];
+    [CommentDetailViewController showInVc:self withDataRequstID:self.cartoonId WithDataType:ComicsCommentDataType];
 }                       //开启评论
 
 - (void)previousPage {

@@ -19,7 +19,7 @@
 #import "CommentSectionHeadView.h"
 #import "CommentBottomView.h"
 
-@interface AuthorStatusDetailViewController () <UITableViewDataSource,UITableViewDelegate,CommentBottomViewDelegate>
+@interface AuthorStatusDetailViewController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,weak) UITableView *feedContentView;
 
@@ -50,9 +50,43 @@
     [super setBackItemWithImage:@"ic_nav_back_normal_11x19_" pressImage:@"ic_nav_back_pressed_11x19_"];
     
     [self setupContentView];
+
+    [self setupCommentBottomView];
     
     [self requstCommentData];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.bottomView resignFirstResponder];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+}
+
+- (void)keyboardFrameChange:(NSNotification *)not {
+    
+    CGFloat end_Y = [not.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+    
+    CGFloat offset = SCREEN_HEIGHT - end_Y;
+    
+    self.bottomView.beginComment = offset > 0;
+    
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-offset);
+    }];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)requstCommentData {
@@ -80,7 +114,9 @@
     
     CommentBottomView *cb = [CommentBottomView commentBottomView];
     
-    cb.delegate = self;
+    cb.dataType  = FeedsCommentDataType;
+    cb.commentID = self.feed_Model.feed_id;
+    cb.recommend_count = self.feed_Model.comments_count.integerValue;
     
     [self.view addSubview:cb];
     
@@ -118,6 +154,9 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.bottomView resignFirstResponder];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;

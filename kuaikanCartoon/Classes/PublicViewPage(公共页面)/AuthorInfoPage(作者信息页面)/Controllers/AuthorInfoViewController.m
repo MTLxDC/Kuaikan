@@ -312,20 +312,13 @@ static NSInteger page_num = 0;
     if (section == 0) return wordsOptionsHeadViewHeight;
     
     if (self.displayTypeOfInfo == displayProfile) {
-        
-        switch (section) {
-            case 1:
-            {
-                return 100;
-            }
-            case 2:
-            {
-                return 40;
-            }
-            case 3:
-            {
-                return 40;
-            }
+        if (section == 1) return 100;
+
+        if ((section == 2 && self.shareText.count < 1)||
+            (section == 3 && self.model.topics.count < 1)) {
+            return 0.01;
+        }else {
+            return 40;
         }
         
     }
@@ -352,11 +345,19 @@ static NSInteger page_num = 0;
         }
         case 2:
         {
-            return [self creatSectionHeadViewWithTitle:@"更多信息"];
+            if(self.shareText.count > 0) {
+                return [self creatSectionHeadViewWithTitle:@"更多信息"];
+            }else {
+                return nil;
+            }
         }
         case 3:
         {
-            return [self creatSectionHeadViewWithTitle:@"TA的作品"];
+            if(self.model.topics.count > 0) {
+                return [self creatSectionHeadViewWithTitle:@"TA的作品"];
+            }else {
+                return nil;
+            }
         }
     }
     
@@ -398,7 +399,15 @@ static NSInteger page_num = 0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (section == 0 || self.displayTypeOfInfo == displayProfile) return 10;
+    if (section == 0 || self.displayTypeOfInfo == displayProfile) {
+        
+        if ((section == 2 && self.shareText.count < 1)||
+            (section == 3 && self.model.topics.count < 1)) {
+            return 0.01;
+        }
+        
+        return 10;
+    }
     
     return 0.01;
 }

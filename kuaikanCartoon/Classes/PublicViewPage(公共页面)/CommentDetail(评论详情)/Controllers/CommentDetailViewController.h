@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-
-typedef NS_ENUM(NSUInteger, commentDataType) {
-    ComicsCommentDataType = 0,  //漫画评论
-    FeedsCommentDataType  = 1,  //作者动态评论
-};
+#import "UserInfoManager.h"
 
 @interface CommentDetailViewController : BaseViewController
 

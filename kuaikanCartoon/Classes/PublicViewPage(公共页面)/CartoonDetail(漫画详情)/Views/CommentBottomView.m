@@ -12,6 +12,7 @@
 #import "NSString+Extension.h"
 #import <Masonry.h>
 #import "CommonMacro.h"
+#import "CommentDetailViewController.h"
 
 static NSString * const contentSizeKeyPath = @"contentSize";
 
@@ -34,6 +35,8 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 
 @end
 
+static CGFloat contentSizeMaxHeight = 100.0f;
+
 @implementation CommentBottomView
 
 
@@ -43,9 +46,23 @@ static NSString * const contentSizeKeyPath = @"contentSize";
         
         CGSize size = [change[NSKeyValueChangeNewKey] CGSizeValue];
         
-        if ([self.delegate respondsToSelector:@selector(textView:ContenSizeDidChange:)]) {
-            [self.delegate textView:self.commentTextView ContenSizeDidChange:size];
+        CGFloat offset_H = size.height;
+        
+        self.commentTextView.showsVerticalScrollIndicator = offset_H > contentSizeMaxHeight;
+        
+        if (offset_H > contentSizeMaxHeight) return;
+        
+        if (offset_H < bottomBarHeight) {
+            offset_H = bottomBarHeight;
         }
+        
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(offset_H));
+        }];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [self layoutIfNeeded];
+        }];
         
     }
     
@@ -89,25 +106,15 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     self.sendBtn = sendBtn;
 }
 
-- (void)sendSucceeded {
-    self.commentTextView.text = nil;
-    [self.commentTextView resignFirstResponder];
-    
-    if ([self.delegate respondsToSelector:@selector(textView:ContenSizeDidChange:)]) {
-        [self.delegate textView:self.commentTextView ContenSizeDidChange:self.commentTextView.contentSize];
-    }
-    
-    self.beginComment = NO;
-    self.placeBtn.hidden = NO;
-    
-}
-
 - (void)sendComment:(UIButton *)btn {
     if (self.commentTextView.text.length < 1) return;
     
-    if ([self.delegate respondsToSelector:@selector(sendMessage:)]) {
-        [self.delegate sendMessage:self.commentTextView.text];
-    }
+    weakself(self);
+    
+    [UserInfoManager sendMessage:self.commentTextView.text isReply:NO withID:self.commentID withDataType:self.dataType withSucceededCallback:^(CommentsModel *md) {
+        [weakSelf restituteUI];
+    }];
+    
 }
 
 - (void)awakeFromNib {
@@ -151,7 +158,6 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 
 - (BOOL)resignFirstResponder {
     [self.commentTextView resignFirstResponder];
-    
     return [super resignFirstResponder];
 
 }
@@ -159,7 +165,6 @@ static NSString * const contentSizeKeyPath = @"contentSize";
 - (void)textViewDidChange:(UITextView *)textView {
     self.placeBtn.hidden = textView.text.length > 0;
 }
-
 
 - (void)setRecommend_count:(NSInteger)recommend_count {
     _recommend_count = recommend_count;
@@ -180,14 +185,28 @@ static NSString * const contentSizeKeyPath = @"contentSize";
     }];
 }
 
+- (void)restituteUI {
+    
+     self.commentTextView.text = nil;
+    [self.commentTextView resignFirstResponder];
+    
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(bottomBarHeight));
+    }];
+    
+    self.beginComment = NO;
+    self.placeBtn.hidden = NO;
+
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+    }];
+}
 
 - (IBAction)share:(id)sender {
 }
 
 - (IBAction)gotoCommentPage:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(showCommentPage)]) {
-        [self.delegate showCommentPage];
-    }
+    [CommentDetailViewController showInVc:self.myViewController withDataRequstID:self.commentID WithDataType:self.dataType];
 }
 
 - (void)dealloc {

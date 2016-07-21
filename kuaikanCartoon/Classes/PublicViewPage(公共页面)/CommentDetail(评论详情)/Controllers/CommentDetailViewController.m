@@ -12,7 +12,6 @@
 #import <Masonry.h>
 #import "CommonMacro.h"
 #import "CommentSendView.h"
-#import "UserInfoManager.h"
 
 #import "CommentInfoCell.h"
 #import "CommentDetailModel.h"

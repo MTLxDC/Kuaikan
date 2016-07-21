@@ -14,7 +14,7 @@
 
 @property (nonatomic,weak,) UIImageView *userIcon;
 
-@property (nonatomic,weak) UIImageView *authenticatIcon;
+@property (nonatomic,weak)  UIImageView *authenticatIcon;
 
 @end
 
@@ -59,7 +59,7 @@
     
     
     self.backgroundColor = [UIColor clearColor];
-    icon.backgroundColor = [UIColor clearColor];
+    icon.backgroundColor = self.backgroundColor;
 }
 
 - (void)layoutSubviews {
@@ -68,7 +68,7 @@
     CGFloat size = self.bounds.size.width;
     CGFloat margin = size * 0.01;
     
-    [self.userIcon mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.authenticatIcon mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).insets(UIEdgeInsetsMake(margin, margin, margin, margin));
     }];
     
@@ -90,7 +90,7 @@
     if (!_authenticatIcon) {
         
         UIImageView *authenticatIcon = [[UIImageView alloc] init];
-        [self.userIcon addSubview:authenticatIcon];
+        [self addSubview:authenticatIcon];
         
         [authenticatIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);

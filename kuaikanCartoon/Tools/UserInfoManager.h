@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CommentDetailViewController.h"
 
 static NSString * const passwordKey = @"password";
 static NSString * const phoneKey    = @"phone";
@@ -29,6 +28,10 @@ static NSString * const loginStatusChangeNotification = @"UserLoginStatusChangeN
 @class CommentsModel;
 @class UIButton;
 
+typedef NS_ENUM(NSUInteger, commentDataType) {
+    ComicsCommentDataType = 0,  //漫画评论
+    FeedsCommentDataType  = 1,  //作者动态评论
+};
 
 
 @interface UserInfoManager : NSObject

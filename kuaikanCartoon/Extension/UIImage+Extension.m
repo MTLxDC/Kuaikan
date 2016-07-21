@@ -11,13 +11,13 @@
 
 @implementation UIImage (Extension)
 
-- (UIImage *)clipEllipseImage {
+- (UIImage *)clipEllipseImage{
     
     UIGraphicsBeginImageContext(self.size);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGFloat size = MIN(self.size.width, self.size.height);
+    CGFloat size = MAX(self.size.width, self.size.height);
     CGRect rect  = CGRectMake(0, 0, size, size);
 
     CGContextAddEllipseInRect(context, rect);

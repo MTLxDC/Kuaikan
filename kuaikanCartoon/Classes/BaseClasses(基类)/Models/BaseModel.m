@@ -43,6 +43,7 @@ MJCodingImplementation
 
 }
 
+static dispatch_queue_t serializationQueue = nil;
 
 + (void)requestModelDataWithUrlString:(NSString *)urlString
                              complish:(void (^)(id))complish
@@ -102,19 +103,26 @@ MJCodingImplementation
         
         for (NSInteger index = 0; index < fields.count; index++) res = res[fields[index]];
         
-        id result = nil;
+        if (!serializationQueue) serializationQueue = dispatch_queue_create("serializationQueue", DISPATCH_QUEUE_SERIAL);
         
-        if (isModelArray) {
-            result = [[self class] mj_objectArrayWithKeyValuesArray:res];
-        }else {
-            result = [[self class] mj_objectWithKeyValues:res];
-        }
-            complish(result);
-        
-        if (saveMemoryCache) {
-            [cache setCache:result forKey:urlString];
-        }
-
+        dispatch_async(serializationQueue, ^{
+            
+            id result = nil;
+            
+            if (isModelArray) {
+                result = [[self class] mj_objectArrayWithKeyValuesArray:res];   //耗时操作
+            }else {
+                result = [[self class] mj_objectWithKeyValues:res];             //耗时操作
+            }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    complish(result);
+                });
+            
+            if (saveMemoryCache) {
+                [cache setCache:result forKey:urlString];
+            }
+            
+        });
     }];
 
 }

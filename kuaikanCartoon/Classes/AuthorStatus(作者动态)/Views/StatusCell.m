@@ -39,8 +39,6 @@
 
 @property (nonatomic,weak) UIButton *replyCountView;
 
-@property (nonatomic,weak) UIViewController *myVc;
-
 @end
 
 static CGFloat iconSize = 40;
@@ -206,7 +204,7 @@ static CGFloat iconSize = 40;
     
     aiVc.authorID = self.model.user.ID.stringValue;
     
-    [self.myVc.navigationController pushViewController:aiVc animated:YES];
+    [self.myViewController.navigationController pushViewController:aiVc animated:YES];
 }
 
 - (UILabel *)userNameLabel {
@@ -303,15 +301,8 @@ static CGFloat iconSize = 40;
     return _replyCountView;
 }
 
-- (UIViewController *)myVc {
-    if (!_myVc) {
-        _myVc = [self findResponderWithClass:[UIViewController class]];
-    }
-    return _myVc;
-}
-
 - (void)showCommentVc {
-    [CommentDetailViewController showInVc:self.myVc
+    [CommentDetailViewController showInVc:self.myViewController
                          withDataRequstID:self.model.feed_id
                              WithDataType:FeedsCommentDataType];
 }

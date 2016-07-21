@@ -7,31 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol CommentBottomViewDelegate <NSObject>
-
-@optional
-
-- (void)textView:(UITextView *)textView ContenSizeDidChange:(CGSize)size;
-
-- (void)showShareView;
-
-- (void)showCommentPage;
-
-- (void)sendMessage:(NSString *)message;
-
-@end
+#import "UserInfoManager.h"
 
 @interface CommentBottomView : UIView
+
+@property (nonatomic,assign) commentDataType dataType;
+
+@property (nonatomic,strong) NSNumber *commentID;
 
 @property (nonatomic,assign) BOOL beginComment;
 
 @property (nonatomic,assign) NSInteger recommend_count;
 
-@property (nonatomic,weak) id<CommentBottomViewDelegate> delegate;
-
 + (instancetype)commentBottomView;
-
-- (void)sendSucceeded;
 
 @end
