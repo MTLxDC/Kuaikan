@@ -113,8 +113,10 @@ static bool flag = NO;
     self.hotFeedsTableView  = [self creatFeedsTableView];
     self.newsFeedsTableView = [self creatFeedsTableView];
     
-    [self.hotFeedsTableView  setFrame:self.mainView.bounds];
-    [self.newsFeedsTableView setFrame:CGRectMake(self.mainView.width,0,self.mainView.width,self.mainView.height)];
+    CGFloat height = self.mainView.height - bottomBarHeight;
+    
+    [self.hotFeedsTableView  setFrame:CGRectMake(0, 0, self.mainView.width,height)];
+    [self.newsFeedsTableView setFrame:CGRectMake(self.mainView.width,0,self.mainView.width,height)];
     
 }
 

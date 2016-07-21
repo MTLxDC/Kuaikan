@@ -3,6 +3,7 @@
 #import "MainTabBarController.h"
 #import "UserInfoManager.h"
 #import "GuideViewController.h"
+#import <UMMobClick/MobClick.h>
 
 @interface AppDelegate ()
 
@@ -20,11 +21,22 @@
     
     [_window makeKeyAndVisible];
     
+    [self configUM];
+    
     [UserInfoManager autoLogin];
 
     return YES;
 }
 
+- (void)configUM {
+    
+    [UMConfigInstance setAppKey:@"5790e63967e58e0b0d0037cc"];
+     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    [MobClick setAppVersion:version];
+    [MobClick startWithConfigure:UMConfigInstance];
+    
+}
 
 - (BOOL)isFirstOpen {
     

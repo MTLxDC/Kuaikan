@@ -47,6 +47,7 @@ PODS:
     - libwebp
     - SDWebImage/Core
   - UITableView+FDTemplateLayoutCell (1.4)
+  - UMengAnalytics (4.0.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - MJRefresh
   - SDWebImage/WebP
   - UITableView+FDTemplateLayoutCell
+  - UMengAnalytics
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -66,5 +68,6 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
+  UMengAnalytics: 3bb802b73e815fa9ec4ef384c2fce8de9e1ec62b
 
 COCOAPODS: 0.39.0

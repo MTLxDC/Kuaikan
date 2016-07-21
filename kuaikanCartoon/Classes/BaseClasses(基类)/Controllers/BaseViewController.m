@@ -11,6 +11,7 @@
 #import "MainTabBarController.h"
 #import "UIView+Extension.h"
 #import "CommonMacro.h"
+#import <UMMobClick/MobClick.h>
 
 @interface BaseViewController ()
 
@@ -91,8 +92,12 @@
 
     MainTabBarController *main = (MainTabBarController *)self.tabBarController;
     [main setHidesBottomBar:self.navigationController.viewControllers.count > 1];
-    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
 @end

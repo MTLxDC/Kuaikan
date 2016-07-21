@@ -166,6 +166,11 @@ SOFTWARE.
 
 
 
+## UMengAnalytics
+
+Copyright 2011 - 2015 UMeng.com. All rights reserved.
+
+
 ## libwebp
 
 Copyright (c) 2010, Google Inc. All rights reserved.

@@ -13,6 +13,8 @@
 #import "LoginViewController.h"
 #import "CommonMacro.h"
 
+#import <UMMobClick/MobClick.h>
+
 @interface UserInfoManager () <UIAlertViewDelegate>
 
 @property (nonatomic,copy) NSString *savePath;
@@ -169,6 +171,7 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
             DEBUG_Log(@"登录失败,错误信息:%@",error);
             if (failed) failed(res,error);
             
+            [MobClick event:@"loginFail" attributes:error.userInfo];
         }
         
     }];

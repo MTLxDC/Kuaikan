@@ -12,6 +12,7 @@ pod ‘Masonry’
 pod ‘MJExtension’
 pod ‘JGProgressHUD’
 pod ‘UITableView+FDTemplateLayoutCell’
+pod ‘UMengAnalytics’
 
 end
 
