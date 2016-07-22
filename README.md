@@ -12,6 +12,11 @@ email:18210337715@163.com
 
 ###项目截图
 
+![作者动态](https://github.com/NSDengChen/Kuaikan/blob/master/%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE/%E4%BD%9C%E8%80%85%E5%8A%A8%E6%80%81.png?raw=true)
+
+![作者信息](https://github.com/NSDengChen/Kuaikan/blob/master/%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE/%E4%BD%9C%E8%80%85%E4%BF%A1%E6%81%AF.png?raw=true)
+
+
 ![主页](https://github.com/NSDengChen/Kuaikan/blob/master/%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE/%E4%B8%BB%E9%A1%B5.png?raw=true)
 
 ![发现](https://github.com/NSDengChen/Kuaikan/blob/master/%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE/%E5%8F%91%E7%8E%B0.png?raw=true)
