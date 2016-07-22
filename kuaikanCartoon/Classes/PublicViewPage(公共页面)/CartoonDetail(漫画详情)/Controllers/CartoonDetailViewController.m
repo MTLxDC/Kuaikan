@@ -60,7 +60,6 @@ static const CGFloat imageCellHeight = 250.0f;
 
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
@@ -79,7 +78,7 @@ static const CGFloat imageCellHeight = 250.0f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
 }
@@ -87,7 +86,7 @@ static const CGFloat imageCellHeight = 250.0f;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self.bottomView resignFirstResponder];
+     [self.bottomView resignFirstResponder];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 
 }
@@ -117,8 +116,11 @@ static const CGFloat imageCellHeight = 250.0f;
     
     weakself(self);
     
-    self.view.hidden = YES;
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self hideNavBar:NO];
+    [self.cartoonContentView setHidden:YES];
+    
+    self.comicsMd = nil;
+    self.commentModels = nil;
     
    [comicsModel requestModelDataWithUrlString:url complish:^(id res) {
        
@@ -130,24 +132,11 @@ static const CGFloat imageCellHeight = 250.0f;
         sself.comicsMd = res;
         [sself updataUI];
        
-        sself.view.hidden = NO;
         [sself hideOrShowProgressView:NO];
        
        
-   } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
+   } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
-    
-    NSString *commentUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/hot_comments?",self.cartoonId];
-    
-    [CommentsModel requestModelDataWithUrlString:commentUrl complish:^(id result) {
-        
-        if (result == nil) return ;
-        
-        CartoonDetailViewController *sself = weakSelf;
-        sself.commentModels = result;
-        [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
     
 }
 
@@ -156,10 +145,12 @@ static const CGFloat imageCellHeight = 250.0f;
     self.titleLabel.text = self.comicsMd.title;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     self.progress.maximumValue = self.comicsMd.images.count - 1;
+    self.progress.value = 0.0f;
     [self.cartoonContentView reloadData];
+    [self.cartoonContentView layoutIfNeeded];
     [self.cartoonContentView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                          atScrollPosition:UITableViewScrollPositionNone animated:NO];
-    
+    [self.cartoonContentView setHidden:NO];
 }
 
 static CGFloat progressWidth = 150;
@@ -292,7 +283,6 @@ static bool needHide = false;
 #pragma mark 设置滑动条
 
 - (void)setupProgress{
-    
     
     //进度滑动条
     UISlider *progress = [[UISlider alloc] init];
@@ -521,6 +511,28 @@ static NSString * const CartoonContentCellIdentifier = @"CartoonContentCell";
     }
 
     return 0;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if (section == 1 && self.commentModels.count < 1 && self.comicsMd != nil) {
+        
+        weakself(self);
+        
+        NSString *commentUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/comics/%@/hot_comments?",self.cartoonId];
+        
+        [CommentsModel requestModelDataWithUrlString:commentUrl complish:^(id result) {
+            
+            if (result == nil) return ;
+            
+            CartoonDetailViewController *sself = weakSelf;
+            sself.commentModels = result;
+            [sself.cartoonContentView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+        } cachingPolicy:ModelDataCachingPolicyDefault hubInView:weakSelf.view];
+    }
+}
+- (void)dealloc {
+    
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {

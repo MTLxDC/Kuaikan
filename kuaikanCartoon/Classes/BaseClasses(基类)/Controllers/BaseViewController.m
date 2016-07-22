@@ -71,8 +71,7 @@
 - (void)hideNavBar:(BOOL)ishide {
     
     _statusBarHidden = ishide;
-    
-    [self.navigationController setNavigationBarHidden:ishide animated:YES];
+        [self.navigationController setNavigationBarHidden:ishide animated:YES];
     
 }
 

@@ -151,10 +151,10 @@ static NSString * const replyUrlFormat = @"http://api.kuaikanmanhua.com/v1/comme
         
         NSDictionary *result = (NSDictionary *)res;
         
-        NSString *message  = result[@"message"];
-        NSDictionary *data = result[@"data"];
+        NSString *message  = result[NetMessage];
+        NSDictionary *data = result[NetData];
         
-        if ([message isEqualToString:@"OK"] && data) {
+        if ([message isEqualToString:NetOk] && data) {
             
             [self saveUserInfoWithData:data];
             
@@ -226,7 +226,7 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
         
         NSDictionary *data = (NSDictionary *)res;
         
-        NSDictionary *comment = data[@"data"][@"comment"];
+        NSDictionary *comment = data[NetData][@"comment"];
         
         if (comment.count > 0) {
             

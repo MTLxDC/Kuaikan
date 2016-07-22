@@ -51,8 +51,6 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    
     [self setupSeachBar];
     
     [self setupSearchResultsView];
@@ -111,6 +109,7 @@ static NSString * const searchBaseUrl = @"http://api.kuaikanmanhua.com/v1/topics
     tableView.rowHeight = cellHeight;
     tableView.dataSource = self;
     tableView.delegate = self;
+    tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     tableView.mj_footer.hidden = YES;
@@ -258,11 +257,6 @@ static NSInteger offset = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.wordModelArray.count;
-}
-
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.searchBar resignFirstResponder];
 }
 
 @end
