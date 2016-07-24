@@ -13,6 +13,8 @@
 #import "userAuthenticationIcon.h"
 #import "StatusImageContentView.h"
 #import "FeedsDataModel.h"
+
+#import "UserInfoManager.h"
 #import "DateManager.h"
 
 #import "UIView+Extension.h"
@@ -28,6 +30,8 @@
 @property (nonatomic,weak) userAuthenticationIcon *userAuthenticationIcon;
 
 @property (nonatomic,weak) UILabel *userNameLabel;
+
+@property (nonatomic,weak) UIButton *followBtn;
 
 @property (nonatomic,weak) UILabel *contentTextLabel;
 
@@ -65,6 +69,8 @@ static CGFloat iconSize = 40;
     [self.userAuthenticationIcon updateIconWithImageUrl:model.user.avatar_url];
     
     self.userNameLabel.text    = model.user.nickname;
+    
+    if (self.showFollowBtn)  self.followBtn.hidden = model.following;
     
     self.contentTextLabel.text = model.content.text;
     
@@ -172,6 +178,18 @@ static CGFloat iconSize = 40;
     
 }
 
+- (void)setShowFollowBtn:(BOOL)showFollowBtn {
+    if (showFollowBtn == _showFollowBtn) return;
+    _showFollowBtn = showFollowBtn;
+    if (showFollowBtn && _followBtn == nil) {
+        [self.followBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.statusContentView);
+            make.centerY.equalTo(self.userAuthenticationIcon);
+        }];
+        
+    }
+}
+
 - (UIView *)statusContentView {
     if (!_statusContentView) {
         UIView *statusContentView = [UIView new];
@@ -221,6 +239,34 @@ static CGFloat iconSize = 40;
     }
     return _userNameLabel;
  }
+
+- (UIButton *)followBtn {
+    if (!_followBtn) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [btn setImage:[UIImage imageNamed:@"ic_me_follow_normal_50x24_"] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
+        [self.statusContentView addSubview:btn];
+        
+        _followBtn = btn;
+    }
+    return _followBtn;
+}
+
+- (void)follow:(UIButton *)btn {
+    
+    btn.userInteractionEnabled = NO;
+    
+    UserInfoManager *user = [UserInfoManager share];
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/update_following_author?author_id=%@&relation=%d&uid=%@",self.model.user.ID,YES,user.ID];
+    
+    [UserInfoManager followWithUrl:url isFollow:YES WithfollowCallBack:^(BOOL succeed) {
+        btn.hidden = succeed;
+        btn.userInteractionEnabled = YES;
+    }];
+    
+}
 
 - (UILabel *)contentTextLabel {
     if (!_contentTextLabel) {

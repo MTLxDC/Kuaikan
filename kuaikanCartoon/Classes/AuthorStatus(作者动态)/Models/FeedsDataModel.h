@@ -57,6 +57,8 @@
 
 @property (nonatomic,copy)   NSString *share_url;
 
+@property (nonatomic,assign) BOOL following;
+
 @property (nonatomic,strong) NSNumber *created_at;
 
 @property (nonatomic,strong) NSNumber *shared_count;

@@ -75,7 +75,7 @@ static CGFloat const spaceing   = 8.0f;
     
     self.followBtn.userInteractionEnabled = NO;
     
-    NSString *url = [NSString stringWithFormat:FollowTopicsUrlStringFormat,self.model.ID.stringValue];
+    NSString *url = [NSString stringWithFormat:FollowTopicsUrlStringFormat,self.model.ID];
     
     weakself(self);
     

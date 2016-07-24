@@ -69,6 +69,7 @@ typedef NS_ENUM(NSUInteger, commentDataType) {
              isFollow:(BOOL)isfollow                    //关注还是取消关注
    WithfollowCallBack:(void(^)(BOOL succeed))callback;  //回调
 
+
 - (void)logoutUserInfo; //注销
 
 @end

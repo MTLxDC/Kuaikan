@@ -12,6 +12,7 @@
 
 
 - (CGFloat)getTextWidthWithFont:(UIFont *)font;
+- (CGFloat)getTextWidthWithFont:(UIFont *)font WithMaxSize:(CGSize)maxSize;
 
 + (NSString *)makeTextWithCount:(NSInteger)count;
 

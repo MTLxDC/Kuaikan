@@ -13,6 +13,8 @@
 //"avatar_url": "http://i.kuaikanmanhua.com/image/150706/hic40eurt.jpg-w180",
 //"grade": 1,
 //"id": 641190,
+//"follower_cnt": 14231,
+//"following": null,
 //"ios": "https://appsto.re/cn/6YNo4.i",
 //"nickname": "\u597d\u6f2b\u753b",
 //"pub_feed": 0,
@@ -32,11 +34,17 @@
 
 @property (nonatomic,strong) NSNumber *bind_phone;
 
+@property (nonatomic,strong) NSNumber *follower_cnt; //粉丝个数
+
+@property (nonatomic,assign) BOOL      following; //是否关注
+
 @property (nonatomic,strong) NSNumber *grade;
 
 @property (nonatomic,strong) NSNumber *ID;
 
 @property (nonatomic,copy)   NSString *intro;
+
+@property (nonatomic,copy)   NSString *u_intro;
 
 @property (nonatomic,copy)   NSString *ios;
 
@@ -55,6 +63,5 @@
 @property (nonatomic,copy)   NSString *wechat;
 
 @property (nonatomic,copy)   NSString *weibo_name;
-
 
 @end

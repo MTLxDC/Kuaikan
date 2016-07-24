@@ -146,6 +146,7 @@ static const CGFloat imageCellHeight = 250.0f;
     self.bottomView.recommend_count = self.comicsMd.comments_count.integerValue;
     self.progress.maximumValue = self.comicsMd.images.count - 1;
     self.progress.value = 0.0f;
+    
     [self.cartoonContentView reloadData];
     [self.cartoonContentView layoutIfNeeded];
     [self.cartoonContentView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]

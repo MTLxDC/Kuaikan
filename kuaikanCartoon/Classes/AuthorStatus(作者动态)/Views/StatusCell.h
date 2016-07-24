@@ -17,6 +17,9 @@ static NSString * const statusCellReuseIdentifier = @"StatusCell";
 
 @property (nonatomic,strong) FeedsModel *model;
 
+@property (nonatomic,assign) BOOL showFollowBtn;
+
+
 + (StatusCell *)configureCellWithModel:(FeedsDataModel *)model
                    inTableView:(UITableView *)tableView
                    AtIndexPath:(NSIndexPath *)indexPath;

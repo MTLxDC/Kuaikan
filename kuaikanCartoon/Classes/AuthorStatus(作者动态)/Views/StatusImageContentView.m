@@ -121,8 +121,7 @@ static CGFloat margin = 5;
     
     NSURL *imageUrl = self.thumbImages[indexPath.row];
     
-     cell.imageView.image = nil;
-    [cell.imageView performSelector:@selector(sd_setImageWithURL:) withObject:imageUrl afterDelay:0.0f inModes:@[NSDefaultRunLoopMode]];
+    [cell.imageView sd_setImageWithURL:imageUrl];
 
     return cell;
 }

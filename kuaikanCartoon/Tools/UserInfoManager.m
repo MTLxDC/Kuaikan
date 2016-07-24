@@ -254,7 +254,13 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
         return;
     }
     
-    NSString *metond = isfollow ? @"POST" : @"DELETE";
+    NSString *metond = nil;
+    
+    if ([url rangeOfString:@"update_following_author"].length > 0) {
+        metond = HTTPPOST;
+    }else {
+        metond = isfollow ? HTTPPOST : HTTPDELETE;
+    }
     
     [[NetWorkManager share] requestWithMethod:metond url:url parameters:nil complish:^(id res, NSError *error) {
         
@@ -265,7 +271,7 @@ withSucceededCallback:(void (^)(CommentsModel *model))succeededCallback {
         
         UIWindow *topWindow = [[[UIApplication sharedApplication] windows] lastObject];
         
-        if (code.integerValue == 200 && [message isEqualToString:@"OK"]) {
+        if (code.integerValue == 200 || [message isEqualToString:NetOk]) {
             
             NSString *status = isfollow ? @"关注成功" : @"取消关注成功";
             

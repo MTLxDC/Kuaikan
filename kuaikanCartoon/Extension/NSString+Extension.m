@@ -12,10 +12,14 @@
 
 @implementation NSString (Extension)
 
-- (CGFloat)getTextWidthWithFont:(UIFont *)font {
-    return [self boundingRectWithSize:CGSizeMake(MAXFLOAT,MAXFLOAT)
+- (CGFloat)getTextWidthWithFont:(UIFont *)font WithMaxSize:(CGSize)maxSize {
+    return [self boundingRectWithSize:maxSize
                                    options:NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading
                                 attributes:@{NSFontAttributeName:font} context:nil].size.width;
+}
+
+- (CGFloat)getTextWidthWithFont:(UIFont *)font {
+    return [self getTextWidthWithFont:font WithMaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
 }
 
 

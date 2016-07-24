@@ -15,13 +15,14 @@
  */
 
 
-#define NetCode             @"code"
-#define NetOk               @"OK"
-#define NetData             @"data"
-#define NetMessage          @"message"
-#define HTTPSchema          @"http:"
-#define HTTPGET             @"GET"
-#define HTTPPOST            @"POST"
+static NSString * const NetCode     = @"code";
+static NSString * const NetOk       = @"OK";
+static NSString * const NetData     = @"data";
+static NSString * const NetMessage  = @"message";
+static NSString * const HTTPSchema  = @"http:";
+static NSString * const HTTPGET     = @"GET";
+static NSString * const HTTPPOST    = @"POST";
+static NSString * const HTTPDELETE  = @"DELETE";
 
 @interface NetWorkManager : AFHTTPSessionManager
 

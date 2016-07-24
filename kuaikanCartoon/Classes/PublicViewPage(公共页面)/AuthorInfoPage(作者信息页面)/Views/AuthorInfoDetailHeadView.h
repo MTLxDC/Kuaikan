@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 @class AuthorInfoModel;
 
-static CGFloat const AuthorInfoDetailHeadViewHeight = 200.0f;
+static CGFloat const AuthorInfoDetailHeadViewHeight = 250.0f;
 
 @interface AuthorInfoDetailHeadView : UIView
 

@@ -135,7 +135,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [StatusCell configureCellWithModel:self.modelData inTableView:tableView AtIndexPath:indexPath];
+    
+    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:statusCellReuseIdentifier];
+    
+    cell.showFollowBtn = YES;
+    cell.model = [self.modelData.feeds objectAtIndex:indexPath.row];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
