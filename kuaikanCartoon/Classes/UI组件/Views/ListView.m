@@ -51,7 +51,7 @@ static const CGFloat lineHeight = 5.0f;
 
 @property (nonatomic,strong) ListViewConfiguration *configuration;
 
-@property (nonatomic,weak) UIScrollView *scrollView;
+@property (nonatomic,weak)   UIScrollView *scrollView;
 
 @property (nonatomic,assign) CGFloat itemScale;
 
@@ -91,7 +91,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
         if (self.configuration.monitorScrollView) {
             [self.configuration.monitorScrollView addObserver:self forKeyPath:offsetKeyPath options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(self)];
             
-            self.itemWidth = self.configuration.labelWidth + self.configuration.spaceing;
+            self.itemWidth = self.configuration.labelWidth;
             self.itemScale = self.itemWidth/self.configuration.MonitorScrollViewItemWidth;
         }
         
@@ -167,9 +167,10 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     CALayer *line = [CALayer layer];
     line.backgroundColor = [[UIColor alloc] initWithWhite:0.9 alpha:1].CGColor;
-    line.frame = CGRectMake(0,self.height - line_h,self.width,line_h);
-    
+    [line setFrame:CGRectMake(0,self.height - line_h,self.width,line_h)];
     [self.layer addSublayer:line];
+    
+    _bottomLine = line;
 }
 
 
@@ -243,7 +244,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
 
 - (void)scrollWithOffsetX:(CGFloat)x {
     
-    [_lineView setX:x];
+    [_lineView setX:x + self.configuration.spaceing * 0.5];
     
     _currentIndex = round(x/(self.itemWidth));
     
@@ -255,7 +256,9 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     self.lastIndex = _currentIndex;
     
-    [self setCurrentSelectLabel:_titleLabelArray[_currentIndex]];
+    UILabel *currentLabel = _titleLabelArray[_currentIndex];
+    
+    [self setCurrentSelectLabel:currentLabel];
     
     CGFloat left = x - MyWidth * 0.5f;
     CGFloat right = self.scrollView.contentSize.width - MyWidth;
@@ -300,8 +303,8 @@ static NSString * const offsetKeyPath = @"contentOffset";
     [self setCurrentSelectLabel:(UILabel *)_titleLabelArray.firstObject];
     
         if (self.itemWidth > 1) {
-            [_lineView setWidth:self.configuration.labelWidth];
-            [_lineView setX:self.configuration.spaceing];
+            [_lineView setWidth:self.configuration.labelWidth - self.configuration.spaceing];
+            [_lineView setX:self.configuration.spaceing * 1.5];
         }else {
             CGRect firstFrame = [_titleLabelFrameCache.firstObject CGRectValue];
             [_lineView setWidth:firstFrame.size.width];
@@ -345,7 +348,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
             
             NSValue *lastFrame = [_titleLabelFrameCache objectAtIndex:index - 1];
             
-            label_X = CGRectGetMaxX([lastFrame CGRectValue]) + self.configuration.spaceing;
+            label_X = CGRectGetMaxX([lastFrame CGRectValue]);
             
         }
         
@@ -387,6 +390,11 @@ static NSString * const offsetKeyPath = @"contentOffset";
     
     self.scrollView.frame = self.bounds;
     
+    CGFloat line_h = SINGLE_LINE_WIDTH;
+//
+//    [_lineView   setFrame:CGRectMake(_lineView.x,self.height - lineHeight,0, lineHeight)];
+    [_bottomLine setFrame:CGRectMake(0,self.height - line_h,self.width,line_h)];
+//
     if (_titleLabelArray.count < 1) return;
     
     [self updateLabelFrame];

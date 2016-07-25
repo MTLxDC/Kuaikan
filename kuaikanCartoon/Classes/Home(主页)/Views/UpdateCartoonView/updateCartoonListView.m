@@ -104,7 +104,7 @@
 
         for (NSInteger index = 1; index < 8; index++) {
             
-            NSString *timeStamp = [date timeStampWithDate:[date dateByTodayAddingDays:index - 7]];
+            NSString *timeStamp = [date timeStampWithDate:[date dateByTodayAddingDays:index - 7]]; 
             NSString *newUrl = [NSString stringWithFormat:formatUrl,timeStamp];
             
             [array addObject:newUrl];

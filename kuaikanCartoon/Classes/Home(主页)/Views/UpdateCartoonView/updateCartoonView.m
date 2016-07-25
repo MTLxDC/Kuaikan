@@ -80,8 +80,9 @@ static const CGFloat navigationHeadView_H = 35;
     lc.lineColor = subjectColor;
     lc.font = [UIFont systemFontOfSize:12];
     lc.spaceing = SCREEN_WIDTH * 0.05;
-    lc.labelWidth = SCREEN_WIDTH * 0.15;
+    lc.labelWidth = SCREEN_WIDTH * 0.2;
     lc.monitorScrollView = self.cartoonListView;
+    lc.hasSelectAnimate = YES;
     
     ListView *lv = [ListView listViewWithFrame:CGRectMake(0, 0,self.width,navigationHeadView_H) TextArray:arr Configuration:lc];
     

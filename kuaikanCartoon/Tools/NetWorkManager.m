@@ -66,7 +66,7 @@
         [self.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     
         [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
-    
+        
     }
     return self;
 }

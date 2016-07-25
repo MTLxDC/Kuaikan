@@ -249,9 +249,6 @@
         [self setMaxMinZoomScalesForCurrentBounds];
         
     }
-    [UIView animateWithDuration:0.25 animations:^{
-        [self layoutIfNeeded];
-    }];
 }
 
 #pragma mark - Loading Progress

@@ -28,6 +28,8 @@
 
 @end
 
+
+
 @implementation FeedsTableView
 
 - (void)updateWithDataType:(catalog_type)dataType {
@@ -71,7 +73,13 @@
     
      [self.mj_footer resetNoMoreData];
 
-        NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=1&since=0&uid=0",self.dataType];
+    NSString *url = nil;
+    
+    if (self.dataType == usersConcernedData) {
+        url = @"http://api.kuaikanmanhua.com/v1/feeds/following/feed_lists?since=0";
+    }else {
+        url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=1&since=0&uid=0",self.dataType];
+    }
     
         weakself(self);
     
@@ -94,7 +102,13 @@
 
 - (void)loadMoreDate {
     
-    NSString *url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=%zd&since=%@&uid=0",self.dataType,_page_num,self.modelData.since];
+    NSString *url = nil;
+    
+    if (self.dataType == usersConcernedData) {
+        url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/following/feed_lists?since=%@",self.modelData.since];
+    }else {
+        url = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=%zd&page_num=%zd&since=%@&uid=0",self.dataType,_page_num,self.modelData.since];
+    }
     
     weakself(self);
     

@@ -37,7 +37,8 @@
 
 @interface ListView : UIView
 {
-    __weak UIView *_lineView;
+     UIView  *_lineView;
+     CALayer *_bottomLine;
     
     NSMutableArray *_titleLabelArray;
     NSMutableArray *_titleLabelFrameCache;

@@ -15,6 +15,7 @@ static char TAG_ACTIVITY_INDICATOR;
 static char TAG_ACTIVITY_STYLE;
 static char TAG_ACTIVITY_SHOW;
 
+
 @implementation UIImageView (WebCache)
 
 - (void)sd_setImageWithURL:(NSURL *)url {
@@ -42,12 +43,22 @@ static char TAG_ACTIVITY_SHOW;
 }
 
 - (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock {
-    [self sd_cancelCurrentImageLoad];
+    
+    NSURL *currentUrl = objc_getAssociatedObject(self, &imageURLKey);
+    
+    if (![currentUrl.absoluteString isEqualToString:url.absoluteString]) {
+        [self sd_cancelCurrentImageLoad];
+    }else {
+        return;
+    }
+
+    
     objc_setAssociatedObject(self, &imageURLKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     if (!(options & SDWebImageDelayPlaceholder)) {
         dispatch_main_async_safe(^{
-            self.image = placeholder;
+            [self.layer removeAnimationForKey:@"SDWebImage.TransitionAnimation"];
+             self.image = placeholder;
         });
     }
     
@@ -71,8 +82,17 @@ static char TAG_ACTIVITY_SHOW;
                     return;
                 }
                 else if (image) {
-                    wself.image = image;
+                    
+                    CATransition *transition = [CATransition animation];
+                    transition.duration = 0.2;
+                    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                    transition.type = kCATransitionFade;
+                
+                [wself.layer addAnimation:transition forKey:@"SDWebImage.TransitionAnimation"];
+                        
+                     wself.image = image;
                     [wself setNeedsLayout];
+                    
                 } else {
                     if ((options & SDWebImageDelayPlaceholder)) {
                         wself.image = placeholder;

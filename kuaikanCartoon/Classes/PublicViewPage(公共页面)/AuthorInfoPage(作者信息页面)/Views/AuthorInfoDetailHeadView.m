@@ -59,6 +59,7 @@
 
     [self.fansNumber setNeedsLayout];
     [self setNeedsLayout];
+    
 }
 
 

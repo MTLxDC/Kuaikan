@@ -101,7 +101,7 @@ static CGFloat margin = 5;
         self.delegate = self;
         self.backgroundColor = [UIColor whiteColor];
         self.scrollEnabled = NO;
-    
+
         _defaultWidth    =  SCREEN_WIDTH - SPACEING * 2;
         _defaultItemSize = (_defaultWidth - margin * 2)/3 - 1;
         

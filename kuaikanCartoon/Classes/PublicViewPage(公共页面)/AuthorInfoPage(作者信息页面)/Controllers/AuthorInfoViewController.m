@@ -73,6 +73,8 @@ static NSInteger page_num = 0;
     
     weakself(self);
     
+    self.headView.hidden = YES;
+    
     [AuthorInfoModel requestModelDataWithUrlString:url complish:^(id result) {
         
         AuthorInfoModel *md = (AuthorInfoModel *)result;
@@ -81,8 +83,9 @@ static NSInteger page_num = 0;
         
         weakSelf.headView.model = md;
         weakSelf.model = md;
+        weakSelf.headView.hidden = NO;
         
-    } cachingPolicy:ModelDataCachingPolicyDefault hubInView:self.view];
+    } cachingPolicy:ModelDataCachingPolicyNoCache hubInView:self.view];
     
     NSString *feedDataUrl = [NSString stringWithFormat:@"http://api.kuaikanmanhua.com/v1/feeds/feed_lists?catalog_type=3&page_num=1&since=0&uid=%@",self.authorID];
     

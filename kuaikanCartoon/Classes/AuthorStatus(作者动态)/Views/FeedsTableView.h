@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, catalog_type) {
+    usersConcernedData = 0,
     newsData = 1,
     hotData  = 2,
 };

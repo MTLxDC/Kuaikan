@@ -8,7 +8,7 @@
 
 #import "AuthorStatusViewController.h"
 
-#import "navBarTitleView.h"
+#import "ListView.h"
 #import "CommonMacro.h"
 #import "UIView+Extension.h"
 #import <MJRefresh.h>
@@ -21,13 +21,19 @@
 
 @property (nonatomic,weak) UIScrollView *mainView;
 
-@property (nonatomic,weak) navBarTitleView *titleView;
+@property (nonatomic,weak) ListView *titleView;
 
 @property (nonatomic,weak) FeedsTableView *hotFeedsTableView;
 
 @property (nonatomic,weak) FeedsTableView *newsFeedsTableView;
 
+@property (nonatomic,weak) FeedsTableView *followFeedsTableView;
+
 @property (nonatomic,strong) FeedsDataModel *modelData;
+
+@property (nonatomic,weak) UIView *customNavBar;
+
+@property (nonatomic,weak) ListView *listView;
 
 @end
 
@@ -38,50 +44,55 @@
     
     [self setupMainView];
     
-    [self setupTitleView];
+    [self setupCustomNavBar];
     
     [self setupFeedsTableView];
     
-    [self.hotFeedsTableView  updateWithDataType:hotData];
-    [self.newsFeedsTableView updateWithDataType:newsData];
-
+    [self.followFeedsTableView  updateWithDataType:usersConcernedData];
+    [self.hotFeedsTableView     updateWithDataType:hotData];
+    [self.newsFeedsTableView    updateWithDataType:newsData];
 }
 
-static bool flag = NO;
+- (void)setupCustomNavBar {
+    
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
+    UIView *customNavBar = [[UIView alloc] init];
+    customNavBar.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
 
-- (void)setupTitleView {
+    NSArray *textArray = @[@"关注",@"热门",@"最新"];
     
-    navBarTitleView *titleView = [navBarTitleView defaultTitleView];
+    CGFloat listViewWidth    = self.view.width * 0.66;
+    CGFloat listViewItemSize = (listViewWidth - SPACEING * 2)/textArray.count;
     
-    [titleView.leftBtn  setTitle:@"热门" forState:UIControlStateNormal];
-    [titleView.rightBtn setTitle:@"最新" forState:UIControlStateNormal];
-
-    weakself(self);
+    ListViewConfiguration *lc = [ListViewConfiguration new];
     
-    titleView.leftBtnOnClick = ^(UIButton *btn){
-        if (flag) return;
-        [weakSelf.mainView setContentOffset:CGPointMake(0, 0) animated:YES];
-    };
+    lc.hasSelectAnimate = YES;
+    lc.labelSelectTextColor = subjectColor;
+    lc.labelTextColor = [UIColor blackColor];
+    lc.lineColor  = subjectColor;
+    lc.font       = [UIFont systemFontOfSize:14];
+    lc.spaceing   = SPACEING;
+    lc.labelWidth = listViewItemSize;
+    lc.monitorScrollView = self.mainView;
     
-    titleView.rightBtnOnClick = ^(UIButton *btn){
-        if (flag) return;
-        [weakSelf.mainView setContentOffset:CGPointMake(weakSelf.mainView.width, 0) animated:YES];
-    };
+    CGFloat x = (self.view.width - listViewWidth) * 0.5;
     
-    [titleView selectBtn:titleView.leftBtn];
+    ListView *listView = [[ListView alloc] initWithFrame:CGRectMake(x,20,listViewWidth,44) TextArray:textArray Configuration:lc];
     
-    self.navigationItem.titleView = titleView;
-    self.titleView = titleView;
+    [customNavBar addSubview:listView];
+    [self.view addSubview:customNavBar];
+    
+     self.customNavBar = customNavBar;
+     self.listView = listView;
+    
 }
 
 - (void)setupMainView {
     
-    CGFloat mainViewHeight = self.view.height - bottomBarHeight;
-    
-    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,navHeight, self.view.width,mainViewHeight)];
+    UIScrollView *mainView = [[UIScrollView alloc] init];
     
     mainView.bounces = NO;
-    mainView.contentSize   = CGSizeMake(mainView.width * 2, 0);
     mainView.pagingEnabled = YES;
     mainView.showsHorizontalScrollIndicator = NO;
     mainView.showsVerticalScrollIndicator = NO;
@@ -93,30 +104,37 @@ static bool flag = NO;
     
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    
-    BOOL isRight = velocity.x > 0;
-    
-    flag = YES;
-    
-    if (isRight) {
-        [self.titleView selectBtn:self.titleView.rightBtn];
-    }else {
-        [self.titleView selectBtn:self.titleView.leftBtn];
-    }
-    
-    flag = NO;
-}
-
 - (void)setupFeedsTableView {
     
-    self.hotFeedsTableView  = [self creatFeedsTableView];
-    self.newsFeedsTableView = [self creatFeedsTableView];
+    self.followFeedsTableView   = [self creatFeedsTableView];
+    self.hotFeedsTableView      = [self creatFeedsTableView];
+    self.newsFeedsTableView     = [self creatFeedsTableView];
     
-    CGFloat height = self.mainView.height - bottomBarHeight;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self.hotFeedsTableView  setFrame:CGRectMake(0, 0, self.mainView.width,height)];
-    [self.newsFeedsTableView setFrame:CGRectMake(self.mainView.width,0,self.mainView.width,height)];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    CGFloat height = self.view.height - bottomBarHeight - navHeight;
+    CGFloat width  = self.view.width;
+    
+    CGFloat listViewWidth = width * 0.66;
+    CGFloat x = (width - listViewWidth) * 0.5;
+    
+    [self.mainView setFrame:CGRectMake(0,navHeight,width,height)];
+     self.mainView.contentSize  = CGSizeMake(width * 3, 0);
+    
+    [self.listView setFrame:CGRectMake(x,20,listViewWidth,44)];
+    
+    [self.followFeedsTableView  setFrame:CGRectMake(0, 0, width,height)];
+    [self.hotFeedsTableView     setFrame:CGRectMake(width,0,width,height)];
+    [self.newsFeedsTableView    setFrame:CGRectMake(width * 2, 0, width, height)];
     
 }
 
