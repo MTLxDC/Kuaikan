@@ -136,6 +136,7 @@
     [self.hotFeedsTableView     setFrame:CGRectMake(width,0,width,height)];
     [self.newsFeedsTableView    setFrame:CGRectMake(width * 2, 0, width, height)];
     
+    [self.mainView setContentOffset:CGPointMake(width, 0)];
 }
 
 - (FeedsTableView *)creatFeedsTableView {

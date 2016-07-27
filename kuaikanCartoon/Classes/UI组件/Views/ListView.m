@@ -223,6 +223,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
 
 - (void)selectItem:(UILabel *)selectLabel {
 
+
     if (self.configuration.monitorScrollView) {
         
         CGFloat offsetX = self.configuration.MonitorScrollViewItemWidth * selectLabel.tag;
@@ -236,10 +237,7 @@ static NSString * const offsetKeyPath = @"contentOffset";
         [self scrollWithOffsetX:selectLabel.center.x];
     }
     
-    if (self.selectAtIndex) {
-        self.selectAtIndex(selectLabel.tag);
-    }
-    
+  
 }
 
 - (void)scrollWithOffsetX:(CGFloat)x {
@@ -270,6 +268,10 @@ static NSString * const offsetKeyPath = @"contentOffset";
     }
     
     [self.scrollView setContentOffset:CGPointMake(left, 0) animated:YES];
+    
+    if (self.selectAtIndex) {
+        self.selectAtIndex(currentLabel.tag);
+    }
 }
 
 - (void)setCurrentSelectLabel:(UILabel *)newSelectLabel {
